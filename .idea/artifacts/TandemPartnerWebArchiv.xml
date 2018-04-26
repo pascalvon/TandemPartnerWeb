@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TandemPartnerWebArchiv">
+    <output-path>$PROJECT_DIR$/out/artifacts/TandemPartnerWebArchiv</output-path>
+    <root id="archive" name="TandemPartnerWebArchiv.war">
+      <element id="artifact" artifact-name="TandemPartnerWeb" />
+    </root>
+  </artifact>
+</component>

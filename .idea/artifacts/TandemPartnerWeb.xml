@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="TandemPartnerWeb:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/TandemPartnerWeb_war_exploded</output-path>
+  <artifact type="exploded-war" name="TandemPartnerWeb">
+    <output-path>$PROJECT_DIR$/out/artifacts/TandemPartnerWeb</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
