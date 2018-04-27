@@ -8,9 +8,11 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="JPA 2.1-2.1" />
+          <element id="library" level="project" name="Maven: net.bootsfaces:bootsfaces:1.2.0" />
+          <element id="library" level="project" name="Maven: org.omnifaces:omnifaces:3.1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="TandemPartnerWeb/web/Web" />
+      <element id="javaee-facet-resources" facet="TandemPartnerWeb/web/webapp" />
     </root>
   </artifact>
 </component>
