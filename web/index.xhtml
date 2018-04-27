@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+    <title>TandemPartner</title>
+</head>
+<body>
+
+<!-- im Wrapper/container muss ALLES stehen, dadurch kann das Gesamte responsive bleiben-->
+<div class="container">
+    <!-- Navigationsleiste Beginn-->
+    <!-- von getbootstrap.com kopiert und nun angepasst -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- die tandemPartner Schrift wird hiermit angezeigt-->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">TandemPartner</a>
+            </div>
+
+            <!-- Navbar beginnt hier -->
+            <!-- linke Navbar-->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Hauptmenü <span class="sr-only">(aktuell)</span></a></li>
+                    <li><a href="profil.html">Profil bearbeiten</a></li>
+                    <li><a href="suchanfrage.html">Suchanfrage</a></li>
+                    <li><a href="matches.html">Meine Matches</a></li>
+                </ul>
+                <!-- rechte Navbar-->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav> <!-- Ende Navigationsleiste-->
+
+    <h1>Herzlich Willkommen bei tandemPartner!</h1>
+</div>
+
+
+
+<f:view>
+    <h:form>
+        <h:panelGrid columns="2">
+
+            <h:outputText value="Vorname"/>
+            <h:inputText value="#{nutzerBean.vorname}"/>
+
+            <h:outputText value="Nachname"/>
+            <h:inputText value="#{nutzerBean.nachname}"/>
+
+            <h:outputText value="Bezirk"/>
+            <h:inputText value="#{nutzerBean.bezirk}"/>
+
+            <h:outputText value="Geschlecht"/>
+            <h:selectOneListbox value="#{nutzerBean.geschlecht}">
+                <f:selectItem itemValue="Männlich"/>
+                <f:selectItem itemValue="Weiblich"/>
+            </h:selectOneListbox>
+
+            <h:outputText value="Ich spreche"/>
+            <h:selectManyListbox value="#{nutzerBean.ichSpreche}">
+                <f:selectItem itemValue="Deutsch"/>
+                <f:selectItem itemValue="Englisch"/>
+                <f:selectItem itemValue="Französisch"/>
+                <f:selectItem itemValue="Italienisch"/>
+            </h:selectManyListbox>
+
+            <h:outputText value="Freizeitaktivitäten"/>
+            <h:selectManyListbox value="#{nutzerBean.freizeitAktivitaeten}">
+                <f:selectItem itemValue="Radfahren"/>
+                <f:selectItem itemValue="Schwimmen"/>
+                <f:selectItem itemValue="Fußball spielen"/>
+                <f:selectItem itemValue="Klettern"/>
+            </h:selectManyListbox>
+
+
+            <!-- <h:outputText value="Geburtsdatum"/>
+            <h:inputText value="#{nutzer.gebDat}"/> -->
+
+        </h:panelGrid>
+
+        <h:commandButton value="Daten speichern" action="#{nutzerBean.save}" actionListener="#{nutzerBean.saveListener}"/>
+
+    </h:form>
+</f:view>
+</body>
+</html>
