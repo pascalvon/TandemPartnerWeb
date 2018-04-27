@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+  <title>TandemPartner</title>
+</head>
+  <body>
+  <f:view>
+    <h:form>
+        <h:panelGrid columns="2">
+
+        <h:outputText value="Vorname"/>
+        <h:inputText value="#{nutzerBean.vorname}"/>
+
+        <h:outputText value="Nachname"/>
+        <h:inputText value="#{nutzerBean.nachname}"/>
+
+        <h:outputText value="Bezirk"/>
+        <h:inputText value="#{nutzerBean.bezirk}"/>
+
+        <h:outputText value="Geschlecht"/>
+        <h:selectOneListbox value="#{nutzerBean.geschlecht}">
+            <f:selectItem itemValue="Männlich"/>
+            <f:selectItem itemValue="Weiblich"/>
+        </h:selectOneListbox>
+
+        <h:outputText value="Ich spreche"/>
+        <h:selectManyListbox value="#{nutzerBean.ichSpreche}">
+            <f:selectItem itemValue="Deutsch"/>
+            <f:selectItem itemValue="Englisch"/>
+            <f:selectItem itemValue="Französisch"/>
+            <f:selectItem itemValue="Italienisch"/>
+        </h:selectManyListbox>
+
+        <h:outputText value="Freizeitaktivitäten"/>
+        <h:selectManyListbox value="#{nutzerBean.freizeitAktivitaeten}">
+            <f:selectItem itemValue="Radfahren"/>
+            <f:selectItem itemValue="Schwimmen"/>
+            <f:selectItem itemValue="Fußball spielen"/>
+            <f:selectItem itemValue="Klettern"/>
+        </h:selectManyListbox>
+
+
+        <!-- <h:outputText value="Geburtsdatum"/>
+        <h:inputText value="#{nutzer.gebDat}"/> -->
+
+        </h:panelGrid>
+
+        <h:commandButton value="Daten speichern" action="#{nutzerBean.save}" actionListener="#{nutzerBean.saveListener}"/>
+
+    </h:form>
+  </f:view>
+  </body>
+</html>
