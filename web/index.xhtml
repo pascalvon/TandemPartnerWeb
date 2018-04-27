@@ -4,89 +4,50 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
+
 <head>
     <title>TandemPartner</title>
 </head>
-<body>
 
-<!-- im Wrapper/container muss ALLES stehen, dadurch kann das Gesamte responsive bleiben-->
-<div class="container">
-    <!-- Navigationsleiste Beginn-->
-    <!-- von getbootstrap.com kopiert und nun angepasst -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- die tandemPartner Schrift wird hiermit angezeigt-->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">TandemPartner</a>
-            </div>
-
-            <!-- Navbar beginnt hier -->
-            <!-- linke Navbar-->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Hauptmenü <span class="sr-only">(aktuell)</span></a></li>
-                    <li><a href="profil.html">Profil bearbeiten</a></li>
-                    <li><a href="suchanfrage.html">Suchanfrage</a></li>
-                    <li><a href="matches.html">Meine Matches</a></li>
-                </ul>
-                <!-- rechte Navbar-->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="impressum.html">Impressum</a></li>
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav> <!-- Ende Navigationsleiste-->
-
-    <h1>Herzlich Willkommen bei tandemPartner!</h1>
-</div>
-
-
-
-<f:view>
-    <h:form>
-        <h:panelGrid columns="2">
-
-            <h:outputText value="Vorname"/>
-            <h:inputText value="#{nutzerBean.vorname}"/>
-
-            <h:outputText value="Nachname"/>
-            <h:inputText value="#{nutzerBean.nachname}"/>
-
-            <h:outputText value="Bezirk"/>
-            <h:inputText value="#{nutzerBean.bezirk}"/>
-
-            <h:outputText value="Geschlecht"/>
-            <h:selectOneListbox value="#{nutzerBean.geschlecht}">
-                <f:selectItem itemValue="Männlich"/>
-                <f:selectItem itemValue="Weiblich"/>
-            </h:selectOneListbox>
-
-            <h:outputText value="Ich spreche"/>
-            <h:selectManyListbox value="#{nutzerBean.ichSpreche}">
-                <f:selectItem itemValue="Deutsch"/>
-                <f:selectItem itemValue="Englisch"/>
-                <f:selectItem itemValue="Französisch"/>
-                <f:selectItem itemValue="Italienisch"/>
-            </h:selectManyListbox>
-
-            <h:outputText value="Freizeitaktivitäten"/>
-            <h:selectManyListbox value="#{nutzerBean.freizeitAktivitaeten}">
-                <f:selectItem itemValue="Radfahren"/>
-                <f:selectItem itemValue="Schwimmen"/>
-                <f:selectItem itemValue="Fußball spielen"/>
-                <f:selectItem itemValue="Klettern"/>
-            </h:selectManyListbox>
+<h:body>
+    <b:container>
+        <b:navBar brand="TandemPartner" brandHref="#">
+            <b:navbarLinks>
+                <b:navLink value="Home" href="#">Test1</b:navLink>
+                <b:navLink value="Link" href="#">Test2</b:navLink>
+                <b:navLink value="Link" href="#">Test3</b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+    </b:container>
+    <b:container>
+        <b:row>
+            <b:column>
+                <h1>Hello, world!</h1>
+            </b:column>
+        </b:row>
+    </b:container>
+    <b:container fluid="true" contentDisabled="false">
+        <b:row contentDisabled="false">
+            <b:column span="6" contentDisabled="false">
+                <b:inputText placeholder="You can't input anything here" label="b:inputText"/>
+                <b:datepicker label="Datepicker" />
+                <b:button look="primary" value="You can't click me!"/>
+            </b:column>
+            <b:column span="6">
+                <b:dateTimePicker label="DateTimerPicker"/>
+                <b:colorPicker label="ColorPicker"/>
+                <b:selectOneMenu label="SelectOneMenu">
+                    <f:selectItem itemValue="one" itemLabel="one">Hallo1</f:selectItem>
+                    <f:selectItem itemValue="two" itemLabel="two">Hallo2</f:selectItem>
+                </b:selectOneMenu>
+                <b:selectMultiMenu label="SelectMultiMenu" >
+                    <f:selectItem itemValue="one" itemLabel="one">Hallo3</f:selectItem>
+                    <f:selectItem itemValue="two" itemLabel="two">Hallo4</f:selectItem>
+                </b:selectMultiMenu>
+            </b:column>
+        </b:row>
+    </b:container>
+</h:body>
 
 
-            <!-- <h:outputText value="Geburtsdatum"/>
-            <h:inputText value="#{nutzer.gebDat}"/> -->
-
-        </h:panelGrid>
-
-        <h:commandButton value="Daten speichern" action="#{nutzerBean.save}" actionListener="#{nutzerBean.saveListener}"/>
-
-    </h:form>
-</f:view>
-</body>
 </html>
