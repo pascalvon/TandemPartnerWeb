@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Login tandemPartner</title>
+</h:head>
+<h:body>
+    <b:container>
+        <b:row>
+            <b:column medium-screen="2">
+                <h:outputText value="Emailadresse:"/>
+            </b:column>
+            <b:column medium-screen="4">
+                <b:inputText placeholder="Emailadresse" />
+            </b:column>
+        </b:row>
+        <b:row>
+            <b:column medium-screen="2">
+                <h:outputText value="Passwort:" />
+            </b:column>
+            <b:column medium-screen="4">
+                <b:inputSecret placeholder="Passwort" />
+            </b:column>
+        </b:row>
+        <b:row>
+            <b:column span="2" offset="2">
+                <b:commandButton value="login" look="primary" style="width:100%" />
+            </b:column>
+            <b:column span="2">
+                <b:commandButton value="Account erstellen" look="primary" href="registrieren.xhtml" style="width:100%" />
+            </b:column>
+        </b:row>
+
+    </b:container>
+</h:body>
+</html>
