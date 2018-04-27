@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID"
+         version="3.0">
+    <context-param>
+        <param-name>BootsFaces_USETHEME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <welcome-file-list>
+        <welcome-file>index.jsf</welcome-file>
+    </welcome-file-list>
+</web-app>
+
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
@@ -15,20 +33,20 @@
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
 
     <!-- The BootsFaces_THEME context-param controls the loading of the Themes -->
     <!-- The default is Bootstrap, the valid values are a Bootswach Theme name (lowercase) or "custom".
-    If custom is chosen, you will have to provide your custom CSS in the "other" folder. -->
+    If custom is chosen, you will have to provide your custom CSS in the "other" folder.
     <context-param>
         <param-name>BootsFaces_THEME</param-name>
         <param-value>#{theme.internalTheme}</param-value>
-    </context-param>
+    </context-param>-->
     <!-- The BootsFaces_USETHEME context-param controls the loading of the bootstrap-theme.css -->
-    <!-- The default is false, when set to true the bootstrap-theme.css will be loaded -->
+    <!-- The default is false, when set to true the bootstrap-theme.css will be loaded
     <context-param>
         <param-name>BootsFaces_USETHEME</param-name>
         <param-value>true</param-value>
     </context-param>
 
-</web-app>
+</web-app>-->
