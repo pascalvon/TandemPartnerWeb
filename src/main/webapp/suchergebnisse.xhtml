@@ -6,30 +6,31 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Home</title>
+    <title>Suchergebnisse</title>
 </h:head>
 <h:body>
     <b:container>
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="#"></b:navLink>
+                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
                 <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
                 <b:navLink value="Suchanfragen" href="suchanfragen.xhtml"></b:navLink>
                 <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="Suchergebnisse" href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right">
                 <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
                 <b:navLink value="Logout" href="login.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
-        <h1>Herzlich Willkommen bei tandemPartner!</h1>
+        <h1>Suchergebnisse:</h1>
         <br></br>
-        <!--Datentabellen Beginn-->
+        <br></br>
+
         <h:form>
-            <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
+            <b:dataTable value="#{MATCHERGEBNISSE-CODE-EINFÜGEN}"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}">
                 <b:dataTableColumn label="Vorname" value="#{CODE}"/>
@@ -40,24 +41,22 @@
                 <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
             </b:dataTable>
 
-            <!--Buttons Start-->
+            <!--Buttons Beginn-->
             <b:row>
-                <b:column colSm="1"></b:column>
+                <b:column colSm="2"></b:column>
                 <b:column colSm="3">
-                    <b:commandButton value="angenommen" name="action" ajax="true" update="@next"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}">Annehmen</b:commandButton>
+                    <b:commandButton value="anfragen" name="action" ajax="true" update="@next"
+                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}">Matchanfrage schicken</b:commandButton>
                 </b:column>
+                <b:column colSm="2"></b:column>
                 <b:column colSm="3">
-                    <b:commandButton value="abgelehnt" name="action" ajax="true" update="@next"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}">Ablehnen</b:commandButton>
-                </b:column>
-                <b:column colSm="3">
-                    <b:button value="Abbrechen" href="home.xhtml" />
+                    <b:commandButton type="reset" value="Abbrechen" name="action" ajax="true" update="@next"
+                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}"/>
                 </b:column>
             </b:row><!--Buttons Ende-->
 
-        </h:form>
-    </b:container><!--Container Ende-->
-</h:body>
+        </h:form><!--Form Ende-->
 
+    </b:container>
+</h:body>
 </html>

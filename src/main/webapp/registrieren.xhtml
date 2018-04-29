@@ -6,26 +6,27 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Profil bearbeiten</title>
+    <title>Registrieren</title>
 </h:head>
 <h:body>
     <b:container>
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="#"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfragen.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink value="Registrieren" href="#"></b:navLink>
+                <b:navLink value="" href="#"></b:navLink>
+                <b:navLink value="" href="#"></b:navLink>
+                <b:navLink value="" href="#"></b:navLink>
 
             </b:navbarLinks>
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right">
                 <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Login" href="login.xhtml"></b:navLink>
+
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
-        <h1>Hier kannst du Dein Profil bearbeiten</h1>
+        <h1>Hier kannst du Dich registrieren</h1>
         <br></br>
 
         <h:form>
@@ -93,42 +94,35 @@
 
             <b:row>
                 <b:column colSm="6">
-                    <b:inputSecret id="passwordNeu" fieldId="n_password" name="n_password"
+                    <b:inputSecret id="password" fieldId="n_password" name="p_password"
                                    value="#{loginBean.password}"
-                                   label="neues Passwort:" placeholder="neues Passwort"
+                                   label="Passwort:" placeholder="Passwort"
                                    colSm="4"/>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputSecret id="passwordNeuBest" fieldId="b_password" name="b_password"
+                    <b:inputSecret id="passwordBest" fieldId="b_password" name="pb_password"
                                    value="#{loginBean.password}"
-                                   label="neues Passwort bestätigen:" placeholder="neues Passwort bestätigen"
+                                   label="Passwort bestätigen:" placeholder="Passwort bestätigen"
                                    colSm="4"/>
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
-            <!--Buttons Beginn-->
+            <!--Buttons beginn-->
             <b:row>
                 <b:column colSm="1"></b:column>
 
                 <b:column colSm="2">
-                    <b:commandButton update="@form" value="Login" onclick="ajax:loginBean.login2()"/>
+                    <b:commandButton update="@form" value="registrieren" onclick="ajax:loginBean.login2()">Jetzt registrieren</b:commandButton>
                 </b:column>
 
                 <b:column colSm="1"></b:column>
 
                 <b:column colSm="1">
-                   <b:button value="Abbrechen" href="home.xhtml"></b:button>
-                </b:column>
-
-                <b:column colSm="1"></b:column>
-
-                <b:column colSm="1">
-                    <b:button value="Profil löschen" href="login.xhtml"></b:button>
-                </b:column>
+                    <b:button value="Abbrechen" href="login.xhtml"></b:button>
+                </b:column><!--Buttons Ende-->
             </b:row><!--Buttons Ende-->
 
-        </h:form>
-
-    </b:container>
+        </h:form><!--Form Ende-->
+    </b:container><!--Container Ende-->
 </h:body>
 </html>
