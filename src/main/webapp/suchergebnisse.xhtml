@@ -14,7 +14,7 @@
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
                 <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfragen.xhtml"></b:navLink>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
                 <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
 
             </b:navbarLinks>
@@ -45,13 +45,11 @@
             <b:row>
                 <b:column colSm="2"></b:column>
                 <b:column colSm="3">
-                    <b:commandButton value="anfragen" name="action" ajax="true" update="@next"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}">Matchanfrage schicken</b:commandButton>
+                    <b:commandButton value="anfragen" name="action" ajax="true">Matchanfrage schicken</b:commandButton>
                 </b:column>
                 <b:column colSm="2"></b:column>
                 <b:column colSm="3">
-                    <b:commandButton type="reset" value="Abbrechen" name="action" ajax="true" update="@next"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}"/>
+                    <b:commandButton type="reset" value="Abbrechen" name="action"/>
                 </b:column>
             </b:row><!--Buttons Ende-->
 
