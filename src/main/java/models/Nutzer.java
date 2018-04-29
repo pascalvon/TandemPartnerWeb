@@ -1,14 +1,16 @@
 package models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
-        @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn")})
-public class Nutzer {
+@NamedQueries({ @NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
+                @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn")
+})
+public class Nutzer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "gen")
