@@ -2,8 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/NutzerService.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/bootstrap" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/bootstrap" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ejb" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ejb" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ejb/NutzerService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ejb/NutzerService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/servlet/NutzerServlet.java" charset="windows-1252" />
   </component>
 </project>
