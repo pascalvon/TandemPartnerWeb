@@ -85,13 +85,12 @@ public class Nutzerbean extends HttpServlet {
 
         Nutzer nutzer = new Nutzer();
 
-        // Geburtstadatum hinzufügen
         Calendar calender = Calendar.getInstance();
-        calender.set(1969,Calendar.MAY, 11);
-        Date geburtstdatum = new Date(calender.getTime().getTime());
+        calender.set(1975,Calendar.MARCH, 15);
+        Date geburtsdatum = new Date(calender.getTime().getTime());
 
         nutzer.setMail(mail);
-        nutzer.setGeburtsdatum(geburtstdatum);
+        nutzer.setGeburtsdatum(geburtsdatum);
         nutzer.setVorname(vorname);
         nutzer.setNachname(nachname);
         nutzer.setPasswort(passwort);
@@ -100,6 +99,6 @@ public class Nutzerbean extends HttpServlet {
         nutzerDAO.persist(nutzer);
         nutzerDAO.shutdown();
 
-        return "test";
+        return "home";
     }
 }

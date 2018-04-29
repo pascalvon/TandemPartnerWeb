@@ -9,7 +9,7 @@
     <title>Suchanfrage starten</title>
 </h:head>
 <h:body>
-    <b:container>
+     <b:container>
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
@@ -27,7 +27,7 @@
 
         <h1>Gib Deine Suchkriterien ein!</h1>
         <br></br>
-        <b:form>
+        <h:form>
             <!--Sprach- und Geschlechterwahl-->
             <b:row>
                 <b:column colSm="6">
@@ -90,8 +90,7 @@
             <b:row>
                 <b:column colSm="2"></b:column>
                 <b:column colSm="3">
-                    <b:commandButton target="#" href="suchergebnisse.xhtml" value="suchStart" name="action" ajax="true" update="@next"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}">Suchanfrage starten</b:commandButton>
+                    <b:commandButton target="#" href="suchergebnisse.xhtml" value="Suche starten" name="action"/>
                 </b:column>
                 <b:column colSm="2"></b:column>
                 <b:column colSm="3">
@@ -99,7 +98,7 @@
                 </b:column>
             </b:row><!--Buttons Ende-->
 
-        </b:form>
+        </h:form>
 
     </b:container>
 </h:body>
