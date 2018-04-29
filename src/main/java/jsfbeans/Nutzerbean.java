@@ -1,0 +1,113 @@
+package jsfbeans;
+
+import dao.NutzerDAO;
+import models.Geschlecht;
+import models.Nutzer;
+
+
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
+
+@ManagedBean
+@SessionScoped
+@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"})
+public class Nutzerbean extends HttpServlet {
+
+    @EJB
+    private NutzerDAO nutzerDAO;
+
+    private String mail;
+
+    private String vorname;
+
+    private String nachname;
+
+    private String passwort;
+
+    private Geschlecht geschlecht;
+
+    private Date geburtsdatum;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
+    public String getPasswort() {
+        return passwort;
+    }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
+
+    public Geschlecht getGeschlecht() {
+        return geschlecht;
+    }
+
+    public void setGeschlecht(Geschlecht geschlecht) {
+        this.geschlecht = geschlecht;
+    }
+
+    public Date getGeburtsdatum() {
+        return geburtsdatum;
+    }
+
+    public void setGeburtsdatum(Date geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
+
+    public String save(){
+        System.out.println("Test");
+
+        Nutzer nutzer = new Nutzer();
+
+        // Geburtstadatum hinzufügen
+        Calendar calender = Calendar.getInstance();
+        calender.set(1969,Calendar.MAY, 11);
+        Date geburtstdatum = new Date(calender.getTime().getTime());
+
+        nutzer.setMail(mail);
+        nutzer.setGeburtsdatum(geburtstdatum);
+        nutzer.setVorname(vorname);
+        nutzer.setNachname(nachname);
+        nutzer.setPasswort(passwort);
+        nutzer.setGeschlecht(Geschlecht.WEIBLICH);
+
+        nutzerDAO.persist(nutzer);
+        nutzerDAO.shutdown();
+
+        return "test";
+    }
+}
