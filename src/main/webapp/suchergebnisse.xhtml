@@ -12,22 +12,22 @@
     <b:container>
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="Suchergebnisse" href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="Suchergebnisse" href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
         <h1>Suchergebnisse:</h1>
-        <br></br>
-        <br></br>
+        <br/>
+        <br/>
 
         <h:form>
             <b:dataTable value="#{MATCHERGEBNISSE-CODE-EINFÜGEN}"
@@ -43,11 +43,11 @@
 
             <!--Buttons Beginn-->
             <b:row>
-                <b:column colSm="2"></b:column>
+                <b:column colSm="2"/>
                 <b:column colSm="3">
                     <b:commandButton value="anfragen" name="action" ajax="true">Matchanfrage schicken</b:commandButton>
                 </b:column>
-                <b:column colSm="2"></b:column>
+                <b:column colSm="2"/>
                 <b:column colSm="3">
                     <b:commandButton type="reset" value="Abbrechen" name="action"/>
                 </b:column>

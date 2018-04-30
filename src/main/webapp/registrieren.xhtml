@@ -33,17 +33,17 @@
         <h:form>
             <b:row>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="Vorname" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
+                    <b:inputText colSm="4" required="true" label="Vorname" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4"  label="Nachname" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
+                    <b:inputText colSm="4"  required="true" label="Nachname" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
             <b:row>
                 <b:column colSm="6">
                     <b:formGroup>
-                        <b:selectOneMenu colSm="4" required="true" label="Dein Geschlecht:" labelColSm="4">
+                        <b:selectOneMenu colSm="4" required="true" label="Dein Geschlecht:" labelColSm="4" value="">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
@@ -51,7 +51,7 @@
                     </b:formGroup>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="E-Mail" placeholder="E-Mail" value="#{nutzerbean.mail}"/>
+                    <b:inputText colSm="4" required="true" validator="#{nutzerbean.validateMail}" label="E-Mail" placeholder="E-Mail" value="#{nutzerbean.mail}"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -66,7 +66,7 @@
                     </b:formGroup>
                 </b:column>
                 <b:column colSm="6">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.geburtsdatum}"
                                   firstDay="1" required="true"
                                   label="Geburtsdatum:" label-col-sm="3" col-sm="5"  />
                     <b:message for="calendar" col-sm="1" />
@@ -76,7 +76,7 @@
             <b:row>
                 <b:column colSm="6">
                     <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" >
+                    <b:selectMultiMenu required="true" id="sprachwahl" >
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -85,7 +85,7 @@
 
                 <b:column colSm="6">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu id="aktivitätenwahl" >
+                    <b:selectMultiMenu required="true" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -95,13 +95,13 @@
 
             <b:row>
                 <b:column colSm="6">
-                    <b:inputSecret id="password" fieldId="n_password" name="p_password"
+                    <b:inputSecret id="password" required="true" fieldId="n_password" name="p_password"
                                    value="#{nutzerbean.passwort}"
                                    label="Passwort:" placeholder="Passwort"
                                    colSm="4"/>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputSecret id="passwordBest" fieldId="b_password" name="pb_password"
+                    <b:inputSecret id="passwordBest" required="true" fieldId="b_password" name="pb_password"
                                    label="Passwort bestätigen:" placeholder="Passwort bestätigen"
                                    colSm="4"/>
                 </b:column>

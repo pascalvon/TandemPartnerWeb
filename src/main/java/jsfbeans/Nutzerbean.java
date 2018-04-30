@@ -5,12 +5,12 @@ import models.Geschlecht;
 import models.Nutzer;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.validator.ValidatorException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import java.sql.Date;
-import java.util.Calendar;
 
 @ManagedBean
 @SessionScoped
@@ -30,7 +30,7 @@ public class Nutzerbean extends HttpServlet {
 
     private Geschlecht geschlecht;
 
-    private Date geburtsdatum;
+    private java.util.Date geburtsdatum;
 
     public String getMail() {
         return mail;
@@ -72,11 +72,11 @@ public class Nutzerbean extends HttpServlet {
         this.geschlecht = geschlecht;
     }
 
-    public Date getGeburtsdatum() {
+    public java.util.Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(Date geburtsdatum) {
+    public void setGeburtsdatum(java.util.Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
 
@@ -85,12 +85,8 @@ public class Nutzerbean extends HttpServlet {
 
         Nutzer nutzer = new Nutzer();
 
-        Calendar calender = Calendar.getInstance();
-        calender.set(1975,Calendar.MARCH, 15);
-        Date geburtsdatum = new Date(calender.getTime().getTime());
-
         nutzer.setMail(mail);
-        nutzer.setGeburtsdatum(geburtsdatum);
+        nutzer.setGeburtsdatum(new java.sql.Date(geburtsdatum.getTime()));
         nutzer.setVorname(vorname);
         nutzer.setNachname(nachname);
         nutzer.setPasswort(passwort);
@@ -101,4 +97,15 @@ public class Nutzerbean extends HttpServlet {
 
         return "home";
     }
+
+    /*public void validateMail() throws ValidatorException
+    {
+        if(!java.util.regex.Pattern.matches("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}.[a-zA-Z]", mail))
+        {
+            FacesMessage msg = new FacesMessage("Ungültige E-Mail-Adresse!","Bitte eine gültige Mail im Format mail@example.com angeben!");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
+
+    }*/
 }
