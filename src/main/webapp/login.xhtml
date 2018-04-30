@@ -9,25 +9,29 @@
     <title>Login tandemPartner</title>
 </h:head>
 <h:body>
-    <b:container>
+    <b:container style="margin-top: 5%">
         <h:form>
             <b:row>
-                <b:column medium-screen="2">
-                    <h:outputText value="Emailadresse:"/>
-                </b:column>
+                    <b:column medium-screen="5"></b:column>
+                    <b:column medium-screen="2">
+                        <b:image styleClass="img-circle" name="test" value="./bilder/tandemLogo.png" style="margin-top: 50%; margin-bottom: 10px; margin-left: 25%; height: 100px; width: 100px;"/>
+                    </b:column>
+                </b:row>
+                <b:row></b:row>
+            <b:row>
+                <b:column medium-screen="4"></b:column>
                 <b:column medium-screen="4">
                     <b:inputText placeholder="Emailadresse" />
                 </b:column>
             </b:row>
             <b:row>
-                <b:column medium-screen="2">
-                    <h:outputText value="Passwort:" />
-                </b:column>
+                <b:column medium-screen="4"></b:column>
                 <b:column medium-screen="4">
                     <b:inputSecret placeholder="Passwort" />
                 </b:column>
             </b:row>
             <b:row>
+                <b:column medium-screen="2"/>
                 <b:column span="2" offset="2">
                     <b:commandButton value="login" look="primary" style="width:100%" />
                 </b:column>
@@ -35,6 +39,7 @@
                     <b:commandButton value="Account erstellen" look="primary" action="registrieren.xhtml?faces-redirect=true" style="width:100%" />
                 </b:column>
             </b:row>
+
         </h:form>
 
     </b:container>
