@@ -4,22 +4,29 @@ import models.Bezirk;
 import models.Nutzer;
 import models.Sprache;
 
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.*;
 import java.util.Collection;
 
+@Stateless
 public class NutzerDAO {
-    private EntityManagerFactory factory;
+
+    //private EntityManagerFactory factory;
+    @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
 
     public NutzerDAO() {
-        factory = Persistence.createEntityManagerFactory("ExperimentalJPADatabase");
-        em = factory.createEntityManager();
+        //factory = Persistence.createEntityManagerFactory("ExperimentalJPADatabase");
+        //em = factory.createEntityManager();
     }
     public void shutdown() {
-        em.close();
-        factory.close();
-        em = null;
-        factory = null;
+        //em.close();
+        //factory.close();
+        //em = null;
+        //factory = null;
     }
     public Nutzer find(String Mail) {
         return em.find(Nutzer.class, Mail);
@@ -39,9 +46,9 @@ public class NutzerDAO {
     }
 
     public void persist(Nutzer nutzer) {
-        em.getTransaction().begin();
+        //em.getTransaction().begin();
         em.persist(nutzer);
-        em.getTransaction().commit();
+        //em.getTransaction().commit();
     }
 
     public void delete(String Mail) {

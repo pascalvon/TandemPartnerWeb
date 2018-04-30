@@ -4,30 +4,21 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID"
          version="3.0">
-    <!-- The BootsFaces_THEME context-param controls the loading of the Themes -->
-    <!-- The default is Bootstrap, the valid values are a Bootswach Theme name (lowercase) or "custom".-->
-    <context-param>
-        <param-name>BootsFaces_THEME</param-name>
-        <param-value>#{theme.internalTheme}</param-value>
-    </context-param>
-    <!-- The BootsFaces_USETHEME context-param controls the loading of the bootstrap-theme.css -->
-    <!-- The default is false, when set to true the bootstrap-theme.css will be loaded-->
-    <context-param>
-        <param-name>BootsFaces_USETHEME</param-name>
-        <param-value>true</param-value>
-    </context-param>
+    <display-name>TandemPartnerWeb</display-name>
     <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    <welcome-file-list>
-        <welcome-file>profil.xhtml</welcome-file>
-    </welcome-file-list>
-
+         <servlet-name>Faces Servlet</servlet-name>
+         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+         <load-on-startup>1</load-on-startup>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>Faces Servlet</servlet-name>
+         <url-pattern>*.xhtml</url-pattern>
+     </servlet-mapping>
+     <welcome-file-list>
+         <welcome-file>login.xhtml</welcome-file>
+     </welcome-file-list>
+     <context-param>
+         <param-name>BootsFaces_USETHEME</param-name>
+         <param-value>true</param-value>
+     </context-param>
 </web-app>
-
