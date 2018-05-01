@@ -16,7 +16,7 @@
                     <h:outputText value="Emailadresse:"/>
                 </b:column>
                 <b:column medium-screen="4">
-                    <b:inputText placeholder="Emailadresse" />
+                    <b:inputText placeholder="Emailadresse" value="#{nutzerbean.mail}"/>
                 </b:column>
             </b:row>
             <b:row>
@@ -24,12 +24,12 @@
                     <h:outputText value="Passwort:" />
                 </b:column>
                 <b:column medium-screen="4">
-                    <b:inputSecret placeholder="Passwort" />
+                    <b:inputSecret placeholder="Passwort" value="#{nutzerbean.passwort}"/>
                 </b:column>
             </b:row>
             <b:row>
                 <b:column span="2" offset="2">
-                    <b:commandButton value="login" look="primary" style="width:100%" />
+                    <b:commandButton value="login" look="primary" style="width:100%" action="#{nutzerbean.login}" />
                 </b:column>
                 <b:column span="2">
                     <b:commandButton value="Account erstellen" look="primary" action="registrieren.xhtml?faces-redirect=true" style="width:100%" />

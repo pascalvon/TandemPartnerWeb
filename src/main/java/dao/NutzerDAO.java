@@ -4,14 +4,14 @@ import models.Bezirk;
 import models.Nutzer;
 import models.Sprache;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
+import javax.servlet.annotation.WebServlet;
 import javax.transaction.UserTransaction;
 import java.util.Collection;
 
+@ManagedBean
 @Stateless
 public class NutzerDAO {
 
@@ -31,7 +31,9 @@ public class NutzerDAO {
         //factory = null;
     }
     public Nutzer find(String Mail) {
-        return em.find(Nutzer.class, Mail);
+        return em.createNamedQuery("findByMail", Nutzer.class)
+                .setParameter("vn", Mail)
+                .getSingleResult();
     }
 
     public Collection<Nutzer> findAll() {
@@ -49,7 +51,7 @@ public class NutzerDAO {
 
     public void persist(Nutzer nutzer) {
         //em.getTransaction().begin();
-        em.persist(nutzer);
+        em.merge(nutzer);
         //em.getTransaction().commit();
     }
 

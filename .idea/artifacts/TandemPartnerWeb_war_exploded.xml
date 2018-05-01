@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="TandemPartnerWeb:war exploded">
-    <output-path>$PROJECT_DIR$/target/TandemPartner</output-path>
+    <output-path />
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -33,6 +33,7 @@
           <element id="library" level="project" name="Maven: org.jboss.spec.javax.el:jboss-el-api_3.0_spec:1.0.0.Alpha1" />
           <element id="library" level="project" name="Maven: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.2_spec:1.0.0.Final" />
           <element id="library" level="project" name="Maven: net.bootsfaces:bootsfaces:1.2.0" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.2.10" />
         </element>
       </element>
       <element id="directory" name="META-INF">

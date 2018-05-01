@@ -15,7 +15,7 @@
          <url-pattern>*.xhtml</url-pattern>
      </servlet-mapping>
      <welcome-file-list>
-         <welcome-file>registrieren.xhtml</welcome-file>
+         <welcome-file>login.xhtml</welcome-file>
      </welcome-file-list>
      <context-param>
          <param-name>BootsFaces_USETHEME</param-name>
