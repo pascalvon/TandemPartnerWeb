@@ -6,6 +6,7 @@ import models.Nutzer;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,17 +20,12 @@ public class Nutzerbean extends HttpServlet {
 
     @EJB
     private NutzerDAO nutzerDAO;
-
+    private Nutzer nutzer;
     private String mail;
-
     private String vorname;
-
     private String nachname;
-
     private String passwort;
-
     private Geschlecht geschlecht;
-
     private Date geburtsdatum;
 
     public String getMail() {
@@ -80,10 +76,32 @@ public class Nutzerbean extends HttpServlet {
         this.geburtsdatum = geburtsdatum;
     }
 
+    public Nutzer getNutzer() {
+        return nutzer;
+    }
+
     public String save(){
         System.out.println("Test");
 
-        Nutzer nutzer = new Nutzer();
+        Calendar calender = Calendar.getInstance();
+        calender.set(1975,Calendar.MARCH, 15);
+        Date geburtsdatum = new Date(calender.getTime().getTime());
+
+        nutzer = new Nutzer();
+        nutzer.setMail(mail);
+        nutzer.setGeburtsdatum(geburtsdatum);
+        nutzer.setVorname(vorname);
+        nutzer.setNachname(nachname);
+        nutzer.setPasswort(passwort);
+        nutzer.setGeschlecht(Geschlecht.WEIBLICH);
+
+        nutzerDAO.persist(nutzer);
+        nutzerDAO.shutdown();
+
+        return "profil";
+    }
+
+    public String update() {
 
         Calendar calender = Calendar.getInstance();
         calender.set(1975,Calendar.MARCH, 15);
@@ -96,9 +114,9 @@ public class Nutzerbean extends HttpServlet {
         nutzer.setPasswort(passwort);
         nutzer.setGeschlecht(Geschlecht.WEIBLICH);
 
-        nutzerDAO.persist(nutzer);
-        nutzerDAO.shutdown();
-
-        return "home";
+        nutzer = nutzerDAO.merge(nutzer);
+        return "profil";
     }
+
+
 }

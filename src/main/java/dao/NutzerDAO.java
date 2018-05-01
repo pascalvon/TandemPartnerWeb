@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.*;
+import javax.transaction.UserTransaction;
 import java.util.Collection;
 
 @Stateless
@@ -17,6 +18,7 @@ public class NutzerDAO {
     //private EntityManagerFactory factory;
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
+    private UserTransaction userTransaction;
 
     public NutzerDAO() {
         //factory = Persistence.createEntityManagerFactory("ExperimentalJPADatabase");
@@ -49,6 +51,11 @@ public class NutzerDAO {
         //em.getTransaction().begin();
         em.persist(nutzer);
         //em.getTransaction().commit();
+    }
+
+    public Nutzer merge(Nutzer nutzer) {
+        //em.detach(nutzer);
+        return em.merge(nutzer);
     }
 
     public void delete(String Mail) {
