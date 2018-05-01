@@ -5,36 +5,34 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
-
 <h:head>
     <title>TandemPartner</title>
-    <!--<f:facet name="first">
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </f:facet>
-
-
-    <f:facet name="middle">
-        <h:outputStylesheet name="bootstrap/css/bootstrap.css"/>
-        <h:outputScript name="bootstrap/js/bootstrap.js"/>
-    </f:facet>-->
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
 
-<h:body>
-    <b:container>
-        <b:navBar brand="Brand" brandHref="#" inverse="true">
-            <b:navbarLinks>
-                <b:navLink value="Home" href="#"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
-            </b:navbarLinks>
-        </b:navBar>
-    </b:container>
+<body>
+<f:view>
+    <h:form>
+        <h:panelGrid columns="2">
 
-</h:body>
+            <h:outputText value="Vorname"/>
+            <h:inputText value="#{nutzerbean.vorname}"/>
 
+            <h:outputText value="Nachname"/>
+            <h:inputText value="#{nutzerbean.nachname}"/>
+
+            <h:outputText value="E-Mail"/>
+            <h:inputText value="#{nutzerbean.mail}"/>
+
+            <h:outputText value="Passwort"/>
+            <h:inputText value="#{nutzerbean.passwort}"/>
+
+        </h:panelGrid>
+
+        <h:commandButton value="Abspeichern" action="#{nutzerbean.save}"/>
+
+    </h:form>
+</f:view>
+</body>
 
 </html>
