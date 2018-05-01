@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <!--Titel der derzeit aufgerufenen Seite holen-->
+    <title><ui:insert name="pagetitle">tandemPartner</ui:insert></title>
+
+    <!-- CSS-Stylesheet einbinden-->
+    <link href="#{request.contextPath}/css/style.css" type="text/css" rel="stylesheet"/>
+</h:head>
+
+<h:body>
+    <f:view>
+        <div id="header">
+            <b:navBar brand="tandemPartner" fluid="true">
+                <b:navbarLinks>
+                    <b:navLink active="true" value="Hauptmenü" href="#"></b:navLink>
+                    <b:navLink value="Profil bearbeiten" href="../../profil.xhtml"></b:navLink>
+                    <b:navLink value="Suchanfragen" href="../../suchanfrage.xhtml"></b:navLink>
+                    <b:navLink value="Meine Matches" href="../../matches.xhtml"></b:navLink>
+
+                </b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                <b:navbarLinks pull="right">
+                    <b:navLink value="Impressum" href="../../impressum.xhtml"></b:navLink>
+                    <b:navLink value="Logout" href="../../login.xhtml"></b:navLink>
+                </b:navbarLinks>
+            </b:navBar><!--Navigation Ende-->
+        </div>
+
+        <div id="content">
+            <ui:insert name="content"></ui:insert>
+        </div>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <b:panel>
+                    <b:link style-class="some-class" href="ueber.xhtml" value="Über Uns" />
+                    <br></br>
+                    <p><b:link style-class="some-class" href="impressum.xhtml" value="Impressum" /></p>
+                    <p>Made with ♥ for you &#169; by tandemPartner</p>
+                </b:panel>
+            </ui:insert>
+        </div>
+    </f:view>
+
+</h:body>
+</html>

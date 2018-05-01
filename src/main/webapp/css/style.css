@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("../bilder/cesar-couto-420976-unsplash.jpg");
+    background-size: 100%;
+}
+
+#footer{
+    text-align: center;
+    flex-shrink: 0;
+    background-color: #eac58e;
+    opacity: 0.6;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-color:#eac58e;
+}
