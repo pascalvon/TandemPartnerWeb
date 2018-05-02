@@ -1,0 +1,15 @@
+html, body{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("../bilder/cesar-couto-420976-unsplash.jpg");
+    background-size: 100%;
+
+}
+
+.some-class{
+    color: black;
+}

@@ -5,15 +5,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Registrieren</title>
-</h:head>
-<h:body>
-    <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Registrieren tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Registrieren" href="#"/>
+                <b:navLink active="true" value="Registrieren" href="#"/>
                 <b:navLink value="" href="#"/>
                 <b:navLink value="" href="#"/>
                 <b:navLink value="" href="#"/>
@@ -30,27 +31,36 @@
         <h1>Hier kannst du Dich registrieren</h1>
         <br/>
 
+    <!--Registrieren Fenster Beginn-->
+        <!--Namen-->
         <h:form>
             <b:row>
-                <b:column colSm="6">
-                    <b:inputText colSm="4" required="true" label="Vorname" placeholder="Vorname" value="#{nutzerBean.vorname}"/>
+                <b:column medium-screen="4">
+                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
                 </b:column>
-                <b:column colSm="6">
-                    <b:inputText colSm="4"  required="true" label="Nachname" placeholder="Nachname" value="#{nutzerBean.nachname}"/>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
+            <!--Geschlecht & Mail-->
             <b:row>
-                <b:column colSm="6">
+                <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu colSm="4" required="true" value="#{nutzerBean.geschlecht}" label="Dein Geschlecht:" labelColSm="4">
-                            <f:selectItem itemLabel="Bitte wählen" />
+                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4" value="#{nutzerBean.geschlecht}">
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
-                            <f:selectItem itemLabel="Weiblich" itemValue="WEIBLICH"/>
+                            <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
-                <b:column colSm="6">
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
                     <b:inputText id="mail" colSm="4" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
@@ -61,26 +71,31 @@
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
+            <!-- Wohnen und Geburt-->
             <b:row>
-                <b:column colSm="6">
+                <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu colSm="4" required="true" label="Wohnbezirk:" labelColSm="2">
+                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Neukölln" itemValue="2" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
-                <b:column colSm="6">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerBean.geburtsdatum}"
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
                                   firstDay="1" required="true"
-                                  label="Geburtsdatum:" label-col-sm="3" col-sm="5"  />
-                    <b:message for="calendar" col-sm="1" />
+                                  label="Geburtsdatum:" labelmedium-screen="3"/>
+                    <b:message for="calendar" medium-screen="4" />
                 </b:column>
             </b:row><!--3.Reihe Ende-->
 
+            <!--Sprachen & Freizeitaktivitäten-->
             <b:row>
-                <b:column colSm="6">
+                <b:column span="4">
                     <h:outputLabel value="Ich spreche:" for="sprachwahl" />
                     <b:selectMultiMenu required="true" id="sprachwahl" >
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
@@ -89,9 +104,11 @@
                     </b:selectMultiMenu>
                 </b:column>
 
-                <b:column colSm="6">
+                <b:column medium-screen="2"></b:column>
+
+                <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu required="true" id="aktivitätenwahl" >
+                    <b:selectMultiMenu id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -99,8 +116,11 @@
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 
+            <br></br>
+
+            <!--Passwörter-->
             <b:row>
-                <b:column colSm="6">
+                <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
                                    value="#{nutzerBean.passwort}"
                                    label="Passwort:" placeholder="Passwort"
@@ -111,7 +131,10 @@
                     </b:inputSecret>
                     <b:message id="m_password" for="password" />
                 </b:column>
-                <b:column colSm="6">
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
@@ -119,22 +142,23 @@
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
+            <br></br>
+
             <!--Buttons beginn-->
             <b:row>
-                <b:column colSm="1"/>
+                <b:column medium-screen="3"/>
 
-                <b:column colSm="2">
-                    <b:commandButton value="Jetzt registrieren" action="#{nutzerBean.nutzerAnlegen}"/>
+                <b:column medium-screen="2">
+                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.save}"/>
                 </b:column>
 
-                <b:column colSm="1"/>
 
-                <b:column colSm="1">
-                    <b:button value="Abbrechen" href="login.xhtml"/>
+                <b:column medium-screen="2">
+                    <b:button value="Abbrechen" style="width:100%" href="login.xhtml"/>
                 </b:column><!--Buttons Ende-->
             </b:row><!--Buttons Ende-->
 
         </h:form><!--Form Ende-->
-    </b:container><!--Container Ende-->
-</h:body>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>

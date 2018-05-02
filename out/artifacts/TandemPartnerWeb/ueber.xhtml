@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Über Uns tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
+        <b:navBar brand="tandemPartner" fluid="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Über Uns" href="#"></b:navLink>
+
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
+                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar><!--Navigation Ende-->
+
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
+</html>

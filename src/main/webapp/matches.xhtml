@@ -5,36 +5,40 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Meine Matches</title>
-</h:head>
-<h:body>
-    <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Meine Matches tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"/>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                <b:navLink value="Meine Matches" href="#"/>
+                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
+                <b:navLink active="true" value="Meine Matches" href="#"></b:navLink>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Logout" href="login.xhtml"/>
+                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
+                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
                <h1>Meine Matches:</h1>
-               <br/>
-               <br/>
+               <br></br>
+               <br></br>
 
         <h:form>
                    <!--Offene Matches anzeigen-->
 
             <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
                         striped="#{dataTableSettingsBean.striped}"
-                        paginated="#{dataTableSettingsBean.paginated}">
+                         paginated="false"
+                         searching="false">
                <b:dataTableColumn label="Vorname" value="#{CODE}"/>
                <b:dataTableColumn label="Nachname" value="#{CODE}"/>
                <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
@@ -45,11 +49,11 @@
 
            <!--Buttons Start-->
           <b:row>
-               <b:column colSm="2"/>
+               <b:column colSm="2"></b:column>
                <b:column colSm="3">
                    <b:commandButton value="loeschen" name="action">Matches löschen</b:commandButton>
                </b:column>
-               <b:column colSm="2"/>
+               <b:column colSm="2"></b:column>
                <b:column colSm="3">
                    <b:button value="Abbrechen" href="matches.xhtml"/>
                </b:column>
@@ -57,7 +61,7 @@
 
         </h:form>
 
-    </b:container>
-  </h:body>
-  </html>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
+</html>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>TandemPartner</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+
+<body>
+<f:view>
+    <h:form>
+        <h:panelGrid columns="2">
+
+            <h:outputText value="Vorname"/>
+            <h:inputText value="#{nutzerbean.vorname}"/>
+
+            <h:outputText value="Nachname"/>
+            <h:inputText value="#{nutzerbean.nachname}"/>
+
+            <h:outputText value="E-Mail"/>
+            <h:inputText value="#{nutzerbean.mail}"/>
+
+            <h:outputText value="Passwort"/>
+            <h:inputText value="#{nutzerbean.passwort}"/>
+
+        </h:panelGrid>
+
+        <h:commandButton value="Abspeichern" action="#{nutzerbean.save}"/>
+
+    </h:form>
+</f:view>
+</body>
+
+</html>

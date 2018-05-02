@@ -5,14 +5,12 @@ import models.Geschlecht;
 import models.Nutzer;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.validator.ValidatorException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import java.sql.Date;
+import java.util.Calendar;
 
 @ManagedBean
 @SessionScoped
@@ -97,6 +95,4 @@ public class Nutzerbean extends HttpServlet {
 
         return "home";
     }
-
-
 }

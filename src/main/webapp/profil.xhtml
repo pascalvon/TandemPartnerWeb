@@ -5,15 +5,18 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Profil bearbeiten</title>
-</h:head>
-<h:body>
-    <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Profil bearbeiten tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="#"></b:navLink>
+                <b:navLink active="true" value="Profil bearbeiten" href="#"></b:navLink>
                 <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
                 <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
 
@@ -31,25 +34,25 @@
         <h:form>
             <b:row>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="Vorname" placeholder="Vorname"></b:inputText>
+                    <b:inputText colSm="4" label="Vorname" placeholder="Vorname" value="#{nutzerBean.vorname}"/>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4"  label="Nachname" placeholder="Nachname"></b:inputText>
+                    <b:inputText colSm="4"  label="Nachname" placeholder="Nachname" value="#{nutzerBean.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
             <b:row>
                 <b:column colSm="6">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{selectOneMenuBean.brand}" colSm="4" required="true" label="Dein Geschlecht:" labelColSm="4">
+                        <b:selectOneMenu value="#{nutzerBean.geschlecht}" colSm="4" required="true" label="Dein Geschlecht:" labelColSm="4">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="Männlich" itemValue="1" />
-                            <f:selectItem itemLabel="weiblich" itemValue="2" />
+                            <f:selectItem itemLabel="Weiblich" itemValue="2" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="E-Mail" placeholder="E-Mail"></b:inputText>
+                    <b:inputText colSm="4" label="E-Mail" placeholder="E-Mail" value="#{nutzerBean.mail}"></b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -65,7 +68,7 @@
                 </b:column>
                 <b:column colSm="6">
                     <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
-                                  firstDay="1" value="#{dateBean.cdate}" required="true"
+                                  firstDay="1" value="#{nutzerBean.gebDat}" required="true"
                                   label="Geburtsdatum:" label-col-sm="3" col-sm="5"  />
                     <b:message for="calendar" col-sm="1" />
                 </b:column>
@@ -94,29 +97,29 @@
             <b:row>
                 <b:column colSm="6">
                     <b:inputSecret id="passwordNeu" fieldId="n_password" name="n_password"
-                                   value="#{loginBean.password}"
+                                   value="#{nutzerBean.passwort}"
                                    label="neues Passwort:" placeholder="neues Passwort"
                                    colSm="4"/>
                 </b:column>
                 <b:column colSm="6">
                     <b:inputSecret id="passwordNeuBest" fieldId="b_password" name="b_password"
-                                   value="#{loginBean.password}"
                                    label="neues Passwort bestätigen:" placeholder="neues Passwort bestätigen"
                                    colSm="4"/>
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
+            <!--Buttons Beginn-->
             <b:row>
                 <b:column colSm="1"></b:column>
 
                 <b:column colSm="2">
-                    <b:commandButton update="@form" value="Login" onclick="ajax:loginBean.login2()"/>
+                    <b:commandButton value="Speichern" action="#{nutzerBean.save}"/>
                 </b:column>
 
                 <b:column colSm="1"></b:column>
 
                 <b:column colSm="1">
-                   <b:button value="Abbrechen" href="home.xhtml"></b:button>
+                    <b:button value="Abbrechen" href="home.xhtml"></b:button>
                 </b:column>
 
                 <b:column colSm="1"></b:column>
@@ -124,8 +127,10 @@
                 <b:column colSm="1">
                     <b:button value="Profil löschen" href="login.xhtml"></b:button>
                 </b:column>
-            </b:row>
+            </b:row><!--Buttons Ende-->
+
         </h:form>
-    </b:container>
-</h:body>
+
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>
