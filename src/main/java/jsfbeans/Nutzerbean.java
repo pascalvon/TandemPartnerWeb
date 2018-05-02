@@ -3,16 +3,19 @@ package jsfbeans;
 import dao.NutzerDAO;
 import models.Geschlecht;
 import models.Nutzer;
+import models.Sprache;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @ManagedBean
@@ -32,6 +35,9 @@ public class Nutzerbean extends HttpServlet {
     private Date geburtsdatum;
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     EntityManager em;
+    private ArrayList<Nutzer> sprachenList = findAllSprache();
+    private ArrayList<Sprache> selectedSprachen;
+
 
     public String getMail() {
         return mail;
@@ -93,6 +99,22 @@ public class Nutzerbean extends HttpServlet {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
+    public ArrayList<Nutzer> getSprachenList() {
+        return sprachenList;
+    }
+
+    public void setSprachenList(ArrayList<Nutzer> sprachenList) {
+        this.sprachenList = sprachenList;
+    }
+
+    public ArrayList<Sprache> getSelectedSprachen() {
+        return selectedSprachen;
+    }
+
+    public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
+        this.selectedSprachen = selectedSprachen;
+    }
+
     public String registerNutzer(){
         System.out.println("Test");
 
@@ -107,9 +129,7 @@ public class Nutzerbean extends HttpServlet {
         nutzer.setNachname(nachname);
         nutzer.setPasswort(passwort);
         nutzer.setGeschlecht(Geschlecht.WEIBLICH);
-
         nutzerDAO.persist(nutzer);
-        nutzerDAO.shutdown();
 
         return "login";
     }
@@ -120,27 +140,30 @@ public class Nutzerbean extends HttpServlet {
         calender.set(1975,Calendar.MARCH, 15);
         Date geburtsdatum = new Date(calender.getTime().getTime());
 
-        if (mail.equals(aktuellerNutzer.getMail()))
+        if (mail.equals(aktuellerNutzer.getMail())) {
             aktuellerNutzer.setMail(mail);
-        else
+        }
+        else {
             aktuellerNutzer.setMail(aktuellerNutzer.getMail());
-
+        }
         aktuellerNutzer.setGeburtsdatum(geburtsdatum);
-
-        // TODO Joe: 01.05.2018 vorname und getVorname wechseln
-        if (vorname != null || aktuellerNutzer.getVorname().equals(vorname))
+        if (aktuellerNutzer.getVorname().equals(vorname)) {
             aktuellerNutzer.setVorname(vorname);
-        else
+        }
+        else {
             aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
-
-        if (nachname != null || aktuellerNutzer.getNachname().equals(nachname))
+        }
+        if (aktuellerNutzer.getNachname().equals(nachname)) {
             aktuellerNutzer.setNachname(nachname);
-        else
+        }
+        else {
             aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
+        }
         aktuellerNutzer.setPasswort(passwort);
         aktuellerNutzer.setGeschlecht(Geschlecht.WEIBLICH);
 
         nutzer = nutzerDAO.merge(aktuellerNutzer);
+
         return "profil";
     }
 
@@ -151,19 +174,16 @@ public class Nutzerbean extends HttpServlet {
             aktuellerNutzer = getNutzer(mail);
             return "home";
         }
-
-        return "login";
+            return "login";
     }
 
     private boolean validateNutzer(String mail, String passwort) {
-        NutzerDAO dao = new NutzerDAO();
         Nutzer n = find(mail);
 
         return n.getPasswort().equals(passwort);
     }
 
     private Nutzer getNutzer(String mail) {
-        NutzerDAO dao = new NutzerDAO();
         return find(mail);
 
     }
@@ -174,5 +194,14 @@ public class Nutzerbean extends HttpServlet {
                 .getSingleResult();
     }
 
+    private void addSprachen() {
+
+    }
+
+    // TODO Joe: 02.05.2018 auf Sprache aendern
+    public ArrayList<Nutzer> findAllSprache() {
+        return (ArrayList<Nutzer>) em.createNamedQuery("findAll", Nutzer.class).getResultList();
+
+    }
 
 }

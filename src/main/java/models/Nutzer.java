@@ -125,4 +125,10 @@ public class Nutzer {
     public void addFreizeitaktivitaeten(Freizeitaktivitaeten freizeitaktivitaeten) {
         this.freizeitaktivitaetenSet.add(freizeitaktivitaeten);
     }
+
+    // TODO Joe: 02.05.2018 spaeter loeschen
+    @Override
+    public String toString() {
+        return getMail();
+    }
 }

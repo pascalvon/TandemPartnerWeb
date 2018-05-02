@@ -76,10 +76,8 @@
             <b:row>
                 <b:column colSm="6">
                     <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" >
-                        <f:selectItem itemLabel="Englisch" itemValue="1"/>
-                        <f:selectItem itemLabel="Russisch" itemValue="2"/>
-                        <f:selectItem itemLabel="Deutsch" itemValue="3"/>
+                    <b:selectMultiMenu id="sprachwahl" value="#{nutzerbean.selectedSprachen}" >
+                        <f:selectItem value="#{nutzerbean.sprachenList}"/>
                     </b:selectMultiMenu>
                 </b:column>
 

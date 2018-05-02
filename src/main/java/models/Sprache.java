@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@NamedQuery(name = "findAllSprache", query = "SELECT sprache FROM Sprache sprache")
 public class Sprache {
 
     @Id
@@ -25,4 +26,11 @@ public class Sprache {
         this.nameSprache = nameSprache;
     }
 
+    public Set<Nutzer> getNutzerSet() {
+        return nutzerSet;
+    }
+
+    public void setNutzerSet(Set<Nutzer> nutzerSet) {
+        this.nutzerSet = nutzerSet;
+    }
 }
