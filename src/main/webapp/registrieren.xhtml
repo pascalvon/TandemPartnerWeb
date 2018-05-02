@@ -43,15 +43,21 @@
             <b:row>
                 <b:column colSm="6">
                     <b:formGroup>
-                        <b:selectOneMenu colSm="4" required="true" label="Dein Geschlecht:" labelColSm="4" value="">
-                            <f:selectItem itemLabel="auswählen" itemValue="" />
+                        <b:selectOneMenu colSm="4" required="true" value="#{nutzerbean.geschlecht}" label="Dein Geschlecht:" labelColSm="4">
+                            <f:selectItem itemLabel="Bitte wählen" />
                             <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
-                            <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
+                            <f:selectItem itemLabel="Weiblich" itemValue="WEIBLICH"/>
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" required="true" validator="#{nutzerbean.validateMail}" label="E-Mail" placeholder="E-Mail" value="#{nutzerbean.mail}"/>
+                    <b:inputText id="mail" colSm="4" required="true"
+                                 validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
+                                 requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
+                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.mail}">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                        <b:messages for="mail" col-sm="1"/>
+                    </b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -95,15 +101,21 @@
 
             <b:row>
                 <b:column colSm="6">
-                    <b:inputSecret id="password" required="true" fieldId="n_password" name="p_password"
+                    <b:inputSecret id="password" required="true"
                                    value="#{nutzerbean.passwort}"
                                    label="Passwort:" placeholder="Passwort"
-                                   colSm="4"/>
+                                   colSm="4">
+                        <f:validator validatorId="PasswordValidator" />
+                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                        <f:ajax event="blur" execute="password confirm" render="m_password" />
+                    </b:inputSecret>
+                    <b:message id="m_password" for="password" />
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputSecret id="passwordBest" required="true" fieldId="b_password" name="pb_password"
-                                   label="Passwort bestätigen:" placeholder="Passwort bestätigen"
-                                   colSm="4"/>
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
+                        <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                    </b:inputSecret>
+                    <b:message id="m_confirm" for="confirm" />
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
@@ -112,7 +124,7 @@
                 <b:column colSm="1"/>
 
                 <b:column colSm="2">
-                    <b:commandButton value="Jetzt registrieren" action="#{nutzerbean.save}"/>
+                    <b:commandButton value="Jetzt registrieren" action="#{nutzerbean.nutzerAnlegen}"/>
                 </b:column>
 
                 <b:column colSm="1"/>

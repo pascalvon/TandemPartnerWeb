@@ -11,6 +11,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @ManagedBean
 @SessionScoped
@@ -21,15 +23,14 @@ public class Nutzerbean extends HttpServlet {
     private NutzerDAO nutzerDAO;
 
     private String mail;
-
     private String vorname;
-
     private String nachname;
 
+    @Size(min=8, max=30, message = "Das Passwort muss zwischen 8 und 30 Zeichen lang sein!")
     private String passwort;
 
-    private Geschlecht geschlecht;
 
+    private Geschlecht geschlecht;
     private java.util.Date geburtsdatum;
 
     public String getMail() {
@@ -80,7 +81,7 @@ public class Nutzerbean extends HttpServlet {
         this.geburtsdatum = geburtsdatum;
     }
 
-    public String save(){
+    public String nutzerAnlegen(){
         System.out.println("Test");
 
         Nutzer nutzer = new Nutzer();
@@ -90,7 +91,7 @@ public class Nutzerbean extends HttpServlet {
         nutzer.setVorname(vorname);
         nutzer.setNachname(nachname);
         nutzer.setPasswort(passwort);
-        nutzer.setGeschlecht(Geschlecht.WEIBLICH);
+        nutzer.setGeschlecht(geschlecht);
 
         nutzerDAO.persist(nutzer);
         nutzerDAO.shutdown();
@@ -98,14 +99,5 @@ public class Nutzerbean extends HttpServlet {
         return "home";
     }
 
-    /*public void validateMail() throws ValidatorException
-    {
-        if(!java.util.regex.Pattern.matches("[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}.[a-zA-Z]", mail))
-        {
-            FacesMessage msg = new FacesMessage("Ungültige E-Mail-Adresse!","Bitte eine gültige Mail im Format mail@example.com angeben!");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(msg);
-        }
 
-    }*/
 }
