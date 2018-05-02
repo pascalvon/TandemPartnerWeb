@@ -5,11 +5,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Meine Matches</title>
-</h:head>
-<h:body>
-    <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Meine Matches tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
@@ -34,7 +37,8 @@
 
             <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
                         striped="#{dataTableSettingsBean.striped}"
-                        paginated="#{dataTableSettingsBean.paginated}">
+                         paginated="false"
+                         searching="false">
                <b:dataTableColumn label="Vorname" value="#{CODE}"/>
                <b:dataTableColumn label="Nachname" value="#{CODE}"/>
                <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
@@ -57,7 +61,7 @@
 
         </h:form>
 
-    </b:container>
-  </h:body>
-  </html>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
+</html>
 

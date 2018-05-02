@@ -5,23 +5,26 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Über Uns</title>
-</h:head>
-<h:body>
-<b:container>
-<b:navBar brand="tandemPartner" fluid="true">
-    <b:navbarLinks>
-        <b:navLink active="true" value="Über Uns" href="#"></b:navLink>
 
-    </b:navbarLinks>
-    <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-    <b:navbarLinks pull="right">
-        <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-        <b:navLink value="Logout" href="login.xhtml"></b:navLink>
-    </b:navbarLinks>
-</b:navBar><!--Navigation Ende-->
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Über Uns tandemPartner</ui:define>
 
-</b:container>
-</h:body>
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
+        <b:navBar brand="tandemPartner" fluid="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Über Uns" href="#"></b:navLink>
+
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
+                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar><!--Navigation Ende-->
+
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>

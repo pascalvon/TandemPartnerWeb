@@ -5,12 +5,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Registrieren</title>
-</h:head>
-<h:body>
-    <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Registrieren tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
                 <b:navLink active="true" value="Registrieren" href="#"/>
@@ -146,6 +147,6 @@
             </b:row><!--Buttons Ende-->
 
         </h:form><!--Form Ende-->
-    </b:container><!--Container Ende-->
-</h:body>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>

@@ -5,11 +5,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Suchanfrage starten</title>
-</h:head>
-<h:body>
-     <b:container>
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Suchanfrage starten tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
         <b:navBar brand="tandemPartner" fluid="true">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
@@ -100,6 +103,6 @@
 
         </h:form>
 
-    </b:container>
-</h:body>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>

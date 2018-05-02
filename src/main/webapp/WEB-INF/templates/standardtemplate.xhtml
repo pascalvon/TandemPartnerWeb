@@ -12,35 +12,32 @@
     <title><ui:insert name="pagetitle">tandemPartner</ui:insert></title>
 
     <!-- CSS-Stylesheet einbinden-->
-    <link href="#{request.contextPath}/css/style.css" type="text/css" rel="stylesheet"/>
+    <link href="../../css/style.css" type="text/css" rel="stylesheet"/>
 </h:head>
 
 <h:body>
-    <f:view>
-        <div id="header">
-            <b:navBar brand="tandemPartner" fluid="true">
-                <b:navbarLinks>
-                    <b:navLink active="true" value="Hauptmenü" href="#"></b:navLink>
-                    <b:navLink value="Profil bearbeiten" href="../../profil.xhtml"></b:navLink>
-                    <b:navLink value="Suchanfragen" href="../../suchanfrage.xhtml"></b:navLink>
-                    <b:navLink value="Meine Matches" href="../../matches.xhtml"></b:navLink>
+    <b:container style="padding-bottom: 10%">
 
-                </b:navbarLinks>
-                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-                <b:navbarLinks pull="right">
-                    <b:navLink value="Impressum" href="../../impressum.xhtml"></b:navLink>
-                    <b:navLink value="Logout" href="../../login.xhtml"></b:navLink>
-                </b:navbarLinks>
-            </b:navBar><!--Navigation Ende-->
+        <div id="header">
+            <ui:insert name="header"><!--hier könnte die navbar drin stehen--></ui:insert>
         </div>
 
         <div id="content">
             <ui:insert name="content"></ui:insert>
         </div>
+    </b:container>
 
         <div id="footer">
             <ui:insert name="footer">
-                <b:panel>
+                <b:panel style="text-align: center;
+                                flex-shrink: 0;
+                                background-color: #eac58e;
+                                opacity: 0.6;
+                                height: 10%;
+                                margin-top: 10%;
+                                margin-bottom: 0;
+                                padding-bottom: 0;
+                                border-color:#eac58e;">
                     <b:link style-class="some-class" href="ueber.xhtml" value="Über Uns" />
                     <br></br>
                     <p><b:link style-class="some-class" href="impressum.xhtml" value="Impressum" /></p>
@@ -48,7 +45,6 @@
                 </b:panel>
             </ui:insert>
         </div>
-    </f:view>
 
 </h:body>
 </html>
