@@ -82,7 +82,6 @@ public class Nutzerbean extends HttpServlet {
     }
 
     public String nutzerAnlegen(){
-        System.out.println("Test");
 
         Nutzer nutzer = new Nutzer();
 
