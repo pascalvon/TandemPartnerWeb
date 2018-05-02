@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @ManagedBean
 @SessionScoped
 @WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"})
-public class Nutzerbean extends HttpServlet {
+public class NutzerBean extends HttpServlet {
 
     @EJB
     private NutzerDAO nutzerDAO;
