@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -26,8 +27,6 @@ public class Nutzerbean extends HttpServlet {
 
     @Size(min=8, max=30, message = "Das Passwort muss zwischen 8 und 30 Zeichen lang sein!")
     private String passwort;
-
-
     private Geschlecht geschlecht;
     private java.util.Date geburtsdatum;
 
@@ -94,5 +93,11 @@ public class Nutzerbean extends HttpServlet {
         nutzerDAO.shutdown();
 
         return "home";
+    }
+
+    public String profilSpeichern(){
+
+        //TODO: body;
+        return "profil";
     }
 }

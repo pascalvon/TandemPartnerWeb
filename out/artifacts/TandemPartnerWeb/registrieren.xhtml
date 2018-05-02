@@ -61,12 +61,12 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="mail" colSm="4" required="true"
+                    <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <b:messages for="mail" col-sm="1"/>
+                        <b:messages for="mail"/>
                     </b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
@@ -83,7 +83,7 @@
                     </b:formGroup>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.geburtsdatum}"
@@ -104,7 +104,7 @@
                     </b:selectMultiMenu>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
@@ -116,15 +116,14 @@
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <!--Passwörter-->
             <b:row>
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
                                    value="#{nutzerbean.passwort}"
-                                   label="Passwort:" placeholder="Passwort"
-                                   colSm="4">
+                                   label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                         <f:ajax event="blur" execute="password confirm" render="m_password" />
@@ -132,7 +131,7 @@
                     <b:message id="m_password" for="password" />
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" label="Passwort:" placeholder="Passwort">
@@ -142,7 +141,7 @@
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <!--Buttons beginn-->
             <b:row>

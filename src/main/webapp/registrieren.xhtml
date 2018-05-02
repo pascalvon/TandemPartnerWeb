@@ -50,7 +50,7 @@
             <b:row>
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4" value="#{nutzerBean.geschlecht}">
+                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4" value="#{nutzerbean.geschlecht}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
@@ -61,12 +61,12 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="mail" colSm="4" required="true"
+                    <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerBean.mail}">
+                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <b:messages for="mail" col-sm="1"/>
+                        <b:messages for="mail"/>
                     </b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
@@ -83,10 +83,10 @@
                     </b:formGroup>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.geburtsdatum}"
                                   firstDay="1" required="true"
                                   label="Geburtsdatum:" labelmedium-screen="3"/>
                     <b:message for="calendar" medium-screen="4" />
@@ -104,7 +104,7 @@
                     </b:selectMultiMenu>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
@@ -116,15 +116,14 @@
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <!--Passwörter-->
             <b:row>
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
-                                   value="#{nutzerBean.passwort}"
-                                   label="Passwort:" placeholder="Passwort"
-                                   colSm="4">
+                                   value="#{nutzerbean.passwort}"
+                                   label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                         <f:ajax event="blur" execute="password confirm" render="m_password" />
@@ -132,24 +131,24 @@
                     <b:message id="m_password" for="password" />
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" label="Passwort:" placeholder="Passwort">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
-                    <b:message id="m_confirm" for="confirm" />
+                    <b:messages onkeyup="ajax:messagesBean.update()" update="leftmessages rightmessages" redisplay="true" id="m_confirm" for="confirm" />
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <!--Buttons beginn-->
             <b:row>
                 <b:column medium-screen="3"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.save}"/>
+                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.nutzerAnlegen}"/>
                 </b:column>
 
 
