@@ -7,7 +7,7 @@ body{
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background: url("#{request.contextPath}/bilder/cesar-couto-420976-unsplash.jpg")no-repeat center center fixed;
+    background: url("../bilder/cesar-couto-420976-unsplash.jpg")no-repeat center center fixed;
     background-size: cover;
 
 }

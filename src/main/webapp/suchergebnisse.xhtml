@@ -15,22 +15,22 @@
 
         <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink active="true" value="Suchergebnisse" href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink active="true" value="Suchergebnisse" href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
         <h1 style="text-align: center">Suchergebnisse:</h1>
-        <br></br>
-        <br></br>
+        <br/>
+        <br/>
 
         <h:form>
             <b:dataTable value="#{MATCHERGEBNISSE-CODE-EINFÜGEN}"
@@ -46,7 +46,7 @@
 
             <!--Buttons Beginn-->
             <b:row>
-                <b:column  medium-screen="4"></b:column>
+                <b:column  medium-screen="4"/>
                 <b:column  medium-screen="2">
                     <b:commandButton value="anfragen" name="action" ajax="true">Matchanfrage schicken</b:commandButton>
                 </b:column>

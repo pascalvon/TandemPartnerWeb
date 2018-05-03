@@ -15,31 +15,31 @@
 
         <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink active="true" value="Profil bearbeiten" href="#"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                <b:navLink active="true" value="Profil bearbeiten" href="#"/>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
         <h1 style="text-align: center">Hier kannst du Dein Profil bearbeiten</h1>
-        <br></br>
+        <br/>
 
         <h:form>
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:inputText  label="Vorname" required="true" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputText  label="Nachname" required="true" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
@@ -47,20 +47,20 @@
             </b:row><!--1.Reihe Ende-->
 
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu value="#{nutzerbean.aktuellerNutzer.geschlecht}" required="true"
                                          label="Dein Geschlecht:" labelmedium-screen="4">
-                            <f:selectItem itemLabel="auswählen" itemValue="" />
-                            <f:selectItem itemLabel="Männlich" itemValue="MAENNLICH" />
-                            <f:selectItem itemLabel="Weiblich" itemValue="WEIBLICH" />
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="" />
+                            <f:selectItem itemLabel="männlich" itemValue="MAENNLICH" />
+                            <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
@@ -74,45 +74,46 @@
             </b:row><!--2.Reihe Ende-->
 
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
-                            <f:selectItem itemLabel="auswählen" itemValue="" />
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Neukölln" itemValue="2" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" required="true" mode="popup-icon" showWeek="true"
-                                  firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}"
-                                  label="Geburtsdatum:" labelmedium-screen="3"   />
-                    <b:message for="calendar" medium-screen="4" />
+                    <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
+                                  firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}" format="DD.MM.YYYY"
+                                  label="Geburtsdatum:" labelmedium-screen="3"/>
+                    <b:messages for="calendar"/>
                 </b:column>
             </b:row><!--3.Reihe Ende-->
 
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column span="4">
                     <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" required="true">
+                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen">
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
                     </b:selectMultiMenu>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column span="4">
-                    <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;" for="aktivitätenwahl" />
-                    <b:selectMultiMenu id="aktivitätenwahl" >
+                    <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;"
+                                   for="aktivitätenwahl"/>
+                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen">
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -120,13 +121,12 @@
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" required="true"
-                                   value="#{nutzerbean.passwort}"
+                    <b:inputSecret id="password" value="#{nutzerbean.passwort}"
                                    label="Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
@@ -135,37 +135,37 @@
                     </b:inputSecret>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" label="Passwort:"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="Passwort:"
                                    placeholder="neues Paswort bestätigen">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
-                    <b:message id="m_confirm" for="confirm" />
+                    <b:messages id="m_confirm" for="confirm" />
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
-            <br></br>
+            <br/>
 
             <!--Buttons Beginn-->
             <b:row>
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="2">
                     <b:commandButton value="Speichern" action="#{nutzerbean.update}"/>
                 </b:column>
 
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="1">
-                    <b:button value="Abbrechen" href="home.xhtml"></b:button>
+                    <b:button value="Abbrechen" href="home.xhtml"/>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="1">
-                    <b:button value="Profil löschen" href="login.xhtml"></b:button>
+                    <b:button value="Profil löschen" href="login.xhtml"/>
                 </b:column>
             </b:row><!--Buttons Ende-->
 

@@ -35,13 +35,13 @@
         <!--Namen-->
         <h:form>
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
@@ -50,20 +50,20 @@
 
             <!--Geschlecht & Mail-->
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4"
                                           value="#{nutzerbean.aktuellerNutzer.geschlecht}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
-                            <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
+                            <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
 
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
@@ -78,12 +78,12 @@
 
             <!-- Wohnen und Geburt-->
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
-                            <f:selectItem itemLabel="auswählen" itemValue="" />
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Neukölln" itemValue="2" />
                         </b:selectOneMenu>
@@ -93,20 +93,21 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}"
-                                  firstDay="1" required="true"
-                                  label="Geburtsdatum:" labelmedium-screen="3"/>
-                    <b:message for="calendar" medium-screen="4" />
+                    <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
+                                      firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}" format="DD.MM.YYYY"
+                                      label="Geburtsdatum:" requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3"/>
+                    <b:messages for="calendar"/>
                 </b:column>
             </b:row><!--3.Reihe Ende-->
 
             <!--Sprachen & Freizeitaktivitäten-->
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <h:outputLabel style="width: 100%;" value="Ich spreche: *" for="sprachwahl" />
-                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" >
+                    <h:outputLabel style="width: 100%;" value="Ich spreche: *"
+                                   for="sprachwahl"/>
+                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen">
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -116,8 +117,9 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <h:outputLabel style="width: 100%;" value="Meine Freizeitaktivitäten: *" for="aktivitätenwahl" />
-                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" >
+                    <h:outputLabel style="width: 100%;" value="Meine Freizeitaktivitäten: *"
+                                   for="aktivitätenwahl" />
+                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" nonSelectedText="Bitte wählen">
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -129,23 +131,25 @@
 
             <!--Passwörter-->
             <b:row>
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
                                    value="#{nutzerbean.passwort}"
-                                   label="Passwort:" placeholder="Passwort">
+                                   label="Passwort:" placeholder="Passwort"
+                                   requiredMessage="Das Passwort muss zwischen 8 und 30 Zeichen lang sein!">
                         <f:validator validatorId="passwordValidator" />
-                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
                         <f:ajax event="blur" execute="password confirm" render="m_password" />
                     </b:inputSecret>
-                    <b:message id="m_password" for="password" />
+                    <b:messages id="m_password" for="password" />
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" label="Passwort:" placeholder="Passwort">
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
+                                   label="Passwort:" placeholder="Passwort">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />

@@ -132,6 +132,7 @@ public class Nutzerbean extends HttpServlet {
 
     public String update() {
 
+        //TODO: update statt neu anlegen
         aktuellerNutzer.setMail(aktuellerNutzer.getMail());
         aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
         aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
@@ -139,7 +140,7 @@ public class Nutzerbean extends HttpServlet {
         aktuellerNutzer.setPasswort(passwort);
         aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
 
-        nutzerDAO.merge(aktuellerNutzer);
+        aktuellerNutzer = nutzerDAO.merge(aktuellerNutzer);
 
         return "profil";
     }
@@ -147,7 +148,7 @@ public class Nutzerbean extends HttpServlet {
     // TODO Joe: 01.05.2018 Exception fuer den Fall, dass falsche E-Mail angegeben wird, muss noch gefangen werden.
     // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
     public String login() {
-        if (validateNutzer(aktuellerNutzer.getMail(), aktuellerNutzer.getPasswort())) {
+        if (validateNutzer(aktuellerNutzer.getMail(), passwort)) {
             aktuellerNutzer = findNutzer(aktuellerNutzer.getMail());
             return "home";
         }

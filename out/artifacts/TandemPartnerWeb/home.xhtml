@@ -15,23 +15,23 @@
 
         <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
-                <b:navLink active="true" value="Hauptmenü" href="#"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink active="true" value="Hauptmenü" href="#"/>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
         <h1 style="text-align: center">Herzlich Willkommen bei tandemPartner!</h1>
-        <br></br>
-        <br></br>
-
+        <br/>
+        <br/>
+        <h3 style="text-align: center">Meine offenen Matchanfragen:</h3>
         <!--Datentabellen Beginn-->
         <h:form>
             <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
@@ -47,22 +47,22 @@
             </b:dataTable>
 
             <!--Buttons Start-->
-            <br></br>
+            <br/>
             <b:row>
-                <b:column medium-screen="2"></b:column>
+                <b:column medium-screen="2"/>
                 <b:column medium-screen="2">
                     <b:commandButton value="Annehmen" name="action" ajax="true"
                                      actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
                 </b:column>
 
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="2">
                     <b:commandButton value="Ablehnen" name="action" ajax="true"
                                      actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
                 </b:column>
 
-                <b:column medium-screen="1"></b:column>
+                <b:column medium-screen="1"/>
 
                 <b:column medium-screen="2">
                     <b:button value="Abbrechen" href="home.xhtml" />
