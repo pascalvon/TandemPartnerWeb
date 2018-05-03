@@ -149,7 +149,8 @@
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
-                                   label="Passwort:" placeholder="Passwort">
+                                   label="Passwort:" placeholder="Passwort"
+                                   requiredMessage="Das Passwort muss zwischen 8 und 30 Zeichen lang sein!">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
