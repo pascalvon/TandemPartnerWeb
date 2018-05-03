@@ -5,20 +5,25 @@
          id="WebApp_ID"
          version="3.0">
     <display-name>TandemPartnerWeb</display-name>
+
     <servlet>
          <servlet-name>Faces Servlet</servlet-name>
          <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
          <load-on-startup>1</load-on-startup>
      </servlet>
+
      <servlet-mapping>
          <servlet-name>Faces Servlet</servlet-name>
          <url-pattern>*.xhtml</url-pattern>
      </servlet-mapping>
+
      <welcome-file-list>
          <welcome-file>login.xhtml</welcome-file>
      </welcome-file-list>
+
      <context-param>
          <param-name>BootsFaces_USETHEME</param-name>
          <param-value>true</param-value>
      </context-param>
+
 </web-app>

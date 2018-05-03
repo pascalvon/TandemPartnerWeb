@@ -26,7 +26,7 @@ public class Nutzerbean extends HttpServlet {
 
     @EJB
     private NutzerDAO nutzerDAO;
-    private Nutzer aktuellerNutzer;
+    private Nutzer aktuellerNutzer = new Nutzer();
     private Nutzer nutzer; // TODO Joe: 01.05.2018 Dieser Nutzer noch erforderlich?
     private String mail;
     private String vorname;
@@ -87,7 +87,7 @@ public class Nutzerbean extends HttpServlet {
         this.geburtsdatum = geburtsdatum;
     }
 
-    public String nutzerAnlegen(){
+
     public Nutzer getNutzer() {
         return nutzer;
     }
@@ -100,62 +100,46 @@ public class Nutzerbean extends HttpServlet {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-    public ArrayList<Nutzer> getSprachenList() {
-        return sprachenList;
-    }
+   //public ArrayList<Nutzer> getSprachenList() {
+   //    return sprachenList;
+   //}
 
-    public void setSprachenList(ArrayList<Nutzer> sprachenList) {
-        this.sprachenList = sprachenList;
-    }
+   //public void setSprachenList(ArrayList<Nutzer> sprachenList) {
+   //    this.sprachenList = sprachenList;
+   //}
 
-    public ArrayList<Sprache> getSelectedSprachen() {
-        return selectedSprachen;
-    }
+   //public ArrayList<Sprache> getSelectedSprachen() {
+   //    return selectedSprachen;
+   //}
 
-    public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
-        this.selectedSprachen = selectedSprachen;
-    }
+   //public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
+   //    this.selectedSprachen = selectedSprachen;
+   //}
 
     public String nutzerAnlegen(){
-        Nutzer nutzer = new Nutzer();
 
-        nutzer.setMail(mail);
-        nutzer.setGeburtsdatum(new java.sql.Date(geburtsdatum.getTime()));
-        nutzer.setVorname(vorname);
-        nutzer.setNachname(nachname);
-        nutzer.setPasswort(passwort);
-        nutzer.setGeschlecht(geschlecht);
+        aktuellerNutzer.setMail(aktuellerNutzer.getMail());
+        aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
+        aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
+        aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
+        aktuellerNutzer.setPasswort(passwort);
+        aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
 
-        nutzerDAO.persist(nutzer);
+        nutzerDAO.persist(aktuellerNutzer);
 
         return "home";
     }
 
     public String update() {
 
-        if (mail.equals(aktuellerNutzer.getMail())) {
-            aktuellerNutzer.setMail(mail);
-        }
-        else {
-            aktuellerNutzer.setMail(aktuellerNutzer.getMail());
-        }
-        aktuellerNutzer.setGeburtsdatum(geburtsdatum);
-        if (aktuellerNutzer.getVorname().equals(vorname)) {
-            aktuellerNutzer.setVorname(vorname);
-        }
-        else {
-            aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
-        }
-        if (aktuellerNutzer.getNachname().equals(nachname)) {
-            aktuellerNutzer.setNachname(nachname);
-        }
-        else {
-            aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
-        }
+        aktuellerNutzer.setMail(aktuellerNutzer.getMail());
+        aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
+        aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
+        aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
         aktuellerNutzer.setPasswort(passwort);
-        aktuellerNutzer.setGeschlecht(Geschlecht.WEIBLICH);
+        aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
 
-        nutzer = nutzerDAO.merge(aktuellerNutzer);
+        nutzerDAO.merge(aktuellerNutzer);
 
         return "profil";
     }
@@ -163,44 +147,23 @@ public class Nutzerbean extends HttpServlet {
     // TODO Joe: 01.05.2018 Exception fuer den Fall, dass falsche E-Mail angegeben wird, muss noch gefangen werden.
     // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
     public String login() {
-        if (validateNutzer(mail, passwort)) {
-            aktuellerNutzer = getNutzer(mail);
+        if (validateNutzer(aktuellerNutzer.getMail(), aktuellerNutzer.getPasswort())) {
+            aktuellerNutzer = findNutzer(aktuellerNutzer.getMail());
             return "home";
         }
             return "login";
     }
 
-    public String profilSpeichern(){
-
-        //TODO: body;
-        return "profil";
-    }
-
     private boolean validateNutzer(String mail, String passwort) {
-        Nutzer n = find(mail);
+        Nutzer n = nutzerDAO.find(mail);
 
         return n.getPasswort().equals(passwort);
     }
 
-    private Nutzer getNutzer(String mail) {
-        return find(mail);
+    private Nutzer findNutzer(String mail) {
+        return nutzerDAO.find(mail);
 
     }
 
-    public Nutzer find(String Mail) {
-        return em.createNamedQuery("findByMail", Nutzer.class)
-                .setParameter("vn", Mail)
-                .getSingleResult();
-    }
-
-    private void addSprachen() {
-
-    }
-
-    // TODO Joe: 02.05.2018 auf Sprache aendern
-    public ArrayList<Nutzer> findAllSprache() {
-        return (ArrayList<Nutzer>) em.createNamedQuery("findAll", Nutzer.class).getResultList();
-
-    }
 
 }

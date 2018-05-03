@@ -28,29 +28,34 @@
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
-        <h1>Hier kannst du Dich registrieren</h1>
+        <h1 style="text-align: center">Hier kannst du Dich registrieren</h1>
         <br/>
 
     <!--Registrieren Fenster Beginn-->
         <!--Namen-->
         <h:form>
             <b:row>
+                <b:column medium-screen="1"></b:column>
+
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
+                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
+                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
             <!--Geschlecht & Mail-->
             <b:row>
+                <b:column medium-screen="1"></b:column>
+
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4" value="#{nutzerbean.geschlecht}">
+                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4"
+                                          value="#{nutzerbean.aktuellerNutzer.geschlecht}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
@@ -64,7 +69,7 @@
                     <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.mail}">
+                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.aktuellerNutzer.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                         <b:messages for="mail"/>
                     </b:inputText>
@@ -73,6 +78,8 @@
 
             <!-- Wohnen und Geburt-->
             <b:row>
+                <b:column medium-screen="1"></b:column>
+
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
@@ -86,7 +93,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.geburtsdatum}"
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}"
                                   firstDay="1" required="true"
                                   label="Geburtsdatum:" labelmedium-screen="3"/>
                     <b:message for="calendar" medium-screen="4" />
@@ -95,6 +102,8 @@
 
             <!--Sprachen & Freizeitaktivitäten-->
             <b:row>
+                <b:column medium-screen="1"></b:column>
+
                 <b:column span="4">
                     <h:outputLabel value="Ich spreche:" for="sprachwahl" />
                     <b:selectMultiMenu required="true" id="sprachwahl" >
@@ -120,6 +129,8 @@
 
             <!--Passwörter-->
             <b:row>
+                <b:column medium-screen="1"></b:column>
+
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
                                    value="#{nutzerbean.passwort}"
@@ -137,7 +148,7 @@
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" label="Passwort:" placeholder="Passwort">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
-                    <b:message id="m_confirm" for="confirm" />
+                    <b:messages id="m_confirm" for="confirm" />
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
@@ -145,7 +156,7 @@
 
             <!--Buttons beginn-->
             <b:row>
-                <b:column medium-screen="3"/>
+                <b:column medium-screen="4"/>
 
                 <b:column medium-screen="2">
                     <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.nutzerAnlegen}"/>

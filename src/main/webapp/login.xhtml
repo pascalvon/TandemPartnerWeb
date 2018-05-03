@@ -29,7 +29,7 @@
             <b:row>
                 <b:column medium-screen="4"></b:column>
                 <b:column medium-screen="4">
-                    <b:inputText type="mail" placeholder="Emailadresse" value="#{nutzerbean.mail}">
+                    <b:inputText type="mail" placeholder="Emailadresse" value="#{nutzerbean.aktuellerNutzer.mail}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
@@ -39,7 +39,7 @@
             <b:row>
                 <b:column medium-screen="4"></b:column>
                 <b:column medium-screen="4">
-                    <b:inputSecret placeholder="Passwort">
+                    <b:inputSecret placeholder="Passwort" value="#{nutzerbean.aktuellerNutzer.passwort}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>

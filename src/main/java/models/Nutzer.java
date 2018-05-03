@@ -34,7 +34,7 @@ public class Nutzer {
     private Geschlecht geschlecht;
 
     @Column(nullable = false)
-    private Date geburtsdatum;
+    private java.util.Date geburtsdatum;
 
     @ManyToOne
     private Bezirk bezirk;
@@ -91,11 +91,11 @@ public class Nutzer {
         this.geschlecht = geschlecht;
     }
 
-    public Date getGeburtsdatum() {
+    public java.util.Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(Date geburtsdatum) {
+    public void setGeburtsdatum(java.util.Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
 

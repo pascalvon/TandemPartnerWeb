@@ -36,13 +36,13 @@
                 <b:column medium-screen="1"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Vorname" placeholder="Vorname" value="#{nutzerBean.aktuellerNutzer.vorname}"/>
+                    <b:inputText  label="Vorname" required="true" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Nachname" placeholder="Nachname" value="#{nutzerBean.aktuellerNutzer.nachname}"/>
+                    <b:inputText  label="Nachname" required="true" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -51,10 +51,11 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{nutzerBean.geschlecht}"  label="Dein Geschlecht:" labelmedium-screen="4">
+                        <b:selectOneMenu value="#{nutzerbean.aktuellerNutzer.geschlecht}" required="true"
+                                         label="Dein Geschlecht:" labelmedium-screen="4">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
-                            <f:selectItem itemLabel="Männlich" itemValue="1" />
-                            <f:selectItem itemLabel="Weiblich" itemValue="2" />
+                            <f:selectItem itemLabel="Männlich" itemValue="MAENNLICH" />
+                            <f:selectItem itemLabel="Weiblich" itemValue="WEIBLICH" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
@@ -77,7 +78,7 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{selectOneMenuBean.brand}"  label="Wohnbezirk:" labelmedium-screen="2">
+                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Neukölln" itemValue="2" />
@@ -88,8 +89,8 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
-                                  firstDay="1" value="#{nutzerBean.gebDat}"
+                    <b:datepicker id="calendar" required="true" mode="popup-icon" showWeek="true"
+                                  firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}"
                                   label="Geburtsdatum:" labelmedium-screen="3"   />
                     <b:message for="calendar" medium-screen="4" />
                 </b:column>
@@ -100,7 +101,7 @@
 
                 <b:column span="4">
                     <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" id="sprachwahl" >
+                    <b:selectMultiMenu id="sprachwahl" required="true">
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -111,7 +112,7 @@
 
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" id="aktivitätenwahl" >
+                    <b:selectMultiMenu required="true" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -125,7 +126,7 @@
                 <b:column medium-screen="1"></b:column>
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
-                                   value="#{nutzerbean.aktuellerNutzer.passwort}"
+                                   value="#{nutzerbean.passwort}"
                                    label="Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
@@ -152,7 +153,7 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{nutzerBean.update}"/>
+                    <b:commandButton value="Speichern" action="#{nutzerbean.update}"/>
                 </b:column>
 
                 <b:column medium-screen="1"></b:column>
