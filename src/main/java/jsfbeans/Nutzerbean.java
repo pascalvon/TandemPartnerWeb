@@ -20,8 +20,7 @@ import java.util.Calendar;
 
 @ManagedBean
 @SessionScoped
-@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"})
-public class Nutzerbean extends HttpServlet {
+public class Nutzerbean {
 
     @EJB
     private NutzerDAO nutzerDAO;
@@ -33,10 +32,10 @@ public class Nutzerbean extends HttpServlet {
     private String passwort;
     private Geschlecht geschlecht;
     private Date geburtsdatum;
-    @PersistenceContext(unitName = "ExperimentalJPADatabase")
-    EntityManager em;
-    private ArrayList<Nutzer> sprachenList = findAllSprache();
-    private ArrayList<Sprache> selectedSprachen;
+    //@PersistenceContext(unitName = "ExperimentalJPADatabase")
+    //EntityManager em;
+   // private ArrayList<Nutzer> sprachenList = findAllSprache();
+    //private ArrayList<Sprache> selectedSprachen;
 
 
     public String getMail() {
@@ -99,24 +98,23 @@ public class Nutzerbean extends HttpServlet {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-    public ArrayList<Nutzer> getSprachenList() {
-        return sprachenList;
-    }
-
-    public void setSprachenList(ArrayList<Nutzer> sprachenList) {
-        this.sprachenList = sprachenList;
-    }
-
-    public ArrayList<Sprache> getSelectedSprachen() {
-        return selectedSprachen;
-    }
-
-    public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
-        this.selectedSprachen = selectedSprachen;
-    }
+   // public ArrayList<Nutzer> getSprachenList() {
+   //     return sprachenList;
+   // }
+//
+   // public void setSprachenList(ArrayList<Nutzer> sprachenList) {
+   //     this.sprachenList = sprachenList;
+   // }
+//
+   // public ArrayList<Sprache> getSelectedSprachen() {
+   //     return selectedSprachen;
+   // }
+//
+   // public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
+   //     this.selectedSprachen = selectedSprachen;
+   // }
 
     public String registerNutzer(){
-        System.out.println("Test");
 
         Calendar calender = Calendar.getInstance();
         calender.set(1975,Calendar.MARCH, 15);
@@ -178,30 +176,30 @@ public class Nutzerbean extends HttpServlet {
     }
 
     private boolean validateNutzer(String mail, String passwort) {
-        Nutzer n = find(mail);
+        Nutzer n = nutzerDAO.find(mail);
 
         return n.getPasswort().equals(passwort);
     }
 
     private Nutzer getNutzer(String mail) {
-        return find(mail);
+        return nutzerDAO.find(mail);
 
     }
 
-    public Nutzer find(String Mail) {
-        return em.createNamedQuery("findByMail", Nutzer.class)
-                .setParameter("vn", Mail)
-                .getSingleResult();
-    }
+    //public Nutzer find(String Mail) {
+    //    return em.createNamedQuery("findByMail", Nutzer.class)
+    //            .setParameter("vn", Mail)
+    //            .getSingleResult();
+    //}
 
     private void addSprachen() {
 
     }
 
     // TODO Joe: 02.05.2018 auf Sprache aendern
-    public ArrayList<Nutzer> findAllSprache() {
-        return (ArrayList<Nutzer>) em.createNamedQuery("findAll", Nutzer.class).getResultList();
-
-    }
+   // public ArrayList<Nutzer> findAllSprache() {
+   //     return (ArrayList<Nutzer>) em.createNamedQuery("findAll", Nutzer.class).getResultList();
+//
+   // }
 
 }

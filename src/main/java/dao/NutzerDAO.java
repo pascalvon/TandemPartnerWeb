@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.transaction.UserTransaction;
 import java.util.Collection;
 
-@ManagedBean
+//@ManagedBean
 @Stateless
 public class NutzerDAO {
 
