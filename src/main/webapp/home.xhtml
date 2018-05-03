@@ -21,7 +21,7 @@
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right">
                 <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Logout" href="login.xhtml"></b:navLink>  <!--<todo>Soll der Logout den aktuellenNutzer wirklich ausloggen oder reicht es auf login zu kommen?</todo>-->
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
@@ -32,7 +32,7 @@
             <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}">
-                <b:dataTableColumn label="Vorname" value="#{CODE}"/>
+                <b:dataTableColumn label="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{CODE}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
                 <b:dataTableColumn label="Emailadresse" value="#{CODE}"/>

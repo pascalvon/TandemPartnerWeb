@@ -31,10 +31,10 @@
         <h:form>
             <b:row>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="Vorname" value="#{nutzerbean.nutzer.vorname}"/>
+                    <b:inputText colSm="4" label="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4"  label="Nachname" value="#{nutzerbean.nutzer.nachname}"/>
+                    <b:inputText colSm="4"  label="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -49,7 +49,7 @@
                     </b:formGroup>
                 </b:column>
                 <b:column colSm="6">
-                    <b:inputText colSm="4" label="E-Mail" value="#{nutzerbean.nutzer.mail}"/>
+                    <b:inputText colSm="4" label="E-Mail" value="#{nutzerbean.aktuellerNutzer.mail}"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -95,13 +95,13 @@
                 <b:column colSm="6">
                     <b:inputSecret id="passwordNeu" fieldId="n_password" name="n_password"
 
-                                   label="neues Passwort:" value="#{nutzerbean.nutzer.passwort}"
+                                   label="neues Passwort:" value="#{nutzerbean.aktuellerNutzer.passwort}"
                                    colSm="4"/>
                 </b:column>
                 <b:column colSm="6">
                     <b:inputSecret id="passwordNeuBest" fieldId="b_password" name="b_password"
 
-                                   label="neues Passwort bestätigen:" value="#{nutzerbean.nutzer.passwort}"
+                                   label="neues Passwort bestätigen:" value="#{nutzerbean.aktuellerNutzer.passwort}"
                                    colSm="4"/>
                 </b:column>
             </b:row><!--5.Reihe Ende-->
