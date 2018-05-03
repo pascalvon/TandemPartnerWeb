@@ -36,13 +36,13 @@
                 <b:column medium-screen="1"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Vorname" placeholder="Vorname" value="#{nutzerBean.vorname}"/>
+                    <b:inputText  label="Vorname" placeholder="Vorname" value="#{nutzerBean.aktuellerNutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Nachname" placeholder="Nachname" value="#{nutzerBean.nachname}"/>
+                    <b:inputText  label="Nachname" placeholder="Nachname" value="#{nutzerBean.aktuellerNutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -65,7 +65,7 @@
                     <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.mail}">
+                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.aktuellerNutzer.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                         <b:messages for="mail"/>
                     </b:inputText>
@@ -125,7 +125,7 @@
                 <b:column medium-screen="1"></b:column>
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
-                                   value="#{nutzerbean.passwort}"
+                                   value="#{nutzerbean.aktuellerNutzer.passwort}"
                                    label="Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
@@ -152,7 +152,7 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{nutzerBean.save}"/>
+                    <b:commandButton value="Speichern" action="#{nutzerBean.update}"/>
                 </b:column>
 
                 <b:column medium-screen="1"></b:column>

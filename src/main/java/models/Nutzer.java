@@ -7,16 +7,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
-                @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn")
-})
-public class Nutzer implements Serializable {
+@NamedQueries({@NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
+        @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
+        @NamedQuery(name = "findByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn")})
+public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "gen")
     @SequenceGenerator(name="gen", sequenceName = "Nutzersequenz", initialValue = 1000, allocationSize = 10)
     private int Id;
-
+    // TODO Joe: 01.05.2018 Jede Mail darf nur einmal existieren.
     @Column(nullable = false)
     private String mail;
 
@@ -125,5 +125,11 @@ public class Nutzer implements Serializable {
 
     public void addFreizeitaktivitaeten(Freizeitaktivitaeten freizeitaktivitaeten) {
         this.freizeitaktivitaetenSet.add(freizeitaktivitaeten);
+    }
+
+    // TODO Joe: 02.05.2018 spaeter loeschen
+    @Override
+    public String toString() {
+        return getMail();
     }
 }
