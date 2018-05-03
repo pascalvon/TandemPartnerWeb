@@ -13,7 +13,7 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true">
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
                 <b:navLink active="true" value="Profil bearbeiten" href="#"></b:navLink>
@@ -89,7 +89,7 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:datepicker id="calendar" required="true" mode="popup-icon" showWeek="true"
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
                                   firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}"
                                   label="Geburtsdatum:" labelmedium-screen="3"   />
                     <b:message for="calendar" medium-screen="4" />
@@ -100,8 +100,8 @@
                 <b:column medium-screen="1"></b:column>
 
                 <b:column span="4">
-                    <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" required="true">
+                    <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
+                    <b:selectMultiMenu style="width: 100%;" id="sprachwahl" >
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -111,8 +111,8 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column span="4">
-                    <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu required="true" id="aktivitätenwahl" >
+                    <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;" for="aktivitätenwahl" />
+                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -125,6 +125,7 @@
             <b:row>
                 <b:column medium-screen="1"></b:column>
                 <b:column medium-screen="4">
+
                     <b:inputSecret id="password" required="true"
                                    value="#{nutzerbean.passwort}"
                                    label="Passwort:" placeholder="neues Passwort">
