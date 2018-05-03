@@ -1,20 +1,22 @@
 package models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
-        @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn")})
+        @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
+        @NamedQuery(name = "findByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn")})
 public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "gen")
     @SequenceGenerator(name="gen", sequenceName = "Nutzersequenz", initialValue = 1000, allocationSize = 10)
     private int Id;
-
+    // TODO Joe: 01.05.2018 Jede Mail darf nur einmal existieren.
     @Column(nullable = false)
     private String mail;
 
@@ -32,7 +34,7 @@ public class Nutzer {
     private Geschlecht geschlecht;
 
     @Column(nullable = false)
-    private Date geburtsdatum;
+    private java.util.Date geburtsdatum;
 
     @ManyToOne
     private Bezirk bezirk;
@@ -89,11 +91,11 @@ public class Nutzer {
         this.geschlecht = geschlecht;
     }
 
-    public Date getGeburtsdatum() {
+    public java.util.Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(Date geburtsdatum) {
+    public void setGeburtsdatum(java.util.Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
 
@@ -123,5 +125,11 @@ public class Nutzer {
 
     public void addFreizeitaktivitaeten(Freizeitaktivitaeten freizeitaktivitaeten) {
         this.freizeitaktivitaetenSet.add(freizeitaktivitaeten);
+    }
+
+    // TODO Joe: 02.05.2018 spaeter loeschen
+    @Override
+    public String toString() {
+        return getMail();
     }
 }

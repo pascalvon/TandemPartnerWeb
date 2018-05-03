@@ -5,43 +5,48 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Suchanfrage starten</title>
-</h:head>
-<h:body>
-     <b:container>
-        <b:navBar brand="tandemPartner" fluid="true">
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Suchanfrage starten tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="#"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                <b:navLink active="true" value="Suchanfragen" href="#"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
-        <h1>Gib Deine Suchkriterien ein!</h1>
-        <br></br>
+        <h1 style="text-align: center">Gib Deine Suchkriterien ein!</h1>
+        <br/>
         <h:form>
             <!--Sprach- und Geschlechterwahl-->
             <b:row>
-                <b:column colSm="6">
+                <b:column medium-screen="1"/>
+
+                <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{selectOneMenuBean.brand}" colSm="4" required="true" label="Ich will lernen:" labelColSm="2">
+                        <b:selectOneMenu value="#{selectOneMenuBean.brand}"  required="true" label="Ich will lernen:" labelmedium-screen="2">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="Russisch" itemValue="1" />
                             <f:selectItem itemLabel="Englisch" itemValue="2" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
-                <b:column colSm="6">
+                <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{selectOneMenuBean.brand}" colSm="4" required="true" label="Geschlecht:" labelColSm="4">
+                        <b:selectOneMenu value="#{selectOneMenuBean.brand}"  required="true" label="Geschlecht:" labelmedium-screen="4">
                             <f:selectItem itemLabel="auswählen" itemValue="" />
                             <f:selectItem itemLabel="männlich" itemValue="1" />
                             <f:selectItem itemLabel="weiblich" itemValue="2" />
@@ -53,17 +58,21 @@
 
             <!-- Auswahl Minimum & Maximum Alter-->
             <b:row>
-                <b:column colSm="6">
-                    <b:inputText colSm="4" id="minAlter" type="number" label="Alter von:" placeholder="Mindestalter"></b:inputText>
+                <b:column medium-screen="1"/>
+
+                <b:column medium-screen="4">
+                    <b:inputText  id="minAlter" type="number" label="Alter von:" placeholder="Mindestalter" required="true"/>
                 </b:column>
-                <b:column colSm="6">
-                    <b:inputText colSm="4"  id="maxAlter" label="Alter bis:" placeholder="Maximalalter"></b:inputText>
+                <b:column medium-screen="4">
+                    <b:inputText   id="maxAlter" label="Alter bis:" placeholder="Maximalalter" required="true"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
             <!--Auswahl Freizeitaktivitäten-->
             <b:row>
-                <b:column colSm="6">
+                <b:column medium-screen="1"/>
+
+                <b:column medium-screen="4">
                     <h:outputLabel value="Freizeitaktivitäten:" for="aktivitätenwahl" />
                     <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
@@ -73,12 +82,13 @@
                 </b:column>
             </b:row><!-- 3.Reihe Ende-->
 
-            <h3>gespeicherte Suchanfragen</h3>
+            <h3 style="text-align: center">Gespeicherte Suchanfragen</h3>
 
             <b:dataTable value="#{GESPEICHERTEANFRAGEN-CODE-EINFÜGEN}"
                          striped="#{dataTableSettingsBean.striped}"
-                         paginated="#{dataTableSettingsBean.paginated}">
-                <b:dataTableColumn label="Sparche" value="#{CODE}"/>
+                         paginated="#{dataTableSettingsBean.paginated}"
+                            searching="false">
+                <b:dataTableColumn label="Sprache" value="#{CODE}"/>
                 <b:dataTableColumn label="Mindestalter" value="#{CODE}"/>
                 <b:dataTableColumn label="Maximalalter" value="#{CODE}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
@@ -86,20 +96,24 @@
                 <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
             </b:dataTable>
 
+            <br/>
+            <br/>
+
             <!--Buttons Beginn-->
             <b:row>
-                <b:column colSm="2"></b:column>
-                <b:column colSm="3">
-                    <b:commandButton target="#" href="suchergebnisse.xhtml" value="Suche starten" name="action"/>
+                <b:column medium-screen="4"/>
+
+                <b:column medium-screen="2">
+                    <b:commandButton style="width:100%" href="suchergebnisse.xhtml" value="Suche starten" name="action"/>
                 </b:column>
-                <b:column colSm="2"></b:column>
-                <b:column colSm="3">
-                    <b:button value="Abbrechen" href="suchanfrage.xhtml" />
+
+                <b:column medium-screen="2">
+                    <b:button style="width:100%" value="Abbrechen" href="suchanfrage.xhtml" />
                 </b:column>
             </b:row><!--Buttons Ende-->
 
         </h:form>
 
-    </b:container>
-</h:body>
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>
