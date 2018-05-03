@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Registrieren tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+        <b:navBar brand="tandemPartner" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px"   fluid="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Registrieren" href="#"/>
+                <b:navLink value="" href="#"/>
+                <b:navLink value="" href="#"/>
+                <b:navLink value="" href="#"/>
+
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Login" href="login.xhtml"/>
+
+            </b:navbarLinks>
+        </b:navBar><!--Navigation Ende-->
+
+        <h1 style="text-align: center">Hier kannst du Dich registrieren</h1>
+        <br/>
+
+    <!--Registrieren Fenster Beginn-->
+        <!--Namen-->
+        <h:form>
+            <b:row>
+                <b:column medium-screen="1"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
+                </b:column>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
+                </b:column>
+            </b:row><!--1.Reihe Ende-->
+
+            <!--Geschlecht & Mail-->
+            <b:row>
+                <b:column medium-screen="1"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:formGroup>
+                        <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4">
+                            <f:selectItem itemLabel="auswählen" itemValue="" />
+                            <f:selectItem itemLabel="Männlich"  itemValue="MAENNLICH"/>
+                            <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
+                        </b:selectOneMenu>
+                    </b:formGroup>
+                </b:column>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputText required="true" label="E-Mail:" placeholder="E-Mail" value="#{nutzerbean.mail}"/>
+                </b:column>
+            </b:row><!--2.Reihe Ende-->
+
+            <!-- Wohnen und Geburt-->
+            <b:row>
+                <b:column medium-screen="1"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:formGroup>
+                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
+                            <f:selectItem itemLabel="auswählen" itemValue="" />
+                            <f:selectItem itemLabel="Mitte" itemValue="1" />
+                            <f:selectItem itemLabel="Neukölln" itemValue="2" />
+                        </b:selectOneMenu>
+                    </b:formGroup>
+                </b:column>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
+                                  firstDay="1" required="true"
+                                  label="Geburtsdatum:" labelmedium-screen="3"/>
+                    <b:message for="calendar" medium-screen="4" />
+                </b:column>
+            </b:row><!--3.Reihe Ende-->
+
+            <!--Sprachen & Freizeitaktivitäten-->
+            <b:row>
+                <b:column medium-screen="1"></b:column>
+
+                <b:column medium-screen="4">
+                    <h:outputLabel style="width: 100%;" value="Ich spreche: *" for="sprachwahl" />
+                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" >
+                        <f:selectItem itemLabel="Englisch" itemValue="1"/>
+                        <f:selectItem itemLabel="Russisch" itemValue="2"/>
+                        <f:selectItem itemLabel="Deutsch" itemValue="3"/>
+                    </b:selectMultiMenu>
+                </b:column>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <h:outputLabel style="width: 100%;" value="Meine Freizeitaktivitäten: *" for="aktivitätenwahl" />
+                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" >
+                        <f:selectItem itemLabel="Rudern" itemValue="1"/>
+                        <f:selectItem itemLabel="Fußball" itemValue="2"/>
+                        <f:selectItem itemLabel="Kochen" itemValue="3"/>
+                    </b:selectMultiMenu>
+                </b:column>
+            </b:row><!-- 4.Reihe Ende-->
+
+            <br></br>
+
+            <!--Passwörter-->
+            <b:row>
+                <b:column medium-screen="1"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputSecret id="password" fieldId="n_password" name="p_password"
+                                   value="#{nutzerbean.passwort}"
+                                   label="Passwort:" placeholder="Passwort"
+                                   required="true"/>
+                </b:column>
+
+                <b:column medium-screen="2"></b:column>
+
+                <b:column medium-screen="4">
+                    <b:inputSecret  id="passwordBest" fieldId="b_password" name="pb_password"
+                                   label="Passwort bestätigen:" placeholder="Passwort bestätigen"
+                                    required="true"/>
+                </b:column>
+            </b:row><!--5.Reihe Ende-->
+
+            <br></br>
+
+            <!--Buttons beginn-->
+            <b:row>
+                <b:column medium-screen="4"/>
+
+                <b:column medium-screen="2">
+                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.save}"/>
+                </b:column>
+
+
+                <b:column medium-screen="2">
+                    <b:button value="Abbrechen" style="width:100%" href="login.xhtml"/>
+                </b:column><!--Buttons Ende-->
+            </b:row><!--Buttons Ende-->
+
+        </h:form><!--Form Ende-->
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
+</html>

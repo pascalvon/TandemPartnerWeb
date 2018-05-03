@@ -12,7 +12,7 @@
 
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
-        <b:navBar brand="tandemPartner" fluid="true">
+        <b:navBar brand="tandemPartner" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px"   fluid="true">
             <b:navbarLinks>
                 <b:navLink active="true" value="Registrieren" href="#"/>
                 <b:navLink value="" href="#"/>
@@ -97,9 +97,9 @@
             <b:row>
                 <b:column medium-screen="1"></b:column>
 
-                <b:column span="4">
-                    <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu required="true" id="sprachwahl" >
+                <b:column medium-screen="4">
+                    <h:outputLabel style="width: 100%;" value="Ich spreche: *" for="sprachwahl" />
+                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" >
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -108,9 +108,9 @@
 
                 <b:column medium-screen="2"></b:column>
 
-                <b:column span="4">
-                    <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu id="aktivitätenwahl" >
+                <b:column medium-screen="4">
+                    <h:outputLabel style="width: 100%;" value="Meine Freizeitaktivitäten: *" for="aktivitätenwahl" />
+                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>

@@ -13,7 +13,7 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true">
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
                 <b:navLink active="true" value="Profil bearbeiten" href="#"></b:navLink>
@@ -36,13 +36,13 @@
                 <b:column medium-screen="1"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Vorname" placeholder="Vorname" value="#{nutzerBean.vorname}"/>
+                    <b:inputText  label="Vorname" placeholder="Vorname" value="#{nutzerbean.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Nachname" placeholder="Nachname" value="#{nutzerBean.nachname}"/>
+                    <b:inputText  label="Nachname" placeholder="Nachname" value="#{nutzerbean.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -62,7 +62,7 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="4">
-                    <b:inputText label="E-Mail" placeholder="E-Mail" value="#{nutzerBean.mail}"></b:inputText>
+                    <b:inputText label="E-Mail" placeholder="E-Mail" value="#{nutzerbean.mail}"></b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -83,7 +83,7 @@
 
                 <b:column medium-screen="4">
                     <b:datepicker id="calendar" mode="popup-icon" showWeek="true"
-                                  firstDay="1" value="#{nutzerBean.gebDat}"
+                                  firstDay="1" value="#{nutzerbean.geburtsdatum}"
                                   label="Geburtsdatum:" labelmedium-screen="3"   />
                     <b:message for="calendar" medium-screen="4" />
                 </b:column>
@@ -93,8 +93,8 @@
                 <b:column medium-screen="1"></b:column>
 
                 <b:column span="4">
-                    <h:outputLabel value="Ich spreche:" for="sprachwahl" />
-                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" id="sprachwahl" >
+                    <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
+                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" style="width: 100%;" id="sprachwahl" >
                         <f:selectItem itemLabel="Englisch" itemValue="1"/>
                         <f:selectItem itemLabel="Russisch" itemValue="2"/>
                         <f:selectItem itemLabel="Deutsch" itemValue="3"/>
@@ -104,8 +104,8 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column span="4">
-                    <h:outputLabel value="Meine Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" id="aktivitätenwahl" >
+                    <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;" for="aktivitätenwahl" />
+                    <b:selectMultiMenu value="#{selectMultiMenuBean.brand}" style="width: 100%;" id="aktivitätenwahl" >
                         <f:selectItem itemLabel="Rudern" itemValue="1"/>
                         <f:selectItem itemLabel="Fußball" itemValue="2"/>
                         <f:selectItem itemLabel="Kochen" itemValue="3"/>
@@ -119,7 +119,7 @@
                 <b:column medium-screen="1"></b:column>
                 <b:column medium-screen="4">
                     <b:inputSecret id="passwordNeu" fieldId="n_password" name="n_password"
-                                   value="#{nutzerBean.passwort}"
+                                   value="#{nutzerbean.passwort}"
                                    label="neues Passwort:" placeholder="neues Passwort"/>
                 </b:column>
 
@@ -138,7 +138,7 @@
                 <b:column medium-screen="2"></b:column>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{nutzerBean.save}"/>
+                    <b:commandButton value="Speichern" action="#{nutzerbean.save}"/>
                 </b:column>
 
                 <b:column medium-screen="1"></b:column>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Über Uns tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Über Uns" href="#"></b:navLink>
+
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
+                <b:navLink value="Logout" href="login.xhtml"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar><!--Navigation Ende-->
+
+        <b:column medium-screen="2"></b:column>
+        <b:column medium-screen="8">
+            <h1 style="text-align: center">Über Uns</h1>
+            <br/>
+            <section style="text-align: justify; line-height: 1.5;">
+                <p>
+                    Tandemlernen ist partnerschaftliches und autonomes interkulturelles Lernen. Menschen mit unterschiedlichen Muttersprachen bzw. Sprachkenntnissen treffen sich und kommunizieren abwechselnd in den Sprachen des anderen. Das Lernen basiert also auf einem Gegenseitigkeitsprinzip: Beide Partner/-innen sollen im selben Maße von der Zusammenarbeit profitieren.
+                </p>
+
+                <p>
+                    Die Partner stehen dabei als Experten für ihre Sprache und Kultur zur Verfügung, sie können auf Wunsch vorlesen, über ausgewählte Themen sprechen, Fehler korrigieren, Verbesse-rungsvorschläge machen usw.
+                </p>
+
+                <p>
+                    Allerdings gestaltet es sich häufig als schwierig, geeignete Tandempartner für das Erlernen einer neuen Sprache bzw. zum Erweitern der bisherigen Sprachkenntnisse zu finden.
+                </p>
+
+                <p>
+                    Mit unserem Software-Projekt <strong>„tandemPartner – Gemeinsam Sprachen lernen“</strong> wollen wir eine problemlose Tandempartnersuche ermöglichen.
+                </p>
+            </section>
+        </b:column>
+
+        <b:row/>
+
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
+</html>

@@ -13,7 +13,7 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true">
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
                 <b:navLink active="true" value="Über Uns" href="#"></b:navLink>
 
@@ -28,7 +28,7 @@
         <b:column medium-screen="2"></b:column>
         <b:column medium-screen="8">
             <h1 style="text-align: center">Über Uns</h1>
-            <br></br>
+            <br/>
             <section style="text-align: justify; line-height: 1.5;">
                 <p>
                     Tandemlernen ist partnerschaftliches und autonomes interkulturelles Lernen. Menschen mit unterschiedlichen Muttersprachen bzw. Sprachkenntnissen treffen sich und kommunizieren abwechselnd in den Sprachen des anderen. Das Lernen basiert also auf einem Gegenseitigkeitsprinzip: Beide Partner/-innen sollen im selben Maße von der Zusammenarbeit profitieren.
@@ -47,6 +47,8 @@
                 </p>
             </section>
         </b:column>
+
+        <b:row/>
 
     </ui:define><!-- content defining Ende-->
 </ui:composition>

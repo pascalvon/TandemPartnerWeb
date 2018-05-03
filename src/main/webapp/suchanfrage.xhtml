@@ -13,7 +13,7 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true">
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
                 <b:navLink value="Hauptmenü" href="home.xhtml"></b:navLink>
                 <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
@@ -86,7 +86,8 @@
 
             <b:dataTable value="#{GESPEICHERTEANFRAGEN-CODE-EINFÜGEN}"
                          striped="#{dataTableSettingsBean.striped}"
-                         paginated="#{dataTableSettingsBean.paginated}">
+                         paginated="#{dataTableSettingsBean.paginated}"
+                            searching="false">
                 <b:dataTableColumn label="Sprache" value="#{CODE}"/>
                 <b:dataTableColumn label="Mindestalter" value="#{CODE}"/>
                 <b:dataTableColumn label="Maximalalter" value="#{CODE}"/>
