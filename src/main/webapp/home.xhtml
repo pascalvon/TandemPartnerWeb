@@ -5,52 +5,71 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Home</title>
-</h:head>
-<h:body>
-    <b:container>
-        <b:navBar brand="tandemPartner" fluid="true">
+
+<!--Templates einbinden-->
+<ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
+    <ui:define name="pagetitle">Home tandemPartner</ui:define>
+
+    <!--body-Inhalt vom Template abweichend-->
+    <ui:define name="content">
+
+        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
             <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="#"></b:navLink>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"></b:navLink>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"></b:navLink>
-                <b:navLink value="Meine Matches" href="matches.xhtml"></b:navLink>
+                <b:navLink active="true" value="Hauptmenü" href="#"/>
+                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
             </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
             <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"></b:navLink>
-                <b:navLink value="Logout" href="login.xhtml"></b:navLink>  <!--<todo>Soll der Logout den aktuellenNutzer wirklich ausloggen oder reicht es auf login zu kommen?</todo>-->
+                <b:navLink value="Impressum" href="impressum.xhtml"/>
+                <b:navLink value="Logout" href="login.xhtml"/>
             </b:navbarLinks>
         </b:navBar><!--Navigation Ende-->
 
-        <h1>Herzlich Willkommen bei tandemPartner!</h1>
-        <br></br>
+        <h1 style="text-align: center">Herzlich Willkommen bei tandemPartner!</h1>
+        <br/>
+        <br/>
+        <h3 style="text-align: center">Meine offenen Matchanfragen:</h3>
         <!--Datentabellen Beginn-->
         <h:form>
             <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
                          striped="#{dataTableSettingsBean.striped}"
-                         paginated="#{dataTableSettingsBean.paginated}">
-                <b:dataTableColumn label="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
+                         paginated="false"
+                            searching="false">
+                <b:dataTableColumn label="Vorname" value="#{CODE}"/>
                 <b:dataTableColumn label="Nachname" value="#{CODE}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
                 <b:dataTableColumn label="Emailadresse" value="#{CODE}"/>
                 <b:dataTableColumn label="Alter" value="#{CODE}"/>
                 <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
-                <b:dataTableColumn label="Auswahl" value="">
-                    <b:radiobutton value="#{radiobuttonBean.javaVersion}" itemLabel="Annehmen" itemValue="1" required="true" />
-                    <b:radiobutton value="#{radiobuttonBean.javaVersion}" itemLabel="Ablehnen" itemValue="0" />
-                </b:dataTableColumn>
             </b:dataTable>
 
+            <!--Buttons Start-->
+            <br/>
+            <b:row>
+                <b:column medium-screen="2"/>
+                <b:column medium-screen="2">
+                    <b:commandButton value="Annehmen" name="action" ajax="true"
+                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
+                </b:column>
 
-            <b:commandButton value="OK" ajax="true" update="@next"
-                             actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
-                <b:button value="Abbrechen" href="home.xhtml" />
+                <b:column medium-screen="1"/>
+
+                <b:column medium-screen="2">
+                    <b:commandButton value="Ablehnen" name="action" ajax="true"
+                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
+                </b:column>
+
+                <b:column medium-screen="1"/>
+
+                <b:column medium-screen="2">
+                    <b:button value="Abbrechen" href="home.xhtml" />
+                </b:column>
+            </b:row><!--Buttons Ende-->
 
         </h:form>
-    </b:container><!--Container Ende-->
-</h:body>
-
+    </ui:define><!-- content defining Ende-->
+</ui:composition>
 </html>

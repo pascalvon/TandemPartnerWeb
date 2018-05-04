@@ -14,29 +14,30 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 @ManagedBean
 @SessionScoped
-public class Nutzerbean {
+@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"})
+public class Nutzerbean extends HttpServlet {
 
     @EJB
     private NutzerDAO nutzerDAO;
-    private Nutzer aktuellerNutzer;
+    private Nutzer aktuellerNutzer = new Nutzer();
     private Nutzer nutzer; // TODO Joe: 01.05.2018 Dieser Nutzer noch erforderlich?
     private String mail;
     private String vorname;
     private String nachname;
+
+    @Size(min=8, max=30, message = "Das Passwort muss zwischen 8 und 30 Zeichen lang sein!")
     private String passwort;
     private Geschlecht geschlecht;
-    private Date geburtsdatum;
-    //@PersistenceContext(unitName = "ExperimentalJPADatabase")
-    //EntityManager em;
-   // private ArrayList<Nutzer> sprachenList = findAllSprache();
+    private java.util.Date geburtsdatum;
+    //private ArrayList<Nutzer> sprachenList = findAllSprache();
     //private ArrayList<Sprache> selectedSprachen;
-
 
     public String getMail() {
         return mail;
@@ -78,13 +79,14 @@ public class Nutzerbean {
         this.geschlecht = geschlecht;
     }
 
-    public Date getGeburtsdatum() {
+    public java.util.Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(Date geburtsdatum) {
+    public void setGeburtsdatum(java.util.Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
+
 
     public Nutzer getNutzer() {
         return nutzer;
@@ -98,69 +100,47 @@ public class Nutzerbean {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-   // public ArrayList<Nutzer> getSprachenList() {
-   //     return sprachenList;
-   // }
-//
-   // public void setSprachenList(ArrayList<Nutzer> sprachenList) {
-   //     this.sprachenList = sprachenList;
-   // }
-//
-   // public ArrayList<Sprache> getSelectedSprachen() {
-   //     return selectedSprachen;
-   // }
-//
-   // public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
-   //     this.selectedSprachen = selectedSprachen;
-   // }
+   //public ArrayList<Nutzer> getSprachenList() {
+   //    return sprachenList;
+   //}
 
-    public String registerNutzer(){
+   //public void setSprachenList(ArrayList<Nutzer> sprachenList) {
+   //    this.sprachenList = sprachenList;
+   //}
 
-        Calendar calender = Calendar.getInstance();
-        calender.set(1975,Calendar.MARCH, 15);
-        Date geburtsdatum = new Date(calender.getTime().getTime());
+   //public ArrayList<Sprache> getSelectedSprachen() {
+   //    return selectedSprachen;
+   //}
 
-        nutzer = new Nutzer();
-        nutzer.setMail(mail);
-        nutzer.setGeburtsdatum(geburtsdatum);
-        nutzer.setVorname(vorname);
-        nutzer.setNachname(nachname);
-        nutzer.setPasswort(passwort);
-        nutzer.setGeschlecht(Geschlecht.WEIBLICH);
-        nutzerDAO.persist(nutzer);
+   //public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
+   //    this.selectedSprachen = selectedSprachen;
+   //}
 
-        return "login";
+    public String nutzerAnlegen(){
+
+        aktuellerNutzer.setMail(aktuellerNutzer.getMail());
+        aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
+        aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
+        aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
+        aktuellerNutzer.setPasswort(passwort);
+        aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
+
+        nutzerDAO.persist(aktuellerNutzer);
+
+        return "home";
     }
 
     public String update() {
 
-        Calendar calender = Calendar.getInstance();
-        calender.set(1975,Calendar.MARCH, 15);
-        Date geburtsdatum = new Date(calender.getTime().getTime());
-
-        if (mail.equals(aktuellerNutzer.getMail())) {
-            aktuellerNutzer.setMail(mail);
-        }
-        else {
-            aktuellerNutzer.setMail(aktuellerNutzer.getMail());
-        }
-        aktuellerNutzer.setGeburtsdatum(geburtsdatum);
-        if (aktuellerNutzer.getVorname().equals(vorname)) {
-            aktuellerNutzer.setVorname(vorname);
-        }
-        else {
-            aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
-        }
-        if (aktuellerNutzer.getNachname().equals(nachname)) {
-            aktuellerNutzer.setNachname(nachname);
-        }
-        else {
-            aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
-        }
+        //TODO: update statt neu anlegen
+        aktuellerNutzer.setMail(aktuellerNutzer.getMail());
+        aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
+        aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
+        aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
         aktuellerNutzer.setPasswort(passwort);
-        aktuellerNutzer.setGeschlecht(Geschlecht.WEIBLICH);
+        aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
 
-        nutzer = nutzerDAO.merge(aktuellerNutzer);
+        aktuellerNutzer = nutzerDAO.merge(aktuellerNutzer);
 
         return "profil";
     }
@@ -168,8 +148,8 @@ public class Nutzerbean {
     // TODO Joe: 01.05.2018 Exception fuer den Fall, dass falsche E-Mail angegeben wird, muss noch gefangen werden.
     // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
     public String login() {
-        if (validateNutzer(mail, passwort)) {
-            aktuellerNutzer = getNutzer(mail);
+        if (validateNutzer(aktuellerNutzer.getMail(), passwort)) {
+            aktuellerNutzer = findNutzer(aktuellerNutzer.getMail());
             return "home";
         }
             return "login";
@@ -181,25 +161,10 @@ public class Nutzerbean {
         return n.getPasswort().equals(passwort);
     }
 
-    private Nutzer getNutzer(String mail) {
+    private Nutzer findNutzer(String mail) {
         return nutzerDAO.find(mail);
 
     }
 
-    //public Nutzer find(String Mail) {
-    //    return em.createNamedQuery("findByMail", Nutzer.class)
-    //            .setParameter("vn", Mail)
-    //            .getSingleResult();
-    //}
-
-    private void addSprachen() {
-
-    }
-
-    // TODO Joe: 02.05.2018 auf Sprache aendern
-   // public ArrayList<Nutzer> findAllSprache() {
-   //     return (ArrayList<Nutzer>) em.createNamedQuery("findAll", Nutzer.class).getResultList();
-//
-   // }
 
 }
