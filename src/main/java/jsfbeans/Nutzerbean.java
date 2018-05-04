@@ -5,6 +5,7 @@ import models.Geschlecht;
 import models.Nutzer;
 import models.Sprache;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,7 +22,7 @@ import java.util.Calendar;
 
 @ManagedBean
 @SessionScoped
-@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"})
+//@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"}) // TODO Joe: 04.05.2018 wieso wurde das eingebaut?
 public class Nutzerbean extends HttpServlet {
 
     @EJB
@@ -36,8 +37,8 @@ public class Nutzerbean extends HttpServlet {
     private String passwort;
     private Geschlecht geschlecht;
     private java.util.Date geburtsdatum;
-    //private ArrayList<Nutzer> sprachenList = findAllSprache();
-    //private ArrayList<Sprache> selectedSprachen;
+    private ArrayList<Sprache> sprachenList; //= nutzerDAO.findAllSprache();
+    private ArrayList<Sprache> selectedSprachen;
 
     public String getMail() {
         return mail;
@@ -100,21 +101,21 @@ public class Nutzerbean extends HttpServlet {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-   //public ArrayList<Nutzer> getSprachenList() {
-   //    return sprachenList;
-   //}
+   public ArrayList<Sprache> getSprachenList() {
+       return sprachenList;
+   }
 
-   //public void setSprachenList(ArrayList<Nutzer> sprachenList) {
-   //    this.sprachenList = sprachenList;
-   //}
+   public void setSprachenList(ArrayList<Sprache> sprachenList) {
+       this.sprachenList = sprachenList;
+   }
 
-   //public ArrayList<Sprache> getSelectedSprachen() {
-   //    return selectedSprachen;
-   //}
+   public ArrayList<Sprache> getSelectedSprachen() {
+       return selectedSprachen;
+   }
 
-   //public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
-   //    this.selectedSprachen = selectedSprachen;
-   //}
+   public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
+       this.selectedSprachen = selectedSprachen;
+   }
 
     public String nutzerAnlegen(){
 
@@ -124,15 +125,14 @@ public class Nutzerbean extends HttpServlet {
         aktuellerNutzer.setNachname(aktuellerNutzer.getNachname());
         aktuellerNutzer.setPasswort(passwort);
         aktuellerNutzer.setGeschlecht(aktuellerNutzer.getGeschlecht());
-
-        nutzerDAO.persist(aktuellerNutzer);
+        // TODO Joe: 04.05.2018 Testen, ob persist mit merge hier geaendert werden kann
+        nutzerDAO.merge(aktuellerNutzer);
 
         return "home";
     }
 
     public String update() {
 
-        //TODO: update statt neu anlegen
         aktuellerNutzer.setMail(aktuellerNutzer.getMail());
         aktuellerNutzer.setGeburtsdatum(new java.sql.Date(aktuellerNutzer.getGeburtsdatum().getTime()));
         aktuellerNutzer.setVorname(aktuellerNutzer.getVorname());
@@ -166,5 +166,8 @@ public class Nutzerbean extends HttpServlet {
 
     }
 
+    private ArrayList<Sprache> allSpracheList() {
+        return nutzerDAO.findAllSprache();
+    }
 
 }

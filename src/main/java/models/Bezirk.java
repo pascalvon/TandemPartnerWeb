@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@NamedQuery(name = "findAllBezirke", query = "select bezirk from Bezirk bezirk where bezirk.bezirkName != null ")
 public class Bezirk {
 
     @Id

@@ -131,6 +131,7 @@
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                         <f:ajax event="blur" execute="password confirm" render="m_password" />
+                        <b:messages id="m_password" for="password" />
                     </b:inputSecret>
                 </b:column>
 
@@ -141,7 +142,7 @@
                                    placeholder="neues Paswort bestätigen">
                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
-                    <b:messages id="m_password" for="confirm" />
+                    <b:messages id="m_confirm" for="confirm" />
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 

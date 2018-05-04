@@ -107,10 +107,8 @@
                 <b:column medium-screen="4">
                     <h:outputLabel style="width: 100%;" value="Ich spreche: *"
                                    for="sprachwahl"/>
-                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen">
-                        <f:selectItem itemLabel="Englisch" itemValue="1"/>
-                        <f:selectItem itemLabel="Russisch" itemValue="2"/>
-                        <f:selectItem itemLabel="Deutsch" itemValue="3"/>
+                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen" value="#{nutzerbean.selectedSprachen}">
+                        <f:selectItem value="#{nutzerbean.sprachenList}"/>
                     </b:selectMultiMenu>
                 </b:column>
 
