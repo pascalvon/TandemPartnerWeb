@@ -1,29 +1,26 @@
 package jsfbeans;
 
 import dao.NutzerDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import models.Geschlecht;
 import models.Nutzer;
 import models.Sprache;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
-//@WebServlet(name = "NutzerServlet", urlPatterns = {"/NutzerServlet"}) // TODO Joe: 04.05.2018 wieso wurde das eingebaut?
-public class Nutzerbean extends HttpServlet {
+public class Nutzerbean {
 
     @EJB
     private NutzerDAO nutzerDAO;
@@ -37,8 +34,8 @@ public class Nutzerbean extends HttpServlet {
     private String passwort;
     private Geschlecht geschlecht;
     private java.util.Date geburtsdatum;
-    private ArrayList<Sprache> sprachenList; //= nutzerDAO.findAllSprache();
-    private ArrayList<Sprache> selectedSprachen;
+    private List<String> sprachenList; //= nutzerDAO.findAllSprache();
+    private List<String> selectedSprachen;
 
     public String getMail() {
         return mail;
@@ -101,21 +98,21 @@ public class Nutzerbean extends HttpServlet {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-   public ArrayList<Sprache> getSprachenList() {
-       return sprachenList;
-   }
+    public List<String> getSprachenList() {
+        return sprachenList;
+    }
 
-   public void setSprachenList(ArrayList<Sprache> sprachenList) {
-       this.sprachenList = sprachenList;
-   }
+    public void setSprachenList(List<String> sprachenList) {
+        this.sprachenList = sprachenList;
+    }
 
-   public ArrayList<Sprache> getSelectedSprachen() {
-       return selectedSprachen;
-   }
+    public List<String> getSelectedSprachen() {
+        return selectedSprachen;
+    }
 
-   public void setSelectedSprachen(ArrayList<Sprache> selectedSprachen) {
-       this.selectedSprachen = selectedSprachen;
-   }
+    public void setSelectedSprachen(List<String> selectedSprachen) {
+        this.selectedSprachen = selectedSprachen;
+    }
 
     public String nutzerAnlegen(){
 
@@ -165,8 +162,13 @@ public class Nutzerbean extends HttpServlet {
         return nutzerDAO.find(mail);
 
     }
+    {
+        sprachenList = Arrays.asList("green", "yellow", "red");
+    }
 
-    private ArrayList<Sprache> allSpracheList() {
+    public List<Sprache> allSpracheList() {
+        //sprachenList = Arrays.asList("green", "yellow", "red");
+    //    return sprachenList;
         return nutzerDAO.findAllSprache();
     }
 

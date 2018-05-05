@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="8c90cc1a-d5ff-4000-8780-de1d9d84a8af" name="WildflyTandem" url="http://ec2-54-245-1-166.us-west-2.compute.amazonaws.com">
-        <fileTransfer host="ec2-54-245-1-166.us-west-2.compute.amazonaws.com" port="22" privateKey="D:\Users\LuisRaphaelRamer\Desktop\Uni-Zeug\4. Semester\Client-Server-Architekturen WPF\tandemPartner\TandemWildfly-keypair.ppk" rootFolder="/home/bitnami" accessType="SFTP" keyPair="true">
+        <fileTransfer host="ec2-54-245-1-166.us-west-2.compute.amazonaws.com" port="22" privateKey="D:\Users\PascalVonholdt\Downloads\CloudStation\Wirtschaftsinformatik\04_Semester\CSA_Schmietendorf\TandemProjekt\keys\TandemWildfly-keypair.ppk" rootFolder="/home/bitnami" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

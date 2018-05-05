@@ -5,13 +5,11 @@ import models.Nutzer;
 import models.Sprache;
 
 import javax.ejb.Stateless;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
-import javax.servlet.annotation.WebServlet;
 import javax.transaction.UserTransaction;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Stateless
 public class NutzerDAO {
@@ -42,9 +40,12 @@ public class NutzerDAO {
         return nutzer;
     }
 
-    public ArrayList<Sprache> findAllSprache() {
-        return (ArrayList<Sprache>) em.createNamedQuery("findAllSprache", Sprache.class)
-                .getResultList();
+    public List<Sprache> findAllSprache() {
+        //TypedQuery<Sprache> query = em.createNamedQuery("findAllSprache",Sprache.class);
+        //Collection<Sprache> collection = query.getResultList();
+        //return collection;
+
+        return (List<Sprache>) em.createNamedQuery("findAllSprache", Sprache.class).getResultList();
     }
 
     public void persist(Nutzer nutzer) {

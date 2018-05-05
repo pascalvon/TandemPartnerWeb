@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "findAllSprache", query = "SELECT sprache FROM Sprache sprache")
+@NamedQuery(name = "findAllSprache", query = "SELECT nameSprache FROM Sprache sprache")
 public class Sprache {
 
     @Id
