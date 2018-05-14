@@ -8,7 +8,8 @@ import java.util.Set;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "findAllSprache", query = "SELECT sprache FROM Sprache sprache"),
-@NamedQuery(name = "findBySpracheName", query = "SELECT sprache FROM Sprache sprache WHERE sprache.nameSprache = :vn")})
+@NamedQuery(name = "findBySpracheName", query = "SELECT sprache FROM Sprache sprache WHERE sprache.nameSprache = :vn"),
+        @NamedQuery(name = "findBySpracheID", query = "SELECT sprache FROM Sprache sprache WHERE sprache.id = :vn")})
 public class Sprache {
 
     @Id
@@ -20,6 +21,14 @@ public class Sprache {
 
     @ManyToMany(mappedBy = "sprachenSet")
     private Set<Nutzer> nutzerSet;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNameSprache() {
         return nameSprache;

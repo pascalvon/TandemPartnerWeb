@@ -9,7 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "findAllBezirke", query = "select bezirk from Bezirk bezirk where bezirk.bezirkName != null ")
+@NamedQueries({@NamedQuery(name = "findAllBezirke", query = "select bezirk from Bezirk bezirk where bezirk.bezirkName != null "),
+              @NamedQuery(name = "findBezirkByID", query = "SELECT bezirk FROM Bezirk bezirk WHERE bezirk.id = :vn")})
 public class Bezirk {
 
     @Id
@@ -25,6 +26,14 @@ public class Bezirk {
     public Bezirk(){
         super();
         nutzerSet = new HashSet<>();
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getBezirkName() {

@@ -1,5 +1,7 @@
 package models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -38,11 +40,13 @@ public class Nutzer {
     @ManyToOne
     private Bezirk bezirk;
 
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER) //, cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Sprache> sprachenSet = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet;
+    @ManyToMany(fetch = FetchType.EAGER) //, cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet = new HashSet<>();
 
     @OneToMany(mappedBy = "nutzer", cascade = CascadeType.ALL)
     private Set<Suchanfrage> suchanfrageSet;
@@ -96,6 +100,14 @@ public class Nutzer {
 
     public void setGeburtsdatum(java.util.Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
+    }
+
+    public Bezirk getBezirk() {
+        return bezirk;
+    }
+
+    public void setBezirk(Bezirk bezirk) {
+        this.bezirk = bezirk;
     }
 
     public void addBezirk(Bezirk bezirk) {

@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@NamedQuery(name = "findByFreizeitaktivitaetenID", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :vn")
 public class Freizeitaktivitaeten {
 
     @Id
@@ -17,6 +18,14 @@ public class Freizeitaktivitaeten {
     @ManyToMany(mappedBy = "freizeitaktivitaetenSet")
     private Set<Nutzer> nutzerSet;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     public String getNameAktivitaet() {
         return nameAktivitaet;
     }
@@ -25,4 +34,8 @@ public class Freizeitaktivitaeten {
         this.nameAktivitaet = nameAktivitaet;
     }
 
+    @Override
+    public String toString() {
+        return getNameAktivitaet();
+    }
 }

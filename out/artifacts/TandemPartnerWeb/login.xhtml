@@ -29,7 +29,7 @@
             <b:row>
                 <b:column medium-screen="4"/>
                 <b:column medium-screen="4">
-                    <b:inputText type="mail" placeholder="E-Mail-Adresse" value="#{nutzerbean.aktuellerNutzer.mail}">
+                    <b:inputText type="mail" placeholder="E-Mail-Adresse" value="#{loginManagedBean.mail}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
@@ -39,7 +39,7 @@
             <b:row>
                 <b:column medium-screen="4"/>
                 <b:column medium-screen="4">
-                    <b:inputSecret placeholder="Passwort" value="#{nutzerbean.passwort}">
+                    <b:inputSecret placeholder="Passwort" value="#{loginManagedBean.password}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
@@ -49,7 +49,7 @@
             <b:row>
                 <b:column medium-screen="2"/>
                 <b:column span="2" offset="2">
-                    <b:commandButton styleClass="logbuttons" value="Login" look="primary" action="#{nutzerbean.login}"/>
+                    <b:commandButton styleClass="logbuttons" value="Login" look="primary" action="#{loginManagedBean.login}"/>
                 </b:column>
                 <b:column span="2">
                     <b:commandButton styleClass="logbuttons" value="Account erstellen" look="primary" action="registrieren.xhtml?faces-redirect=true"/>

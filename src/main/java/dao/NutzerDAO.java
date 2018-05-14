@@ -1,6 +1,7 @@
 package dao;
 
 import models.Bezirk;
+import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
 
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+// TODO Joe: 14.05.2018 ALle unnoetigen Methoden am Ende loeschen und verbleibende sortieren
+// TODO Joe: 14.05.2018 Ueberpruefen ob DAO's erstellt werden sollten
 @Stateless
 public class NutzerDAO {
 
@@ -22,7 +25,7 @@ public class NutzerDAO {
     public NutzerDAO() {
     }
 
-    public Nutzer find(String mail) {
+    public Nutzer findNutzerByMail(String mail) {
         try {
             return em.createNamedQuery("findByMail", Nutzer.class)
                     .setParameter("vn", mail)
@@ -36,7 +39,7 @@ public class NutzerDAO {
         return em.createNamedQuery("findAllSprache", Sprache.class).getResultList();
     }
 
-    public Sprache findSprache(String spracheName) {
+    public Sprache findSpracheByName(String spracheName) {
         try {
             return em.createNamedQuery("findBySpracheName", Sprache.class)
                     .setParameter("vn", spracheName)
@@ -44,6 +47,18 @@ public class NutzerDAO {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public Sprache findSpracheByID(String spracheID) {
+        return em.createNamedQuery("findBySpracheID", Sprache.class)
+                .setParameter("vn", Integer.parseInt(spracheID))
+                .getSingleResult();
+    }
+
+    public Freizeitaktivitaeten findFreizeitaktivitaetenByID(String freizeitaktivitaetenID) {
+        return em.createNamedQuery("findByFreizeitaktivitaetenID", Freizeitaktivitaeten.class)
+                .setParameter("vn", Integer.parseInt(freizeitaktivitaetenID))
+                .getSingleResult();
     }
 
     public ArrayList<Nutzer> findAll() {
@@ -57,8 +72,14 @@ public class NutzerDAO {
                 .getSingleResult();
     }
 
+    public Bezirk findBezirkByID(int bezirkID) {
+        return em.createNamedQuery("findBezirkByID", Bezirk.class)
+                .setParameter("vn", bezirkID)
+                .getSingleResult();
+    }
+
     public void persist(Nutzer nutzer) {
-        em.persist(nutzer);
+        em.merge(nutzer);
     }
 
     public Nutzer merge(Nutzer nutzer) {
@@ -72,7 +93,7 @@ public class NutzerDAO {
         em.getTransaction().commit();
     }
 
-    public Bezirk find(int id) {
+    public Bezirk findNutzerByMail(int id) {
         return em.find(Bezirk.class, id);
     }
 }

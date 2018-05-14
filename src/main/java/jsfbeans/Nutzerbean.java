@@ -1,8 +1,6 @@
 package jsfbeans;
 
 import dao.NutzerDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import models.Geschlecht;
 import models.Nutzer;
 import models.Sprache;
@@ -10,12 +8,7 @@ import models.Sprache;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.servlet.http.HttpServlet;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 @ManagedBean
@@ -36,30 +29,6 @@ public class Nutzerbean {
     private List<Sprache> sprachenList;
     private List<Sprache> selectedSprachen;
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getVorname() {
-        return vorname;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public String getNachname() {
-        return nachname;
-    }
-
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
-    }
-
     public String getPasswort() {
         return passwort;
     }
@@ -68,48 +37,12 @@ public class Nutzerbean {
         this.passwort = passwort;
     }
 
-    public Geschlecht getGeschlecht() {
-        return geschlecht;
-    }
-
-    public void setGeschlecht(Geschlecht geschlecht) {
-        this.geschlecht = geschlecht;
-    }
-
-    public java.util.Date getGeburtsdatum() {
-        return geburtsdatum;
-    }
-
-    public void setGeburtsdatum(java.util.Date geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
-    }
-
     public Nutzer getAktuellerNutzer() {
         return aktuellerNutzer;
     }
 
     public void setAktuellerNutzer(Nutzer aktuellerNutzer) {
         this.aktuellerNutzer = aktuellerNutzer;
-    }
-
-    public List<Sprache> getSprachenList() {
-        if (sprachenList == null) {
-            sprachenList = nutzerDAO.findAllSprache();
-        }
-
-        return sprachenList;
-    }
-
-    public void setSprachenList(List<Sprache> sprachenList) {
-        this.sprachenList = sprachenList;
-    }
-
-    public List<Sprache> getSelectedSprachen() {
-        return selectedSprachen;
-    }
-
-    public void setSelectedSprachen(List<Sprache> selectedSprachen) {
-        this.selectedSprachen = selectedSprachen;
     }
 
     public String nutzerAnlegen(){
@@ -151,13 +84,13 @@ public class Nutzerbean {
     }
 
     private boolean validateNutzer(String mail, String passwort) {
-        Nutzer n = nutzerDAO.find(mail);
+        Nutzer n = nutzerDAO.findNutzerByMail(mail);
 
         return n.getPasswort().equals(passwort);
     }
 
     private Nutzer findNutzer(String mail) {
-        return nutzerDAO.find(mail);
+        return nutzerDAO.findNutzerByMail(mail);
 
     }
 

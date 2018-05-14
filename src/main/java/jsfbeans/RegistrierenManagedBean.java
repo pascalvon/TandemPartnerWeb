@@ -6,11 +6,7 @@ import models.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -22,37 +18,40 @@ public class RegistrierenManagedBean {
     @EJB
     private NutzerDAO nutzerDAO;
     private Nutzer nutzer = new Nutzer();
-    private ArrayList<Bezirk> bezirkList;
-    // TODO Joe: 13.05.2018 anstelle des ArrayList mit List versuchen
+    private int bezirkID;
     private List<Sprache> selectedSprachenList = new ArrayList<>();
-    private List<Sprache> sprachenList;
     private String selectedSprachenString;
-    private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
-    private ArrayList<Freizeitaktivitaeten> freizeitaktivitaetenList;
+    private String[] selectedSprachenArray;
+    private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
+    private String selectedFreizeitaktivitaetenString;
+    private String[] selectedFreizeitaktivitaetenArray;
     // TODO Joe: 14.05.2018 spaeter wieder lokal machen die variable
-    private String[] arr;
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
 
     public String register() {
         if (validateMail(this.nutzer.getMail())) {
+            nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
 
             // TODO Joe: 14.05.2018 Wenn es funktioniert auslagern in Methode
-            arr = selectedSprachenString.split("\\W+ ");
-            for (String anArr : arr) {
-                selectedSprachenList.add(nutzerDAO.findSprache(anArr));
+            selectedSprachenArray = selectedSprachenString.split(",");
+            for (String aSelectedSprachenArray : selectedSprachenArray) {
+                selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
             }
-
-            selectedSprachenList.removeAll(Collections.singleton(null));
+            //selectedSprachenList.removeAll(Collections.singleton(null));
 
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
             }
 
-//            for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
-//                nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
-//            }
+            selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
+            for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
+                selectedFreizeitaktivitaetenList.add(nutzerDAO.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
+            }
+            for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
+                nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
+            }
             nutzerDAO.persist(nutzer);
             return "home";
         } else {
@@ -62,7 +61,7 @@ public class RegistrierenManagedBean {
     }
 
     private boolean validateMail(String mail) {
-        Nutzer n = nutzerDAO.find(mail);
+        Nutzer n = nutzerDAO.findNutzerByMail(mail);
         return n == null;
     }
 
@@ -74,15 +73,12 @@ public class RegistrierenManagedBean {
         this.nutzer = nutzer;
     }
 
-    public List<Sprache> getSprachenList() {
-        if (sprachenList == null) {
-            sprachenList = nutzerDAO.findAllSprache();
-        }
-        return sprachenList;
+    public int getBezirkID() {
+        return bezirkID;
     }
 
-    public void setSprachenList(List<Sprache> sprachenList) {
-        this.sprachenList = sprachenList;
+    public void setBezirkID(int bezirkID) {
+        this.bezirkID = bezirkID;
     }
 
     public List<Sprache> getSelectedSprachenList() {
@@ -101,12 +97,12 @@ public class RegistrierenManagedBean {
         this.selectedSprachenString = selectedSprachenString;
     }
 
-    public ArrayList<Freizeitaktivitaeten> getFreizeitaktivitaetenList() {
-        return freizeitaktivitaetenList;
+    public String[] getSelectedSprachenArray() {
+        return selectedSprachenArray;
     }
 
-    public void setFreizeitaktivitaetenList(ArrayList<Freizeitaktivitaeten> freizeitaktivitaetenList) {
-        this.freizeitaktivitaetenList = freizeitaktivitaetenList;
+    public void setSelectedSprachenArray(String[] selectedSprachenArray) {
+        this.selectedSprachenArray = selectedSprachenArray;
     }
 
     public ArrayList<Freizeitaktivitaeten> getSelectedFreizeitaktivitaetenList() {
@@ -117,22 +113,21 @@ public class RegistrierenManagedBean {
         this.selectedFreizeitaktivitaetenList = selectedFreizeitaktivitaetenList;
     }
 
-    public ArrayList<Bezirk> getBezirkList() {
-        return bezirkList;
+    public String getSelectedFreizeitaktivitaetenString() {
+        return selectedFreizeitaktivitaetenString;
     }
 
-    public void setBezirkList(ArrayList<Bezirk> bezirkList) {
-        this.bezirkList = bezirkList;
+    public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
+        this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
 
-    public String[] getArr() {
-        return arr;
+    public String[] getSelectedFreizeitaktivitaetenArray() {
+        return selectedFreizeitaktivitaetenArray;
     }
 
-    public void setArr(String[] arr) {
-        this.arr = arr;
+    public void setSelectedFreizeitaktivitaetenArray(String[] selectedFreizeitaktivitaetenArray) {
+        this.selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenArray;
     }
-
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
