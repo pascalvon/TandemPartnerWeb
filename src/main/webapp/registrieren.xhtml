@@ -38,13 +38,13 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
+                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{registrierenManagedBean.nutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
+                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{registrierenManagedBean.nutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -55,7 +55,7 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4"
-                                          value="#{nutzerbean.aktuellerNutzer.geschlecht}">
+                                          value="#{registrierenManagedBean.nutzer.geschlecht}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
@@ -69,7 +69,7 @@
                     <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.aktuellerNutzer.mail}">
+                                 label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                         <b:messages for="mail"/>
                     </b:inputText>
@@ -94,7 +94,7 @@
 
                 <b:column medium-screen="4">
                     <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
-                                      firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}" format="DD.MM.YYYY"
+                                      firstDay="1" value="#{registrierenManagedBean.nutzer.geburtsdatum}" format="DD.MM.YYYY"
                                       label="Geburtsdatum:" requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3"/>
                     <b:messages for="calendar"/>
                 </b:column>
@@ -107,8 +107,8 @@
                 <b:column medium-screen="4">
                     <h:outputLabel style="width: 100%;" value="Ich spreche: *"
                                    for="sprachwahl"/>
-                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen" value="#{nutzerbean.selectedSprachen}">
-                        <f:selectItems value="#{nutzerbean.sprachenList}"/>
+                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen" maxHeight="200" value="#{registrierenManagedBean.selectedSprachenString}">
+                        <f:selectItems value="#{registrierenManagedBean.sprachenList}"/>
                     </b:selectMultiMenu>
                 </b:column>
 
@@ -133,7 +133,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
-                                   value="#{nutzerbean.passwort}"
+                                   value="#{registrierenManagedBean.nutzer.passwort}"
                                    label="Passwort:" placeholder="Passwort"
                                    requiredMessage="Das Passwort muss zwischen 8 und 30 Zeichen lang sein!">
                         <f:validator validatorId="passwordValidator" />
@@ -162,7 +162,7 @@
                 <b:column medium-screen="4"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{nutzerbean.nutzerAnlegen}"/>
+                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{registrierenManagedBean.register}"/>
                 </b:column>
 
 

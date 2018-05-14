@@ -25,7 +25,6 @@ public class Nutzerbean {
     @EJB
     private NutzerDAO nutzerDAO;
     private Nutzer aktuellerNutzer = new Nutzer();
-    private Nutzer nutzer; // TODO Joe: 01.05.2018 Dieser Nutzer noch erforderlich?
     private String mail;
     private String vorname;
     private String nachname;
@@ -34,8 +33,8 @@ public class Nutzerbean {
     private String passwort;
     private Geschlecht geschlecht;
     private java.util.Date geburtsdatum;
-    private List<String> sprachenList; //= nutzerDAO.findAllSprache();
-    private List<String> selectedSprachen;
+    private List<Sprache> sprachenList;
+    private List<Sprache> selectedSprachen;
 
     public String getMail() {
         return mail;
@@ -85,11 +84,6 @@ public class Nutzerbean {
         this.geburtsdatum = geburtsdatum;
     }
 
-
-    public Nutzer getNutzer() {
-        return nutzer;
-    }
-
     public Nutzer getAktuellerNutzer() {
         return aktuellerNutzer;
     }
@@ -98,19 +92,23 @@ public class Nutzerbean {
         this.aktuellerNutzer = aktuellerNutzer;
     }
 
-    public List<String> getSprachenList() {
+    public List<Sprache> getSprachenList() {
+        if (sprachenList == null) {
+            sprachenList = nutzerDAO.findAllSprache();
+        }
+
         return sprachenList;
     }
 
-    public void setSprachenList(List<String> sprachenList) {
+    public void setSprachenList(List<Sprache> sprachenList) {
         this.sprachenList = sprachenList;
     }
 
-    public List<String> getSelectedSprachen() {
+    public List<Sprache> getSelectedSprachen() {
         return selectedSprachen;
     }
 
-    public void setSelectedSprachen(List<String> selectedSprachen) {
+    public void setSelectedSprachen(List<Sprache> selectedSprachen) {
         this.selectedSprachen = selectedSprachen;
     }
 
@@ -162,13 +160,8 @@ public class Nutzerbean {
         return nutzerDAO.find(mail);
 
     }
-    {
-        sprachenList = Arrays.asList("green", "yellow", "red");
-    }
 
     public List<Sprache> allSpracheList() {
-        //sprachenList = Arrays.asList("green", "yellow", "red");
-    //    return sprachenList;
         return nutzerDAO.findAllSprache();
     }
 

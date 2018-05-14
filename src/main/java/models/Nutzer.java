@@ -1,8 +1,7 @@
 package models;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class Nutzer {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "gen")
     @SequenceGenerator(name="gen", sequenceName = "Nutzersequenz", initialValue = 1000, allocationSize = 10)
     private int Id;
-    // TODO Joe: 01.05.2018 Jede Mail darf nur einmal existieren.
+
     @Column(nullable = false)
     private String mail;
 
@@ -34,13 +33,13 @@ public class Nutzer {
     private Geschlecht geschlecht;
 
     @Column(nullable = false)
-    private java.util.Date geburtsdatum;
+    private Date geburtsdatum;
 
     @ManyToOne
     private Bezirk bezirk;
 
     @ManyToMany (cascade = CascadeType.ALL)
-    private Set<Sprache> sprachenSet;
+    private Set<Sprache> sprachenSet = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet;
@@ -112,7 +111,9 @@ public class Nutzer {
     }
 
     public void addSprache (Sprache sprache){
-        this.sprachenSet.add(sprache);
+//        if (sprache != null) {
+            this.sprachenSet.add(sprache);
+//        }
     }
 
     public void clearFreizeitaktivitaetenSet(){

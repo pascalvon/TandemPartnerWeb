@@ -4,6 +4,7 @@ import models.Bezirk;
 import models.Nutzer;
 import models.Sprache;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import javax.transaction.UserTransaction;
@@ -21,35 +22,43 @@ public class NutzerDAO {
     public NutzerDAO() {
     }
 
-    public Nutzer find(String Mail) {
-        return em.createNamedQuery("findByMail", Nutzer.class)
-                .setParameter("vn", Mail)
-                .getSingleResult();
-    }
-
-    public Collection<Nutzer> findAll() {
-        TypedQuery<Nutzer> query = em.createNamedQuery("findAll", Nutzer.class);
-        Collection<Nutzer> collection = query.getResultList();
-        return collection;
-    }
-
-    public Nutzer findByVorname(String vorname) {
-        Nutzer nutzer = (Nutzer) em.createNamedQuery("findByVorname")
-                .setParameter("vn", vorname)
-                .getSingleResult();
-        return nutzer;
+    public Nutzer find(String mail) {
+        try {
+            return em.createNamedQuery("findByMail", Nutzer.class)
+                    .setParameter("vn", mail)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public List<Sprache> findAllSprache() {
-        //TypedQuery<Sprache> query = em.createNamedQuery("findAllSprache",Sprache.class);
-        //Collection<Sprache> collection = query.getResultList();
-        //return collection;
+        return em.createNamedQuery("findAllSprache", Sprache.class).getResultList();
+    }
 
-        return (List<Sprache>) em.createNamedQuery("findAllSprache", Sprache.class).getResultList();
+    public Sprache findSprache(String spracheName) {
+        try {
+            return em.createNamedQuery("findBySpracheName", Sprache.class)
+                    .setParameter("vn", spracheName)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public ArrayList<Nutzer> findAll() {
+        TypedQuery<Nutzer> query = em.createNamedQuery("findAll", Nutzer.class);
+        return (ArrayList<Nutzer>)query.getResultList();
+    }
+
+    public Nutzer findByVorname(String vorname) {
+        return (Nutzer) em.createNamedQuery("findByVorname")
+                .setParameter("vn", vorname)
+                .getSingleResult();
     }
 
     public void persist(Nutzer nutzer) {
-        em.merge(nutzer);
+        em.persist(nutzer);
     }
 
     public Nutzer merge(Nutzer nutzer) {

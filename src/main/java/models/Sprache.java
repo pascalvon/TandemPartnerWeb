@@ -1,11 +1,14 @@
 package models;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "findAllSprache", query = "SELECT nameSprache FROM Sprache sprache")
+@NamedQueries({@NamedQuery(name = "findAllSprache", query = "SELECT sprache FROM Sprache sprache"),
+@NamedQuery(name = "findBySpracheName", query = "SELECT sprache FROM Sprache sprache WHERE sprache.nameSprache = :vn")})
 public class Sprache {
 
     @Id
@@ -32,5 +35,10 @@ public class Sprache {
 
     public void setNutzerSet(Set<Nutzer> nutzerSet) {
         this.nutzerSet = nutzerSet;
+    }
+
+    @Override
+    public String toString() {
+        return getNameSprache();
     }
 }
