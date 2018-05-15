@@ -36,13 +36,13 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Vorname" required="true" placeholder="Vorname" value="#{nutzerbean.aktuellerNutzer.vorname}"/>
+                    <b:inputText  label="Vorname" required="true" placeholder="Vorname" value="#{profilManagedBean.nutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Nachname" required="true" placeholder="Nachname" value="#{nutzerbean.aktuellerNutzer.nachname}"/>
+                    <b:inputText  label="Nachname" required="true" placeholder="Nachname" value="#{profilManagedBean.nutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -51,7 +51,7 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{nutzerbean.aktuellerNutzer.geschlecht}" required="true"
+                        <b:selectOneMenu value="#{profilManagedBean.nutzer.geschlecht}" required="true"
                                          label="Dein Geschlecht:" labelmedium-screen="4">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="männlich" itemValue="MAENNLICH" />
@@ -66,7 +66,7 @@
                     <b:inputText id="mail" required="true"
                                  validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{nutzerbean.aktuellerNutzer.mail}">
+                                 label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                         <b:messages for="mail"/>
                     </b:inputText>
@@ -78,10 +78,20 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2">
+                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2" value="#{profilManagedBean.bezirkID}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
-                            <f:selectItem itemLabel="Neukölln" itemValue="2" />
+                            <f:selectItem itemLabel="Friedrichshain-Kreuzberg" itemValue="2" />
+                            <f:selectItem itemLabel="Pankow" itemValue="3" />
+                            <f:selectItem itemLabel="Charlottenburg-Wilmersdorf" itemValue="4" />
+                            <f:selectItem itemLabel="Spandau" itemValue="5" />
+                            <f:selectItem itemLabel="Steglitz-Zehlendorf" itemValue="6" />
+                            <f:selectItem itemLabel="Tempelhof-Schöneberg" itemValue="7" />
+                            <f:selectItem itemLabel="Neukölln" itemValue="8" />
+                            <f:selectItem itemLabel="Treptow-Köpenick" itemValue="9" />
+                            <f:selectItem itemLabel="Marzahn-Hellersdorf" itemValue="10" />
+                            <f:selectItem itemLabel="Lichtenberg" itemValue="11" />
+                            <f:selectItem itemLabel="Reinickendorf" itemValue="12" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
@@ -90,7 +100,7 @@
 
                 <b:column medium-screen="4">
                     <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
-                                  firstDay="1" value="#{nutzerbean.aktuellerNutzer.geburtsdatum}" format="DD.MM.YYYY"
+                                  firstDay="1" value="#{profilManagedBean.nutzer.geburtsdatum}" format="DD.MM.YYYY"
                                   label="Geburtsdatum:" labelmedium-screen="3"/>
                     <b:messages for="calendar"/>
                 </b:column>
@@ -101,10 +111,27 @@
 
                 <b:column span="4">
                     <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen">
-                        <f:selectItem itemLabel="Englisch" itemValue="1"/>
-                        <f:selectItem itemLabel="Russisch" itemValue="2"/>
-                        <f:selectItem itemLabel="Deutsch" itemValue="3"/>
+                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen" value="#{profilManagedBean.selectedSprachenString}">
+                        <f:selectItem itemLabel="Albanisch" itemValue="1"/>
+                        <f:selectItem itemLabel="Arabisch" itemValue="2"/>
+                        <f:selectItem itemLabel="Armenisch" itemValue="3"/>
+                        <f:selectItem itemLabel="Bengalisch" itemValue="4"/>
+                        <f:selectItem itemLabel="Bosnisch" itemValue="5"/>
+                        <f:selectItem itemLabel="Bulgarisch" itemValue="6"/>
+                        <f:selectItem itemLabel="Chinesisch" itemValue="7"/>
+                        <f:selectItem itemLabel="Dänisch" itemValue="8"/>
+                        <f:selectItem itemLabel="Deutsch" itemValue="9"/>
+                        <f:selectItem itemLabel="Englisch" itemValue="10"/>
+                        <f:selectItem itemLabel="Filipino" itemValue="11"/>
+                        <f:selectItem itemLabel="Finnisch" itemValue="12"/>
+                        <f:selectItem itemLabel="Französisch" itemValue="13"/>
+                        <f:selectItem itemLabel="Georgisch" itemValue="14"/>
+                        <f:selectItem itemLabel="Griechisch" itemValue="15"/>
+                        <f:selectItem itemLabel="Grönländisch" itemValue="16"/>
+                        <f:selectItem itemLabel="Haitianisch" itemValue="17"/>
+                        <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
+                        <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
+                        <f:selectItem itemLabel="Hindi" itemValue="20"/>
                     </b:selectMultiMenu>
                 </b:column>
 
@@ -113,10 +140,18 @@
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/>
-                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen">
-                        <f:selectItem itemLabel="Rudern" itemValue="1"/>
-                        <f:selectItem itemLabel="Fußball" itemValue="2"/>
-                        <f:selectItem itemLabel="Kochen" itemValue="3"/>
+                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
+                        <f:selectItem itemLabel="Angeln" itemValue="1"/>
+                        <f:selectItem itemLabel="Basketball" itemValue="2"/>
+                        <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
+                        <f:selectItem itemLabel="Camping" itemValue="4"/>
+                        <f:selectItem itemLabel="Filmen" itemValue="5"/>
+                        <f:selectItem itemLabel="Fitness" itemValue="6"/>
+                        <f:selectItem itemLabel="Fußball" itemValue="7"/>
+                        <f:selectItem itemLabel="Gaming" itemValue="8"/>
+                        <f:selectItem itemLabel="Golfen" itemValue="9"/>
+                        <f:selectItem itemLabel="Handball" itemValue="10"/>
+                        <f:selectItem itemLabel="Inlineskating" itemValue="11"/>
                     </b:selectMultiMenu>
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
@@ -126,7 +161,7 @@
             <b:row>
                 <b:column medium-screen="1"/>
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" value="#{nutzerbean.passwort}"
+                    <b:inputSecret id="password" value="#{profilManagedBean.nutzer.passwort}"
                                    label="Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
@@ -153,7 +188,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{nutzerbean.update}"/>
+                    <b:commandButton value="Speichern" action="#{profilManagedBean.update}"/>
                 </b:column>
 
                 <b:column medium-screen="1"/>
