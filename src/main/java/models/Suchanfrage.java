@@ -11,15 +11,13 @@ public class Suchanfrage {
     private int suchId;
 
     @Column(nullable = false)
-    private String paramLernen;
+    private int paramSpracheID;
+
     private byte paramAlterMin;
     private byte paramAlterMax;
 
     @Enumerated(EnumType.STRING)
     private Geschlecht paramGeschlecht;
-
-    @Column(nullable = false)
-    private String paramAktivitaet;
 
     @ManyToOne
     private Nutzer nutzer;
@@ -32,12 +30,12 @@ public class Suchanfrage {
         this.suchId = suchId;
     }
 
-    public String getParamLernen() {
-        return paramLernen;
+    public int getParamSpracheID() {
+        return paramSpracheID;
     }
 
-    public void setParamLernen(String paramLernen) {
-        this.paramLernen = paramLernen;
+    public void setParamSpracheID(int paramSpracheID) {
+        this.paramSpracheID = paramSpracheID;
     }
 
     public byte getParamAlterMin() {
@@ -62,14 +60,6 @@ public class Suchanfrage {
 
     public void setParamGeschlecht(Geschlecht paramGeschlecht) {
         this.paramGeschlecht = paramGeschlecht;
-    }
-
-    public String getParamAktivitaet() {
-        return paramAktivitaet;
-    }
-
-    public void setParamAktivitaet(String paramAktivitaet) {
-        this.paramAktivitaet = paramAktivitaet;
     }
 
     public void setNutzer(Nutzer nutzer) {
