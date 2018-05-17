@@ -111,7 +111,7 @@
 
                 <b:column span="4">
                     <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen" value="#{profilManagedBean.selectedSprachenString}">
+                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedSprachenString}">
                         <f:selectItem itemLabel="Albanisch" itemValue="1"/>
                         <f:selectItem itemLabel="Arabisch" itemValue="2"/>
                         <f:selectItem itemLabel="Armenisch" itemValue="3"/>
@@ -140,7 +140,7 @@
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/>
-                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
+                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
                         <f:selectItem itemLabel="Angeln" itemValue="1"/>
                         <f:selectItem itemLabel="Basketball" itemValue="2"/>
                         <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>

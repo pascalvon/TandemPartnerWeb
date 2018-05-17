@@ -1,5 +1,5 @@
 package models;
 
 public enum Geschlecht {
-    WEIBLICH, MAENNLICH
+    WEIBLICH, MAENNLICH, EGAL
 }

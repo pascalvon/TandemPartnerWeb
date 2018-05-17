@@ -8,9 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "findAll",query = "SELECT nutzer FROM Nutzer nutzer"),
-        @NamedQuery(name = "findByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
-        @NamedQuery(name = "findByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn")})
+@NamedQueries({@NamedQuery(name = "findAllNutzer",query = "SELECT nutzer FROM Nutzer nutzer"),
+        @NamedQuery(name = "findNutzerByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
+        @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn"),
+        @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :vn"),
+        @NamedQuery(name = "findNutzerByID", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.id = :vn")})
 public class Nutzer {
 
     @Id
@@ -48,7 +50,8 @@ public class Nutzer {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "nutzer", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nutzer", cascade = CascadeType.ALL)
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Suchanfrage> suchanfrageSet;
 
     public Nutzer(){
@@ -94,7 +97,7 @@ public class Nutzer {
         this.geschlecht = geschlecht;
     }
 
-    public java.util.Date getGeburtsdatum() {
+    public Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
@@ -123,9 +126,7 @@ public class Nutzer {
     }
 
     public void addSprache (Sprache sprache){
-//        if (sprache != null) {
             this.sprachenSet.add(sprache);
-//        }
     }
 
     public void clearFreizeitaktivitaetenSet(){
@@ -138,6 +139,18 @@ public class Nutzer {
 
     public void addFreizeitaktivitaeten(Freizeitaktivitaeten freizeitaktivitaeten) {
         this.freizeitaktivitaetenSet.add(freizeitaktivitaeten);
+    }
+
+    public void addSuchanfragen(Suchanfrage suchanfrage) {
+        this.suchanfrageSet.add(suchanfrage);
+    }
+
+    public Set<Suchanfrage> getSuchanfrageSet() {
+        return suchanfrageSet;
+    }
+
+    public void setSuchanfrageSet(Set<Suchanfrage> suchanfrageSet) {
+        this.suchanfrageSet = suchanfrageSet;
     }
 
     // TODO Joe: 02.05.2018 spaeter loeschen

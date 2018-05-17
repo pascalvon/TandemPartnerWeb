@@ -33,15 +33,15 @@
         <br/>
 
         <h:form>
-            <b:dataTable value="#{MATCHERGEBNISSE-CODE-EINFÜGEN}"
+            <b:dataTable value="#{suchergebnisseManagedBean.suchergebnisseArrayList}" var="suche"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}">
-                <b:dataTableColumn label="Vorname" value="#{CODE}"/>
-                <b:dataTableColumn label="Nachname" value="#{CODE}"/>
-                <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
-                <b:dataTableColumn label="Emailadresse" value="#{CODE}"/>
-                <b:dataTableColumn label="Alter" value="#{CODE}"/>
-                <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
+                <b:dataTableColumn label="Vorname" value="#{suche.vorname}"/>
+                <b:dataTableColumn label="Nachname" value="#{suche.nachname}"/>
+                <b:dataTableColumn label="Geschlecht" value="#{suche.geschlecht}"/>
+                <b:dataTableColumn label="Emailadresse" value="#{suche.mail}"/>
+                <b:dataTableColumn label="Alter" value="#{suche.alter}"/>
+                <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
             </b:dataTable>
 
             <!--Buttons Beginn-->

@@ -10,7 +10,6 @@ import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,18 +35,11 @@ public class ProfilManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
-
-    private Nutzer initNutzer() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        LoginManagedBean login = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = login.nutzer;
-        return nutzer;
-    }
-
     public String update() {
+
         if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
-
+            nutzer.clearSprachenSet();
             List<Sprache> selectedSprachenList = new ArrayList<>();
             // TODO Joe: 14.05.2018 Wenn es funktioniert auslagern in Methode
             // TODO Joe: 15.05.2018 muss noch ueberprueft werden, ob Sprachen oder Aktivitaeten entfernt wurden
@@ -55,12 +47,11 @@ public class ProfilManagedBean {
             for (String aSelectedSprachenArray : selectedSprachenArray) {
                 selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
             }
-            //selectedSprachenList.removeAll(Collections.singleton(null));
-
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
             }
 
+            nutzer.clearFreizeitaktivitaetenSet();
             ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
             String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
             for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
@@ -121,6 +112,7 @@ public class ProfilManagedBean {
         this.selectedSprachenString = selectedSprachenString;
     }
 
+    // TODO Joe: 16.05.2018 Utility-Klasse erstellen
     public String getSelectedFreizeitaktivitaetenString() {
         ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
         String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];
@@ -137,6 +129,13 @@ public class ProfilManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
+    private Nutzer initNutzer() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        LoginManagedBean loggedNutzer = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        nutzer = loggedNutzer.nutzer;
+        return nutzer;
+    }
+
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

@@ -1,16 +1,11 @@
 package dao;
 
-import models.Bezirk;
-import models.Freizeitaktivitaeten;
-import models.Nutzer;
-import models.Sprache;
+import models.*;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import javax.transaction.UserTransaction;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 // TODO Joe: 14.05.2018 ALle unnoetigen Methoden am Ende loeschen und verbleibende sortieren
@@ -25,14 +20,27 @@ public class NutzerDAO {
     public NutzerDAO() {
     }
 
+    // TODO Joe: 17.05.2018 Variable "vn" entsprechend ueberall aendern
     public Nutzer findNutzerByMail(String mail) {
         try {
-            return em.createNamedQuery("findByMail", Nutzer.class)
+            return em.createNamedQuery("findNutzerByMail", Nutzer.class)
                     .setParameter("vn", mail)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public Nutzer findNutzerByID(int nutzerID) {
+        return em.createNamedQuery("findNutzerByID", Nutzer.class)
+                .setParameter("vn", nutzerID)
+                .getSingleResult();
+    }
+
+    public ArrayList<Nutzer> findNutzerBySpracheID(int spracheID) {
+        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySprachID", Nutzer.class)
+                .setParameter("vn", spracheID)
+                .getResultList();
     }
 
     public List<Sprache> findAllSprache() {
@@ -62,12 +70,12 @@ public class NutzerDAO {
     }
 
     public ArrayList<Nutzer> findAll() {
-        TypedQuery<Nutzer> query = em.createNamedQuery("findAll", Nutzer.class);
+        TypedQuery<Nutzer> query = em.createNamedQuery("findAllNutzer", Nutzer.class);
         return (ArrayList<Nutzer>)query.getResultList();
     }
 
     public Nutzer findByVorname(String vorname) {
-        return (Nutzer) em.createNamedQuery("findByVorname")
+        return (Nutzer) em.createNamedQuery("findNutzerByVorname")
                 .setParameter("vn", vorname)
                 .getSingleResult();
     }
@@ -84,6 +92,10 @@ public class NutzerDAO {
 
     public Nutzer merge(Nutzer nutzer) {
         return em.merge(nutzer);
+    }
+
+    public Suchanfrage merge(Suchanfrage suchanfrage) {
+        return em.merge(suchanfrage);
     }
 
     public void delete(String Mail) {

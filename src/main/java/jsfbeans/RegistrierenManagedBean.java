@@ -39,8 +39,6 @@ public class RegistrierenManagedBean {
             for (String aSelectedSprachenArray : selectedSprachenArray) {
                 selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
             }
-            //selectedSprachenList.removeAll(Collections.singleton(null));
-
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
             }
