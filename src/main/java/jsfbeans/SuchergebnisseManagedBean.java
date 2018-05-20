@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @ManagedBean
 @ViewScoped
 public class SuchergebnisseManagedBean {
-// TODO Joe: 16.05.2018 ArrayList von mir selbst halten und mit den Suchergebnissen fuellen, die der Suchanfrage entsprechen
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
 
@@ -26,11 +25,7 @@ public class SuchergebnisseManagedBean {
     private NutzerDAO nutzerDAO;
     private Suchanfrage suchanfrage;
     private Nutzer nutzer;
-    private ArrayList<Suchergebnisse> suchergebnisseArrayList = new ArrayList<>();
-
-//    {
-//        suchergebnisseArrayList.add(new Suchergebnisse(initNutzer()));
-//    }
+    private ArrayList<Suchergebnis> suchergebnisseArrayList = new ArrayList<>();
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
@@ -38,8 +33,6 @@ public class SuchergebnisseManagedBean {
         this.nutzer = initNutzer();
     }
     // ===========================  public  Methods  =========================79
-
-
     public Nutzer getNutzer() {
         return nutzer;
     }
@@ -48,12 +41,12 @@ public class SuchergebnisseManagedBean {
         this.nutzer = nutzer;
     }
 
-    public ArrayList<Suchergebnisse> getSuchergebnisseArrayList() {
+    public ArrayList<Suchergebnis> getSuchergebnisseArrayList() {
         calculateSuchanfrage();
         return suchergebnisseArrayList;
     }
 
-    public void setSuchergebnisseArrayList(ArrayList<Suchergebnisse> suchergebnisseArrayList) {
+    public void setSuchergebnisseArrayList(ArrayList<Suchergebnis> suchergebnisseArrayList) {
         this.suchergebnisseArrayList = suchergebnisseArrayList;
     }
 
@@ -83,7 +76,7 @@ public class SuchergebnisseManagedBean {
                 if (!aktivitaeten.isEmpty()) {
                     List<String> aktivitaetenListe = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
                     String aktivitaetenString = String.join(",", aktivitaetenListe);
-                    suchergebnisseArrayList.add(new Suchergebnisse(tempNutzer, aktivitaeten.size(), aktivitaetenString));
+                    suchergebnisseArrayList.add(new Suchergebnis(tempNutzer, aktivitaeten.size(), aktivitaetenString));
                 }
             }
         }

@@ -31,11 +31,11 @@ public class NutzerDAO {
         }
     }
 
-    public Nutzer findNutzerByID(int nutzerID) {
-        return em.createNamedQuery("findNutzerByID", Nutzer.class)
-                .setParameter("vn", nutzerID)
-                .getSingleResult();
-    }
+//    public Nutzer findNutzerByID(int nutzerID) {
+//        return em.createNamedQuery("findNutzerByID", Nutzer.class)
+//                .setParameter("vn", nutzerID)
+//                .getSingleResult();
+//    }
 
     public ArrayList<Nutzer> findNutzerBySpracheID(int spracheID) {
         return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySprachID", Nutzer.class)
@@ -112,7 +112,7 @@ public class NutzerDAO {
         em.getTransaction().commit();
     }
 
-    public Bezirk findNutzerByMail(int id) {
+    public Bezirk findNutzerByID(int id) {
         return em.find(Bezirk.class, id);
     }
 

@@ -15,7 +15,7 @@ public class Suchanfrage {
     private int paramSpracheID;
 
     private byte paramAlterMin;
-    private byte paramAlterMax;
+    private byte paramAlterMax = 100;
 
     @Enumerated(EnumType.STRING)
     private Geschlecht paramGeschlecht;

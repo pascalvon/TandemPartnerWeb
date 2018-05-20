@@ -2,7 +2,7 @@ package models;
 
 import utilities.AgeCalculator;
 
-public class Suchergebnisse {
+public class Suchergebnis {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
@@ -18,7 +18,7 @@ public class Suchergebnisse {
 
     // ============================  Constructors  ===========================79
 
-    public Suchergebnisse(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
+    public Suchergebnis(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
         this.nutzer = nutzer;
         this.vorname = nutzer.getVorname();
         this.nachname = nutzer.getNachname();

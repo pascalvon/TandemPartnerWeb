@@ -67,10 +67,9 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu value="#{suchanfrageManagedBean.suchanfrage.paramGeschlecht}"  required="true" label="Geschlecht:" labelmedium-screen="4">
-                            <f:selectItem itemLabel="Bitte wählen" itemValue="" />
+                            <f:selectItem itemLabel="egal" itemValue="EGAL" />
                             <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
-                            <f:selectItem itemLabel="egal" itemValue="EGAL" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
@@ -81,10 +80,10 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  id="minAlter" type="number" label="Alter von:" placeholder="Mindestalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}"/>
+                    <b:inputText  id="minAlter" label="Alter von:" placeholder="Mindestalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}"/>
                 </b:column>
                 <b:column medium-screen="4">
-                    <b:inputText   id="maxAlter" label="Alter bis:" placeholder="Maximalalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}"/>
+                    <b:inputText  id="maxAlter" label="Alter bis:" placeholder="Maximalalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
