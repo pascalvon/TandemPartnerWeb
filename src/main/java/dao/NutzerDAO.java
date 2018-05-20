@@ -86,10 +86,17 @@ public class NutzerDAO {
                 .getSingleResult();
     }
 
+    public ArrayList<Suchanfrage> findSuchanfrageByNutzerID(Nutzer nutzer) {
+        return (ArrayList<Suchanfrage>) em.createNamedQuery("findSuchanfrageByNutzerID", Suchanfrage.class)
+                .setParameter("vn", nutzer)
+                .getResultList();
+    }
+
     public void persist(Nutzer nutzer) {
         em.merge(nutzer);
     }
 
+    // TODO Joe: 17.05.2018 Wieso nicht void?
     public Nutzer merge(Nutzer nutzer) {
         return em.merge(nutzer);
     }
@@ -107,5 +114,18 @@ public class NutzerDAO {
 
     public Bezirk findNutzerByMail(int id) {
         return em.find(Bezirk.class, id);
+    }
+
+    public ArrayList<Nutzer> findNutzerByFreizeitaktivitaetenID(Freizeitaktivitaeten freizeitaktivitaeten) {
+        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerByFreizeitaktivitaetenID", Nutzer.class)
+                .setParameter("vn", freizeitaktivitaeten.getId())
+                .getResultList();
+    }
+
+    public ArrayList<Nutzer> findNutzerBySuchergebnis(int freizeitaktivitaetID, int spracheID) {
+        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySuchergebnis", Nutzer.class)
+                .setParameter("fa", freizeitaktivitaetID)
+                .setParameter("sp", spracheID)
+                .getResultList();
     }
 }

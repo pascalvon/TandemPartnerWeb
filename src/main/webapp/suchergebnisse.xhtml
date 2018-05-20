@@ -13,20 +13,23 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-            <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"/>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                <b:navLink value="Meine Matches" href="matches.xhtml"/>
+        <b:form>
+            <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                <b:navbarLinks>
+                    <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                    <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                    <b:navLink value="Suchanfragen" active="true" href="#"/>
+                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
-            </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink active="true" value="Suchergebnisse" href="#"/></b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Logout" href="login.xhtml"/>
-            </b:navbarLinks>
-        </b:navBar><!--Navigation Ende-->
+                </b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+                <b:navbarLinks pull="right">
+
+                    <b:navLink value="Impressum" href="impressum.xhtml"/>
+                    <b:navCommandLink id="logout" value="Logout" action="#{loginManagedBean.logout}"/>
+                </b:navbarLinks>
+            </b:navBar><!--Navigation Ende-->
+        </b:form>
 
         <h1 style="text-align: center">Suchergebnisse:</h1>
         <br/>
@@ -34,7 +37,7 @@
 
         <h:form>
             <b:dataTable value="#{suchergebnisseManagedBean.suchergebnisseArrayList}" var="suche"
-                         striped="#{dataTableSettingsBean.striped}"
+                         select="true" selectionMode="multiple" striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}">
                 <b:dataTableColumn label="Vorname" value="#{suche.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{suche.nachname}"/>
@@ -42,6 +45,8 @@
                 <b:dataTableColumn label="Emailadresse" value="#{suche.mail}"/>
                 <b:dataTableColumn label="Alter" value="#{suche.alter}"/>
                 <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
+                <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
+                <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{suche.commonFreizeitaktivitaetenString}"/>
             </b:dataTable>
 
             <!--Buttons Beginn-->

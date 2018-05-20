@@ -6,6 +6,8 @@ import models.Nutzer;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean
@@ -53,6 +55,12 @@ public class LoginManagedBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String logout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+//        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        return "login";
     }
 
     // =================  protected/package local  Methods ===================79

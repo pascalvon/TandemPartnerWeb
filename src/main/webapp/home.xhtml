@@ -4,7 +4,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:form="http://www.springframework.org/tags/form">
 
 <!--Templates einbinden-->
 <ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
@@ -13,20 +13,24 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-            <b:navbarLinks>
-                <b:navLink active="true" value="Hauptmenü" href="#"/>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                <b:navLink value="Meine Matches" href="matches.xhtml"/>
+        <b:form>
+            <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                <b:navbarLinks>
+                    <b:navLink active="true" value="Hauptmenü" href="#"/>
+                    <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                    <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
-            </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Logout" href="login.xhtml"/>
-            </b:navbarLinks>
-        </b:navBar><!--Navigation Ende-->
+                </b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+                <b:navbarLinks pull="right">
+
+                    <b:navLink value="Impressum" href="impressum.xhtml"/>
+                    <b:navCommandLink value="Logout" action="#{loginManagedBean.logout}"/>
+
+                </b:navbarLinks>
+            </b:navBar><!--Navigation Ende-->
+        </b:form>
 
         <h1 style="text-align: center">Herzlich Willkommen bei tandemPartner!</h1>
         <br/>

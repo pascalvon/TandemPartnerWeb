@@ -4,16 +4,18 @@ import dao.NutzerDAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Suchanfrage;
+import models.SuchanfrageModel;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class SuchanfrageManagedBean {
 
     // =========================== Class Variables ===========================79
@@ -23,6 +25,7 @@ public class SuchanfrageManagedBean {
     private Nutzer nutzer;
     private String selectedFreizeitaktivitaetenString;
     private Suchanfrage suchanfrage = new Suchanfrage();
+    private ArrayList<SuchanfrageModel> suchanfrageModelArrayList = new ArrayList<>();
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
@@ -64,6 +67,21 @@ public class SuchanfrageManagedBean {
 
     public void setSuchanfrage(Suchanfrage suchanfrage) {
         this.suchanfrage = suchanfrage;
+    }
+
+    public ArrayList<SuchanfrageModel> getSuchanfrageModelArrayList() {
+        ArrayList<Suchanfrage> suchanfrageArrayList = nutzerDAO.findSuchanfrageByNutzerID(nutzer);
+        for (Suchanfrage aSuchanfrageArrayList : suchanfrageArrayList) {
+            suchanfrageModelArrayList.add(new SuchanfrageModel( nutzerDAO.findSpracheByID(String.valueOf(aSuchanfrageArrayList.getParamSpracheID())).getNameSprache(),
+                                                                aSuchanfrageArrayList.getParamAlterMin(),
+                                                                aSuchanfrageArrayList.getParamAlterMax(),
+                                                                aSuchanfrageArrayList.getParamGeschlecht()));
+        }
+        return suchanfrageModelArrayList;
+    }
+
+    public void setSuchanfrageModelArrayList(ArrayList<SuchanfrageModel> suchanfrageModelArrayList) {
+        this.suchanfrageModelArrayList = suchanfrageModelArrayList;
     }
 
     // =================  protected/package local  Methods ===================79

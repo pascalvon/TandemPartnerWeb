@@ -7,16 +7,21 @@ import utilities.AgeCalculator;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class SuchergebnisseManagedBean {
 // TODO Joe: 16.05.2018 ArrayList von mir selbst halten und mit den Suchergebnissen fuellen, die der Suchanfrage entsprechen
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
+
     @EJB
     private NutzerDAO nutzerDAO;
     private Suchanfrage suchanfrage;
@@ -44,7 +49,7 @@ public class SuchergebnisseManagedBean {
     }
 
     public ArrayList<Suchergebnisse> getSuchergebnisseArrayList() {
-        validateSuchanfrage();
+        calculateSuchanfrage();
         return suchergebnisseArrayList;
     }
 
@@ -68,11 +73,25 @@ public class SuchergebnisseManagedBean {
         return nutzer;
     }
 
-    private void validateSuchanfrage() {
+    private void calculateSuchanfrage() {
         ArrayList<Nutzer> nutzerMatchSprache = nutzerDAO.findNutzerBySpracheID(suchanfrage.getParamSpracheID());
-        for (Nutzer aNutzerMatchSprache : nutzerMatchSprache) {
-            suchergebnisseArrayList.add(new Suchergebnisse(aNutzerMatchSprache));
+
+        for (Nutzer tempNutzer : nutzerMatchSprache) {
+            if (! tempNutzer.equals(this.nutzer) && tempNutzer.getGeschlecht().isSameGeschlecht(suchanfrage.getParamGeschlecht()) && isAlterInRange(suchanfrage, tempNutzer)) {
+                Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(tempNutzer.getFreizeitaktivitaetenSet());
+                aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
+                if (!aktivitaeten.isEmpty()) {
+                    List<String> aktivitaetenListe = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
+                    String aktivitaetenString = String.join(",", aktivitaetenListe);
+                    suchergebnisseArrayList.add(new Suchergebnisse(tempNutzer, aktivitaeten.size(), aktivitaetenString));
+                }
+            }
         }
+    }
+
+    private boolean isAlterInRange(Suchanfrage suchanfrage, Nutzer nutzer) {
+        int age = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
+        return suchanfrage.getParamAlterMin() <= age && suchanfrage.getParamAlterMax() >= age;
     }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79

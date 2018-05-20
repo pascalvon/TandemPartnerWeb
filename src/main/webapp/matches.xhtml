@@ -12,21 +12,23 @@
 
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
+        <b:form>
+            <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                <b:navbarLinks>
+                    <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                    <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                    <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
+                    <b:navLink value="Meine Matches" active="true" href="#"/>
 
-        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-            <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"/>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
-                <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                <b:navLink active="true" value="Meine Matches" href="#"/>
+                </b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+                <b:navbarLinks pull="right">
 
-            </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Logout" href="login.xhtml"/>
-            </b:navbarLinks>
-        </b:navBar><!--Navigation Ende-->
+                    <b:navLink value="Impressum" href="impressum.xhtml"/>
+                    <b:navCommandLink id="logout" value="Logout" action="#{loginManagedBean.logout}"/>
+                </b:navbarLinks>
+            </b:navBar><!--Navigation Ende-->
+        </b:form>
 
                <h1 style="text-align: center">Meine Matches</h1>
                <br/>

@@ -2,8 +2,6 @@ package models;
 
 import utilities.AgeCalculator;
 
-import javax.persistence.NamedQuery;
-
 public class Suchergebnisse {
 
     // =========================== Class Variables ===========================79
@@ -15,10 +13,12 @@ public class Suchergebnisse {
     private String mail;
     private int alter;
     private Bezirk bezirk;
+    private int commonFreizeitaktivitaetenNumber;
+    private String commonFreizeitaktivitaetenString;
 
     // ============================  Constructors  ===========================79
 
-    public Suchergebnisse(Nutzer nutzer) {
+    public Suchergebnisse(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
         this.nutzer = nutzer;
         this.vorname = nutzer.getVorname();
         this.nachname = nutzer.getNachname();
@@ -26,6 +26,8 @@ public class Suchergebnisse {
         this.mail = nutzer.getMail();
         this.alter = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
         this.bezirk = nutzer.getBezirk();
+        this.commonFreizeitaktivitaetenNumber = commonFreizeitaktivitaetenNumber;
+        this.commonFreizeitaktivitaetenString = commonFreizeitaktivitaetenString;
     }
 
     // ===========================  public  Methods  =========================79
@@ -85,6 +87,22 @@ public class Suchergebnisse {
 
     public void setBezirk(Bezirk bezirk) {
         this.bezirk = bezirk;
+    }
+
+    public int getCommonFreizeitaktivitaetenNumber() {
+        return commonFreizeitaktivitaetenNumber;
+    }
+
+    public void setCommonFreizeitaktivitaetenNumber(int commonFreizeitaktivitaetenNumber) {
+        this.commonFreizeitaktivitaetenNumber = commonFreizeitaktivitaetenNumber;
+    }
+
+    public String getCommonFreizeitaktivitaetenString() {
+        return commonFreizeitaktivitaetenString;
+    }
+
+    public void setCommonFreizeitaktivitaetenString(String commonFreizeitaktivitaetenString) {
+        this.commonFreizeitaktivitaetenString = commonFreizeitaktivitaetenString;
     }
 
     // =================  protected/package local  Methods ===================79

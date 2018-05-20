@@ -13,20 +13,23 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-        <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-            <b:navbarLinks>
-                <b:navLink value="Hauptmenü" href="home.xhtml"/>
-                <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
-                <b:navLink active="true" value="Suchanfragen" href="#"/>
-                <b:navLink value="Meine Matches" href="matches.xhtml"/>
+        <b:form>
+            <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                <b:navbarLinks>
+                    <b:navLink value="Hauptmenü" href="home.xhtml"/>
+                    <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
+                    <b:navLink value="Suchanfragen" active="true" href="#"/>
+                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
 
-            </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Logout" href="login.xhtml"/>
-            </b:navbarLinks>
-        </b:navBar><!--Navigation Ende-->
+                </b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+                <b:navbarLinks pull="right">
+
+                    <b:navLink value="Impressum" href="impressum.xhtml"/>
+                    <b:navCommandLink id="logout" value="Logout" action="#{loginManagedBean.logout}"/>
+                </b:navbarLinks>
+            </b:navBar><!--Navigation Ende-->
+        </b:form>
 
         <h1 style="text-align: center">Gib Deine Suchkriterien ein!</h1>
         <br/>
@@ -109,16 +112,15 @@
 
             <h3 style="text-align: center">Gespeicherte Suchanfragen</h3>
 
-            <b:dataTable value="#{GESPEICHERTEANFRAGEN-CODE-EINFÜGEN}"
+            <b:dataTable value="#{suchanfrageManagedBean.suchanfrageModelArrayList}" var="suchanfrage"
+                         select="true"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}"
-                            searching="false">
-                <b:dataTableColumn label="Sprache" value="#{CODE}"/>
-                <b:dataTableColumn label="Mindestalter" value="#{CODE}"/>
-                <b:dataTableColumn label="Maximalalter" value="#{CODE}"/>
-                <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
-                <b:dataTableColumn label="Freizeitaktivitäten" value="#{CODE}"/>
-                <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
+                         searching="false">
+                <b:dataTableColumn label="Sprache" value="#{suchanfrage.searchedSpracheName}"/>
+                <b:dataTableColumn label="Mindestalter" value="#{suchanfrage.minAlter}"/>
+                <b:dataTableColumn label="Maximalalter" value="#{suchanfrage.maxAlter}"/>
+                <b:dataTableColumn label="Geschlecht" value="#{suchanfrage.searchedGeschlecht}"/>
             </b:dataTable>
 
             <br/>

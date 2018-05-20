@@ -5,14 +5,17 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "findAllNutzer",query = "SELECT nutzer FROM Nutzer nutzer"),
-        @NamedQuery(name = "findNutzerByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
-        @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn"),
-        @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :vn"),
-        @NamedQuery(name = "findNutzerByID", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.id = :vn")})
+@NamedQueries({ @NamedQuery(name = "findAllNutzer",query = "SELECT nutzer FROM Nutzer nutzer"),
+                @NamedQuery(name = "findNutzerByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
+                @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn"),
+                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :vn"),
+                @NamedQuery(name = "findNutzerByID", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.id = :vn"),
+                @NamedQuery(name = "findNutzerByFreizeitaktivitaetenID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :vn"),
+                @NamedQuery(name = "findNutzerBySuchergebnis", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten JOIN nutzer.sprachenSet sprache WHERE freizeitaktivitaeten.id = :fa AND sprache.id = :sp")})
 public class Nutzer {
 
     @Id
@@ -157,5 +160,19 @@ public class Nutzer {
     @Override
     public String toString() {
         return getMail();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Nutzer nutzer = (Nutzer) o;
+        return Id == nutzer.Id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(Id);
     }
 }

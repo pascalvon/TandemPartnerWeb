@@ -38,4 +38,18 @@ public class Freizeitaktivitaeten {
     public String toString() {
         return getNameAktivitaet();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Freizeitaktivitaeten that = (Freizeitaktivitaeten) o;
+        return Id == that.Id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(Id);
+    }
 }
