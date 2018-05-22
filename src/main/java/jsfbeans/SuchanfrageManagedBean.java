@@ -4,7 +4,6 @@ import dao.NutzerDAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Suchanfrage;
-import models.SuchanfrageModel;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -33,7 +32,7 @@ public class SuchanfrageManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String search() {
-        if (nutzerDAO.findSuchanfrageByNutzerID(nutzer).size()<5) { // TODO Joe: 20.05.2018 funktioniert nicht
+        if (nutzerDAO.findSuchanfrageByNutzerID(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
             nutzerDAO.merge(suchanfrage);
             return "suchergebnisse";
@@ -49,9 +48,11 @@ public class SuchanfrageManagedBean {
         // TODO Joe: 21.05.2018
         return "suchergebnisse";
     }
+
     public String showSpracheName(int spracheID) {
         return nutzerDAO.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
     }
+
     public Nutzer getNutzer() {
         return nutzer;
     }

@@ -1,4 +1,4 @@
-package Validators;
+package validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

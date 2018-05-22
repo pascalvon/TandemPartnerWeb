@@ -44,6 +44,7 @@ public class SuchergebnisseManagedBean {
     public String cancel() {
         return "suchanfrage";
     }
+
     // TODO Joe: 21.05.2018 Werden die nutzer Getter und Setter ueberhaupt benoetigt?
     public Nutzer getNutzer() {
         return nutzer;
