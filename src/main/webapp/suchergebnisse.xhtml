@@ -37,7 +37,7 @@
 
         <h:form>
             <b:dataTable value="#{suchergebnisseManagedBean.suchergebnisseArrayList}" var="suche"
-                         select="true" selectionMode="multiple" striped="#{dataTableSettingsBean.striped}"
+                         striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}">
                 <b:dataTableColumn label="Vorname" value="#{suche.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{suche.nachname}"/>
@@ -47,6 +47,9 @@
                 <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
                 <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{suche.commonFreizeitaktivitaetenString}"/>
+                <b:dataTableColumn label="Match-Anfrage senden">
+                    <b:commandButton value="Senden" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.mail)}"/>
+                </b:dataTableColumn>
             </b:dataTable>
 
             <!--Buttons Beginn-->

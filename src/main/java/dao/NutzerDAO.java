@@ -128,4 +128,8 @@ public class NutzerDAO {
                 .setParameter("sp", spracheID)
                 .getResultList();
     }
+
+    public void merge(Matchanfragen matchanfrage) {
+        em.merge(matchanfrage);
+    }
 }

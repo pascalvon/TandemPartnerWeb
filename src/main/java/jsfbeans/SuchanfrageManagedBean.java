@@ -10,7 +10,6 @@ import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class SuchanfrageManagedBean {
     private Nutzer nutzer;
     private String selectedFreizeitaktivitaetenString;
     private Suchanfrage suchanfrage = new Suchanfrage();
-    private ArrayList<SuchanfrageModel> suchanfrageModelArrayList = new ArrayList<>();
+    private ArrayList<Suchanfrage> suchanfrageArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
@@ -34,14 +33,25 @@ public class SuchanfrageManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String search() {
-        if (nutzer.getSuchanfrageSet().size()<=5) {
-            suchanfrage.setNutzer(nutzer);
+        if (nutzerDAO.findSuchanfrageByNutzerID(nutzer).size()<5) { // TODO Joe: 20.05.2018 funktioniert nicht
+            suchanfrage.addNutzer(nutzer);
             nutzerDAO.merge(suchanfrage);
             return "suchergebnisse";
         }
             return "suchergebnisse";
     }
 
+    public void deleteSuchanfrage() {
+        // TODO Joe: 21.05.2018
+    }
+
+    public String useSuchanfrage() {
+        // TODO Joe: 21.05.2018
+        return "suchergebnisse";
+    }
+    public String showSpracheName(int spracheID) {
+        return nutzerDAO.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+    }
     public Nutzer getNutzer() {
         return nutzer;
     }
@@ -73,19 +83,14 @@ public class SuchanfrageManagedBean {
         this.suchanfrage = suchanfrage;
     }
 
-    public ArrayList<SuchanfrageModel> getSuchanfrageModelArrayList() {
-        ArrayList<Suchanfrage> suchanfrageArrayList = nutzerDAO.findSuchanfrageByNutzerID(nutzer);
-        for (Suchanfrage aSuchanfrageArrayList : suchanfrageArrayList) {
-            suchanfrageModelArrayList.add(new SuchanfrageModel( nutzerDAO.findSpracheByID(String.valueOf(aSuchanfrageArrayList.getParamSpracheID())).getNameSprache(),
-                                                                aSuchanfrageArrayList.getParamAlterMin(),
-                                                                aSuchanfrageArrayList.getParamAlterMax(),
-                                                                aSuchanfrageArrayList.getParamGeschlecht()));
-        }
-        return suchanfrageModelArrayList;
+    public ArrayList<Suchanfrage> getSuchanfrageArrayList() {
+        suchanfrageArrayList = new ArrayList<>();
+        suchanfrageArrayList = nutzerDAO.findSuchanfrageByNutzerID(nutzer);
+        return this.suchanfrageArrayList;
     }
 
-    public void setSuchanfrageModelArrayList(ArrayList<SuchanfrageModel> suchanfrageModelArrayList) {
-        this.suchanfrageModelArrayList = suchanfrageModelArrayList;
+    public void setSuchanfrageArrayList(ArrayList<Suchanfrage> suchanfrageArrayList) {
+        this.suchanfrageArrayList = suchanfrageArrayList;
     }
 
     // =================  protected/package local  Methods ===================79

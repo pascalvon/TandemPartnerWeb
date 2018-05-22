@@ -65,7 +65,8 @@ public class Suchanfrage {
 
 
 
-    public void setNutzer(Nutzer nutzer) {
+    public void addNutzer(Nutzer nutzer) {
+
         this.nutzer = nutzer;
     }
 

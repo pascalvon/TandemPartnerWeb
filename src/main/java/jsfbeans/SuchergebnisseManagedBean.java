@@ -25,7 +25,7 @@ public class SuchergebnisseManagedBean {
     private NutzerDAO nutzerDAO;
     private Suchanfrage suchanfrage;
     private Nutzer nutzer;
-    private ArrayList<Suchergebnis> suchergebnisseArrayList = new ArrayList<>();
+    private ArrayList<Suchergebnis> suchergebnisseArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
@@ -33,6 +33,18 @@ public class SuchergebnisseManagedBean {
         this.nutzer = initNutzer();
     }
     // ===========================  public  Methods  =========================79
+    public void sendRequest(String partnerMail) {
+        Matchanfragen matchanfrage = new Matchanfragen();
+        matchanfrage.setInitiator(nutzer.getMail());
+        matchanfrage.setPartner(partnerMail);
+        matchanfrage.setAngenommen((byte) 0);
+        nutzerDAO.merge(matchanfrage);
+    }
+
+    public String cancel() {
+        return "suchanfrage";
+    }
+    // TODO Joe: 21.05.2018 Werden die nutzer Getter und Setter ueberhaupt benoetigt?
     public Nutzer getNutzer() {
         return nutzer;
     }
@@ -42,6 +54,7 @@ public class SuchergebnisseManagedBean {
     }
 
     public ArrayList<Suchergebnis> getSuchergebnisseArrayList() {
+        suchergebnisseArrayList = new ArrayList<>();
         calculateSuchanfrage();
         return suchergebnisseArrayList;
     }
@@ -59,6 +72,7 @@ public class SuchergebnisseManagedBean {
         return suchanfrage;
     }
 
+    // TODO Joe: 21.05.2018 Zu "home" wechseln
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         SuchanfrageManagedBean loggedNutzer = (SuchanfrageManagedBean) elContext.getELResolver().getValue(elContext, null, "suchanfrageManagedBean");

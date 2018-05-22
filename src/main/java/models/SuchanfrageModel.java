@@ -1,7 +1,7 @@
 package models;
 
 public class SuchanfrageModel {
-
+    // TODO Joe: 21.05.2018 Kann wahrscheinlich geloescht werden
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     private String searchedSpracheName;
