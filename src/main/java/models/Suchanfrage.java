@@ -63,8 +63,6 @@ public class Suchanfrage {
         this.paramGeschlecht = paramGeschlecht;
     }
 
-
-
     public void addNutzer(Nutzer nutzer) {
 
         this.nutzer = nutzer;

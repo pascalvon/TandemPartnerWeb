@@ -121,10 +121,10 @@
                 <b:dataTableColumn label="Maximalalter" value="#{suchanfrage.paramAlterMax}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{suchanfrage.paramGeschlecht}"/>
                 <b:dataTableColumn label="Suchanfrage löschen">
-                    <b:commandButton value="Löschen" icon="trash" action="#{suchanfrageManagedBean.deleteSuchanfrage()}"/>
+                    <b:commandButton value="Löschen" icon="trash" action="#{suchanfrageManagedBean.deleteSuchanfrage(suchanfrage)}"/>
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Suchanfrage verwenden">
-                    <b:commandButton value="Verwenden" action="#{suchanfrageManagedBean.useSuchanfrage()}"/>
+                    <b:commandButton value="Verwenden" action="#{suchanfrageManagedBean.useSuchanfrage(suchanfrage)}"/>
                 </b:dataTableColumn>
             </b:dataTable>
 

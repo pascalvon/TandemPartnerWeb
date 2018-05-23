@@ -105,11 +105,8 @@ public class NutzerDAO {
         return em.merge(suchanfrage);
     }
 
-    public void delete(String Mail) {
-        em.getTransaction().begin();
-        Nutzer nutzer = em.getReference(Nutzer.class, Mail);
-        em.remove(nutzer);
-        em.getTransaction().commit();
+    public void delete(Object o) {
+        em.remove(o);
     }
 
     public Bezirk findNutzerByID(int id) {

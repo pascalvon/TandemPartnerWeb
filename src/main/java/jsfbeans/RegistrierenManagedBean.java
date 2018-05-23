@@ -34,13 +34,7 @@ public class RegistrierenManagedBean {
         if (validateMail(this.nutzer.getMail())) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
 
-            // TODO Joe: 22.05.2018 Testen, ob es funktioniert und alte Variante loeschen
             splitStringAndAddToSprachenList(selectedSprachenString, selectedSprachenArray, selectedSprachenList);
-            // TODO Joe: 14.05.2018 Wenn es funktioniert auslagern in Methode
-            selectedSprachenArray = selectedSprachenString.split(",");
-            for (String aSelectedSprachenArray : selectedSprachenArray) {
-                selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
-            }
 
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
