@@ -45,16 +45,15 @@ public class Nutzer {
     @ManyToOne
     private Bezirk bezirk;
 
-    @ManyToMany (fetch = FetchType.EAGER) //, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Sprache> sprachenSet = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER) //, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nutzer", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nutzer", cascade = CascadeType.ALL)
     private Set<Suchanfrage> suchanfrageSet;
 
     public Nutzer(){

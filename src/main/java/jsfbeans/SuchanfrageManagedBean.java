@@ -40,10 +40,8 @@ public class SuchanfrageManagedBean {
             return "suchergebnisse";
     }
 
-    public String deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
-        nutzerDAO.deleteSuchanfrage(nutzerDAO.findSuchanfrageByID(savedSuchanfrage));
-        return "suchanfrage";
-        // TODO Joe: 21.05.2018 funkt nicht
+    public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
+        nutzerDAO.deleteSuchanfrage(savedSuchanfrage);
     }
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {

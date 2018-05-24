@@ -109,6 +109,12 @@ public class NutzerDAO {
         em.remove(em.contains(suchanfrage) ? suchanfrage : em.merge(suchanfrage));
     }
 
+    public void deleteSuchanfrageNQ(Suchanfrage suchanfrage) {
+        em.createNamedQuery("deleteSuchanfrage")
+                .setParameter("vn", suchanfrage.getSuchId())
+                .executeUpdate();
+    }
+
     public Suchanfrage findSuchanfrageByID(Suchanfrage suchanfrage) {
         return em.createNamedQuery("findSuchanfrageByID", Suchanfrage.class)
                 .setParameter("vn", suchanfrage.getSuchId())

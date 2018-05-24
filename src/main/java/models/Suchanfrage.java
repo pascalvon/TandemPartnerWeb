@@ -5,7 +5,8 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn"),
-                @NamedQuery(name = "findSuchanfrageByID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.suchId = :vn")})
+                @NamedQuery(name = "findSuchanfrageByID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.suchId = :vn"),
+                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :vn")})
 public class Suchanfrage {
 
     @Id
@@ -66,19 +67,5 @@ public class Suchanfrage {
 
     public void addNutzer(Nutzer nutzer) {
         this.nutzer = nutzer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Suchanfrage that = (Suchanfrage) o;
-        return suchId == that.suchId;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(suchId);
     }
 }
