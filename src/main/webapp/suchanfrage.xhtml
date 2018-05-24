@@ -67,10 +67,10 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu value="#{suchanfrageManagedBean.suchanfrage.paramGeschlecht}"  required="true" label="Geschlecht:" labelmedium-screen="4">
-                            <f:selectItem itemLabel="Bitte wählen"  itemValue=""/>
+                            <f:selectItem itemLabel="egal" itemValue="EGAL" />
+                            <!--<f:selectItem itemLabel="Bitte wählen"  itemValue=""/>-->
                             <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
-                            <f:selectItem itemLabel="egal" itemValue="EGAL" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>

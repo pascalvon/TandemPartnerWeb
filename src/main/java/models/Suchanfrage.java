@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn")
+@NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn"),
+                @NamedQuery(name = "findSuchanfrageByID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.suchId = :vn")})
 public class Suchanfrage {
 
     @Id
@@ -64,8 +65,20 @@ public class Suchanfrage {
     }
 
     public void addNutzer(Nutzer nutzer) {
-
         this.nutzer = nutzer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Suchanfrage that = (Suchanfrage) o;
+        return suchId == that.suchId;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(suchId);
+    }
 }

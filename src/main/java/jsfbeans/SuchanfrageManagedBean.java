@@ -40,13 +40,14 @@ public class SuchanfrageManagedBean {
             return "suchergebnisse";
     }
 
-    public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
-        nutzerDAO.delete(savedSuchanfrage);
-        // TODO Joe: 21.05.2018
+    public String deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
+        nutzerDAO.deleteSuchanfrage(nutzerDAO.findSuchanfrageByID(savedSuchanfrage));
+        return "suchanfrage";
+        // TODO Joe: 21.05.2018 funkt nicht
     }
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
-        this.suchanfrage = savedSuchanfrage;    // TODO Joe: 23.05.2018 funkt nicht
+        this.suchanfrage = savedSuchanfrage;
         return "suchergebnisse";
     }
 

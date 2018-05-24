@@ -105,8 +105,14 @@ public class NutzerDAO {
         return em.merge(suchanfrage);
     }
 
-    public void delete(Object o) {
-        em.remove(o);
+    public void deleteSuchanfrage(Suchanfrage suchanfrage) {
+        em.remove(em.contains(suchanfrage) ? suchanfrage : em.merge(suchanfrage));
+    }
+
+    public Suchanfrage findSuchanfrageByID(Suchanfrage suchanfrage) {
+        return em.createNamedQuery("findSuchanfrageByID", Suchanfrage.class)
+                .setParameter("vn", suchanfrage.getSuchId())
+                .getSingleResult();
     }
 
     public Bezirk findNutzerByID(int id) {
