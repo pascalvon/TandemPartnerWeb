@@ -4,8 +4,10 @@ import dao.NutzerDAO;
 import models.*;
 
 import javax.ejb.EJB;
+import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,7 @@ public class RegistrierenManagedBean {
             for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
                 nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
             }
+            //initNutzer();
             nutzerDAO.persist(nutzer);
             return "home";
         } else {
@@ -133,6 +136,11 @@ public class RegistrierenManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
+    private void initNutzer() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        LoginManagedBean loggedNutzer = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        loggedNutzer.nutzer = nutzer;
+    }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }
