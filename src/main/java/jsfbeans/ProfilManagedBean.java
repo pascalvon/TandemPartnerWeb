@@ -131,8 +131,8 @@ public class ProfilManagedBean {
     // ===========================  private  Methods  ========================79
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        LoginManagedBean loggedNutzer = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loggedNutzer.nutzer;
+        LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        nutzer = loginManagedBean.nutzer;
         return nutzer;
     }
 

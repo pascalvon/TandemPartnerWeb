@@ -6,13 +6,14 @@ import models.*;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class RegistrierenManagedBean {
 
     // =========================== Class Variables ===========================79
@@ -49,8 +50,8 @@ public class RegistrierenManagedBean {
             for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
                 nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
             }
-            //initNutzer();
             nutzerDAO.persist(nutzer);
+            initNutzer();
             return "home";
         } else {
             // TODO Joe: 13.05.2018 Falls die Mail schon vorhanden oder anlegen Fehlgeschlagen ist, soll dementsprechend eine Fehlermeldung erscheinen.
@@ -138,8 +139,8 @@ public class RegistrierenManagedBean {
     // ===========================  private  Methods  ========================79
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        LoginManagedBean loggedNutzer = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        loggedNutzer.nutzer = nutzer;
+        LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        loginManagedBean.nutzer = nutzerDAO.findNutzerByMail(nutzer.getMail());
     }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79

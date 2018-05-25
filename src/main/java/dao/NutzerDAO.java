@@ -21,6 +21,7 @@ public class NutzerDAO {
     }
 
     // TODO Joe: 17.05.2018 Variable "vn" entsprechend ueberall aendern
+    // TODO Joe: 25.05.2018 try catch durch validator ersetzen
     public Nutzer findNutzerByMail(String mail) {
         try {
             return em.createNamedQuery("findNutzerByMail", Nutzer.class)
@@ -105,10 +106,6 @@ public class NutzerDAO {
         return em.merge(suchanfrage);
     }
 
-    public void deleteSuchanfrage(Suchanfrage suchanfrage) {
-        em.remove(em.contains(suchanfrage) ? suchanfrage : em.merge(suchanfrage));
-    }
-
     public void deleteSuchanfrageNQ(Suchanfrage suchanfrage) {
         em.createNamedQuery("deleteSuchanfrage")
                 .setParameter("vn", suchanfrage.getSuchId())
@@ -121,8 +118,10 @@ public class NutzerDAO {
                 .getSingleResult();
     }
 
-    public Bezirk findNutzerByID(int id) {
-        return em.find(Bezirk.class, id);
+    public Nutzer findNutzerByID(int id) {
+        return em.createNamedQuery("findNutzerByID", Nutzer.class)
+                .setParameter("vn", id)
+                .getSingleResult();
     }
 
     public ArrayList<Nutzer> findNutzerByFreizeitaktivitaetenID(Freizeitaktivitaeten freizeitaktivitaeten) {
@@ -140,5 +139,12 @@ public class NutzerDAO {
 
     public void merge(Matchanfragen matchanfrage) {
         em.merge(matchanfrage);
+    }
+
+    public ArrayList<Matchanfragen> findMatchanfragenByMail(String mail, int angenommen) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByMailAndAngenommen", Matchanfragen.class)
+                .setParameter("vn", mail)
+                .setParameter("ag", angenommen)
+                .getResultList();
     }
 }

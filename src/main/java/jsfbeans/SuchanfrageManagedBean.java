@@ -41,7 +41,7 @@ public class SuchanfrageManagedBean {
     }
 
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
-        nutzerDAO.deleteSuchanfrage(savedSuchanfrage);
+        nutzerDAO.deleteSuchanfrageNQ(savedSuchanfrage);
     }
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
@@ -99,8 +99,8 @@ public class SuchanfrageManagedBean {
     // TODO Joe: 16.05.2018 Zum Nutzer aus home aendern
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        LoginManagedBean loggedNutzer = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loggedNutzer.nutzer;
+        LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        nutzer = loginManagedBean.nutzer;
         return nutzer;
     }
 

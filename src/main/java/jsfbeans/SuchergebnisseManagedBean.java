@@ -74,7 +74,7 @@ public class SuchergebnisseManagedBean {
         return suchanfrage;
     }
 
-    // TODO Joe: 21.05.2018 Zu "home" wechseln
+    // TODO Joe: 21.05.2018 Muss es zu "home" gewechselt werden?
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         SuchanfrageManagedBean loggedNutzer = (SuchanfrageManagedBean) elContext.getELResolver().getValue(elContext, null, "suchanfrageManagedBean");

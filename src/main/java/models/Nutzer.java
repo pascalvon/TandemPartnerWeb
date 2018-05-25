@@ -155,6 +155,10 @@ public class Nutzer {
         this.suchanfrageSet = suchanfrageSet;
     }
 
+    public int getId() {
+        return Id;
+    }
+
     // TODO Joe: 02.05.2018 spaeter loeschen
     @Override
     public String toString() {
