@@ -51,7 +51,7 @@ public class DAO {
 
     public Matchanfragen findMatchanfragenByInitiatorPartnerSpracheID(Nutzer initiator, Nutzer partner, int spracheID) {
         try {
-            return (Matchanfragen) em.createNamedQuery("findMatchanfragenByInitiatorPartnerSpracheID", Matchanfragen.class)
+            return em.createNamedQuery("findMatchanfragenByInitiatorPartnerSpracheID", Matchanfragen.class)
                     .setParameter("initiator", initiator.getMail())
                     .setParameter("partner", partner.getMail())
                     .setParameter("spracheID", spracheID)
