@@ -32,30 +32,10 @@ public class NutzerDAO {
         }
     }
 
-//    public Nutzer findNutzerByID(int nutzerID) {
-//        return em.createNamedQuery("findNutzerByID", Nutzer.class)
-//                .setParameter("vn", nutzerID)
-//                .getSingleResult();
-//    }
-
     public ArrayList<Nutzer> findNutzerBySpracheID(int spracheID) {
         return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySprachID", Nutzer.class)
                 .setParameter("vn", spracheID)
                 .getResultList();
-    }
-
-    public List<Sprache> findAllSprache() {
-        return em.createNamedQuery("findAllSprache", Sprache.class).getResultList();
-    }
-
-    public Sprache findSpracheByName(String spracheName) {
-        try {
-            return em.createNamedQuery("findBySpracheName", Sprache.class)
-                    .setParameter("vn", spracheName)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
     }
 
     public Sprache findSpracheByID(String spracheID) {
@@ -67,17 +47,6 @@ public class NutzerDAO {
     public Freizeitaktivitaeten findFreizeitaktivitaetenByID(String freizeitaktivitaetenID) {
         return em.createNamedQuery("findByFreizeitaktivitaetenID", Freizeitaktivitaeten.class)
                 .setParameter("vn", Integer.parseInt(freizeitaktivitaetenID))
-                .getSingleResult();
-    }
-
-    public ArrayList<Nutzer> findAll() {
-        TypedQuery<Nutzer> query = em.createNamedQuery("findAllNutzer", Nutzer.class);
-        return (ArrayList<Nutzer>)query.getResultList();
-    }
-
-    public Nutzer findByVorname(String vorname) {
-        return (Nutzer) em.createNamedQuery("findNutzerByVorname")
-                .setParameter("vn", vorname)
                 .getSingleResult();
     }
 
@@ -97,13 +66,12 @@ public class NutzerDAO {
         em.merge(nutzer);
     }
 
-    // TODO Joe: 17.05.2018 Wieso nicht void?
-    public Nutzer merge(Nutzer nutzer) {
-        return em.merge(nutzer);
+    public void merge(Nutzer nutzer) {
+        em.merge(nutzer);
     }
 
-    public Suchanfrage merge(Suchanfrage suchanfrage) {
-        return em.merge(suchanfrage);
+    public void merge(Suchanfrage suchanfrage) {
+        em.merge(suchanfrage);
     }
 
     public void deleteSuchanfrageNQ(Suchanfrage suchanfrage) {
@@ -112,39 +80,44 @@ public class NutzerDAO {
                 .executeUpdate();
     }
 
-    public Suchanfrage findSuchanfrageByID(Suchanfrage suchanfrage) {
-        return em.createNamedQuery("findSuchanfrageByID", Suchanfrage.class)
-                .setParameter("vn", suchanfrage.getSuchId())
-                .getSingleResult();
-    }
-
-    public Nutzer findNutzerByID(int id) {
-        return em.createNamedQuery("findNutzerByID", Nutzer.class)
-                .setParameter("vn", id)
-                .getSingleResult();
-    }
-
-    public ArrayList<Nutzer> findNutzerByFreizeitaktivitaetenID(Freizeitaktivitaeten freizeitaktivitaeten) {
-        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerByFreizeitaktivitaetenID", Nutzer.class)
-                .setParameter("vn", freizeitaktivitaeten.getId())
-                .getResultList();
-    }
-
-    public ArrayList<Nutzer> findNutzerBySuchergebnis(int freizeitaktivitaetID, int spracheID) {
-        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySuchergebnis", Nutzer.class)
-                .setParameter("fa", freizeitaktivitaetID)
-                .setParameter("sp", spracheID)
-                .getResultList();
-    }
-
     public void merge(Matchanfragen matchanfrage) {
         em.merge(matchanfrage);
     }
 
-    public ArrayList<Matchanfragen> findMatchanfragenByMail(String mail, int angenommen) {
-        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByMailAndAngenommen", Matchanfragen.class)
+    public ArrayList<Matchanfragen> findMatchanfragenByMail(String mail) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByMail", Matchanfragen.class)
                 .setParameter("vn", mail)
-                .setParameter("ag", angenommen)
                 .getResultList();
+    }
+
+    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(String mail) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByAllColumns", Matchanfragen.class)
+                .setParameter("vn", mail)
+                .getResultList();
+    }
+
+    public void deleteMatchanfrage(Matchanfragen matchanfragen) {
+        em.createNamedQuery("deleteMatchanfrage")
+                .setParameter("in", matchanfragen.getInitiator())
+                .setParameter("pa", matchanfragen.getPartner())
+                .executeUpdate();
+    }
+
+    public void deleteNutzer(Nutzer nutzer) {
+        em.createNamedQuery("deleteNutzer")
+                .setParameter("vn", nutzer.getId())
+                .executeUpdate();
+    }
+
+    public void deleteSuchanfrageByNutzerID(Nutzer nutzer) {
+        em.createNamedQuery("deleteSuchanfrageByNutzerID")
+                .setParameter("vn", nutzer)
+                .executeUpdate();
+    }
+
+    public void deleteMatchanfrageByNutzer(Nutzer nutzer) {
+        em.createNamedQuery("deleteMatchanfrageByNutzer")
+                .setParameter("vn", nutzer.getMail())
+                .executeUpdate();
     }
 }

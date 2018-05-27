@@ -6,28 +6,26 @@ public class Suchergebnis {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
-    private Nutzer nutzer;
-    private String vorname;
-    private String nachname;
-    private Geschlecht geschlecht;
-    private String mail;
-    private int alter;
-    private Bezirk bezirk;
-    private int commonFreizeitaktivitaetenNumber;
-    private String commonFreizeitaktivitaetenString;
+    private Nutzer      nutzer;
+    private String      vorname;
+    private String      nachname;
+    private Geschlecht  geschlecht;
+    private int         alter;
+    private Bezirk      bezirk;
+    private int         commonFreizeitaktivitaetenNumber;
+    private String      commonFreizeitaktivitaetenString;
 
     // ============================  Constructors  ===========================79
 
     public Suchergebnis(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
-        this.nutzer = nutzer;
-        this.vorname = nutzer.getVorname();
-        this.nachname = nutzer.getNachname();
-        this.geschlecht = nutzer.getGeschlecht();
-        this.mail = nutzer.getMail();
-        this.alter = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
-        this.bezirk = nutzer.getBezirk();
-        this.commonFreizeitaktivitaetenNumber = commonFreizeitaktivitaetenNumber;
-        this.commonFreizeitaktivitaetenString = commonFreizeitaktivitaetenString;
+        this.nutzer                             = nutzer;
+        this.vorname                            = nutzer.getVorname();
+        this.nachname                           = nutzer.getNachname();
+        this.geschlecht                         = nutzer.getGeschlecht();
+        this.alter                              = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
+        this.bezirk                             = nutzer.getBezirk();
+        this.commonFreizeitaktivitaetenNumber   = commonFreizeitaktivitaetenNumber;
+        this.commonFreizeitaktivitaetenString   = commonFreizeitaktivitaetenString;
     }
 
     // ===========================  public  Methods  =========================79
@@ -63,14 +61,6 @@ public class Suchergebnis {
 
     public void setGeschlecht(Geschlecht geschlecht) {
         this.geschlecht = geschlecht;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 
     public int getAlter() {

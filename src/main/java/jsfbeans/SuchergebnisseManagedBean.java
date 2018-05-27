@@ -42,18 +42,6 @@ public class SuchergebnisseManagedBean {
         nutzerDAO.merge(matchanfrage);
     }
 
-    public String cancel() {
-        return "suchanfrage";
-    }
-
-    // TODO Joe: 21.05.2018 Werden die nutzer Getter und Setter ueberhaupt benoetigt?
-    public Nutzer getNutzer() {
-        return nutzer;
-    }
-
-    public void setNutzer(Nutzer nutzer) {
-        this.nutzer = nutzer;
-    }
 
     public ArrayList<Suchergebnis> getSuchergebnisseArrayList() {
         suchergebnisseArrayList = new ArrayList<>();
@@ -74,7 +62,6 @@ public class SuchergebnisseManagedBean {
         return suchanfrage;
     }
 
-    // TODO Joe: 21.05.2018 Muss es zu "home" gewechselt werden?
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         SuchanfrageManagedBean loggedNutzer = (SuchanfrageManagedBean) elContext.getELResolver().getValue(elContext, null, "suchanfrageManagedBean");
@@ -90,8 +77,8 @@ public class SuchergebnisseManagedBean {
                 Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(tempNutzer.getFreizeitaktivitaetenSet());
                 aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
                 if (!aktivitaeten.isEmpty()) {
-                    List<String> aktivitaetenListe = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
-                    String aktivitaetenString = String.join(",", aktivitaetenListe);
+                    List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
+                    String aktivitaetenString = String.join(",", aktivitaetenList);
                     suchergebnisseArrayList.add(new Suchergebnis(tempNutzer, aktivitaeten.size(), aktivitaetenString));
                 }
             }

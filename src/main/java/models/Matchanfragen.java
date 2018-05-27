@@ -7,8 +7,10 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "findMatchanfragenByMailAndAngenommen", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.partner = :vn AND matchanfragen.angenommen = :ag")
-// TODO Joe: 25.05.2018 Gibt es den Fall, dass Partner und fuer angenommen = 1 gesucht werden? Wenn nein, kann 'ab' raus.
+@NamedQueries({ @NamedQuery(name = "findMatchanfragenByMail", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.partner = :vn AND matchanfragen.angenommen = 0"),
+                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.partner = :vn OR matchanfragen.initiator = :vn)"),
+                @NamedQuery(name = "deleteMatchanfrage", query = "DELETE FROM Matchanfragen matchanfrage WHERE matchanfrage.initiator = :in AND matchanfrage.partner = :pa"),
+                @NamedQuery(name = "deleteMatchanfrageByNutzer", query = "DELETE FROM Matchanfragen  matchanfragen WHERE matchanfragen.initiator = :vn OR matchanfragen.partner = :vn")})
 @IdClass(MatchanfragenPK.class)
 public class Matchanfragen {
 

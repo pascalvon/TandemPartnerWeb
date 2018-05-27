@@ -50,4 +50,18 @@ public class Sprache {
     public String toString() {
         return getNameSprache();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sprache sprache = (Sprache) o;
+        return id == sprache.id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
 }

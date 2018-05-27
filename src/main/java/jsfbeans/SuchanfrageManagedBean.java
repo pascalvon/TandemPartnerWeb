@@ -1,9 +1,9 @@
 package jsfbeans;
 
 import dao.NutzerDAO;
-import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Suchanfrage;
+import utilities.FreizeitaktivitaetenStringTransformer;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -61,18 +61,12 @@ public class SuchanfrageManagedBean {
         this.nutzer = nutzer;
     }
 
-    // TODO Joe: 16.05.2018 Utility-Klasse erstellen
     public String getSelectedFreizeitaktivitaetenString() {
-        ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
-        String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];
-        for (int i = 0; i < selectedFreizeitaktivitaetenList.size(); i++) {
-            selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i).getId());
-        }
-        selectedFreizeitaktivitaetenString = String.join(",", selectedFreizeitaktivitaetenArray);
-        return selectedFreizeitaktivitaetenString;
+        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer,selectedFreizeitaktivitaetenString);
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
+
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
 
@@ -96,7 +90,6 @@ public class SuchanfrageManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-    // TODO Joe: 16.05.2018 Zum Nutzer aus home aendern
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");

@@ -4,17 +4,19 @@ import dao.NutzerDAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
+import utilities.FreizeitaktivitaetenStringTransformer;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ProfilManagedBean {
 
     // =========================== Class Variables ===========================79
@@ -35,14 +37,14 @@ public class ProfilManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    // TODO Joe: 26.05.2018 Bug beim Auswaehlen von mehreren Sprachen/Freizeitaktivitaeten 4<=
     public String update() {
 
         if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
             nutzer.clearSprachenSet();
+            //nutzerDAO.merge(nutzer);
             List<Sprache> selectedSprachenList = new ArrayList<>();
-            // TODO Joe: 14.05.2018 Wenn es funktioniert auslagern in Methode
-            // TODO Joe: 15.05.2018 muss noch ueberprueft werden, ob Sprachen oder Aktivitaeten entfernt wurden
             String[] selectedSprachenArray = selectedSprachenString.split(",");
             for (String aSelectedSprachenArray : selectedSprachenArray) {
                 selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
@@ -69,9 +71,13 @@ public class ProfilManagedBean {
         }
     }
 
-    private boolean validateMail(String mail) {
-        Nutzer n = nutzerDAO.findNutzerByMail(mail);
-        return n == null;
+    // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird
+    public String deleteNutzer() {
+        nutzerDAO.deleteSuchanfrageByNutzerID(nutzer);
+        nutzerDAO.deleteMatchanfrageByNutzer(nutzer);
+        nutzerDAO.deleteNutzer(nutzer);
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login";
     }
 
     public Nutzer getNutzer() {
@@ -99,6 +105,7 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedSprachenString() {
+
         ArrayList<Sprache> selectedSprachenList = new ArrayList<>(nutzer.getSprachenSet());
         String[] selectedSprachenArray = new String[selectedSprachenList.size()];
         for (int i = 0; i < selectedSprachenList.size(); i++) {
@@ -109,18 +116,12 @@ public class ProfilManagedBean {
     }
 
     public void setSelectedSprachenString(String selectedSprachenString) {
+//        nutzer.clearSprachenSet();
         this.selectedSprachenString = selectedSprachenString;
     }
 
-    // TODO Joe: 16.05.2018 Utility-Klasse erstellen
     public String getSelectedFreizeitaktivitaetenString() {
-        ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
-        String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];
-        for (int i = 0; i < selectedFreizeitaktivitaetenList.size(); i++) {
-            selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i).getId());
-        }
-        selectedFreizeitaktivitaetenString = String.join(",", selectedFreizeitaktivitaetenArray);
-        return selectedFreizeitaktivitaetenString;
+        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer, selectedFreizeitaktivitaetenString);
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
@@ -134,6 +135,11 @@ public class ProfilManagedBean {
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.nutzer;
         return nutzer;
+    }
+
+    private boolean validateMail(String mail) {
+        Nutzer n = nutzerDAO.findNutzerByMail(mail);
+        return n == null;
     }
 
     // ============================  Inner Classes  ==========================79

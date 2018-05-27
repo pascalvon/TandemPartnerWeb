@@ -19,7 +19,7 @@
                     <b:navLink value="Hauptmenü" href="home.xhtml"/>
                     <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
                     <b:navLink value="Suchanfragen" active="true" href="#"/>
-                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
+                    <b:navLink value="Akzeptierte Matches" href="matches.xhtml"/>
 
                 </b:navbarLinks>
                 <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
@@ -42,11 +42,10 @@
                 <b:dataTableColumn label="Vorname" value="#{suche.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{suche.nachname}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{suche.geschlecht}"/>
-                <b:dataTableColumn label="Emailadresse" value="#{suche.mail}"/>
                 <b:dataTableColumn label="Alter" value="#{suche.alter}"/>
-                <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
-                <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{suche.commonFreizeitaktivitaetenString}"/>
+                <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
+                <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
                 <b:dataTableColumn label="Match-Anfrage senden">
                     <b:commandButton value="Senden" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.mail)}"/>
                 </b:dataTableColumn>
@@ -54,13 +53,13 @@
 
             <!--Buttons Beginn-->
             <b:row>
-                <b:column  medium-screen="4"/>
-                <b:column  medium-screen="2">
-                    <b:commandButton name="action" ajax="true">Matchanfrage schicken</b:commandButton>
-                </b:column>
+                <b:column  medium-screen="5"/>
+                <!--<b:column  medium-screen="2">-->
+                    <!--<b:commandButton name="action" ajax="true">Matchanfrage schicken</b:commandButton>-->
+                <!--</b:column>-->
 
                 <b:column  medium-screen="2">
-                    <b:commandButton type="reset" value="Abbrechen" name="action"/>
+                    <b:commandButton value="Abbrechen" href="suchanfrage.xhtml" action="suchanfrage.xhtml?faces-redirect=true"/>
                 </b:column>
             </b:row><!--Buttons Ende-->
 

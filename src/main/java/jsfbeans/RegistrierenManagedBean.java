@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +23,8 @@ public class RegistrierenManagedBean {
     private int bezirkID;
     private List<Sprache> selectedSprachenList = new ArrayList<>();
     private String selectedSprachenString;
-    private String[] selectedSprachenArray;
     private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
     private String selectedFreizeitaktivitaetenString;
-    private String[] selectedFreizeitaktivitaetenArray;
-    // TODO Joe: 14.05.2018 spaeter wieder lokal machen die variable
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
@@ -37,13 +33,13 @@ public class RegistrierenManagedBean {
         if (validateMail(this.nutzer.getMail())) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
 
-            splitStringAndAddToSprachenList(selectedSprachenString, selectedSprachenArray, selectedSprachenList);
+            splitStringAndAddToSprachenList(selectedSprachenString, selectedSprachenList);
 
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
             }
 
-            selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
+            String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
             for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
                 selectedFreizeitaktivitaetenList.add(nutzerDAO.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
             }
@@ -59,8 +55,8 @@ public class RegistrierenManagedBean {
         }
     }
 
-    private void splitStringAndAddToSprachenList(String stringToSplit, String[] stringArray, List<Sprache> sprachenList) {
-        stringArray = stringToSplit.split(",");
+    private void splitStringAndAddToSprachenList(String stringToSplit, List<Sprache> sprachenList) {
+        String[] stringArray = stringToSplit.split(",");
         for (String aSelectedSprachenArray : stringArray) {
             sprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
         }
@@ -87,14 +83,6 @@ public class RegistrierenManagedBean {
         this.bezirkID = bezirkID;
     }
 
-    public List<Sprache> getSelectedSprachenList() {
-        return selectedSprachenList;
-    }
-
-    public void setSelectedSprachenList(List<Sprache> selectedSprachenList) {
-        this.selectedSprachenList = selectedSprachenList;
-    }
-
     public String getSelectedSprachenString() {
         return selectedSprachenString;
     }
@@ -103,36 +91,12 @@ public class RegistrierenManagedBean {
         this.selectedSprachenString = selectedSprachenString;
     }
 
-    public String[] getSelectedSprachenArray() {
-        return selectedSprachenArray;
-    }
-
-    public void setSelectedSprachenArray(String[] selectedSprachenArray) {
-        this.selectedSprachenArray = selectedSprachenArray;
-    }
-
-    public ArrayList<Freizeitaktivitaeten> getSelectedFreizeitaktivitaetenList() {
-        return selectedFreizeitaktivitaetenList;
-    }
-
-    public void setSelectedFreizeitaktivitaetenList(ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList) {
-        this.selectedFreizeitaktivitaetenList = selectedFreizeitaktivitaetenList;
-    }
-
     public String getSelectedFreizeitaktivitaetenString() {
         return selectedFreizeitaktivitaetenString;
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
-    }
-
-    public String[] getSelectedFreizeitaktivitaetenArray() {
-        return selectedFreizeitaktivitaetenArray;
-    }
-
-    public void setSelectedFreizeitaktivitaetenArray(String[] selectedFreizeitaktivitaetenArray) {
-        this.selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenArray;
     }
 
     // =================  protected/package local  Methods ===================79

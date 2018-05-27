@@ -6,7 +6,8 @@ import java.util.Objects;
 @Entity
 @NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn"),
                 @NamedQuery(name = "findSuchanfrageByID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.suchId = :vn"),
-                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :vn")})
+                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :vn"),
+                @NamedQuery(name = "deleteSuchanfrageByNutzerID", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn")})
 public class Suchanfrage {
 
     @Id

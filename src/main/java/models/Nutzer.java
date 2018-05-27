@@ -15,7 +15,9 @@ import java.util.Set;
                 @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :vn"),
                 @NamedQuery(name = "findNutzerByID", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.id = :vn"),
                 @NamedQuery(name = "findNutzerByFreizeitaktivitaetenID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :vn"),
-                @NamedQuery(name = "findNutzerBySuchergebnis", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten JOIN nutzer.sprachenSet sprache WHERE freizeitaktivitaeten.id = :fa AND sprache.id = :sp")})
+                @NamedQuery(name = "findNutzerBySuchergebnis", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten JOIN nutzer.sprachenSet sprache WHERE freizeitaktivitaeten.id = :fa AND sprache.id = :sp"),
+                @NamedQuery(name = "findNutzerByMatchanfragenInitiator", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :vn"),
+                @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :vn")})
 public class Nutzer {
 
     @Id
@@ -159,7 +161,6 @@ public class Nutzer {
         return Id;
     }
 
-    // TODO Joe: 02.05.2018 spaeter loeschen
     @Override
     public String toString() {
         return getMail();

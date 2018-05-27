@@ -1,6 +1,7 @@
 package jsfbeans;
 
 import dao.NutzerDAO;
+import models.Freizeitaktivitaeten;
 import models.Matchanfragen;
 import models.MatchanfragenModel;
 import models.Nutzer;
@@ -11,6 +12,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ManagedBean
 @ViewScoped
@@ -26,10 +31,19 @@ public class HomeManagedBean {
     // ============================  Constructors  ===========================79
 
     public HomeManagedBean() {
-        nutzer = initNutzer();
+        this.nutzer = initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
+
+    public void acceptMatchanfrage(Matchanfragen matchanfragen) {
+        matchanfragen.setAngenommen((byte) 1);
+        nutzerDAO.merge(matchanfragen);
+    }
+
+    public void refuseMatchanfrage(Matchanfragen matchanfragen) {
+        nutzerDAO.deleteMatchanfrage(matchanfragen);
+    }
 
     public Nutzer getNutzer() {
         return nutzer;
@@ -40,7 +54,6 @@ public class HomeManagedBean {
     }
 
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
-        // TODO Joe: 25.05.2018 Sollte die Logik enthalten, um gemeinsam Freizeitaktivitaeten auszugeben
         matchanfragenModelArrayList = new ArrayList<>();
         calculateMatchanfragen();
         return matchanfragenModelArrayList;
@@ -60,7 +73,19 @@ public class HomeManagedBean {
     }
 
     private void calculateMatchanfragen() {
-        ArrayList<Matchanfragen> openMatchanfragen = nutzerDAO.findMatchanfragenByMail(nutzer.getMail(), 0);
+        ArrayList<Matchanfragen> openMatchanfragen = nutzerDAO.findMatchanfragenByMail(nutzer.getMail());
+        ArrayList<Nutzer> nutzerFromOpenMatchanfragen = new ArrayList<>();
+
+        for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
+            Nutzer aNutzer = nutzerDAO.findNutzerByMail(anOpenMatchanfragen.getInitiator());
+            Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
+            aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
+            if (!aktivitaeten.isEmpty()) {
+                List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
+                String aktivitaetenString = String.join(",", aktivitaetenList);
+                matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaetenString, aktivitaeten.size(), anOpenMatchanfragen));
+            }
+        }
     }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79

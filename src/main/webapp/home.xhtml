@@ -19,7 +19,7 @@
                     <b:navLink active="true" value="Hauptmenü" href="#"/>
                     <b:navLink value="Profil bearbeiten" href="profil.xhtml"/>
                     <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
+                    <b:navLink value="Akzeptierte Matches" href="matches.xhtml"/>
 
                 </b:navbarLinks>
                 <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
@@ -38,40 +38,25 @@
         <h3 style="text-align: center">Meine offenen Matchanfragen:</h3>
         <!--Datentabellen Beginn-->
         <h:form>
-            <b:dataTable value="#{OFFENMATCHANFRAGEN-CODE-EINFÜGEN}"
+            <b:dataTable value="#{homeManagedBean.matchanfragenModelArrayList}" var="matchanfragen"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="false"
                             searching="false">
-                <b:dataTableColumn label="Vorname" value="#{registrierenManagedBean.selectedSprachenString}"/>
-                <b:dataTableColumn label="Nachname" value="#{CODE}"/>
-                <b:dataTableColumn label="Geschlecht" value="#{CODE}"/>
-                <b:dataTableColumn label="Emailadresse" value="#{CODE}"/>
-                <b:dataTableColumn label="Alter" value="#{CODE}"/>
-                <b:dataTableColumn label="Bezirk" value="#{CODE}"/>
+                <b:dataTableColumn label="Sprache" value=""/>
+                <b:dataTableColumn label="Vorname" value="#{matchanfragen.vorname}"/>
+                <b:dataTableColumn label="Nachname" value="#{matchanfragen.nachname}"/>
+                <b:dataTableColumn label="Geschlecht" value="#{matchanfragen.geschlecht}"/>
+                <b:dataTableColumn label="Alter" value="#{matchanfragen.alter}"/>
+                <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{matchanfragen.commonFreizeitaktivitaetenString}"/>
+                <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{matchanfragen.commonFreizeitaktivitaetenNumber}"/>
+                <b:dataTableColumn label="Bezirk" value="#{matchanfragen.bezirk}"/>
+                <b:dataTableColumn label="Anfrage annehmen">
+                    <b:commandButton value="Annehmen" action="#{homeManagedBean.acceptMatchanfrage(matchanfragen.matchanfragen)}"/>
+                </b:dataTableColumn>
+                <b:dataTableColumn label="Anfrage ablehnen">
+                    <b:commandButton value="Ablehnen" action="#{homeManagedBean.refuseMatchanfrage(matchanfragen.matchanfragen)}"/>
+                </b:dataTableColumn>
             </b:dataTable>
-
-            <!--Buttons Start-->
-            <br/>
-            <b:row>
-                <b:column medium-screen="2"/>
-                <b:column medium-screen="2">
-                    <b:commandButton value="Annehmen" name="action" ajax="true"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
-                </b:column>
-
-                <b:column medium-screen="1"/>
-
-                <b:column medium-screen="2">
-                    <b:commandButton value="Ablehnen" name="action" ajax="true"
-                                     actionListener="#{myBean.listener}" action="#{myBean.navigate}" />
-                </b:column>
-
-                <b:column medium-screen="1"/>
-
-                <b:column medium-screen="2">
-                    <b:button value="Abbrechen" href="home.xhtml" />
-                </b:column>
-            </b:row><!--Buttons Ende-->
 
         </h:form>
     </ui:define><!-- content defining Ende-->

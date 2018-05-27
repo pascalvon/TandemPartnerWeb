@@ -18,7 +18,7 @@
                     <b:navLink value="Hauptmenü" href="home.xhtml"/>
                     <b:navLink value="Profil bearbeiten" active="true" href="#"/>
                     <b:navLink value="Suchanfragen" href="suchanfrage.xhtml"/>
-                    <b:navLink value="Meine Matches" href="matches.xhtml"/>
+                    <b:navLink value="Akzeptierte Matches" href="matches.xhtml"/>
 
                 </b:navbarLinks>
                 <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
@@ -142,7 +142,7 @@
                 <b:column span="4">
                     <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/>
-                    <b:selectMultiMenu id="aktivitätenwahl" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
+                    <b:selectMultiMenu id="aktivitätenwahl" required="true" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
                         <f:selectItem itemLabel="Angeln" itemValue="1"/>
                         <f:selectItem itemLabel="Basketball" itemValue="2"/>
                         <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
@@ -196,13 +196,13 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="1">
-                    <b:button value="Abbrechen" href="home.xhtml"/>
+                    <b:button value="Abbrechen" href="home.xhtml" action="home.xhtml?faces-redirect=true"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="1">
-                    <b:button value="Profil löschen" href="login.xhtml"/>
+                    <b:commandButton value="Profil löschen" action="#{profilManagedBean.deleteNutzer}"/>
                 </b:column>
             </b:row><!--Buttons Ende-->
 
