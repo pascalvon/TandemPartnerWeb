@@ -31,7 +31,7 @@ public class ProfilManagedBean {
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
-        this.nutzer = initNutzer();
+        initNutzer();
         this.mail = nutzer.getMail();
         this.bezirkID = nutzer.getBezirk().getId();
     }
@@ -39,11 +39,10 @@ public class ProfilManagedBean {
     // ===========================  public  Methods  =========================79
     // TODO Joe: 26.05.2018 Bug beim Auswaehlen von mehreren Sprachen/Freizeitaktivitaeten 4<=
     public String update() {
-
         if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
             nutzer.clearSprachenSet();
-            //nutzerDAO.merge(nutzer);
+            //nutzerDAO.persist(nutzer);
             List<Sprache> selectedSprachenList = new ArrayList<>();
             String[] selectedSprachenArray = selectedSprachenString.split(",");
             for (String aSelectedSprachenArray : selectedSprachenArray) {
@@ -62,8 +61,10 @@ public class ProfilManagedBean {
             for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
                 nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
             }
+
             nutzer.setMail(mail);
             nutzerDAO.merge(nutzer);
+            refreshNutzer();
             return "home";
         } else {
             // TODO Joe: 13.05.2018 Falls die Mail schon vorhanden oder bearbeiten Fehlgeschlagen ist, soll dementsprechend eine Fehlermeldung erscheinen.
@@ -116,7 +117,6 @@ public class ProfilManagedBean {
     }
 
     public void setSelectedSprachenString(String selectedSprachenString) {
-//        nutzer.clearSprachenSet();
         this.selectedSprachenString = selectedSprachenString;
     }
 
@@ -130,11 +130,16 @@ public class ProfilManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-    private Nutzer initNutzer() {
+    private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.nutzer;
-        return nutzer;
+    }
+
+    private void refreshNutzer() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
+        loginManagedBean.nutzer = nutzerDAO.findNutzerByMail(nutzer.getMail());
     }
 
     private boolean validateMail(String mail) {

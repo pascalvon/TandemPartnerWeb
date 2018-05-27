@@ -46,7 +46,7 @@ public class RegistrierenManagedBean {
             for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
                 nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
             }
-            nutzerDAO.persist(nutzer);
+            nutzerDAO.merge(nutzer);
             initNutzer();
             return "home";
         } else {

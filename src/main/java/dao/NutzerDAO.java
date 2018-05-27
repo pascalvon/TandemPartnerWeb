@@ -17,6 +17,7 @@ public class NutzerDAO {
     private EntityManager em;
     private UserTransaction userTransaction;
 
+    // TODO Joe: 27.05.2018 Kann weg?
     public NutzerDAO() {
     }
 
@@ -63,7 +64,7 @@ public class NutzerDAO {
     }
 
     public void persist(Nutzer nutzer) {
-        em.merge(nutzer);
+        em.persist(nutzer);
     }
 
     public void merge(Nutzer nutzer) {
