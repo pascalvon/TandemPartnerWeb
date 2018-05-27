@@ -68,8 +68,6 @@ public class MatchesManagedBean {
 
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> acceptedMatchanfragen = nutzerDAO.findMatchanfragenByAllColumns(nutzer.getMail());
-        ArrayList<Nutzer> nutzerFromAcceptedMatchanfragen = new ArrayList<>();
-
         for (Matchanfragen anAcceptedMatchanfragen : acceptedMatchanfragen) {
             Nutzer aNutzer;
             String origin;

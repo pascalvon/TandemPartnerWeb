@@ -12,13 +12,13 @@ public class FreizeitaktivitaetenStringTransformer {
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
-    public static String selectedFreizeitaktivitaetenString(Nutzer nutzer, String freizeitaktivitaetenString) {
+    public static String selectedFreizeitaktivitaetenString(Nutzer nutzer) {
         ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
         String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];
         for (int i = 0; i < selectedFreizeitaktivitaetenList.size(); i++) {
             selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i).getId());
         }
-        freizeitaktivitaetenString = String.join(",", selectedFreizeitaktivitaetenArray);
+        String freizeitaktivitaetenString = String.join(",", selectedFreizeitaktivitaetenArray);
         return freizeitaktivitaetenString;
     }
 

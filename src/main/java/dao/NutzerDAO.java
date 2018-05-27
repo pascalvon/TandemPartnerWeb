@@ -4,9 +4,9 @@ import models.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
+import javax.rmi.CORBA.StubDelegate;
 import javax.transaction.UserTransaction;
 import java.util.ArrayList;
-import java.util.List;
 
 // TODO Joe: 14.05.2018 ALle unnoetigen Methoden am Ende loeschen und verbleibende sortieren
 // TODO Joe: 14.05.2018 Ueberpruefen ob DAO's erstellt werden sollten
@@ -15,7 +15,7 @@ public class NutzerDAO {
 
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
-    private UserTransaction userTransaction;
+    private UserTransaction userTransaction;    // TODO Joe: 27.05.2018 important?
 
     // TODO Joe: 27.05.2018 Kann weg?
     public NutzerDAO() {
@@ -61,10 +61,6 @@ public class NutzerDAO {
         return (ArrayList<Suchanfrage>) em.createNamedQuery("findSuchanfrageByNutzerID", Suchanfrage.class)
                 .setParameter("vn", nutzer)
                 .getResultList();
-    }
-
-    public void persist(Nutzer nutzer) {
-        em.persist(nutzer);
     }
 
     public void merge(Nutzer nutzer) {
@@ -120,5 +116,26 @@ public class NutzerDAO {
         em.createNamedQuery("deleteMatchanfrageByNutzer")
                 .setParameter("vn", nutzer.getMail())
                 .executeUpdate();
+    }
+
+    public Matchanfragen findMatchanfragenByMatchanfragen(Matchanfragen matchanfrage) {
+        try {
+            return em.createNamedQuery("findMatchanfragenByMatchanfragen", Matchanfragen.class)
+                    .setParameter("vn", matchanfrage)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Matchanfragen findMatchanfragenByInitiatorAndPartner(Nutzer initiator, Nutzer partner) {
+        try {
+            return (Matchanfragen) em.createNamedQuery("findMatchanfragenByInitiatorAndPartner")
+                    .setParameter("in", initiator.getMail())
+                    .setParameter("pa", partner.getMail())
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

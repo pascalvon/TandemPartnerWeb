@@ -9,7 +9,6 @@ import utilities.FreizeitaktivitaetenStringTransformer;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -22,12 +21,12 @@ public class ProfilManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
-    private Nutzer nutzer;
-    private String mail;
-    private int bezirkID;
-    private String selectedSprachenString;
-    private String selectedFreizeitaktivitaetenString;
+    private NutzerDAO   nutzerDAO;
+    private Nutzer      nutzer;
+    private String      mail;
+    private int         bezirkID;
+    private String      selectedSprachenString;
+    private String      selectedFreizeitaktivitaetenString;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
@@ -37,12 +36,11 @@ public class ProfilManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
-    // TODO Joe: 26.05.2018 Bug beim Auswaehlen von mehreren Sprachen/Freizeitaktivitaeten 4<=
     public String update() {
         if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
             nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
+
             nutzer.clearSprachenSet();
-            //nutzerDAO.persist(nutzer);
             List<Sprache> selectedSprachenList = new ArrayList<>();
             String[] selectedSprachenArray = selectedSprachenString.split(",");
             for (String aSelectedSprachenArray : selectedSprachenArray) {
@@ -121,7 +119,7 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer, selectedFreizeitaktivitaetenString);
+        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {

@@ -62,7 +62,7 @@ public class SuchanfrageManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer,selectedFreizeitaktivitaetenString);
+        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {

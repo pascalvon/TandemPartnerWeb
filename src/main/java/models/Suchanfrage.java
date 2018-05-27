@@ -1,7 +1,6 @@
 package models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn"),

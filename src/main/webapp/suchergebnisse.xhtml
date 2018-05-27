@@ -47,7 +47,7 @@
                 <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
                 <b:dataTableColumn label="Match-Anfrage senden">
-                    <b:commandButton value="Senden" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.mail)}"/>
+                    <b:commandButton value="Senden"  disabled="#{suchergebnisseManagedBean.matchanfragenAlreadyExist(suche.nutzer)}" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.mail)}"/>
                 </b:dataTableColumn>
             </b:dataTable>
 

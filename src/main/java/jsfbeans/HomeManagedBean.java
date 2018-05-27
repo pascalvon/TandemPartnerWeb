@@ -74,8 +74,6 @@ public class HomeManagedBean {
 
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = nutzerDAO.findMatchanfragenByMail(nutzer.getMail());
-        ArrayList<Nutzer> nutzerFromOpenMatchanfragen = new ArrayList<>();
-
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
             Nutzer aNutzer = nutzerDAO.findNutzerByMail(anOpenMatchanfragen.getInitiator());
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());

@@ -35,14 +35,24 @@ public class SuchergebnisseManagedBean {
     // ===========================  public  Methods  =========================79
     public void sendRequest(String partnerMail) {
         // TODO Joe: 24.05.2018 nutzer_id ergaenzen, wenn geklaert wurde ob es primary key wird
-        Matchanfragen matchanfrage = new Matchanfragen();
-        matchanfrage.setInitiator(nutzer.getMail());
-        matchanfrage.setPartner(partnerMail);
-        matchanfrage.setAngenommen((byte) 0);
-        nutzerDAO.merge(matchanfrage);
+        Matchanfragen matchanfragen = new Matchanfragen();
+        matchanfragen.setInitiator(nutzer.getMail());
+        matchanfragen.setPartner(partnerMail);
+        matchanfragen.setAngenommen((byte) 0);
+        if (!validateMatchanfragen(matchanfragen)) {
+            nutzerDAO.merge(matchanfragen);
+        }
     }
 
 
+    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
+        try {
+            Matchanfragen matchanfragen1 = nutzerDAO.findMatchanfragenByMatchanfragen(matchanfragen);
+            return matchanfragen.equals(matchanfragen1);
+        } catch(NullPointerException e) {
+            return false;
+        }
+    }
     public ArrayList<Suchergebnis> getSuchergebnisseArrayList() {
         suchergebnisseArrayList = new ArrayList<>();
         calculateSuchanfrage();
@@ -73,7 +83,10 @@ public class SuchergebnisseManagedBean {
         ArrayList<Nutzer> nutzerMatchSprache = nutzerDAO.findNutzerBySpracheID(suchanfrage.getParamSpracheID());
 
         for (Nutzer tempNutzer : nutzerMatchSprache) {
-            if (! tempNutzer.equals(this.nutzer) && tempNutzer.getGeschlecht().isSameGeschlecht(suchanfrage.getParamGeschlecht()) && isAlterInRange(suchanfrage, tempNutzer)) {
+            if (! tempNutzer.equals(this.nutzer)
+                    && tempNutzer.getGeschlecht().isSameGeschlecht(suchanfrage.getParamGeschlecht())
+                    && isAlterInRange(suchanfrage, tempNutzer) ) {
+//                    && !matchanfragenAlreadyExist(tempNutzer)) {
                 Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(tempNutzer.getFreizeitaktivitaetenSet());
                 aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
                 if (!aktivitaeten.isEmpty()) {
@@ -82,6 +95,15 @@ public class SuchergebnisseManagedBean {
                     suchergebnisseArrayList.add(new Suchergebnis(tempNutzer, aktivitaeten.size(), aktivitaetenString));
                 }
             }
+        }
+    }
+
+    public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
+        try {
+            Matchanfragen matchanfragen = nutzerDAO.findMatchanfragenByInitiatorAndPartner(nutzer, tempNutzer);
+            return matchanfragen.getInitiator().equals(nutzer.getMail()) && matchanfragen.getPartner().equals(tempNutzer.getMail());
+        } catch (NullPointerException e) {
+            return false;
         }
     }
 
