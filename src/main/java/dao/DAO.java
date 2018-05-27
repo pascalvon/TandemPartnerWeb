@@ -49,11 +49,12 @@ public class DAO {
         }
     }
 
-    public Matchanfragen findMatchanfragenByInitiatorAndPartner(Nutzer initiator, Nutzer partner) {
+    public Matchanfragen findMatchanfragenByInitiatorPartnerSpracheID(Nutzer initiator, Nutzer partner, int spracheID) {
         try {
-            return (Matchanfragen) em.createNamedQuery("findMatchanfragenByInitiatorAndPartner", Matchanfragen.class)
+            return (Matchanfragen) em.createNamedQuery("findMatchanfragenByInitiatorPartnerSpracheID", Matchanfragen.class)
                     .setParameter("initiator", initiator.getMail())
                     .setParameter("partner", partner.getMail())
+                    .setParameter("spracheID", spracheID)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;

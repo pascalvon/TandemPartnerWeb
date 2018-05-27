@@ -34,6 +34,10 @@ public class MatchesManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    public String showSpracheName(int spracheID) {
+        return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+    }
+
     public void deleteMatchanfrage(Matchanfragen matchanfragen) {
         dao.deleteMatchanfrage(matchanfragen);
     }

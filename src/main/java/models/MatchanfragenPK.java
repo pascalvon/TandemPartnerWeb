@@ -11,6 +11,9 @@ public class MatchanfragenPK implements Serializable {
     @Id
     private String partner;
 
+    @Id
+    private int spracheID;
+
     public String getInitiator() {
         return initiator;
     }
@@ -25,5 +28,13 @@ public class MatchanfragenPK implements Serializable {
 
     public void setPartner(String partner) {
         this.partner = partner;
+    }
+
+    public int getSpracheID() {
+        return spracheID;
+    }
+
+    public void setSpracheID(int spracheID) {
+        this.spracheID = spracheID;
     }
 }

@@ -34,6 +34,10 @@ public class HomeManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    public String showSpracheName(int spracheID) {
+        return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+    }
+
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
         dao.merge(matchanfragen);

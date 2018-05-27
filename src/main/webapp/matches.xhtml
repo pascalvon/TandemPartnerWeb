@@ -41,7 +41,7 @@
                         striped="#{dataTableSettingsBean.striped}"
                          paginated="false"
                          searching="false">
-               <b:dataTableColumn label="Sprache" value=""/>
+               <b:dataTableColumn label="Sprache" value="#{matchesManagedBean.showSpracheName(akzeptierteMatchanfragen.matchanfragen.spracheID)}"/>
                <b:dataTableColumn label="Vorname" value="#{akzeptierteMatchanfragen.vorname}"/>
                <b:dataTableColumn label="Nachname" value="#{akzeptierteMatchanfragen.nachname}"/>
                <b:dataTableColumn label="Geschlecht" value="#{akzeptierteMatchanfragen.geschlecht}"/>

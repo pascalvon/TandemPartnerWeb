@@ -36,13 +36,14 @@
         <br/>
         <br/>
         <h3 style="text-align: center">Meine offenen Matchanfragen:</h3>
+
         <!--Datentabellen Beginn-->
         <h:form>
             <b:dataTable value="#{homeManagedBean.matchanfragenModelArrayList}" var="matchanfragen"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="false"
                             searching="false">
-                <b:dataTableColumn label="Sprache" value=""/>
+                <b:dataTableColumn label="Sprache" value="#{homeManagedBean.showSpracheName(matchanfragen.matchanfragen.spracheID)}"/>
                 <b:dataTableColumn label="Vorname" value="#{matchanfragen.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{matchanfragen.nachname}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{matchanfragen.geschlecht}"/>

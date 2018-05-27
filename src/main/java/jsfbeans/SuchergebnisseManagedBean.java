@@ -40,6 +40,7 @@ public class SuchergebnisseManagedBean {
         matchanfragen.setInitiator(nutzer.getMail());
         matchanfragen.setPartner(partnerMail);
         matchanfragen.setAngenommen((byte) 0);
+        matchanfragen.setSpracheID(suchanfrage.getParamSpracheID());
         if (!validateMatchanfragen(matchanfragen)) {
             dao.merge(matchanfragen);
         }
@@ -47,8 +48,10 @@ public class SuchergebnisseManagedBean {
 
     public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
         try {
-            Matchanfragen matchanfragen = dao.findMatchanfragenByInitiatorAndPartner(nutzer, tempNutzer);
-            return matchanfragen.getInitiator().equals(nutzer.getMail()) && matchanfragen.getPartner().equals(tempNutzer.getMail());
+            Matchanfragen matchanfragen = dao.findMatchanfragenByInitiatorPartnerSpracheID(nutzer, tempNutzer, suchanfrage.getParamSpracheID());
+            return matchanfragen.getInitiator().equals(nutzer.getMail())
+                    && matchanfragen.getPartner().equals(tempNutzer.getMail())
+                    && matchanfragen.getSpracheID() == suchanfrage.getParamSpracheID();
         } catch (NullPointerException e) {
             return false;
         }
