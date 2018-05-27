@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.Nutzer;
 
 import javax.ejb.EJB;
@@ -16,7 +16,7 @@ public class LoginManagedBean implements Serializable {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
+    private DAO dao;
     public Nutzer nutzer = new Nutzer();
     private String mail;
     private String password;
@@ -28,7 +28,7 @@ public class LoginManagedBean implements Serializable {
     // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
     public String login() {
         if (validateNutzer(mail, password)) {
-            nutzer = nutzerDAO.findNutzerByMail(mail);
+            nutzer = dao.findNutzerByMail(mail);
             return "home";
         }
         return "login";
@@ -36,7 +36,7 @@ public class LoginManagedBean implements Serializable {
 
     private boolean validateNutzer(String mail, String password) {
         try {
-            Nutzer n = nutzerDAO.findNutzerByMail(mail);
+            Nutzer n = dao.findNutzerByMail(mail);
             return n.getPasswort().equals(password);
         } catch (NullPointerException e) {
             return false;

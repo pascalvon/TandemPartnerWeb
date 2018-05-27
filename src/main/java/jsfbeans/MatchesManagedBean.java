@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Matchanfragen;
 import models.MatchanfragenModel;
@@ -24,7 +24,7 @@ public class MatchesManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
+    private DAO dao;
     private Nutzer nutzer;
     private ArrayList<MatchanfragenModel> matchanfragenModelArrayList;
 
@@ -37,7 +37,7 @@ public class MatchesManagedBean {
     // ===========================  public  Methods  =========================79
 
     public void deleteMatchanfrage(Matchanfragen matchanfragen) {
-        nutzerDAO.deleteMatchanfrage(matchanfragen);
+        dao.deleteMatchanfrage(matchanfragen);
     }
 
     public Nutzer getNutzer() {
@@ -67,15 +67,15 @@ public class MatchesManagedBean {
     }
 
     private void calculateMatchanfragen() {
-        ArrayList<Matchanfragen> acceptedMatchanfragen = nutzerDAO.findMatchanfragenByAllColumns(nutzer.getMail());
+        ArrayList<Matchanfragen> acceptedMatchanfragen = dao.findMatchanfragenByAllColumns(nutzer.getMail());
         for (Matchanfragen anAcceptedMatchanfragen : acceptedMatchanfragen) {
             Nutzer aNutzer;
             String origin;
-            if (nutzer.equals(nutzerDAO.findNutzerByMail(anAcceptedMatchanfragen.getInitiator()))) {
-                aNutzer = nutzerDAO.findNutzerByMail(anAcceptedMatchanfragen.getPartner());
+            if (nutzer.equals(dao.findNutzerByMail(anAcceptedMatchanfragen.getInitiator()))) {
+                aNutzer = dao.findNutzerByMail(anAcceptedMatchanfragen.getPartner());
                 origin = "Gesendet";
             } else {
-                aNutzer = nutzerDAO.findNutzerByMail(anAcceptedMatchanfragen.getInitiator());
+                aNutzer = dao.findNutzerByMail(anAcceptedMatchanfragen.getInitiator());
                 origin = "Empfangen";
             }
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
@@ -87,7 +87,7 @@ public class MatchesManagedBean {
             } else {
                 // TODO Joe: 27.05.2018 Soll Matchanfrage geloescht werden, wenn es keine gemeinsamen Aktivitaeten gibt? Weitere Moeglichkeit ist bei erneutem bearbeiten der Aktiviaeten,
                 // TODO Joe: 27.05.2018 dass Matchanfrage wieder angezeigt wird. Aber dadurch kann auf dauer die DB zugemuellt werden.
-                nutzerDAO.deleteMatchanfrage(anAcceptedMatchanfragen);
+                dao.deleteMatchanfrage(anAcceptedMatchanfragen);
             }
         }
     }

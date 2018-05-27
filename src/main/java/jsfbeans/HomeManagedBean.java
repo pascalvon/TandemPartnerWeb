@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Matchanfragen;
 import models.MatchanfragenModel;
@@ -24,9 +24,9 @@ public class HomeManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
-    private Nutzer nutzer;
-    private ArrayList<MatchanfragenModel> matchanfragenModelArrayList;
+    private DAO                             dao;
+    private Nutzer                          nutzer;
+    private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
 
@@ -38,11 +38,11 @@ public class HomeManagedBean {
 
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
-        nutzerDAO.merge(matchanfragen);
+        dao.merge(matchanfragen);
     }
 
     public void refuseMatchanfrage(Matchanfragen matchanfragen) {
-        nutzerDAO.deleteMatchanfrage(matchanfragen);
+        dao.deleteMatchanfrage(matchanfragen);
     }
 
     public Nutzer getNutzer() {
@@ -73,9 +73,9 @@ public class HomeManagedBean {
     }
 
     private void calculateMatchanfragen() {
-        ArrayList<Matchanfragen> openMatchanfragen = nutzerDAO.findMatchanfragenByMail(nutzer.getMail());
+        ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByMail(nutzer.getMail());
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
-            Nutzer aNutzer = nutzerDAO.findNutzerByMail(anOpenMatchanfragen.getInitiator());
+            Nutzer aNutzer = dao.findNutzerByMail(anOpenMatchanfragen.getInitiator());
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
             aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
             if (!aktivitaeten.isEmpty()) {

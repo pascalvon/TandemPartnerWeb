@@ -3,10 +3,9 @@ package models;
 import javax.persistence.*;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzerID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn"),
-                @NamedQuery(name = "findSuchanfrageByID", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.suchId = :vn"),
-                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :vn"),
-                @NamedQuery(name = "deleteSuchanfrageByNutzerID", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :vn")})
+@NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzer", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :nutzer"),
+                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :id"),
+                @NamedQuery(name = "deleteSuchanfrageByNutzer", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :nutzer")})
 public class Suchanfrage {
 
     @Id

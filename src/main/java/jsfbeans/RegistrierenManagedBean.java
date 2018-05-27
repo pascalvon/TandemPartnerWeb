@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.*;
 
 import javax.ejb.EJB;
@@ -18,35 +18,28 @@ public class RegistrierenManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
-    private Nutzer nutzer = new Nutzer();
-    private int bezirkID;
-    private List<Sprache> selectedSprachenList = new ArrayList<>();
-    private String selectedSprachenString;
-    private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
-    private String selectedFreizeitaktivitaetenString;
+    private DAO                             dao;
+    private Nutzer                          nutzer;
+    private int                             bezirkID;
+    private List<Sprache>                   selectedSprachenList;
+    private String                          selectedSprachenString;
+    private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
+    private String                          selectedFreizeitaktivitaetenString;
+
     // ============================  Constructors  ===========================79
+    public RegistrierenManagedBean() {
+        this.nutzer                             = new Nutzer();
+        this.selectedSprachenList               = new ArrayList<>();
+        this.selectedFreizeitaktivitaetenList   = new ArrayList<>();
+    }
+
     // ===========================  public  Methods  =========================79
-
-
     public String register() {
         if (validateMail(this.nutzer.getMail())) {
-            nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
-
-            splitStringAndAddToSprachenList(selectedSprachenString, selectedSprachenList);
-
-            for (Sprache aSelectedSprachenList : selectedSprachenList) {
-                nutzer.addSprache(aSelectedSprachenList);
-            }
-
-            String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
-            for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
-                selectedFreizeitaktivitaetenList.add(nutzerDAO.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
-            }
-            for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
-                nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
-            }
-            nutzerDAO.merge(nutzer);
+            nutzer.addBezirk(dao.findBezirkByID(bezirkID));
+            addSprachenToNutzer();
+            addFreizeitaktivitaetenToNutzer();
+            dao.merge(nutzer);
             initNutzer();
             return "home";
         } else {
@@ -55,17 +48,7 @@ public class RegistrierenManagedBean {
         }
     }
 
-    private void splitStringAndAddToSprachenList(String stringToSplit, List<Sprache> sprachenList) {
-        String[] stringArray = stringToSplit.split(",");
-        for (String aSelectedSprachenArray : stringArray) {
-            sprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
-        }
-    }
 
-    private boolean validateMail(String mail) {
-        Nutzer n = nutzerDAO.findNutzerByMail(mail);
-        return n == null;
-    }
 
     public Nutzer getNutzer() {
         return nutzer;
@@ -101,10 +84,35 @@ public class RegistrierenManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
+    private void addSprachenToNutzer() {
+        String[] selectedSprachenArray = selectedSprachenString.split(",");
+        for (String aSelectedSprachenArray : selectedSprachenArray) {
+            selectedSprachenList.add(dao.findSpracheByID(aSelectedSprachenArray));
+        }
+        for (Sprache aSelectedSprachenList : selectedSprachenList) {
+            nutzer.addSprache(aSelectedSprachenList);
+        }
+    }
+
+    private void addFreizeitaktivitaetenToNutzer() {
+        String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
+        for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
+            selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
+        }
+        for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
+            nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
+        }
+    }
+
+    private boolean validateMail(String mail) {
+        Nutzer n = dao.findNutzerByMail(mail);
+        return n == null;
+    }
+
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        loginManagedBean.nutzer = nutzerDAO.findNutzerByMail(nutzer.getMail());
+        loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
     }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79

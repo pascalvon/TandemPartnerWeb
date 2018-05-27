@@ -9,15 +9,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findAllNutzer",query = "SELECT nutzer FROM Nutzer nutzer"),
-                @NamedQuery(name = "findNutzerByVorname", query = "select nutzer from Nutzer nutzer where nutzer.vorname = :vn"),
-                @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :vn"),
-                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :vn"),
-                @NamedQuery(name = "findNutzerByID", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.id = :vn"),
-                @NamedQuery(name = "findNutzerByFreizeitaktivitaetenID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :vn"),
-                @NamedQuery(name = "findNutzerBySuchergebnis", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.freizeitaktivitaetenSet freizeitaktivitaeten JOIN nutzer.sprachenSet sprache WHERE freizeitaktivitaeten.id = :fa AND sprache.id = :sp"),
-                @NamedQuery(name = "findNutzerByMatchanfragenInitiator", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :vn"),
-                @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :vn")})
+@NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :mail"),
+                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
 
     @Id

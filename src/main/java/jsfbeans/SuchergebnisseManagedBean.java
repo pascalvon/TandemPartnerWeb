@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.*;
 import utilities.AgeCalculator;
 
@@ -22,15 +22,15 @@ public class SuchergebnisseManagedBean {
     // =============================  Variables  =============================79
 
     @EJB
-    private NutzerDAO nutzerDAO;
-    private Suchanfrage suchanfrage;
-    private Nutzer nutzer;
+    private DAO                     dao;
+    private Suchanfrage             suchanfrage;
+    private Nutzer                  nutzer;
     private ArrayList<Suchergebnis> suchergebnisseArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
-        this.suchanfrage = initSuchanfrage();
-        this.nutzer = initNutzer();
+        this.suchanfrage    = initSuchanfrage();
+        this.nutzer         = initNutzer();
     }
     // ===========================  public  Methods  =========================79
     public void sendRequest(String partnerMail) {
@@ -40,19 +40,19 @@ public class SuchergebnisseManagedBean {
         matchanfragen.setPartner(partnerMail);
         matchanfragen.setAngenommen((byte) 0);
         if (!validateMatchanfragen(matchanfragen)) {
-            nutzerDAO.merge(matchanfragen);
+            dao.merge(matchanfragen);
         }
     }
 
-
-    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
+    public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
         try {
-            Matchanfragen matchanfragen1 = nutzerDAO.findMatchanfragenByMatchanfragen(matchanfragen);
-            return matchanfragen.equals(matchanfragen1);
-        } catch(NullPointerException e) {
+            Matchanfragen matchanfragen = dao.findMatchanfragenByInitiatorAndPartner(nutzer, tempNutzer);
+            return matchanfragen.getInitiator().equals(nutzer.getMail()) && matchanfragen.getPartner().equals(tempNutzer.getMail());
+        } catch (NullPointerException e) {
             return false;
         }
     }
+
     public ArrayList<Suchergebnis> getSuchergebnisseArrayList() {
         suchergebnisseArrayList = new ArrayList<>();
         calculateSuchanfrage();
@@ -80,13 +80,12 @@ public class SuchergebnisseManagedBean {
     }
 
     private void calculateSuchanfrage() {
-        ArrayList<Nutzer> nutzerMatchSprache = nutzerDAO.findNutzerBySpracheID(suchanfrage.getParamSpracheID());
+        ArrayList<Nutzer> nutzerMatchSprache = dao.findNutzerBySpracheID(suchanfrage.getParamSpracheID());
 
         for (Nutzer tempNutzer : nutzerMatchSprache) {
             if (! tempNutzer.equals(this.nutzer)
                     && tempNutzer.getGeschlecht().isSameGeschlecht(suchanfrage.getParamGeschlecht())
                     && isAlterInRange(suchanfrage, tempNutzer) ) {
-//                    && !matchanfragenAlreadyExist(tempNutzer)) {
                 Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(tempNutzer.getFreizeitaktivitaetenSet());
                 aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
                 if (!aktivitaeten.isEmpty()) {
@@ -98,11 +97,11 @@ public class SuchergebnisseManagedBean {
         }
     }
 
-    public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
+    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
         try {
-            Matchanfragen matchanfragen = nutzerDAO.findMatchanfragenByInitiatorAndPartner(nutzer, tempNutzer);
-            return matchanfragen.getInitiator().equals(nutzer.getMail()) && matchanfragen.getPartner().equals(tempNutzer.getMail());
-        } catch (NullPointerException e) {
+            Matchanfragen matchanfragen1 = dao.findMatchanfragenByMatchanfragen(matchanfragen);
+            return matchanfragen.equals(matchanfragen1);
+        } catch(NullPointerException e) {
             return false;
         }
     }

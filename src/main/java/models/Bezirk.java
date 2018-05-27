@@ -6,8 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "findAllBezirke", query = "select bezirk from Bezirk bezirk where bezirk.bezirkName != null "),
-              @NamedQuery(name = "findBezirkByID", query = "SELECT bezirk FROM Bezirk bezirk WHERE bezirk.id = :vn")})
+@NamedQuery(name = "findBezirkByID", query = "SELECT bezirk FROM Bezirk bezirk WHERE bezirk.id = :id")
 public class Bezirk {
 
     @Id

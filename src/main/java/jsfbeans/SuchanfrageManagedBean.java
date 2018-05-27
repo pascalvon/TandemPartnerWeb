@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.Nutzer;
 import models.Suchanfrage;
 import utilities.FreizeitaktivitaetenStringTransformer;
@@ -19,11 +19,11 @@ public class SuchanfrageManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO nutzerDAO;
-    private Nutzer nutzer;
-    private String selectedFreizeitaktivitaetenString;
-    private Suchanfrage suchanfrage = new Suchanfrage();
-    private ArrayList<Suchanfrage> suchanfrageArrayList;
+    private DAO                     dao;
+    private Nutzer                  nutzer;
+    private String                  selectedFreizeitaktivitaetenString;
+    private Suchanfrage             suchanfrage = new Suchanfrage();
+    private ArrayList<Suchanfrage>  suchanfrageArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
@@ -32,16 +32,16 @@ public class SuchanfrageManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String search() {
-        if (nutzerDAO.findSuchanfrageByNutzerID(nutzer).size()<5) {
+        if (dao.findSuchanfrageByNutzer(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
-            nutzerDAO.merge(suchanfrage);
+            dao.merge(suchanfrage);
             return "suchergebnisse";
         }
             return "suchergebnisse";
     }
 
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
-        nutzerDAO.deleteSuchanfrageNQ(savedSuchanfrage);
+        dao.deleteSuchanfrageNQ(savedSuchanfrage);
     }
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
@@ -50,7 +50,7 @@ public class SuchanfrageManagedBean {
     }
 
     public String showSpracheName(int spracheID) {
-        return nutzerDAO.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+        return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
     }
 
     public Nutzer getNutzer() {
@@ -62,7 +62,8 @@ public class SuchanfrageManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        return selectedFreizeitaktivitaetenString;
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
@@ -80,7 +81,7 @@ public class SuchanfrageManagedBean {
 
     public ArrayList<Suchanfrage> getSuchanfrageArrayList() {
         suchanfrageArrayList = new ArrayList<>();
-        suchanfrageArrayList = nutzerDAO.findSuchanfrageByNutzerID(nutzer);
+        suchanfrageArrayList = dao.findSuchanfrageByNutzer(nutzer);
         return this.suchanfrageArrayList;
     }
 

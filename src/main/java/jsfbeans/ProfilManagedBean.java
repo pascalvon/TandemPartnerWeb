@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dao.NutzerDAO;
+import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
@@ -21,7 +21,7 @@ public class ProfilManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private NutzerDAO   nutzerDAO;
+    private DAO         dao;
     private Nutzer      nutzer;
     private String      mail;
     private int         bezirkID;
@@ -38,13 +38,13 @@ public class ProfilManagedBean {
     // ===========================  public  Methods  =========================79
     public String update() {
         if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
-            nutzer.addBezirk(nutzerDAO.findBezirkByID(bezirkID));
+            nutzer.addBezirk(dao.findBezirkByID(bezirkID));
 
             nutzer.clearSprachenSet();
             List<Sprache> selectedSprachenList = new ArrayList<>();
             String[] selectedSprachenArray = selectedSprachenString.split(",");
             for (String aSelectedSprachenArray : selectedSprachenArray) {
-                selectedSprachenList.add(nutzerDAO.findSpracheByID(aSelectedSprachenArray));
+                selectedSprachenList.add(dao.findSpracheByID(aSelectedSprachenArray));
             }
             for (Sprache aSelectedSprachenList : selectedSprachenList) {
                 nutzer.addSprache(aSelectedSprachenList);
@@ -54,14 +54,14 @@ public class ProfilManagedBean {
             ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
             String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
             for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
-                selectedFreizeitaktivitaetenList.add(nutzerDAO.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
+                selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
             }
             for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
                 nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
             }
 
             nutzer.setMail(mail);
-            nutzerDAO.merge(nutzer);
+            dao.merge(nutzer);
             refreshNutzer();
             return "home";
         } else {
@@ -72,9 +72,9 @@ public class ProfilManagedBean {
 
     // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird
     public String deleteNutzer() {
-        nutzerDAO.deleteSuchanfrageByNutzerID(nutzer);
-        nutzerDAO.deleteMatchanfrageByNutzer(nutzer);
-        nutzerDAO.deleteNutzer(nutzer);
+        dao.deleteSuchanfrageByNutzer(nutzer);
+        dao.deleteMatchanfrageByNutzer(nutzer);
+        dao.deleteNutzer(nutzer);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login";
     }
@@ -119,7 +119,8 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        return FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        return selectedFreizeitaktivitaetenString;
     }
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
@@ -137,11 +138,11 @@ public class ProfilManagedBean {
     private void refreshNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        loginManagedBean.nutzer = nutzerDAO.findNutzerByMail(nutzer.getMail());
+        loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
     }
 
     private boolean validateMail(String mail) {
-        Nutzer n = nutzerDAO.findNutzerByMail(mail);
+        Nutzer n = dao.findNutzerByMail(mail);
         return n == null;
     }
 

@@ -16,7 +16,6 @@ public class Suchergebnis {
     private String      commonFreizeitaktivitaetenString;
 
     // ============================  Constructors  ===========================79
-
     public Suchergebnis(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
         this.nutzer                             = nutzer;
         this.vorname                            = nutzer.getVorname();
