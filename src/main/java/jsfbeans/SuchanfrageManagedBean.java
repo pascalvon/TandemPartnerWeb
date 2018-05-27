@@ -22,12 +22,13 @@ public class SuchanfrageManagedBean {
     private DAO                     dao;
     private Nutzer                  nutzer;
     private String                  selectedFreizeitaktivitaetenString;
-    private Suchanfrage             suchanfrage = new Suchanfrage();
+    private Suchanfrage             suchanfrage;
     private ArrayList<Suchanfrage>  suchanfrageArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
-        this.nutzer = initNutzer();
+        this.nutzer         = initNutzer();
+        this.suchanfrage    = new Suchanfrage();
     }
 
     // ===========================  public  Methods  =========================79

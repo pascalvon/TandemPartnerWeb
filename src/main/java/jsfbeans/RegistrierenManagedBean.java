@@ -48,8 +48,6 @@ public class RegistrierenManagedBean {
         }
     }
 
-
-
     public Nutzer getNutzer() {
         return nutzer;
     }
@@ -114,6 +112,7 @@ public class RegistrierenManagedBean {
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
     }
+
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

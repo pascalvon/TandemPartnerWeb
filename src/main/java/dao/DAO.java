@@ -12,38 +12,10 @@ public class DAO {
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
 
-    /** ================= Nutzer =================== */
-    // TODO Joe: 25.05.2018 try catch durch validator ersetzen
-    public Nutzer findNutzerByMail(String mail) {
-        try {
-            return em.createNamedQuery("findNutzerByMail", Nutzer.class)
-                    .setParameter("mail", mail)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    public ArrayList<Nutzer> findNutzerBySpracheID(int spracheID) {
-        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySprachID", Nutzer.class)
-                .setParameter("spracheID", spracheID)
-                .getResultList();
-    }
-
-    public void deleteNutzer(Nutzer nutzer) {
-        em.createNamedQuery("deleteNutzer")
-                .setParameter("id", nutzer.getId())
-                .executeUpdate();
-    }
-
-    public void merge(Nutzer nutzer) {
-        em.merge(nutzer);
-    }
-
-    /** ================= Sprache =================== */
-    public Sprache findSpracheByID(String spracheID) {
-        return em.createNamedQuery("findBySpracheID", Sprache.class)
-                .setParameter("id", Integer.parseInt(spracheID))
+    /** ================= Bezirk =================== */
+    public Bezirk findBezirkByID(int bezirkID) {
+        return em.createNamedQuery("findBezirkByID", Bezirk.class)
+                .setParameter("id", bezirkID)
                 .getSingleResult();
     }
 
@@ -105,10 +77,37 @@ public class DAO {
         em.merge(matchanfrage);
     }
 
-    /** ================= Bezirk =================== */
-    public Bezirk findBezirkByID(int bezirkID) {
-        return em.createNamedQuery("findBezirkByID", Bezirk.class)
-                .setParameter("id", bezirkID)
+    /** ================= Nutzer =================== */
+    public Nutzer findNutzerByMail(String mail) {
+        try {
+            return em.createNamedQuery("findNutzerByMail", Nutzer.class)
+                    .setParameter("mail", mail)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public ArrayList<Nutzer> findNutzerBySpracheID(int spracheID) {
+        return (ArrayList<Nutzer>) em.createNamedQuery("findNutzerBySprachID", Nutzer.class)
+                .setParameter("spracheID", spracheID)
+                .getResultList();
+    }
+
+    public void deleteNutzer(Nutzer nutzer) {
+        em.createNamedQuery("deleteNutzer")
+                .setParameter("id", nutzer.getId())
+                .executeUpdate();
+    }
+
+    public void merge(Nutzer nutzer) {
+        em.merge(nutzer);
+    }
+
+    /** ================= Sprache =================== */
+    public Sprache findSpracheByID(String spracheID) {
+        return em.createNamedQuery("findBySpracheID", Sprache.class)
+                .setParameter("id", Integer.parseInt(spracheID))
                 .getSingleResult();
     }
 

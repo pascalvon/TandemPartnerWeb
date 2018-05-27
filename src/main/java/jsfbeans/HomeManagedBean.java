@@ -29,13 +29,11 @@ public class HomeManagedBean {
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
-
     public HomeManagedBean() {
-        this.nutzer = initNutzer();
+        initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
-
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
         dao.merge(matchanfragen);
@@ -65,11 +63,10 @@ public class HomeManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-    private Nutzer initNutzer() {
+    private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.nutzer;
-        return nutzer;
     }
 
     private void calculateMatchanfragen() {

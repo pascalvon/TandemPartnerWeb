@@ -24,18 +24,16 @@ public class MatchesManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private DAO dao;
-    private Nutzer nutzer;
-    private ArrayList<MatchanfragenModel> matchanfragenModelArrayList;
+    private DAO                             dao;
+    private Nutzer                          nutzer;
+    private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
-
     public MatchesManagedBean() {
         initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
-
     public void deleteMatchanfrage(Matchanfragen matchanfragen) {
         dao.deleteMatchanfrage(matchanfragen);
     }

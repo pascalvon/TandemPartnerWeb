@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @ManagedBean
 @ViewScoped
 public class SuchergebnisseManagedBean {
+
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
-
     @EJB
     private DAO                     dao;
     private Suchanfrage             suchanfrage;
@@ -32,6 +32,7 @@ public class SuchergebnisseManagedBean {
         this.suchanfrage    = initSuchanfrage();
         this.nutzer         = initNutzer();
     }
+
     // ===========================  public  Methods  =========================79
     public void sendRequest(String partnerMail) {
         // TODO Joe: 24.05.2018 nutzer_id ergaenzen, wenn geklaert wurde ob es primary key wird
@@ -110,6 +111,7 @@ public class SuchergebnisseManagedBean {
         int age = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
         return suchanfrage.getParamAlterMin() <= age && suchanfrage.getParamAlterMax() >= age;
     }
+
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }
