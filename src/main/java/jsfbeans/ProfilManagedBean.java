@@ -27,6 +27,7 @@ public class ProfilManagedBean {
     private int         bezirkID;
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
+    private String      tempPassword;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
@@ -41,6 +42,9 @@ public class ProfilManagedBean {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             updateSprachen();
             updateFreizeitaktivitaeten();
+            if (!nutzer.getPasswort().equals(tempPassword) && !tempPassword.equals(null)) {
+                nutzer.setPasswort(tempPassword);
+            }
             nutzer.setMail(mail);
             dao.merge(nutzer);
             refreshNutzer();
@@ -106,6 +110,14 @@ public class ProfilManagedBean {
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
+    }
+
+    public String getTempPassword() {
+        return tempPassword;
+    }
+
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
     }
 
     // =================  protected/package local  Methods ===================79

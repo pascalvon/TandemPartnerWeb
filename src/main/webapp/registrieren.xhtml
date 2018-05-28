@@ -171,11 +171,10 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" required="true"
                                    value="#{registrierenManagedBean.nutzer.passwort}"
-                                   label="Passwort:" placeholder="Passwort"
-                                   requiredMessage="Das Passwort muss zwischen 8 und 30 Zeichen lang sein!">
-                        <f:validator validatorId="passwordValidator" />
+                                   label="Passwort:" placeholder="Passwort">
+                        <f:validator validatorId="passwordValidatorRegistrieren" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
-                        <f:ajax event="blur" execute="password confirm" render="m_password" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -184,9 +183,8 @@
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
-                                   label="Passwort:" placeholder="Passwort"
-                                   requiredMessage="Das Passwort muss zwischen 8 und 30 Zeichen lang sein!">
-                        <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                                   label="Passwort:" placeholder="Passwort">
+                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
                 </b:column>
