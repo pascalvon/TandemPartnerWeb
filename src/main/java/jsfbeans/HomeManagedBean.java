@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Die Managed Bean für die "home.xhtml".
+ */
 @ManagedBean
 @ViewScoped
 public class HomeManagedBean {
@@ -29,20 +32,38 @@ public class HomeManagedBean {
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
+
+    /**
+     * Im Konstruktor wird die Methode initNutzer() aufgerufen.
+     */
     public HomeManagedBean() {
         initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
+
+    /**
+     * Gibt Anhand einer SprachID den Sprachennamen als String zurueck
+     * @param spracheID SprachID des gesuchten Sprachennamens
+     * @return Gibt den Namen der gesuchten Sprache zurueck.
+     */
     public String showSpracheName(int spracheID) {
         return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
     }
 
+    /**
+     * Setzt den angenommen-Parameter der Matchanfrage auf 1.
+     * @param matchanfragen Die Matchanfrage, die als "angenommen" gekennzeichnet werden soll.
+     */
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
         dao.merge(matchanfragen);
     }
 
+    /**
+     * Loescht eine abgelehnte Matchanfrage.
+     * @param matchanfragen Die Matchanfrage, die abgelehnt wurde.
+     */
     public void refuseMatchanfrage(Matchanfragen matchanfragen) {
         dao.deleteMatchanfrage(matchanfragen);
     }
@@ -67,12 +88,19 @@ public class HomeManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
+
+    /**
+     * Initialisiert den eingeloggten Nutzer anhand der Session der LoginManagedBean.
+     */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.nutzer;
     }
 
+    /**
+     * Berechnet die Matchanfragen des eingeloggten Nutzers.
+     */
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByMail(nutzer.getMail());
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
