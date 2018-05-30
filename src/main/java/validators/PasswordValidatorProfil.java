@@ -15,9 +15,9 @@ public class PasswordValidatorProfil implements Validator {
         String password = (String) value;
         String confirm = (String) component.getAttributes().get("confirm");
 
-        if (password == null || confirm == null)
+        if (password.isEmpty() && confirm.isEmpty())
         {
-
+            return;
         }
         if (password.length()< 8 || password.length()>30)
         {

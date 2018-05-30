@@ -130,6 +130,27 @@ public class DAO {
                 .executeUpdate();
     }
 
+//    public void findSpracheByNutzerID(int nutzerID) {
+//        em.createNamedQuery("findSpracheByNutzerID")
+//                .setParameter("id", nutzerID)
+//                .getResultList();
+//    }
+    public boolean findNutzerByMailBoolean(String mail) {
+        try {
+            Nutzer n = em.createNamedQuery("findNutzerByMailBoolean", Nutzer.class)
+                    .setParameter("mail", mail)
+                    .getSingleResult();
+            if (n.getMail().length()>0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        } catch (NoResultException e) {
+            return true;
+        }
+    }
+
     public void merge(Suchanfrage suchanfrage) {
         em.merge(suchanfrage);
     }

@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :mail"),
                 @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
                 @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
 

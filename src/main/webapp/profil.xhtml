@@ -12,7 +12,7 @@
 
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
-        <b:form>
+        <b:form id="formProfil">
             <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
                 <b:navbarLinks>
                     <b:navLink value="Hauptmenü" href="home.xhtml"/>
@@ -84,7 +84,8 @@
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <f:ajax event="blur" execute="mail" render="m_mail mail"/>
+                        <f:validator validatorId="mailValidatorProfil"/>
+                        <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
                     <b:messages id="m_mail" for="mail"/>
                 </b:column>
@@ -134,7 +135,7 @@
             <b:row>
                 <b:column medium-screen="1"/>
 
-                <b:column medium-screen="4">
+                <b:column span="4">
                     <!--><h:outputLabel id="ichSpreche" value="Ich spreche:" style="width: 100%;" for="sprachwahl" /><-->
                     <b:selectMultiMenu id="ichSpreche" label="Ich spreche:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
@@ -164,14 +165,13 @@
                         <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
                         <f:selectItem itemLabel="Hindi" itemValue="20"/>
 
-                        <!--><f:ajax event="ondropdownhide" execute="ichSpreche" render="m_ichSpreche"/><-->
                     </b:selectMultiMenu>
                     <b:messages id="m_ichSpreche" for="ichSpreche"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
-                <b:column medium-screen="4">
+                <b:column span="4">
                     <!--><h:outputLabel id="freizeitaktivitaeten" value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/><-->
                     <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
@@ -193,7 +193,6 @@
                         <f:selectItem itemLabel="Handball" itemValue="10"/>
                         <f:selectItem itemLabel="Inlineskating" itemValue="11"/>
 
-                        <!--><f:ajax event="ondropdownhide" execute="freizeitaktivitaeten" render="m_freizeitaktivitaeten"/><-->
                     </b:selectMultiMenu>
                     <b:messages id="m_freizeitaktivitaeten" for="freizeitaktivitaeten"/>
                 </b:column>
@@ -205,7 +204,7 @@
                 <b:column medium-screen="1"/>
                 <b:column medium-screen="4">
                     <b:inputSecret id="password" value="#{profilManagedBean.tempPassword}"
-                                   label="Passwort:" placeholder="neues Passwort">
+                                   label="neues Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidatorProfil" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                         <f:ajax event="keyup" execute="password confirm" render="m_password" />
@@ -216,7 +215,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="Passwort:"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort:"
                                    placeholder="neues Paswort bestätigen">
                         <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                         <b:messages id="m_confirm" for="confirm" />
@@ -232,7 +231,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{profilManagedBean.update}"/>
+                    <b:commandButton value="Speichern" action="#{profilManagedBean.update}" />
                 </b:column>
 
                 <b:column medium-screen="1"/>

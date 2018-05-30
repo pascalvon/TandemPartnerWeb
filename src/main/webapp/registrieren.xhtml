@@ -38,7 +38,8 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Vorname:" placeholder="Vorname" value="#{registrierenManagedBean.nutzer.vorname}"/>
+                    <b:inputText required="true" label="Vorname:" placeholder="Vorname"
+                                 value="#{registrierenManagedBean.nutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
@@ -67,11 +68,11 @@
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
-                                 validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
+                                 requiredMessage="Bitte geben Sie Ihre E-Mail-Adresse an!"
                                  label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
-                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <b:messages for="mail"/>
+                        <f:validator validatorId="mailValidatorRegistrieren"/>
+                        <f:ajax event="blur" execute="mail" render="m_mail"/>
+                        <b:messages id="m_mail" for="mail"/>
                     </b:inputText>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
@@ -114,10 +115,14 @@
             <b:row>
                 <b:column medium-screen="1"/>
 
-                <b:column medium-screen="4">
-                    <h:outputLabel style="width: 100%;" value="Ich spreche: *"
-                                   for="sprachwahl"/>
-                    <b:selectMultiMenu style="width: 100%;"  id="sprachwahl" nonSelectedText="Bitte wählen" maxHeight="200" value="#{registrierenManagedBean.selectedSprachenString}">
+                <b:column span="4">
+                    <b:selectMultiMenu id="ichSpreche" label="Ich spreche:" required="true"
+                                       nonSelectedText="Bitte wählen" style="width: 100%"
+                                       requiredMessage="Bitte geben Sie mindestens eine Sprache an!"
+                                       maxHeight="200" value="#{registrierenManagedBean.selectedSprachenString}"
+                                       ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
+                                       update="m_ichSpreche"
+                                       process="@this">
                         <f:selectItem itemLabel="Albanisch" itemValue="1"/>
                         <f:selectItem itemLabel="Arabisch" itemValue="2"/>
                         <f:selectItem itemLabel="Armenisch" itemValue="3"/>
@@ -138,15 +143,20 @@
                         <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
                         <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
                         <f:selectItem itemLabel="Hindi" itemValue="20"/>
+
                     </b:selectMultiMenu>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <h:outputLabel style="width: 100%;" value="Meine Freizeitaktivitäten: *"
-                                   for="aktivitätenwahl" />
-                    <b:selectMultiMenu style="width: 100%;" id="aktivitätenwahl" nonSelectedText="Bitte wählen" maxHeight="200" value="#{registrierenManagedBean.selectedFreizeitaktivitaetenString}">
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                                       nonSelectedText="Bitte wählen" style="width: 100%"
+                                       requiredMessage="Bitte geben Sie mindestens eine Freizeitaktivität an!"
+                                       maxHeight="200" value="#{registrierenManagedBean.selectedFreizeitaktivitaetenString}"
+                                       ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
+                                       update="m_freizeitaktivitaeten"
+                                       process="@this">
                         <f:selectItem itemLabel="Angeln" itemValue="1"/>
                         <f:selectItem itemLabel="Basketball" itemValue="2"/>
                         <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
@@ -158,6 +168,7 @@
                         <f:selectItem itemLabel="Golfen" itemValue="9"/>
                         <f:selectItem itemLabel="Handball" itemValue="10"/>
                         <f:selectItem itemLabel="Inlineskating" itemValue="11"/>
+
                     </b:selectMultiMenu>
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
@@ -174,7 +185,7 @@
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
-                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -184,7 +195,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
                                    label="Passwort:" placeholder="Passwort">
-                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
                 </b:column>
@@ -197,7 +208,8 @@
                 <b:column medium-screen="4"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{registrierenManagedBean.register}"/>
+                    <b:commandButton value="Jetzt registrieren" style="width:100%" action="#{registrierenManagedBean.register}">
+                    </b:commandButton>
                 </b:column>
 
 

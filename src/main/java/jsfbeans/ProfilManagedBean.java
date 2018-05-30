@@ -8,6 +8,7 @@ import utilities.FreizeitaktivitaetenStringTransformer;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -38,21 +39,27 @@ public class ProfilManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String update() {
-        if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
+        if (!nutzer.getPasswort().equals(tempPassword) && tempPassword != null && !tempPassword.isEmpty()) {
+            nutzer.setPasswort(tempPassword);
+        }
+        if (mail.equals(nutzer.getMail())) {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             updateSprachen();
             updateFreizeitaktivitaeten();
-            if (!nutzer.getPasswort().equals(tempPassword) && !tempPassword.equals(null)) {
-                nutzer.setPasswort(tempPassword);
-            }
+            dao.merge(nutzer);
+            refreshNutzer();
+            return "home";
+
+        } if(validateMail(mail)){
+            nutzer.addBezirk(dao.findBezirkByID(bezirkID));
+            updateSprachen();
+            updateFreizeitaktivitaeten();
             nutzer.setMail(mail);
             dao.merge(nutzer);
             refreshNutzer();
             return "home";
-        } else {
-            // TODO Joe: 13.05.2018 Falls die Mail schon vorhanden oder bearbeiten Fehlgeschlagen ist, soll dementsprechend eine Fehlermeldung erscheinen.
-            return "profil";
         }
+        return null;
     }
 
     // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird

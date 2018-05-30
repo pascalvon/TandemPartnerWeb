@@ -17,7 +17,7 @@ public class PasswordValidatorRegistrieren implements Validator {
         String password = (String) value;
         String confirm = (String) component.getAttributes().get("confirm");
 
-        if (password == null || confirm == null)
+        if (password.isEmpty() || confirm.isEmpty())
         {
             return; // Just ignore and let required="true" do its job.
         }
