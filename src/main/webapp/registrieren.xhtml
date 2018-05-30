@@ -9,24 +9,25 @@
 <!--Templates einbinden-->
 <ui:composition template="/WEB-INF/templates/standardtemplate.xhtml">
     <ui:define name="pagetitle">Registrieren tandemPartner</ui:define>
+    <ui:define name="header"><b:navBar brand="tandemPartner" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px"   fluid="true">
+        <b:navbarLinks>
+            <b:navLink active="true" value="Registrieren" href="#"/>
+            <b:navLink value="" href="#"/>
+            <b:navLink value="" href="#"/>
+            <b:navLink value="" href="#"/>
+
+        </b:navbarLinks>
+        <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
+        <b:navbarLinks pull="right">
+            <b:navLink value="Impressum" href="impressum.xhtml"/>
+            <b:navLink value="Login" href="login.xhtml"/>
+
+            </b:navbarLinks>
+        </b:navBar>
+    </ui:define>
 
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
-        <b:navBar brand="tandemPartner" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px"   fluid="true">
-            <b:navbarLinks>
-                <b:navLink active="true" value="Registrieren" href="#"/>
-                <b:navLink value="" href="#"/>
-                <b:navLink value="" href="#"/>
-                <b:navLink value="" href="#"/>
-
-            </b:navbarLinks>
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="Impressum" href="impressum.xhtml"/>
-                <b:navLink value="Login" href="login.xhtml"/>
-
-            </b:navbarLinks>
-        </b:navBar><!--Navigation Ende-->
 
         <h1 style="text-align: center">Hier kannst du Dich registrieren</h1>
         <br/>

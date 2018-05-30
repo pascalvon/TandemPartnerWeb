@@ -58,14 +58,6 @@ public class ImpressumManagedBean {
         }
     }
 
-//    public String checkLogStatus() {
-//        if (!validateNutzer(nutzer.getMail())) {
-//            return "Login";
-//        } else {
-//            return "Logout";
-//        }
-//    }
-
     public String getLogStatus() {
         if (validateNutzer(nutzer.getMail())) {
             logStatus = "Login";

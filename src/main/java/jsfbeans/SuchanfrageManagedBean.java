@@ -24,11 +24,13 @@ public class SuchanfrageManagedBean {
     private String                  selectedFreizeitaktivitaetenString;
     private Suchanfrage             suchanfrage;
     private ArrayList<Suchanfrage>  suchanfrageArrayList;
+    private boolean                 active;
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
         this.nutzer         = initNutzer();
         this.suchanfrage    = new Suchanfrage();
+        this.active         = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -88,6 +90,14 @@ public class SuchanfrageManagedBean {
 
     public void setSuchanfrageArrayList(ArrayList<Suchanfrage> suchanfrageArrayList) {
         this.suchanfrageArrayList = suchanfrageArrayList;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     // =================  protected/package local  Methods ===================79

@@ -27,12 +27,14 @@ public class ProfilManagedBean {
     private int         bezirkID;
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
+    private boolean     active;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
         initNutzer();
         this.mail       = nutzer.getMail();
         this.bezirkID   = nutzer.getBezirk().getId();
+        this.active     = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -106,6 +108,14 @@ public class ProfilManagedBean {
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     // =================  protected/package local  Methods ===================79

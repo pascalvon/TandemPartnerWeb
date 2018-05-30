@@ -12,23 +12,6 @@
 
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
-        <b:form>
-            <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-                <b:navbarLinks>
-                    <b:navCommandLink value="Hauptmenü" action="#{impressumManagedBean.redirectToHome}"/>
-                    <b:navCommandLink value="Profil bearbeiten" action="#{impressumManagedBean.redirectToProfil}"/>
-                    <b:navCommandLink value="Suchanfragen" action="#{impressumManagedBean.redirectToSuchanfragen}"/>
-                    <b:navCommandLink value="Akzeptierte Matches" action="#{impressumManagedBean.redirectToMatches}"/>
-
-                </b:navbarLinks>
-                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-                <b:navbarLinks pull="right">
-
-                    <b:navLink value="Impressum" active="true" href="#"/>
-                    <b:navCommandLink id="logout" value="#{impressumManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
-                </b:navbarLinks>
-            </b:navBar><!--Navigation Ende-->
-        </b:form>
 
         <h1 style="text-align: center">tandemPartner </h1>
         <br/>

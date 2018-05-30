@@ -38,6 +38,14 @@ public class LoginManagedBean implements Serializable {
         return "login";
     }
 
+    public Nutzer getNutzer() {
+        return nutzer;
+    }
+
+    public void setNutzer(Nutzer nutzer) {
+        this.nutzer = nutzer;
+    }
+
     public String getMail() {
         return mail;
     }
