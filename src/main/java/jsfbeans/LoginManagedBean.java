@@ -4,9 +4,11 @@ import dao.DAO;
 import models.Nutzer;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import java.io.Serializable;
 
 @ManagedBean
@@ -25,13 +27,22 @@ public class LoginManagedBean implements Serializable {
     // ===========================  public  Methods  =========================79
     // TODO Joe: 01.05.2018 Exception fuer den Fall, dass falsche E-Mail angegeben wird, muss noch gefangen werden. (27.05.18 Wird bereits gefangen, aber Validator fehlt noch)
     // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
-    public String login() {
-        if (validateNutzer(mail, password)) {
-            nutzer = dao.findNutzerByMail(mail);
-            return "home";
+    public String login() throws ValidatorException {
+
+        try {
+            if (validateNutzer(mail, password)) {
+                nutzer = dao.findNutzerByMail(mail);
+                return "home";
+            }
+//            else{
+//                throw new ValidatorException(new FacesMessage("Hallo"));
+//            }
+        } catch (ValidatorException e) {
+            e.printStackTrace();
         }
         return "login";
     }
+
 
     public String logout()  {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

@@ -8,6 +8,7 @@ import utilities.FreizeitaktivitaetenStringTransformer;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -27,19 +28,29 @@ public class ProfilManagedBean {
     private int         bezirkID;
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
-    private boolean     active;
+    private String      tempPassword;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
         initNutzer();
         this.mail       = nutzer.getMail();
         this.bezirkID   = nutzer.getBezirk().getId();
-        this.active     = true;
     }
 
     // ===========================  public  Methods  =========================79
     public String update() {
-        if (mail.equals(nutzer.getMail()) || validateMail(mail)) {
+        if (!nutzer.getPasswort().equals(tempPassword) && tempPassword != null && !tempPassword.isEmpty()) {
+            nutzer.setPasswort(tempPassword);
+        }
+        if (mail.equals(nutzer.getMail())) {
+            nutzer.addBezirk(dao.findBezirkByID(bezirkID));
+            updateSprachen();
+            updateFreizeitaktivitaeten();
+            dao.merge(nutzer);
+            refreshNutzer();
+            return "home";
+
+        } if(validateMail(mail)){
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             updateSprachen();
             updateFreizeitaktivitaeten();
@@ -47,10 +58,8 @@ public class ProfilManagedBean {
             dao.merge(nutzer);
             refreshNutzer();
             return "home";
-        } else {
-            // TODO Joe: 13.05.2018 Falls die Mail schon vorhanden oder bearbeiten Fehlgeschlagen ist, soll dementsprechend eine Fehlermeldung erscheinen.
-            return "profil";
         }
+        return null;
     }
 
     // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird
@@ -110,12 +119,12 @@ public class ProfilManagedBean {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getTempPassword() {
+        return tempPassword;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
     }
 
     // =================  protected/package local  Methods ===================79

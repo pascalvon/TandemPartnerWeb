@@ -49,10 +49,13 @@
             <b:row>
                 <b:column medium-screen="2"/>
                 <b:column span="2" offset="2">
-                    <b:commandButton styleClass="logbuttons" value="Login" look="primary" action="#{loginManagedBean.login}"/>
+                    <b:commandButton id="loginButton" styleClass="logbuttons" value="Login"
+                                     look="primary" action="#{loginManagedBean.login}"/>
+                    <b:messages id="m_login" for="loginButton"/>
                 </b:column>
                 <b:column span="2">
-                    <b:commandButton styleClass="logbuttons" value="Account erstellen" look="primary" action="registrieren.xhtml?faces-redirect=true"/>
+                    <b:commandButton id="accountErstellenButton" styleClass="logbuttons" value="Account erstellen"
+                                     look="primary" action="registrieren.xhtml?faces-redirect=true"/>
                 </b:column>
             </b:row>
 

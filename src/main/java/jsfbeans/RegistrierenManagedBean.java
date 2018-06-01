@@ -35,17 +35,12 @@ public class RegistrierenManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String register() {
-        if (validateMail(this.nutzer.getMail())) {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             addSprachenToNutzer();
             addFreizeitaktivitaetenToNutzer();
             dao.merge(nutzer);
             initNutzer();
             return "home";
-        } else {
-            // TODO Joe: 13.05.2018 Falls die Mail schon vorhanden oder anlegen Fehlgeschlagen ist, soll dementsprechend eine Fehlermeldung erscheinen.
-            return "registrieren";
-        }
     }
 
     public Nutzer getNutzer() {
@@ -100,11 +95,6 @@ public class RegistrierenManagedBean {
         for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
             nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
         }
-    }
-
-    private boolean validateMail(String mail) {
-        Nutzer n = dao.findNutzerByMail(mail);
-        return n == null;
     }
 
     private void initNutzer() {
