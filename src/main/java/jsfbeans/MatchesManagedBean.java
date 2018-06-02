@@ -1,10 +1,7 @@
 package jsfbeans;
 
 import dao.DAO;
-import models.Freizeitaktivitaeten;
-import models.Matchanfragen;
-import models.MatchanfragenModel;
-import models.Nutzer;
+import models.*;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -79,15 +76,15 @@ public class MatchesManagedBean {
     }
 
     private void calculateMatchanfragen() {
-        ArrayList<Matchanfragen> acceptedMatchanfragen = dao.findMatchanfragenByAllColumns(nutzer.getMail());
+        ArrayList<Matchanfragen> acceptedMatchanfragen = dao.findMatchanfragenByAllColumns(nutzer.getId());
         for (Matchanfragen anAcceptedMatchanfragen : acceptedMatchanfragen) {
             Nutzer aNutzer;
             String origin;
-            if (nutzer.equals(dao.findNutzerByMail(anAcceptedMatchanfragen.getInitiator()))) {
-                aNutzer = dao.findNutzerByMail(anAcceptedMatchanfragen.getPartner());
+            if (nutzer.equals(dao.findNutzerByID(anAcceptedMatchanfragen.getId().getInitiator()))) {
+                aNutzer = dao.findNutzerByID(anAcceptedMatchanfragen.getId().getPartner());
                 origin = "Gesendet";
             } else {
-                aNutzer = dao.findNutzerByMail(anAcceptedMatchanfragen.getInitiator());
+                aNutzer = dao.findNutzerByID(anAcceptedMatchanfragen.getId().getInitiator());
                 origin = "Empfangen";
             }
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());

@@ -4,43 +4,31 @@ package models;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findMatchanfragenByMail", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.partner = :partnerMail AND matchanfragen.angenommen = 0"),
-                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.partner = :mail OR matchanfragen.initiator = :mail)"),
+@NamedQueries({ @NamedQuery(name = "findMatchanfragenByNutzerID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.partner = :partnerID AND matchanfragen.angenommen = 0"),
+                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.id.partner = :nutzerID OR matchanfragen.id.initiator = :nutzerID)"),
                 @NamedQuery(name = "findMatchanfragenByMatchanfragen", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen = :matchanfragen"),
-                @NamedQuery(name = "findMatchanfragenByInitiatorPartnerSpracheID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.initiator = :initiator AND matchanfragen.partner = :partner AND matchanfragen.spracheID = :spracheID"),
-                @NamedQuery(name = "deleteMatchanfrage", query = "DELETE FROM Matchanfragen matchanfragen WHERE matchanfragen.initiator = :initiator AND matchanfragen.partner = :partner"),
-                @NamedQuery(name = "deleteMatchanfrageByNutzer", query = "DELETE FROM Matchanfragen  matchanfragen WHERE matchanfragen.initiator = :mail OR matchanfragen.partner = :mail")})
-@IdClass(MatchanfragenPK.class)
+                @NamedQuery(name = "findMatchanfragenByInitiatorPartnerSpracheID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.initiator = :initiatorID AND matchanfragen.id.partner = :partnerID AND matchanfragen.id.spracheID = :spracheID"),
+                @NamedQuery(name = "deleteMatchanfrage", query = "DELETE FROM Matchanfragen matchanfragen WHERE matchanfragen.id = :matchID"),
+                @NamedQuery(name = "deleteMatchanfrageByNutzer", query = "DELETE FROM Matchanfragen  matchanfragen WHERE matchanfragen.id.initiator = :nutzerID OR matchanfragen.id.partner = :nutzerID")})
+
 public class Matchanfragen {
 
-    @Id
-    private String initiator;
+    @EmbeddedId
+    private MatchId id;
 
-    @Id
-    private String partner;
-
-    @Id
-    private int spracheID;
 
     private Byte angenommen;
 
-    public String getInitiator() {
-        return initiator;
+    public MatchId getId() {
+        return id;
     }
 
-    public void setInitiator(String initiator) {
-        this.initiator = initiator;
-    }
-
-    public String getPartner() {
-        return partner;
-    }
-
-    public void setPartner(String partner) {
-        this.partner = partner;
+    public void setId(MatchId id) {
+        this.id = id;
     }
 
     public Byte getAngenommen() {
@@ -51,27 +39,18 @@ public class Matchanfragen {
         this.angenommen = angenommen;
     }
 
-    public int getSpracheID() {
-        return spracheID;
-    }
-
-    public void setSpracheID(int gesuchteSprache) {
-        this.spracheID = gesuchteSprache;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matchanfragen that = (Matchanfragen) o;
-        return spracheID == that.spracheID &&
-                Objects.equals(initiator, that.initiator) &&
-                Objects.equals(partner, that.partner);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(initiator, partner, spracheID);
+        return Objects.hash(id);
     }
 }
+
