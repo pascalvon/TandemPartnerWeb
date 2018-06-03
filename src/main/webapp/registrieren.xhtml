@@ -71,10 +71,10 @@
                     <b:inputText id="mail" required="true"
                                  requiredMessage="Bitte geben Sie Ihre E-Mail-Adresse an!"
                                  label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
-                        <!--<f:validator binding="#{mailValidatorRegistrieren}"/>-->
-                        <!--<f:ajax event="blur" execute="mail" render="m_mail"/>-->
-                        <b:messages id="m_mail" for="mail"/>
+                        <f:validator binding="#{mailValidatorRegistrieren}"/>
+                        <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
+                    <b:messages id="m_mail" for="mail"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 

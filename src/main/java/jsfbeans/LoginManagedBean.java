@@ -34,9 +34,6 @@ public class LoginManagedBean implements Serializable {
                 nutzer = dao.findNutzerByMail(mail);
                 return "home";
             }
-//            else{
-//                throw new ValidatorException(new FacesMessage("Hallo"));
-//            }
         } catch (ValidatorException e) {
             e.printStackTrace();
         }

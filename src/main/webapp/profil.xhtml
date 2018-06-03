@@ -63,11 +63,9 @@
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
-                                 validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
                                  label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
-                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <!--<f:validator validatorId="mailValidatorProfil"/>-->
+                        <f:validator binding="#{mailValidatorProfil}"/>
                         <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
                     <b:messages id="m_mail" for="mail"/>
@@ -186,11 +184,11 @@
             <b:row>
                 <b:column medium-screen="1"/>
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" value="#{profilManagedBean.tempPassword}"
+                    <b:inputSecret id="password" value="#{profilManagedBean.password}"
                                    label="neues Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidatorProfil" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                        <f:ajax event="keyup" execute="password confirm" render="m_password" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -200,7 +198,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort:"
                                    placeholder="neues Paswort bestätigen">
-                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
                         <b:messages id="m_confirm" for="confirm" />
                     </b:inputSecret>
 
