@@ -35,7 +35,6 @@ public class SuchergebnisseManagedBean {
 
     // ===========================  public  Methods  =========================79
     public void sendRequest(int partnerID) {
-        // TODO Joe: 24.05.2018 nutzer_id ergaenzen, wenn geklaert wurde ob es primary key wird
         Matchanfragen matchanfragen = new Matchanfragen();
         matchanfragen.getId().setInitiator(nutzer.getId());
         matchanfragen.getId().setPartner(partnerID);

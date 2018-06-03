@@ -58,6 +58,14 @@ public class Nutzer {
         suchanfrageSet = new HashSet<>();
     }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     public String getMail() { return mail; }
 
     public void setMail(String mail) {
@@ -150,14 +158,6 @@ public class Nutzer {
 
     public void setSuchanfrageSet(Set<Suchanfrage> suchanfrageSet) {
         this.suchanfrageSet = suchanfrageSet;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     @Override
