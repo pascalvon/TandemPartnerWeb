@@ -27,15 +27,15 @@ public class DAO {
     }
 
     /** ================= Matchanfragen =================== */
-    public ArrayList<Matchanfragen> findMatchanfragenByMail(String mail) {
-        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByMail", Matchanfragen.class)
-                .setParameter("partnerMail", mail)
+    public ArrayList<Matchanfragen> findMatchanfragenByNutzerID(int nutzerID) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByNutzerID", Matchanfragen.class)
+                .setParameter("partnerID", nutzerID)
                 .getResultList();
     }
 
-    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(String mail) {
+    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(int nutzerID) {
         return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByAllColumns", Matchanfragen.class)
-                .setParameter("mail", mail)
+                .setParameter("nutzerID", nutzerID)
                 .getResultList();
     }
 
@@ -52,8 +52,8 @@ public class DAO {
     public Matchanfragen findMatchanfragenByInitiatorPartnerSpracheID(Nutzer initiator, Nutzer partner, int spracheID) {
         try {
             return em.createNamedQuery("findMatchanfragenByInitiatorPartnerSpracheID", Matchanfragen.class)
-                    .setParameter("initiator", initiator.getMail())
-                    .setParameter("partner", partner.getMail())
+                    .setParameter("initiatorID", initiator.getId())
+                    .setParameter("partnerID", partner.getId())
                     .setParameter("spracheID", spracheID)
                     .getSingleResult();
         } catch (NoResultException e) {
@@ -63,14 +63,13 @@ public class DAO {
 
     public void deleteMatchanfrage(Matchanfragen matchanfragen) {
         em.createNamedQuery("deleteMatchanfrage")
-                .setParameter("initiator", matchanfragen.getInitiator())
-                .setParameter("partner", matchanfragen.getPartner())
+                .setParameter("matchID", matchanfragen.getId())
                 .executeUpdate();
     }
 
     public void deleteMatchanfrageByNutzer(Nutzer nutzer) {
         em.createNamedQuery("deleteMatchanfrageByNutzer")
-                .setParameter("mail", nutzer.getMail())
+                .setParameter("nutzerID", nutzer.getId())
                 .executeUpdate();
     }
 
@@ -84,6 +83,15 @@ public class DAO {
             return em.createNamedQuery("findNutzerByMail", Nutzer.class)
                     .setParameter("mail", mail)
                     .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Nutzer findNutzerByID(int nutzerID) {
+        try {
+            return em.find(Nutzer.class, nutzerID);
+
         } catch (NoResultException e) {
             return null;
         }

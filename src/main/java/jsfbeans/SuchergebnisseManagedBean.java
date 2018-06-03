@@ -34,13 +34,13 @@ public class SuchergebnisseManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
-    public void sendRequest(String partnerMail) {
+    public void sendRequest(int partnerID) {
         // TODO Joe: 24.05.2018 nutzer_id ergaenzen, wenn geklaert wurde ob es primary key wird
         Matchanfragen matchanfragen = new Matchanfragen();
-        matchanfragen.setInitiator(nutzer.getMail());
-        matchanfragen.setPartner(partnerMail);
+        matchanfragen.getId().setInitiator(nutzer.getId());
+        matchanfragen.getId().setPartner(partnerID);
         matchanfragen.setAngenommen((byte) 0);
-        matchanfragen.setSpracheID(suchanfrage.getParamSpracheID());
+        matchanfragen.getId().setSpracheID(suchanfrage.getParamSpracheID());
         if (!validateMatchanfragen(matchanfragen)) {
             dao.merge(matchanfragen);
         }
@@ -49,9 +49,9 @@ public class SuchergebnisseManagedBean {
     public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
         try {
             Matchanfragen matchanfragen = dao.findMatchanfragenByInitiatorPartnerSpracheID(nutzer, tempNutzer, suchanfrage.getParamSpracheID());
-            return matchanfragen.getInitiator().equals(nutzer.getMail())
-                    && matchanfragen.getPartner().equals(tempNutzer.getMail())
-                    && matchanfragen.getSpracheID() == suchanfrage.getParamSpracheID();
+            return matchanfragen.getId().getInitiator() == nutzer.getId()
+                    && matchanfragen.getId().getPartner() == tempNutzer.getId()
+                    && matchanfragen.getId().getSpracheID() == suchanfrage.getParamSpracheID();
         } catch (NullPointerException e) {
             return false;
         }

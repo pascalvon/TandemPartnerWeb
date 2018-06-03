@@ -34,13 +34,13 @@ public class SuchanfrageManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
-    public String search() {
+    public void search() {
         if (dao.findSuchanfrageByNutzer(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
             dao.merge(suchanfrage);
-            return "suchergebnisse";
+            //return "suchergebnisse";
         }
-            return "suchergebnisse";
+            //return "suchergebnisse";
     }
 
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
