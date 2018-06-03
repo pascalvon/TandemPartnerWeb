@@ -7,39 +7,39 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "findMatchanfragenByMail", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.partner = :partnerMail AND matchanfragen.angenommen = 0"),
-                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.partner = :mail OR matchanfragen.initiator = :mail)"),
+@NamedQueries({ @NamedQuery(name = "findMatchanfragenByID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.partner = :partnerID AND matchanfragen.angenommen = 0"),
+                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.partner = :id OR matchanfragen.initiator = :id)"),
                 @NamedQuery(name = "findMatchanfragenByMatchanfragen", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen = :matchanfragen"),
                 @NamedQuery(name = "findMatchanfragenByInitiatorPartnerSpracheID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.initiator = :initiator AND matchanfragen.partner = :partner AND matchanfragen.spracheID = :spracheID"),
                 @NamedQuery(name = "deleteMatchanfrage", query = "DELETE FROM Matchanfragen matchanfragen WHERE matchanfragen.initiator = :initiator AND matchanfragen.partner = :partner"),
-                @NamedQuery(name = "deleteMatchanfrageByNutzer", query = "DELETE FROM Matchanfragen  matchanfragen WHERE matchanfragen.initiator = :mail OR matchanfragen.partner = :mail")})
+                @NamedQuery(name = "deleteMatchanfrageByNutzer", query = "DELETE FROM Matchanfragen  matchanfragen WHERE matchanfragen.initiator = :id OR matchanfragen.partner = :id")})
 @IdClass(MatchanfragenPK.class)
 public class Matchanfragen {
 
     @Id
-    private String initiator;
+    private int initiator;
 
     @Id
-    private String partner;
+    private int partner;
 
     @Id
     private int spracheID;
 
     private Byte angenommen;
 
-    public String getInitiator() {
+    public int getInitiator() {
         return initiator;
     }
 
-    public void setInitiator(String initiator) {
+    public void setInitiator(int initiator) {
         this.initiator = initiator;
     }
 
-    public String getPartner() {
+    public int getPartner() {
         return partner;
     }
 
-    public void setPartner(String partner) {
+    public void setPartner(int partner) {
         this.partner = partner;
     }
 

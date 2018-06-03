@@ -6,27 +6,27 @@ import java.io.Serializable;
 public class MatchanfragenPK implements Serializable {
 
     @Id
-    private String initiator;
+    private int initiator;
 
     @Id
-    private String partner;
+    private int partner;
 
     @Id
     private int spracheID;
 
-    public String getInitiator() {
+    public int getInitiator() {
         return initiator;
     }
 
-    public void setInitiator(String initiator) {
+    public void setInitiator(int initiator) {
         this.initiator = initiator;
     }
 
-    public String getPartner() {
+    public int getPartner() {
         return partner;
     }
 
-    public void setPartner(String partner) {
+    public void setPartner(int partner) {
         this.partner = partner;
     }
 

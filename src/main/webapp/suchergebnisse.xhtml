@@ -31,9 +31,34 @@
                 <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
                 <b:dataTableColumn label="Match-Anfrage senden">
-                    <b:commandButton value="Senden"  disabled="#{suchergebnisseManagedBean.matchanfragenAlreadyExist(suche.nutzer)}" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.mail)}"/>
+                    <b:commandButton value="Senden"  disabled="#{suchergebnisseManagedBean.matchanfragenAlreadyExist(suche.nutzer)}"
+                                     action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.id)}"/>
                 </b:dataTableColumn>
             </b:dataTable>
+
+            <!--Modal Beginn-->
+            <b:modal id="modal" class="modal-example" title="Suchergebnisse" styleClass="responsiveModalPseudoClass" size="modal-lg">
+                <b:dataTable value="#{suchergebnisseManagedBean.suchergebnisseArrayList}" var="suche"
+                             widgetVar="tableWidgetVar"
+                             responsive="true"
+                             striped="#{dataTableSettingsBean.striped}"
+                             paginated="#{dataTableSettingsBean.paginated}">
+                    <b:dataTableColumn label="Vorname" value="#{suche.vorname}"/>
+                    <b:dataTableColumn label="Nachname" value="#{suche.nachname}"/>
+                    <b:dataTableColumn label="Geschlecht" value="#{suche.geschlecht}"/>
+                    <b:dataTableColumn label="Alter" value="#{suche.alter}"/>
+                    <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{suche.commonFreizeitaktivitaetenString}"/>
+                    <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
+                    <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
+                    <b:dataTableColumn label="Match-Anfrage senden">
+                        <b:commandButton value="Senden"  disabled="#{suchergebnisseManagedBean.matchanfragenAlreadyExist(suche.nutzer)}" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.id)}"/>
+                    </b:dataTableColumn>
+                </b:dataTable>
+                <f:facet name="footer">
+                    <b:commandButton value="Fertig" href="home.xhtml" action="home.xhtml?faces-redirect=true"/>
+                    <b:button value="Abbrechen" dismiss="modal" />
+                </f:facet>
+            </b:modal><!--Modal Ende-->
 
             <!--Buttons Beginn-->
             <b:row>

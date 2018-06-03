@@ -29,10 +29,11 @@
                         <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" href="matches.xhtml"/>
 
                     </b:navbarLinks>
-                    <b:navbarLinks pull="right"><b:navLink value="#{loginManagedBean.nutzer.vorname}"/></b:navbarLinks>
+                    <b:navbarLinks pull="right"><b:navLink value="   "/></b:navbarLinks>
                     <b:navbarLinks pull="right">
 
                         <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
+                        <b:navLink value="#{loginManagedBean.nutzer.vorname}"/>
                         <b:navCommandLink value="#{impressumManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
 
                     </b:navbarLinks>

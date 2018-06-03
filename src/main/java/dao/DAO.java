@@ -27,15 +27,15 @@ public class DAO {
     }
 
     /** ================= Matchanfragen =================== */
-    public ArrayList<Matchanfragen> findMatchanfragenByMail(String mail) {
-        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByMail", Matchanfragen.class)
-                .setParameter("partnerMail", mail)
+    public ArrayList<Matchanfragen> findMatchanfragenByID(int id) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByID", Matchanfragen.class)
+                .setParameter("partnerID", id)
                 .getResultList();
     }
 
-    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(String mail) {
+    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(int id) {
         return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByAllColumns", Matchanfragen.class)
-                .setParameter("mail", mail)
+                .setParameter("id", id)
                 .getResultList();
     }
 
@@ -52,8 +52,8 @@ public class DAO {
     public Matchanfragen findMatchanfragenByInitiatorPartnerSpracheID(Nutzer initiator, Nutzer partner, int spracheID) {
         try {
             return em.createNamedQuery("findMatchanfragenByInitiatorPartnerSpracheID", Matchanfragen.class)
-                    .setParameter("initiator", initiator.getMail())
-                    .setParameter("partner", partner.getMail())
+                    .setParameter("initiator", initiator.getId())
+                    .setParameter("partner", partner.getId())
                     .setParameter("spracheID", spracheID)
                     .getSingleResult();
         } catch (NoResultException e) {
@@ -70,7 +70,7 @@ public class DAO {
 
     public void deleteMatchanfrageByNutzer(Nutzer nutzer) {
         em.createNamedQuery("deleteMatchanfrageByNutzer")
-                .setParameter("mail", nutzer.getMail())
+                .setParameter("id", nutzer.getMail())
                 .executeUpdate();
     }
 
@@ -84,6 +84,14 @@ public class DAO {
             return em.createNamedQuery("findNutzerByMail", Nutzer.class)
                     .setParameter("mail", mail)
                     .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Nutzer findNutzerByID(int id) {
+        try {
+            return em.find(Nutzer.class, id);
         } catch (NoResultException e) {
             return null;
         }
