@@ -186,7 +186,7 @@
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
-                        <f:ajax event="keyup" execute="password confirm" render="m_password" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -196,7 +196,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
                                    label="Passwort:" placeholder="Passwort">
-                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
                 </b:column>

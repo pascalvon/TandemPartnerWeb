@@ -11,9 +11,9 @@ import javax.faces.validator.ValidatorException;
 public class PasswordValidatorProfil implements Validator {
 
     @Override
-    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        String password = (String) value;
-        String confirm = (String) component.getAttributes().get("confirm");
+    public void validate(FacesContext facesContext, UIComponent uicomponent, Object o) throws ValidatorException {
+        String password = (String) o;
+        String confirm = (String) uicomponent.getAttributes().get("confirm");
 
         if (password.isEmpty() && confirm.isEmpty())
         {
