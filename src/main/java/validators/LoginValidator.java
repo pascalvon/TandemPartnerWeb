@@ -23,7 +23,7 @@ public class LoginValidator implements Validator {
     private String mail;
     private String password;
 
-
+//TEST
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException
     {
         mail = (String) o;
