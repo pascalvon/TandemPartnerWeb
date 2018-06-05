@@ -23,13 +23,15 @@ public class LoginValidator implements Validator {
     private String mail;
     private String password;
 
-//TEST
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException
     {
         mail = (String) o;
         password = (String) uiComponent.getAttributes().get("password");
 
-        if(!validateNutzer(mail,password))
+        if (mail.isEmpty() && password.isEmpty()){
+            return;
+        }
+        else if(!validateNutzer(mail,password))
         {
             throw new ValidatorException(new FacesMessage("E-Mail-Adresse oder Passwort falsch!"));
         }
