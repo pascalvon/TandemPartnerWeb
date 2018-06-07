@@ -62,7 +62,7 @@ public class ProfilManagedBean {
         return null;
     }
 
-    // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird
+    // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wir
     public String deleteNutzer() {
         dao.deleteSuchanfrageByNutzer(nutzer);
         dao.deleteMatchanfrageByNutzer(nutzer);
