@@ -218,12 +218,46 @@
 
                 <b:column medium-screen="2"/>
 
-                <b:column medium-screen="1">
-                    <b:commandButton value="Profil löschen" action="#{profilManagedBean.deleteNutzer}"/>
-                </b:column>
-            </b:row><!--Buttons Ende-->
+            <b:column medium-screen="1">
+                <b:button value="Profil löschen" onclick="$('.loeschModalClass').modal('show')"/>
+            </b:column>
+        </b:row><!--Buttons Ende-->
 
-        </h:form>
+        <!--Pop Up, wenn Profil gelöscht werden soll-->
+        <b:modal id="loeschModal" styleClass="loeschModalClass" title="Möchtest Du wirklich Dein Profil Löschen?"
+                 closable="false" close-on-escape="false" backdrop="false">
+            <h4 style="text-align: center">Gib deine E-Mail ein, um den Vorgang zu bestätigen.</h4>
+            <b:row/>
+
+            <b:row>
+                <b:column medium-screen="3"/>
+
+                <b:column medium-screen="6">
+                    <b:inputText id="loeschMail" placeholder="Deine E-Mail" value="#{profilManagedBean.deleteMail}"/>
+                </b:column>
+            </b:row>
+            <f:facet name="footer">
+                <b:row>
+                    <b:column medium-screen="2"/>
+
+                    <b:column medium-screen="3">
+                        <b:button value="Abbrechen" style="width: 100%;" dismiss="modal"/>
+                    </b:column>
+
+                    <b:column medium-screen="1"/>
+
+                    <b:column medium-screen="2">
+                        <b:commandButton value="Profil endgültig löschen"
+                                         action="#{profilManagedBean.deleteNutzer}"
+                                         look="warning"
+                                         dismiss="modal"/>
+                    </b:column>
+                </b:row>
+            </f:facet>
+        </b:modal><!--Pop Up Ende-->
+
+
+    </h:form>
 
     </ui:define><!-- content defining Ende-->
 </ui:composition>
