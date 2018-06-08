@@ -3,16 +3,19 @@ package jsfbeans;
 import dao.DAO;
 import models.*;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class RegistrierenManagedBean {
 
     // =========================== Class Variables ===========================79
@@ -21,6 +24,8 @@ public class RegistrierenManagedBean {
     private DAO                             dao;
     private Nutzer                          nutzer;
     private int                             bezirkID;
+    private ArrayList<Sprache>              allSprachenList;
+    private ArrayList<SelectItem>           selectItemList;
     private List<Sprache>                   selectedSprachenList;
     private String                          selectedSprachenString;
     private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
@@ -34,6 +39,13 @@ public class RegistrierenManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+
+    @PostConstruct
+    public void initialise() {
+        allSprachenList = new ArrayList<>();
+        allSprachenList = dao.findSprachen();
+    }
+
     public String register() {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             addSprachenToNutzer();
@@ -57,6 +69,26 @@ public class RegistrierenManagedBean {
 
     public void setBezirkID(int bezirkID) {
         this.bezirkID = bezirkID;
+    }
+
+    public ArrayList<Sprache> getAllSprachenList() {
+        return allSprachenList;
+    }
+
+    public void setAllSprachenList(ArrayList<Sprache> allSprachenList) {
+        this.allSprachenList = allSprachenList;
+    }
+
+    public ArrayList<SelectItem> getSelectItemList() {
+        selectItemList = new ArrayList<>();
+        for (Sprache sprachen : getAllSprachenList()) {
+            selectItemList.add(new SelectItem(sprachen.getId(), sprachen.getNameSprache()));
+        }
+        return selectItemList;
+    }
+
+    public void setSelectItemList(ArrayList<SelectItem> selectItemList) {
+        this.selectItemList = selectItemList;
     }
 
     public String getSelectedSprachenString() {

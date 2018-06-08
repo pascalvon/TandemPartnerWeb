@@ -159,18 +159,8 @@ public class DAO {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public ArrayList<Sprache> findSprachen() {
+        return (ArrayList<Sprache>) em.createNamedQuery("findSprachen", Sprache.class)
+                .getResultList();
+    }
 }

@@ -5,7 +5,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name = "findBySpracheID", query = "SELECT sprache FROM Sprache sprache WHERE sprache.id = :id")
+@NamedQueries({
+@NamedQuery(name = "findBySpracheID", query = "SELECT sprache FROM Sprache sprache WHERE sprache.id = :id"),
+@NamedQuery(name = "findSprachen", query = "SELECT sprache FROM Sprache sprache")})
 public class Sprache {
 
     @Id
