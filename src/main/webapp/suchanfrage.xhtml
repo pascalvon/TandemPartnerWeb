@@ -22,7 +22,8 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{suchanfrageManagedBean.suchanfrage.paramSpracheID}"  required="true" label="Ich will lernen:" labelmedium-screen="2">
+                        <b:selectOneMenu id="sprache" value="#{suchanfrageManagedBean.suchanfrage.paramSpracheID}"
+                                         required="true" label="Ich will lernen:" labelmedium-screen="2">
                             <f:selectItem itemLabel="Albanisch" itemValue="1"/>
                             <f:selectItem itemLabel="Arabisch" itemValue="2"/>
                             <f:selectItem itemLabel="Armenisch" itemValue="3"/>
@@ -43,7 +44,10 @@
                             <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
                             <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
                             <f:selectItem itemLabel="Hindi" itemValue="20"/>
+                            <f:validator validatorId="suchanfrageValidator"/>
+                            <f:ajax event="blur" execute="sprache" render="m_sprache"/>
                         </b:selectOneMenu>
+                        <b:messages id="m_sprache" for="sprache"/>
                     </b:formGroup>
                 </b:column>
                 <b:column medium-screen="4">
