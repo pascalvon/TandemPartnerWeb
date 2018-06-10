@@ -25,7 +25,7 @@ public class RegistrierenManagedBean {
     private Nutzer                          nutzer;
     private int                             bezirkID;
     private ArrayList<Sprache>              allSprachenList;
-    private ArrayList<SelectItem>           selectItemList;
+//    private ArrayList<SelectItem>           selectItemList;
     private List<Sprache>                   selectedSprachenList;
     private String                          selectedSprachenString;
     private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
@@ -79,17 +79,17 @@ public class RegistrierenManagedBean {
         this.allSprachenList = allSprachenList;
     }
 
-    public ArrayList<SelectItem> getSelectItemList() {
-        selectItemList = new ArrayList<>();
-        for (Sprache sprachen : getAllSprachenList()) {
-            selectItemList.add(new SelectItem(sprachen.getId(), sprachen.getNameSprache()));
-        }
-        return selectItemList;
-    }
+//    public ArrayList<SelectItem> getSelectItemList() {
+//        selectItemList = new ArrayList<>();
+//        for (Sprache sprachen : getAllSprachenList()) {
+//            selectItemList.add(new SelectItem(sprachen.getId(), sprachen.getNameSprache()));
+//        }
+//        return selectItemList;
+//    }
 
-    public void setSelectItemList(ArrayList<SelectItem> selectItemList) {
-        this.selectItemList = selectItemList;
-    }
+//    public void setSelectItemList(ArrayList<SelectItem> selectItemList) {
+//        this.selectItemList = selectItemList;
+//    }
 
     public String getSelectedSprachenString() {
         return selectedSprachenString;
