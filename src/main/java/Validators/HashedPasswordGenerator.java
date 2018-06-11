@@ -1,4 +1,4 @@
-package Validators;
+package validators;
 
 import com.google.common.hash.Hashing;
 import com.google.common.base.Charsets;
