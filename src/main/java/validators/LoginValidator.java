@@ -3,6 +3,7 @@ package validators;
 
 import dao.DAO;
 import models.Nutzer;
+import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -41,7 +42,7 @@ public class LoginValidator implements Validator {
     private boolean validateNutzer(String mail, String password) {
         try {
             nutzer = dao.findNutzerByMail(mail);
-            return password.equals(nutzer.getPasswort());
+            return HashedPasswordGenerator.generateHash(password).equals(nutzer.getPasswort());
         } catch (NullPointerException e) {
             return false;
         }
