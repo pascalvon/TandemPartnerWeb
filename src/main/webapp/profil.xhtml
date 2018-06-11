@@ -93,6 +93,7 @@
                             <f:selectItem itemLabel="Reinickendorf" itemValue="12" />
                             <f:ajax event="blur" execute="bezirk" render="m_bezirk bezirk" />
                         </b:selectOneMenu>
+                        <b:messages id="m_bezirk" for="bezirk"/>
                     </b:formGroup>
                 </b:column>
 
@@ -182,7 +183,7 @@
                                    label="neues Passwort:" placeholder="neues Passwort">
                         <f:validator validatorId="passwordValidatorProfil" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -192,7 +193,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort:"
                                    placeholder="neues Paswort bestätigen">
-                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                         <b:messages id="m_confirm" for="confirm" />
                     </b:inputSecret>
 
@@ -223,17 +224,22 @@
         </b:row><!--Buttons Ende-->
 
         <!--Pop Up, wenn Profil gelöscht werden soll-->
-        <b:modal id="loeschModal" styleClass="loeschModalClass" title="Möchtest Du wirklich Dein Profil Löschen?"
+        <b:modal id="loeschModal" styleClass="loeschModalClass" title="Möchtest Du wirklich Dein Profil löschen?"
                  closable="false" close-on-escape="false" backdrop="false">
-            <h4 style="text-align: center">Gib deine E-Mail ein, um den Vorgang zu bestätigen.</h4>
+            <h4 style="text-align: center">Gib dein Passwort ein, um den Vorgang zu bestätigen!</h4>
             <b:row/>
 
             <b:row>
                 <b:column medium-screen="3"/>
 
                 <b:column medium-screen="6">
-                    <b:inputText id="loeschMail" placeholder="Deine E-Mail" value="#{profilManagedBean.deleteMail}"/>
+                    <b:inputText id="loeschMail" placeholder="Deine E-Mail" value="#{profilManagedBean.deleteMail}"
+                                 validatorMessage="Falsches Passwort! Dein Profil konnte nicht gelöscht werden!">
+                        <f:validator validatorId="deleteValidator"/>
+                    </b:inputText>
+
                 </b:column>
+
             </b:row>
             <f:facet name="footer">
                 <b:row>

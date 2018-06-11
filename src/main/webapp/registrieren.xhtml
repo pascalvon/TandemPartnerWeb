@@ -40,13 +40,16 @@
 
                 <b:column medium-screen="4">
                     <b:inputText required="true" label="Vorname:" placeholder="Vorname"
+                                 requiredMessage="Bitte gib Deinen Vornamen ein!"
                                  value="#{registrierenManagedBean.nutzer.vorname}"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText required="true" label="Nachname:" placeholder="Nachname" value="#{registrierenManagedBean.nutzer.nachname}"/>
+                    <b:inputText required="true" label="Nachname:" placeholder="Nachname"
+                                 requiredMessage="Bitte gib Deinen Nachnamen ein!"
+                                 value="#{registrierenManagedBean.nutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -57,6 +60,7 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu  required="true" label="Dein Geschlecht:" labelmedium-screen="4"
+                                          requiredMessage="Bitte gib Dein Geschlecht an!"
                                           value="#{registrierenManagedBean.nutzer.geschlecht}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
@@ -84,7 +88,9 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2" value="#{registrierenManagedBean.bezirkID}">
+                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2"
+                                         value="#{registrierenManagedBean.bezirkID}"
+                                         requiredMessage="Bitte gib Deinen Wohnbezirk an!">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Friedrichshain-Kreuzberg" itemValue="2" />
@@ -106,8 +112,9 @@
 
                 <b:column medium-screen="4">
                     <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
-                                      firstDay="1" value="#{registrierenManagedBean.nutzer.geburtsdatum}" format="DD.MM.YYYY"
-                                      label="Geburtsdatum:" requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3">
+                                      firstDay="1" value="#{registrierenManagedBean.nutzer.geburtsdatum}"
+                                      format="DD.MM.YYYY" label="Geburtsdatum:"
+                                      requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3">
                         <f:validator validatorId="datumValidator"/>
                         <f:ajax event="blur" execute="calendar" render="m_calendar"/>
                     </b:dateTimePicker>
@@ -157,7 +164,8 @@
                     <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
                                        requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
-                                       maxHeight="200" value="#{registrierenManagedBean.selectedFreizeitaktivitaetenString}"
+                                       maxHeight="200"
+                                       value="#{registrierenManagedBean.selectedFreizeitaktivitaetenString}"
                                        ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
                                        update="m_freizeitaktivitaeten"
                                        process="@this">
@@ -189,7 +197,7 @@
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
-                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -199,7 +207,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
                                    label="Passwort:" placeholder="Passwort">
-                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
                 </b:column>

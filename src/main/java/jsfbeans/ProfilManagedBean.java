@@ -5,6 +5,7 @@ import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
 import utilities.FreizeitaktivitaetenStringTransformer;
+import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -39,7 +40,7 @@ public class ProfilManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String update() {
-        if (!nutzer.getPasswort().equals(password) && password != null && !password.isEmpty()) {
+        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && password != null && !password.isEmpty()) {
             nutzer.setPasswort(password);
         }
         if (mail.equals(nutzer.getMail())) {
