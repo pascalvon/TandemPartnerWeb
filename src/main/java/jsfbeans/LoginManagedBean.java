@@ -2,6 +2,7 @@ package jsfbeans;
 
 import dao.DAO;
 import models.Nutzer;
+import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -67,7 +68,7 @@ public class LoginManagedBean implements Serializable {
     private boolean validateNutzer(String mail, String password) {
         try {
             Nutzer n = dao.findNutzerByMail(mail);
-            return n.getPasswort().equals(password);
+            return n.getPasswort().equals(HashedPasswordGenerator.generateHash(password));
         } catch (NullPointerException e) {
             return false;
         }

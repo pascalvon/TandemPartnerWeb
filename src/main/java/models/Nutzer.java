@@ -1,6 +1,7 @@
 package models;
 
 import org.hibernate.annotations.Cascade;
+import utilities.HashedPasswordGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -93,7 +94,7 @@ public class Nutzer {
     }
 
     public void setPasswort(String passwort) {
-        this.passwort = passwort;
+        this.passwort = HashedPasswordGenerator.generateHash(passwort);
     }
 
     public Geschlecht getGeschlecht() {
