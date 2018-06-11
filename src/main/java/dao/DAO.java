@@ -27,14 +27,14 @@ public class DAO {
     }
 
     /** ================= Matchanfragen =================== */
-    public ArrayList<Matchanfragen> findMatchanfragenByNutzerID(int nutzerID) {
-        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByNutzerID", Matchanfragen.class)
+    public ArrayList<Matchanfragen> findOpenMatchanfragenByNutzerID(int nutzerID) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findOpenMatchanfragenByNutzerID", Matchanfragen.class)
                 .setParameter("partnerID", nutzerID)
                 .getResultList();
     }
 
-    public ArrayList<Matchanfragen> findMatchanfragenByAllColumns(int nutzerID) {
-        return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByAllColumns", Matchanfragen.class)
+    public ArrayList<Matchanfragen> findAcceptedMatchanfragenByAllColumns(int nutzerID) {
+        return (ArrayList<Matchanfragen>) em.createNamedQuery("findAcceptedMatchanfragenByAllColumns", Matchanfragen.class)
                 .setParameter("nutzerID", nutzerID)
                 .getResultList();
     }

@@ -112,7 +112,7 @@ public class HomeManagedBean {
      * Berechnet die Matchanfragen des eingeloggten Nutzers.
      */
     private void calculateMatchanfragen() {
-        ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
+        ArrayList<Matchanfragen> openMatchanfragen = dao.findOpenMatchanfragenByNutzerID(nutzer.getId());
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
             Nutzer aNutzer = dao.findNutzerByID(anOpenMatchanfragen.getId().getInitiator());
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());

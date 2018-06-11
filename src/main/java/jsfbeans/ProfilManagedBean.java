@@ -4,8 +4,9 @@ import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
-import utilities.FreizeitaktivitaetenStringTransformer;
+import utilities.FreizeitaktivitaetenStringConverter;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
@@ -38,6 +39,13 @@ public class ProfilManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+
+    @PostConstruct
+    public void initialise() {
+        sprachenStringConverter();
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
+    }
+
     public String update() {
         if (!nutzer.getPasswort().equals(password) && password != null && !password.isEmpty()) {
             nutzer.setPasswort(password);
@@ -94,13 +102,7 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedSprachenString() {
-
-        ArrayList<Sprache> selectedSprachenList = new ArrayList<>(nutzer.getSprachenSet());
-        String[] selectedSprachenArray = new String[selectedSprachenList.size()];
-        for (int i = 0; i < selectedSprachenList.size(); i++) {
-            selectedSprachenArray[i] = String.valueOf(selectedSprachenList.get(i).getId());
-        }
-        selectedSprachenString = String.join(",", selectedSprachenArray);
+//        sprachenStringConverter();
         return selectedSprachenString;
     }
 
@@ -109,7 +111,7 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+//        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
         return selectedFreizeitaktivitaetenString;
     }
 
@@ -169,6 +171,15 @@ public class ProfilManagedBean {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
+    }
+
+    private void sprachenStringConverter() {
+        ArrayList<Sprache> selectedSprachenList = new ArrayList<>(nutzer.getSprachenSet());
+        String[] selectedSprachenArray = new String[selectedSprachenList.size()];
+        for (int i = 0; i < selectedSprachenList.size(); i++) {
+            selectedSprachenArray[i] = String.valueOf(selectedSprachenList.get(i).getId());
+        }
+        selectedSprachenString = String.join(",", selectedSprachenArray);
     }
 
     // ============================  Inner Classes  ==========================79

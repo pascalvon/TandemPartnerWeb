@@ -70,6 +70,7 @@ public class ImpressumManagedBean {
     public void setLogStatus(String logStatus) {
         this.logStatus = logStatus;
     }
+
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     private void initNutzer() {

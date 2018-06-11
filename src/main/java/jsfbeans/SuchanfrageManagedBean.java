@@ -3,8 +3,9 @@ package jsfbeans;
 import dao.DAO;
 import models.Nutzer;
 import models.Suchanfrage;
-import utilities.FreizeitaktivitaetenStringTransformer;
+import utilities.FreizeitaktivitaetenStringConverter;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
@@ -34,6 +35,11 @@ public class SuchanfrageManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    @PostConstruct
+    public void initialise() {
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
+    }
+
     public String search() {
         if (dao.findSuchanfrageByNutzer(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
@@ -64,7 +70,7 @@ public class SuchanfrageManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+//        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
         return selectedFreizeitaktivitaetenString;
     }
 
