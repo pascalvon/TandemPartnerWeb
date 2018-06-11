@@ -8,7 +8,6 @@ import utilities.FreizeitaktivitaetenStringTransformer;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -28,7 +27,8 @@ public class ProfilManagedBean {
     private int         bezirkID;
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
-    private String      tempPassword;
+    private String      password;
+    private String      deleteMail;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
@@ -39,8 +39,8 @@ public class ProfilManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String update() {
-        if (!nutzer.getPasswort().equals(tempPassword) && tempPassword != null && !tempPassword.isEmpty()) {
-            nutzer.setPasswort(tempPassword);
+        if (!nutzer.getPasswort().equals(password) && password != null && !password.isEmpty()) {
+            nutzer.setPasswort(password);
         }
         if (mail.equals(nutzer.getMail())) {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
@@ -50,7 +50,7 @@ public class ProfilManagedBean {
             refreshNutzer();
             return "home";
 
-        } if(validateMail(mail)){
+        } else{
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
             updateSprachen();
             updateFreizeitaktivitaeten();
@@ -59,10 +59,8 @@ public class ProfilManagedBean {
             refreshNutzer();
             return "home";
         }
-        return null;
     }
 
-    // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wir
     public String deleteNutzer() {
         dao.deleteSuchanfrageByNutzer(nutzer);
         dao.deleteMatchanfrageByNutzer(nutzer);
@@ -119,12 +117,20 @@ public class ProfilManagedBean {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
 
-    public String getTempPassword() {
-        return tempPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTempPassword(String tempPassword) {
-        this.tempPassword = tempPassword;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDeleteMail() {
+        return deleteMail;
+    }
+
+    public void setDeleteMail(String deleteMail) {
+        this.deleteMail = deleteMail;
     }
 
     // =================  protected/package local  Methods ===================79
@@ -133,11 +139,6 @@ public class ProfilManagedBean {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.nutzer;
-    }
-
-    private boolean validateMail(String mail) {
-        Nutzer n = dao.findNutzerByMail(mail);
-        return n == null;
     }
 
     private void updateSprachen() {

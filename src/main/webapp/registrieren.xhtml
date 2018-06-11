@@ -69,12 +69,12 @@
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
-                                 requiredMessage="Bitte geben Sie Ihre E-Mail-Adresse an!"
+                                 requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
                                  label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
-                        <!--<f:validator binding="#{mailValidatorRegistrieren}"/>-->
-                        <!--<f:ajax event="blur" execute="mail" render="m_mail"/>-->
-                        <b:messages id="m_mail" for="mail"/>
+                        <f:validator binding="#{mailValidatorRegistrieren}"/>
+                        <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
+                    <b:messages id="m_mail" for="mail"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -107,8 +107,11 @@
                 <b:column medium-screen="4">
                     <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
                                       firstDay="1" value="#{registrierenManagedBean.nutzer.geburtsdatum}" format="DD.MM.YYYY"
-                                      label="Geburtsdatum:" requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3"/>
-                    <b:messages for="calendar"/>
+                                      label="Geburtsdatum:" requiredMessage="Bitte gib Dein Geburtsdatum ein!" labelmedium-screen="3">
+                        <f:validator validatorId="datumValidator"/>
+                        <f:ajax event="blur" execute="calendar" render="m_calendar"/>
+                    </b:dateTimePicker>
+                    <b:messages id="m_calendar" for="calendar"/>
                 </b:column>
             </b:row><!--3.Reihe Ende-->
 
@@ -119,7 +122,7 @@
                 <b:column span="4">
                     <b:selectMultiMenu id="ichSpreche" label="Ich spreche:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
-                                       requiredMessage="Bitte geben Sie mindestens eine Sprache an!"
+                                       requiredMessage="Bitte gib mindestens eine Sprache an!"
                                        maxHeight="200" value="#{registrierenManagedBean.selectedSprachenString}"
                                        ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
                                        update="m_ichSpreche"
@@ -153,7 +156,7 @@
                 <b:column medium-screen="4">
                     <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
-                                       requiredMessage="Bitte geben Sie mindestens eine Freizeitaktivität an!"
+                                       requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
                                        maxHeight="200" value="#{registrierenManagedBean.selectedFreizeitaktivitaetenString}"
                                        ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
                                        update="m_freizeitaktivitaeten"
@@ -186,7 +189,7 @@
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}"/>
-                        <f:ajax event="keyup" execute="password confirm" render="m_password" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
                     </b:inputSecret>
                     <b:messages id="m_password" for="password" />
                 </b:column>
@@ -196,7 +199,7 @@
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
                                    label="Passwort:" placeholder="Passwort">
-                        <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
                 </b:column>
