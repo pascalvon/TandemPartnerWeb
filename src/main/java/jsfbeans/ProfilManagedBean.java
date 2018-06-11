@@ -28,6 +28,7 @@ public class ProfilManagedBean {
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
     private String      password;
+    private String      deleteMail;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
@@ -60,7 +61,6 @@ public class ProfilManagedBean {
         }
     }
 
-    // TODO Joe: 27.05.2018 Ein Fenster mit einer Bestaetigung sollte aufploppen, wenn auf loeschen geklickt wird
     public String deleteNutzer() {
         dao.deleteSuchanfrageByNutzer(nutzer);
         dao.deleteMatchanfrageByNutzer(nutzer);
@@ -123,6 +123,14 @@ public class ProfilManagedBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDeleteMail() {
+        return deleteMail;
+    }
+
+    public void setDeleteMail(String deleteMail) {
+        this.deleteMail = deleteMail;
     }
 
     // =================  protected/package local  Methods ===================79

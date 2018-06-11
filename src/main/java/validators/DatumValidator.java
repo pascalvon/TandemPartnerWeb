@@ -6,27 +6,21 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 @FacesValidator("datumValidator")
 public class DatumValidator implements Validator {
 
-    private Date geburtsdatum;
-    private Date history = new Date();
-
-
-
-
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        geburtsdatum = (Date) o;
-        /*Setzen des Vergleichsdatums auf vor 13 Jahren.
-        Da .setDay nicht vorhanden, wird per Differenzbildung der Stundenunterschied zum nächsten Tag ermittelt und addiert
-        Das hat zufolge, dass der heutige Tag vor 13 Jahren eine valide Eingabe wird*/
-        int diff = 23-history.getHours();
-        history.setYear(history.getYear()-13);
-        history.setHours(history.getHours()+diff);
-        if(geburtsdatum.after(history)) {
+        LocalDate geburtstag = ((Date) o).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate today = LocalDate.now();
+        Period p = Period.between(geburtstag, today);
+        if (p.getYears() < 13) {
             throw new ValidatorException(new FacesMessage("Die Anmeldung ist erst ab 13 Jahren erlaubt!"));
         }
         return;
