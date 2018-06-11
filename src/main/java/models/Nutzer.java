@@ -12,6 +12,7 @@ import java.util.Set;
 @Entity
 @NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "select nutzer from Nutzer nutzer where nutzer.mail = :mail"),
                 @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
                 @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
 
@@ -56,6 +57,14 @@ public class Nutzer {
     public Nutzer(){
         super();
         suchanfrageSet = new HashSet<>();
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getMail() { return mail; }
@@ -150,14 +159,6 @@ public class Nutzer {
 
     public void setSuchanfrageSet(Set<Suchanfrage> suchanfrageSet) {
         this.suchanfrageSet = suchanfrageSet;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     @Override

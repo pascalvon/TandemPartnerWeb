@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Matchanfragen {
 
     @EmbeddedId
-    private MatchId id;
+    private MatchId id = new MatchId();
 
 
     private Byte angenommen;

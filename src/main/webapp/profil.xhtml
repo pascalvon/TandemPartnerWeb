@@ -13,7 +13,6 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-
         <h1 style="text-align: center">Hier kannst du Dein Profil bearbeiten</h1>
         <br/>
 
@@ -22,13 +21,23 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Vorname" required="true" placeholder="Vorname" value="#{profilManagedBean.nutzer.vorname}"/>
+                    <b:inputText id="vorname" label="Vorname" required="true" placeholder="Vorname"
+                                 requiredMessage="Bitte gib Deinen Vornamen ein!"
+                                 value="#{profilManagedBean.nutzer.vorname}">
+                    <f:ajax event="blur" execute="vorname" render="m_vorname vorname"/>
+                    </b:inputText>
+                    <b:messages id="m_vorname" for="vorname"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  label="Nachname" required="true" placeholder="Nachname" value="#{profilManagedBean.nutzer.nachname}"/>
+                    <b:inputText id="nachname" label="Nachname" required="true" placeholder="Nachname"
+                                 requiredMessage="Bitte gib Deinen Nachnamen ein!"
+                                 value="#{profilManagedBean.nutzer.nachname}">
+                        <f:ajax event="blur" execute="nachname" render="m_nachname nachname"/>
+                    </b:inputText>
+                    <b:messages id="m_nachname" for="nachname"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->
 
@@ -37,25 +46,27 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu value="#{profilManagedBean.nutzer.geschlecht}" required="true"
-                                         label="Dein Geschlecht:" labelmedium-screen="4">
+                        <b:selectOneMenu disabled="true" id="geschlecht" value="#{profilManagedBean.nutzer.geschlecht}"
+                                         required="true" label="Dein Geschlecht:" labelmedium-screen="4">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="männlich" itemValue="MAENNLICH" />
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH" />
+                            <f:ajax event="blur" execute="geschlecht" render="m_geschlecht"/>
                         </b:selectOneMenu>
                     </b:formGroup>
+                    <b:messages id="m_geschlecht" for="geschlecht"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
-                                 validatorMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
-                                 requiredMessage="Deine E-Mail-Adresse ist nicht gültig. Bitte gib Deine E-Mail-Adresse erneut ein!"
+                                 requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
                                  label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
-                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
-                        <b:messages for="mail"/>
+                        <f:validator binding="#{mailValidatorProfil}"/>
+                        <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
+                    <b:messages id="m_mail" for="mail"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -64,7 +75,9 @@
 
                 <b:column medium-screen="4">
                     <b:formGroup>
-                        <b:selectOneMenu required="true" label="Wohnbezirk:" labelmedium-screen="2" value="#{profilManagedBean.bezirkID}">
+                        <b:selectOneMenu id="bezirk" required="true" label="Wohnbezirk:" labelmedium-screen="2"
+                                         requiredMessage="Bitte gib Deinen Wohnbezirk an!"
+                                         value="#{profilManagedBean.bezirkID}">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItem itemLabel="Mitte" itemValue="1" />
                             <f:selectItem itemLabel="Friedrichshain-Kreuzberg" itemValue="2" />
@@ -78,6 +91,7 @@
                             <f:selectItem itemLabel="Marzahn-Hellersdorf" itemValue="10" />
                             <f:selectItem itemLabel="Lichtenberg" itemValue="11" />
                             <f:selectItem itemLabel="Reinickendorf" itemValue="12" />
+                            <f:ajax event="blur" execute="bezirk" render="m_bezirk bezirk" />
                         </b:selectOneMenu>
                     </b:formGroup>
                 </b:column>
@@ -87,8 +101,10 @@
                 <b:column medium-screen="4">
                     <b:dateTimePicker id="calendar" required="true" mode="popup-icon" locale="de"
                                   firstDay="1" value="#{profilManagedBean.nutzer.geburtsdatum}" format="DD.MM.YYYY"
-                                  label="Geburtsdatum:" labelmedium-screen="3"/>
-                    <b:messages for="calendar"/>
+                                  label="Geburtsdatum:" labelmedium-screen="3" readonly="true">
+                        <f:ajax event="blur" execute="calendar" render="m_calendar"/>
+                    </b:dateTimePicker>
+                    <b:messages id="m_calendar" for="calendar"/>
                 </b:column>
             </b:row><!--3.Reihe Ende-->
 
@@ -96,8 +112,14 @@
                 <b:column medium-screen="1"/>
 
                 <b:column span="4">
-                    <h:outputLabel value="Ich spreche:" style="width: 100%;" for="sprachwahl" />
-                    <b:selectMultiMenu id="sprachwahl" required="true" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedSprachenString}">
+                    <!--><h:outputLabel id="ichSpreche" value="Ich spreche:" style="width: 100%;" for="sprachwahl" /><-->
+                    <b:selectMultiMenu id="ichSpreche" label="Ich spreche:" required="true"
+                                       nonSelectedText="Bitte wählen" style="width: 100%"
+                                       requiredMessage="Bitte gib mindestens eine Sprache an!"
+                                       maxHeight="200" value="#{profilManagedBean.selectedSprachenString}"
+                                       ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
+                                       update="m_ichSpreche"
+                                       process="@this">
                         <f:selectItem itemLabel="Albanisch" itemValue="1"/>
                         <f:selectItem itemLabel="Arabisch" itemValue="2"/>
                         <f:selectItem itemLabel="Armenisch" itemValue="3"/>
@@ -119,14 +141,21 @@
                         <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
                         <f:selectItem itemLabel="Hindi" itemValue="20"/>
                     </b:selectMultiMenu>
+                    <b:messages id="m_ichSpreche" for="ichSpreche"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column span="4">
-                    <h:outputLabel value="Meine Freizeitaktivitäten:" style="width: 100%;"
-                                   for="aktivitätenwahl"/>
-                    <b:selectMultiMenu id="aktivitätenwahl" required="true" nonSelectedText="Bitte wählen" maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}">
+                    <!--><h:outputLabel id="freizeitaktivitaeten" value="Meine Freizeitaktivitäten:" style="width: 100%;"
+                                   for="aktivitätenwahl"/><-->
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                                       nonSelectedText="Bitte wählen" style="width: 100%"
+                                       requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
+                                       maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}"
+                                       ondropdownhide="console.log('hide brand');ajax:selectMultiMenuBean.updateBrandMessage()"
+                                       update="m_freizeitaktivitaeten"
+                                       process="@this">
                         <f:selectItem itemLabel="Angeln" itemValue="1"/>
                         <f:selectItem itemLabel="Basketball" itemValue="2"/>
                         <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
@@ -138,7 +167,9 @@
                         <f:selectItem itemLabel="Golfen" itemValue="9"/>
                         <f:selectItem itemLabel="Handball" itemValue="10"/>
                         <f:selectItem itemLabel="Inlineskating" itemValue="11"/>
+
                     </b:selectMultiMenu>
+                    <b:messages id="m_freizeitaktivitaeten" for="freizeitaktivitaeten"/>
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 
@@ -147,23 +178,24 @@
             <b:row>
                 <b:column medium-screen="1"/>
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" value="#{profilManagedBean.nutzer.passwort}"
-                                   label="Passwort:" placeholder="neues Passwort">
-                        <f:validator validatorId="passwordValidator" />
+                    <b:inputSecret id="password" value="#{profilManagedBean.password}"
+                                   label="neues Passwort:" placeholder="neues Passwort">
+                        <f:validator validatorId="passwordValidatorProfil" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                        <f:ajax event="blur" execute="password confirm" render="m_password" />
-                        <b:messages id="m_password" for="password" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password" />
                     </b:inputSecret>
+                    <b:messages id="m_password" for="password" />
                 </b:column>
 
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="Passwort:"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort:"
                                    placeholder="neues Paswort bestätigen">
-                        <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                        <f:ajax event="keypress" execute="password confirm" render="m_password m_confirm" />
+                        <b:messages id="m_confirm" for="confirm" />
                     </b:inputSecret>
-                    <b:messages id="m_confirm" for="confirm" />
+
                 </b:column>
             </b:row><!--5.Reihe Ende-->
 
@@ -174,7 +206,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="2">
-                    <b:commandButton value="Speichern" action="#{profilManagedBean.update}"/>
+                    <b:commandButton value="Speichern" action="#{profilManagedBean.update}" />
                 </b:column>
 
                 <b:column medium-screen="1"/>
@@ -185,12 +217,46 @@
 
                 <b:column medium-screen="2"/>
 
-                <b:column medium-screen="1">
-                    <b:commandButton value="Profil löschen" action="#{profilManagedBean.deleteNutzer}"/>
-                </b:column>
-            </b:row><!--Buttons Ende-->
+            <b:column medium-screen="1">
+                <b:button value="Profil löschen" onclick="$('.loeschModalClass').modal('show')"/>
+            </b:column>
+        </b:row><!--Buttons Ende-->
 
-        </h:form>
+        <!--Pop Up, wenn Profil gelöscht werden soll-->
+        <b:modal id="loeschModal" styleClass="loeschModalClass" title="Möchtest Du wirklich Dein Profil Löschen?"
+                 closable="false" close-on-escape="false" backdrop="false">
+            <h4 style="text-align: center">Gib deine E-Mail ein, um den Vorgang zu bestätigen.</h4>
+            <b:row/>
+
+            <b:row>
+                <b:column medium-screen="3"/>
+
+                <b:column medium-screen="6">
+                    <b:inputText id="loeschMail" placeholder="Deine E-Mail" value="#{profilManagedBean.deleteMail}"/>
+                </b:column>
+            </b:row>
+            <f:facet name="footer">
+                <b:row>
+                    <b:column medium-screen="2"/>
+
+                    <b:column medium-screen="3">
+                        <b:button value="Abbrechen" style="width: 100%;" dismiss="modal"/>
+                    </b:column>
+
+                    <b:column medium-screen="1"/>
+
+                    <b:column medium-screen="2">
+                        <b:commandButton value="Profil endgültig löschen"
+                                         action="#{profilManagedBean.deleteNutzer}"
+                                         look="warning"
+                                         dismiss="modal"/>
+                    </b:column>
+                </b:row>
+            </f:facet>
+        </b:modal><!--Pop Up Ende-->
+
+
+    </h:form>
 
     </ui:define><!-- content defining Ende-->
 </ui:composition>
