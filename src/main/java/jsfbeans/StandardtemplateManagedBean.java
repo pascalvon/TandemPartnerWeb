@@ -19,7 +19,6 @@ public class StandardtemplateManagedBean {
     private DAO dao;
     private Nutzer nutzer;
     private String logStatus;
-    private String searchStatus;
 
     // ============================  Constructors  ===========================79
     public StandardtemplateManagedBean() {
@@ -70,20 +69,6 @@ public class StandardtemplateManagedBean {
 
     public void setLogStatus(String logStatus) {
         this.logStatus = logStatus;
-    }
-
-    public String getSearchStatus() {
-        String actualUrlString = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        if (actualUrlString.contains("/suchergebnisse.xhtml")) {
-            searchStatus = "Suchergebnisse";
-        } else {
-            searchStatus = "Suchanfragen";
-        }
-        return searchStatus;
-    }
-
-    public void setSearchStatus(String searchStatus) {
-        this.searchStatus = searchStatus;
     }
 
     // =================  protected/package local  Methods ===================79

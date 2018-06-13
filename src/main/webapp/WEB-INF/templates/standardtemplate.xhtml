@@ -23,10 +23,10 @@
                 <h:form>
                 <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
                     <b:navbarLinks>
-                        <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToHome}" href="home.xhtml">Hauptmenü</b:navCommandLink>
-                        <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToProfil}" value="Profil bearbeiten" href="profil.xhtml"/>
-                        <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || view.viewId == '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToSuchanfragen}" value="#{standardtemplateManagedBean.searchStatus}" href="suchanfrage.xhtml"/>
-                        <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToMatches}" value="Angenommene Matches" href="matches.xhtml"/>
+                        <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToHome}">Hauptmenü</b:navCommandLink>
+                        <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToProfil}" value="Profil bearbeiten"/>
+                        <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || view.viewId == '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToSuchanfragen}" value="#{view.viewId == '/suchergebnisse.xhtml' ? 'Suchergebnisse' : 'Suchanfragen'}"/>
+                        <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToMatches}" value="Angenommene Matches"/>
 
                     </b:navbarLinks>
                     <b:navbarLinks pull="right"><b:navLink value="#{loginManagedBean.nutzer.vorname}"/></b:navbarLinks>
