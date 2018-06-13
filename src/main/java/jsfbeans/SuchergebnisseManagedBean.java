@@ -26,11 +26,13 @@ public class SuchergebnisseManagedBean {
     private Suchanfrage             suchanfrage;
     private Nutzer                  nutzer;
     private ArrayList<Suchergebnis> suchergebnisseArrayList;
+    private boolean                 active;
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
         this.suchanfrage    = initSuchanfrage();
         this.nutzer         = initNutzer();
+        this.active         = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -112,6 +114,14 @@ public class SuchergebnisseManagedBean {
     private boolean isAlterInRange(Suchanfrage suchanfrage, Nutzer nutzer) {
         int age = AgeCalculator.calculateAge(nutzer.getGeburtsdatum());
         return suchanfrage.getParamAlterMin() <= age && suchanfrage.getParamAlterMax() >= age;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     // ============================  Inner Classes  ==========================79

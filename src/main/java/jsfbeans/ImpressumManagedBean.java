@@ -28,33 +28,33 @@ public class ImpressumManagedBean {
     // ===========================  public  Methods  =========================79
     public String redirectToHome() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "home";
+            return "home?faces-redirect=true";
         }
     }
 
     public String redirectToProfil() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "profil";
+            return "profil?faces-redirect=true";
         }
     }
 
     public String redirectToSuchanfragen() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "suchanfrage";
+            return "suchanfrage?faces-redirect=true";
         }
     }
 
     public String redirectToMatches() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "matches";
+            return "matches?faces-redirect=true";
         }
     }
 

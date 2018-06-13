@@ -39,7 +39,7 @@ public class SuchanfrageManagedBean {
             suchanfrage.addNutzer(nutzer);
             dao.merge(suchanfrage);
         }
-            return "suchergebnisse";
+            return "suchergebnisse?faces-redirect=true";
     }
 
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
@@ -48,7 +48,7 @@ public class SuchanfrageManagedBean {
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
         this.suchanfrage = savedSuchanfrage;
-        return "suchergebnisse";
+        return "suchergebnisse?faces-redirect=true";
     }
 
     public String showSpracheName(int spracheID) {

@@ -23,10 +23,10 @@
                 <h:form>
                     <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
                         <b:navbarLinks>
-                            <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToHome}" value="Hauptmenü" href="home.xhtml"/>
-                            <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToProfil}" value="Profil bearbeiten" href="profil.xhtml"/>
-                            <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToSuchanfragen}" value="Suchanfragen" href="suchanfrage.xhtml"/>
-                            <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" href="matches.xhtml"/>
+                            <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToHome}" value="Hauptmenü"/>
+                            <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToProfil}" value="Profil bearbeiten" />
+                            <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToSuchanfragen}" value="#{view.viewId == '/suchergebnisse.xhtml'?'Suchergebnisse' : 'Suchanfragen'}" />
+                            <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" />
 
                         </b:navbarLinks>
                         <b:navbarLinks pull="right">
@@ -38,6 +38,7 @@
                         </b:navbarLinks>
                     </b:navBar><!--Navigation Ende-->
                 </h:form>
+
             </ui:insert>
         </div>
 
