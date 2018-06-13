@@ -21,24 +21,24 @@
         <div id="header">
             <ui:insert name="header">
                 <h:form>
-                <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-                    <b:navbarLinks>
-                        <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToHome}" href="home.xhtml">Hauptmenü</b:navCommandLink>
-                        <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToProfil}" value="Profil bearbeiten" href="profil.xhtml"/>
-                        <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToSuchanfragen}" value="Suchanfragen" href="suchanfrage.xhtml"/>
-                        <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" href="matches.xhtml"/>
+                    <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                        <b:navbarLinks>
+                            <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToHome}" value="Hauptmenü" href="home.xhtml"/>
+                            <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToProfil}" value="Profil bearbeiten" href="profil.xhtml"/>
+                            <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToSuchanfragen}" value="Suchanfragen" href="suchanfrage.xhtml"/>
+                            <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" href="matches.xhtml"/>
 
-                    </b:navbarLinks>
-                    <b:navbarLinks pull="right"><b:navLink value="#{loginManagedBean.nutzer.vorname}"/></b:navbarLinks>
-                    <b:navbarLinks pull="right">
+                        </b:navbarLinks>
+                        <b:navbarLinks pull="right">
+                            <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
 
-                        <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
-                        <b:navCommandLink value="#{impressumManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
+                            <b:navLink style="font-weight: bold; background-color:gold ;" value="| #{loginManagedBean.nutzer.vorname} |"/>
+                            <b:navCommandLink value="#{impressumManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
 
-                    </b:navbarLinks>
-                </b:navBar><!--Navigation Ende-->
+                        </b:navbarLinks>
+                    </b:navBar><!--Navigation Ende-->
                 </h:form>
-                <!--hier könnte die navbar drin stehen--></ui:insert>
+            </ui:insert>
         </div>
 
         <div id="content">
