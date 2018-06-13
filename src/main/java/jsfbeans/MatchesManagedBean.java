@@ -24,12 +24,10 @@ public class MatchesManagedBean {
     private DAO                             dao;
     private Nutzer                          nutzer;
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
-    private boolean                         active;
 
     // ============================  Constructors  ===========================79
     public MatchesManagedBean() {
         initNutzer();
-        this.active = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -57,14 +55,6 @@ public class MatchesManagedBean {
 
     public void setMatchanfragenModelArrayList(ArrayList<MatchanfragenModel> matchanfragenModelArrayList) {
         this.matchanfragenModelArrayList = matchanfragenModelArrayList;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     // =================  protected/package local  Methods ===================79
