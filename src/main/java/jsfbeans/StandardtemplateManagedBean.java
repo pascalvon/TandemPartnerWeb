@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class ImpressumManagedBean {
+public class StandardtemplateManagedBean {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
@@ -19,42 +19,43 @@ public class ImpressumManagedBean {
     private DAO dao;
     private Nutzer nutzer;
     private String logStatus;
+    private String searchStatus;
 
     // ============================  Constructors  ===========================79
-    public ImpressumManagedBean() {
+    public StandardtemplateManagedBean() {
         initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
     public String redirectToHome() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "home";
+            return "home?faces-redirect=true";
         }
     }
 
     public String redirectToProfil() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "profil";
+            return "profil?faces-redirect=true";
         }
     }
 
     public String redirectToSuchanfragen() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "suchanfrage";
+            return "suchanfrage?faces-redirect=true";
         }
     }
 
     public String redirectToMatches() {
         if (validateNutzer(nutzer.getMail())) {
-            return "login";
+            return "login?faces-redirect=true";
         } else {
-            return "matches";
+            return "matches?faces-redirect=true";
         }
     }
 
@@ -70,6 +71,21 @@ public class ImpressumManagedBean {
     public void setLogStatus(String logStatus) {
         this.logStatus = logStatus;
     }
+
+    public String getSearchStatus() {
+        String actualUrlString = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        if (actualUrlString.contains("/suchergebnisse.xhtml")) {
+            searchStatus = "Suchergebnisse";
+        } else {
+            searchStatus = "Suchanfragen";
+        }
+        return searchStatus;
+    }
+
+    public void setSearchStatus(String searchStatus) {
+        this.searchStatus = searchStatus;
+    }
+
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     private void initNutzer() {

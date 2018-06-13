@@ -24,12 +24,10 @@ public class MatchesManagedBean {
     private DAO                             dao;
     private Nutzer                          nutzer;
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
-    private boolean                         active;
 
     // ============================  Constructors  ===========================79
     public MatchesManagedBean() {
         initNutzer();
-        this.active = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -59,14 +57,6 @@ public class MatchesManagedBean {
         this.matchanfragenModelArrayList = matchanfragenModelArrayList;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     private void initNutzer() {
@@ -94,8 +84,6 @@ public class MatchesManagedBean {
                 String aktivitaetenString = String.join(",", aktivitaetenList);
                 matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaetenString, aktivitaeten.size(), anAcceptedMatchanfragen, origin));
             } else {
-                // TODO Joe: 27.05.2018 Soll Matchanfrage geloescht werden, wenn es keine gemeinsamen Aktivitaeten gibt? Weitere Moeglichkeit ist bei erneutem bearbeiten der Aktiviaeten,
-                // TODO Joe: 27.05.2018 dass Matchanfrage wieder angezeigt wird. Aber dadurch kann auf dauer die DB zugemuellt werden.
                 dao.deleteMatchanfrage(anAcceptedMatchanfragen);
             }
         }

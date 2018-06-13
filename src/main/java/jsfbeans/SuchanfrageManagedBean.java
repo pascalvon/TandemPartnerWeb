@@ -9,11 +9,14 @@ import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 
 @ManagedBean
-@RequestScoped
+// TODO Joe: 13.06.2018 Scope wurde von Request auf Session geandert. Muss getestet werden und bei fehlern, muss die SessionScope vom SuchanfrageManagedBean nur gekillt werden,
+// TODO Joe: 13.06.2018 wenn bei Suchergebnissen auf Fertig oder Abbrechen gedrueckt wird.
+@SessionScoped
 public class SuchanfrageManagedBean {
 
     // =========================== Class Variables ===========================79
@@ -24,13 +27,11 @@ public class SuchanfrageManagedBean {
     private String                  selectedFreizeitaktivitaetenString;
     private Suchanfrage             suchanfrage;
     private ArrayList<Suchanfrage>  suchanfrageArrayList;
-    private boolean                 active;
 
     // ============================  Constructors  ===========================79
     public SuchanfrageManagedBean() {
         this.nutzer         = initNutzer();
         this.suchanfrage    = new Suchanfrage();
-        this.active         = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -39,7 +40,7 @@ public class SuchanfrageManagedBean {
             suchanfrage.addNutzer(nutzer);
             dao.merge(suchanfrage);
         }
-            return "suchergebnisse";
+            return "suchergebnisse?faces-redirect=true";
     }
 
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
@@ -48,7 +49,7 @@ public class SuchanfrageManagedBean {
 
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
         this.suchanfrage = savedSuchanfrage;
-        return "suchergebnisse";
+        return "suchergebnisse?faces-redirect=true";
     }
 
     public String showSpracheName(int spracheID) {
@@ -89,14 +90,6 @@ public class SuchanfrageManagedBean {
 
     public void setSuchanfrageArrayList(ArrayList<Suchanfrage> suchanfrageArrayList) {
         this.suchanfrageArrayList = suchanfrageArrayList;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     // =================  protected/package local  Methods ===================79

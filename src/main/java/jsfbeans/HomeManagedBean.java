@@ -11,6 +11,7 @@ import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Die Managed Bean für die "home.xhtml".
+ * Die HomeManagedBean dient zur Verwaltung der Variablen und Methoden fuer
+ * die <i>home.xhtml</i>.
  */
 @ManagedBean
 @ViewScoped
@@ -26,11 +28,22 @@ public class HomeManagedBean {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
+    /**
+     * Das DAO-Objekt enthaelt Methoden, um abfragen mit der Datenbank zu realisieren.
+     */
     @EJB
     private DAO                             dao;
+
+    /**
+     * Das Nutzer-Objekt stellt den aktuell angemeldeten Nutzer dar, welcher im Konstruktor
+     * durch die Methode <i>initNutzer()</i> initialisiert wird.
+     */
     private Nutzer                          nutzer;
+
+    /**
+     * Die ArrayList mit der Typisierung MatchanfragenModel enthaelt alle offenen Matchanfragen.
+     */
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
-    private boolean                         active;
 
     // ============================  Constructors  ===========================79
 
@@ -39,7 +52,6 @@ public class HomeManagedBean {
      */
     public HomeManagedBean() {
         initNutzer();
-        this.active = true;
     }
 
     // ===========================  public  Methods  =========================79
@@ -86,14 +98,6 @@ public class HomeManagedBean {
 
     public void setMatchanfragenModelArrayList(ArrayList<MatchanfragenModel> matchanfragenModelArrayList) {
         this.matchanfragenModelArrayList = matchanfragenModelArrayList;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     // =================  protected/package local  Methods ===================79

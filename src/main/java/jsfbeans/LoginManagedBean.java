@@ -25,17 +25,15 @@ public class LoginManagedBean implements Serializable {
 
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
-    // TODO Joe: 01.05.2018 Exception fuer den Fall, dass falsche E-Mail angegeben wird, muss noch gefangen werden. (27.05.18 Wird bereits gefangen, aber Validator fehlt noch)
-    // TODO Joe: 01.05.2018 Validator auslagern auf eigene Klasse und Text ausgeben bei falscher Eingabe (siehe TODO zuvor).
     public String login() throws ValidatorException {
         nutzer = dao.findNutzerByMail(mail);
-        return "home";
+        return "home?faces-redirect=true";
     }
 
 
     public String logout()  {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login";
+        return "login?faces-redirect=true";
     }
 
     public Nutzer getNutzer() {
