@@ -29,13 +29,13 @@
                         <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToMatches}" value="Angenommene Matches"/>
 
                     </b:navbarLinks>
-                    <b:navbarLinks pull="right"><b:navLink value="#{loginManagedBean.nutzer.vorname}"/></b:navbarLinks>
                     <b:navbarLinks pull="right">
-
                         <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
+
+                        <b:navLink style="font-weight: bold; background-color:gold ;" value="| #{loginManagedBean.nutzer.vorname} |"/>
                         <b:navCommandLink value="#{standardtemplateManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
 
-                        </b:navbarLinks>
+                    </b:navbarLinks>
                     </b:navBar><!--Navigation Ende-->
                 </h:form>
 
