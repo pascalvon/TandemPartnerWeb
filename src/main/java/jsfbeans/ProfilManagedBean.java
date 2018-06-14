@@ -29,7 +29,6 @@ public class ProfilManagedBean {
     private String      selectedSprachenString;
     private String      selectedFreizeitaktivitaetenString;
     private String      password;
-    private String      deleteMail;
 
     // ============================  Constructors  ===========================79
     public ProfilManagedBean() {
@@ -40,8 +39,8 @@ public class ProfilManagedBean {
 
     // ===========================  public  Methods  =========================79
     public String update() {
-        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && password != null && !password.isEmpty()) {
-            nutzer.setPasswort(password);
+        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
+            nutzer.setPasswort(HashedPasswordGenerator.generateHash(password));
         }
         if (mail.equals(nutzer.getMail())) {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
@@ -124,14 +123,6 @@ public class ProfilManagedBean {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getDeleteMail() {
-        return deleteMail;
-    }
-
-    public void setDeleteMail(String deleteMail) {
-        this.deleteMail = deleteMail;
     }
 
     // =================  protected/package local  Methods ===================79

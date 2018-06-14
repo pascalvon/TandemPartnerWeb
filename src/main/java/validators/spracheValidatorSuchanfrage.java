@@ -15,11 +15,11 @@ import javax.faces.validator.ValidatorException;
 import java.util.Set;
 
 @FacesValidator("suchanfrageValidator")
-public class SuchanfrageValidator implements Validator {
+public class spracheValidatorSuchanfrage implements Validator {
 
     private Nutzer nutzer;
 
-    public SuchanfrageValidator() { initNutzer(); }
+    public spracheValidatorSuchanfrage() { initNutzer(); }
 
     int sprachID = 0;
 
