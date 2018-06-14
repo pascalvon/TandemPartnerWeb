@@ -49,7 +49,7 @@ public class ProfilManagedBean {
             updateFreizeitaktivitaeten();
             dao.merge(nutzer);
             refreshNutzer();
-            return "home";
+            return "home?faces-redirect=true";
 
         } else{
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
@@ -58,7 +58,7 @@ public class ProfilManagedBean {
             nutzer.setMail(mail);
             dao.merge(nutzer);
             refreshNutzer();
-            return "home";
+            return "home?faces-redirect=true";
         }
     }
 
@@ -67,7 +67,7 @@ public class ProfilManagedBean {
         dao.deleteMatchanfrageByNutzer(nutzer);
         dao.deleteNutzer(nutzer);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login";
+        return "login?faces-redirect=true";
     }
 
     public Nutzer getNutzer() {
