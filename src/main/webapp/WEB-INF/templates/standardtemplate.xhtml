@@ -21,19 +21,19 @@
         <div id="header">
             <ui:insert name="header">
                 <h:form>
-                    <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
-                        <b:navbarLinks>
-                            <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToHome}" value="Hauptmenü"/>
-                            <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToProfil}" value="Profil bearbeiten" />
-                            <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || view.viewId == '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToSuchanfragen}" value="#{view.viewId == '/suchergebnisse.xhtml'?'Suchergebnisse' : 'Suchanfragen'}" />
-                            <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{impressumManagedBean.redirectToMatches}" value="Angenommene Matches" />
+                <b:navBar brand="tandemPartner" fluid="true" brandImg="#{request.contextPath}/bilder/tandemLogo.png" brandImgStyle="width:40px; margin-top: -10px; margin-left: -10px; margin-right: 5px">
+                    <b:navbarLinks>
+                        <b:navCommandLink class="#{view.viewId == '/home.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToHome}">Hauptmenü</b:navCommandLink>
+                        <b:navCommandLink class="#{view.viewId == '/profil.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToProfil}" value="Profil bearbeiten"/>
+                        <b:navCommandLink class="#{view.viewId == '/suchanfrage.xhtml' || view.viewId == '/suchergebnisse.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToSuchanfragen}" value="#{view.viewId == '/suchergebnisse.xhtml' ? 'Suchergebnisse' : 'Suchanfragen'}"/>
+                        <b:navCommandLink class="#{view.viewId == '/matches.xhtml' ? 'active' : ''}" action="#{standardtemplateManagedBean.redirectToMatches}" value="Angenommene Matches"/>
 
-                        </b:navbarLinks>
-                        <b:navbarLinks pull="right">
-                            <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
+                    </b:navbarLinks>
+                    <b:navbarLinks pull="right"><b:navLink value="#{loginManagedBean.nutzer.vorname}"/></b:navbarLinks>
+                    <b:navbarLinks pull="right">
 
-                            <b:navLink style="font-weight: bold; background-color:gold ;" value="| #{loginManagedBean.nutzer.vorname} |"/>
-                            <b:navCommandLink value="#{impressumManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
+                        <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
+                        <b:navCommandLink value="#{standardtemplateManagedBean.logStatus}" action="#{loginManagedBean.logout}"/>
 
                         </b:navbarLinks>
                     </b:navBar><!--Navigation Ende-->

@@ -84,8 +84,6 @@ public class MatchesManagedBean {
                 String aktivitaetenString = String.join(",", aktivitaetenList);
                 matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaetenString, aktivitaeten.size(), anAcceptedMatchanfragen, origin));
             } else {
-                // TODO Joe: 27.05.2018 Soll Matchanfrage geloescht werden, wenn es keine gemeinsamen Aktivitaeten gibt? Weitere Moeglichkeit ist bei erneutem bearbeiten der Aktiviaeten,
-                // TODO Joe: 27.05.2018 dass Matchanfrage wieder angezeigt wird. Aber dadurch kann auf dauer die DB zugemuellt werden.
                 dao.deleteMatchanfrage(anAcceptedMatchanfragen);
             }
         }

@@ -9,11 +9,14 @@ import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 
 @ManagedBean
-@RequestScoped
+// TODO Joe: 13.06.2018 Scope wurde von Request auf Session geandert. Muss getestet werden und bei fehlern, muss die SessionScope vom SuchanfrageManagedBean nur gekillt werden,
+// TODO Joe: 13.06.2018 wenn bei Suchergebnissen auf Fertig oder Abbrechen gedrueckt wird.
+@SessionScoped
 public class SuchanfrageManagedBean {
 
     // =========================== Class Variables ===========================79

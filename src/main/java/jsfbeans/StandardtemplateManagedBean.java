@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class ImpressumManagedBean {
+public class StandardtemplateManagedBean {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
@@ -21,7 +21,7 @@ public class ImpressumManagedBean {
     private String logStatus;
 
     // ============================  Constructors  ===========================79
-    public ImpressumManagedBean() {
+    public StandardtemplateManagedBean() {
         initNutzer();
     }
 
@@ -70,6 +70,7 @@ public class ImpressumManagedBean {
     public void setLogStatus(String logStatus) {
         this.logStatus = logStatus;
     }
+
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     private void initNutzer() {
