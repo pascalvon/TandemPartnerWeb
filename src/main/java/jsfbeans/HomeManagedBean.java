@@ -19,8 +19,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Die HomeManagedBean dient zur Verwaltung der Variablen und Methoden fuer
- * die <i>home.xhtml</i>.
+ * Die {@code HomeManagedBean} dient zur Verwaltung der Variablen und Methoden fuer
+ * die {@code home.xhtml}.
  */
 @ManagedBean
 @ViewScoped
@@ -29,26 +29,26 @@ public class HomeManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     /**
-     * Das DAO-Objekt enthaelt Methoden, um abfragen mit der Datenbank zu realisieren.
+     * Das DAO-Objekt, welches Methoden enthaelt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
     private DAO                             dao;
 
     /**
-     * Das Nutzer-Objekt stellt den aktuell angemeldeten Nutzer dar, welcher im Konstruktor
-     * durch die Methode <i>initNutzer()</i> initialisiert wird.
+     * Das Nutzer-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * durch die Methode {@link #initNutzer() (void) initNutzer} initialisiert wird.
      */
     private Nutzer                          nutzer;
 
     /**
-     * Die ArrayList mit der Typisierung MatchanfragenModel enthaelt alle offenen Matchanfragen.
+     * Die {@code ArrayList} mit der Typisierung {@code MatchanfragenModel} enthaelt alle offenen Matchanfragen.
      */
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
 
     /**
-     * Im Konstruktor wird die Methode initNutzer() aufgerufen.
+     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() (void)} aufgerufen wird.
      */
     public HomeManagedBean() {
         initNutzer();
@@ -57,17 +57,21 @@ public class HomeManagedBean {
     // ===========================  public  Methods  =========================79
 
     /**
-     * Gibt Anhand einer SprachID den Sprachennamen als String zurueck
-     * @param spracheID SprachID des gesuchten Sprachennamens
-     * @return Gibt den Namen der gesuchten Sprache zurueck.
+     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zurueck.
+     * Diese Methode wird dazu genutzt, um in der Tabelle der {@code home.xhtml} die Sprachennamen anzuzeigen.
+     *
+     * @param   spracheID SprachID des gesuchten Sprachennamens
+     * @return  Gibt den Namen der gesuchten Sprache zurueck.
      */
     public String showSpracheName(int spracheID) {
         return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
     }
 
     /**
-     * Setzt den angenommen-Parameter der Matchanfrage auf 1.
-     * @param matchanfragen Die Matchanfrage, die als "angenommen" gekennzeichnet werden soll.
+     * Setzt den angenommen-Parameter der {@code Matchanfragen} auf 1, wodurch die Matchanfrage in der Datenbank
+     * als angenommen gekennzeichnet wird.
+     *
+     * @param matchanfragen     Die Matchanfrage, die als "angenommen" gekennzeichnet werden soll.
      */
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
@@ -75,30 +79,45 @@ public class HomeManagedBean {
     }
 
     /**
-     * Loescht eine abgelehnte Matchanfrage.
-     * @param matchanfragen Die Matchanfrage, die abgelehnt wurde.
+     * Loescht eine abgelehnte {@code Matchanfragen} aus der Datenbank.
+     *
+     * @param matchanfragen     Die Matchanfrage, die abgelehnt wurde.
      */
     public void refuseMatchanfrage(Matchanfragen matchanfragen) {
         dao.deleteMatchanfrage(matchanfragen);
     }
 
+    /**
+     * Liefert den {@code Nutzer} zurueck, der eingeloggt ist.
+     *
+     * @return  Das Nutzer-Objekt.
+     */
     public Nutzer getNutzer() {
         return nutzer;
     }
 
-    public void setNutzer(Nutzer nutzer) {
-        this.nutzer = nutzer;
-    }
+//    /**
+//     *
+//     * @param nutzer
+//     */
+//    public void setNutzer(Nutzer nutzer) {
+//        this.nutzer = nutzer;
+//    }
 
+    /**
+     *
+     *
+     * @return
+     */
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
         matchanfragenModelArrayList = new ArrayList<>();
         calculateMatchanfragen();
         return matchanfragenModelArrayList;
     }
 
-    public void setMatchanfragenModelArrayList(ArrayList<MatchanfragenModel> matchanfragenModelArrayList) {
-        this.matchanfragenModelArrayList = matchanfragenModelArrayList;
-    }
+//    public void setMatchanfragenModelArrayList(ArrayList<MatchanfragenModel> matchanfragenModelArrayList) {
+//        this.matchanfragenModelArrayList = matchanfragenModelArrayList;
+//    }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79

@@ -35,6 +35,7 @@ public class SuchanfrageManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    // TODO Joe: 14.06.2018 Validierung von bereits vorhandenen gleichen Suchanfragen fehlt
     public String search() {
         if (dao.findSuchanfrageByNutzer(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
