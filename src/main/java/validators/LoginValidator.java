@@ -26,17 +26,22 @@ public class LoginValidator implements Validator {
 
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException
     {
-        mail = (String) o;
-        password = (String) uiComponent.getAttributes().get("password");
+        try{
+            mail = (String) o;
+            password = (String) uiComponent.getAttributes().get("password");
 
-        if (mail.isEmpty() && password.isEmpty()){
+            if (mail.isEmpty() && password.isEmpty()){
+                throw new ValidatorException(new FacesMessage("Bitte gib Deine Login-Daten ein!"));
+            }
+            else if(!validateNutzer(mail,HashedPasswordGenerator.generateHash(password))){
+                throw new ValidatorException(new FacesMessage("E-Mail-Adresse oder Passwort falsch!"));
+            }
             return;
         }
-        else if(!validateNutzer(mail,HashedPasswordGenerator.generateHash(password)))
+        catch (NullPointerException e)
         {
             throw new ValidatorException(new FacesMessage("E-Mail-Adresse oder Passwort falsch!"));
         }
-        return;
     }
 
     private boolean validateNutzer(String mail, String password) {
