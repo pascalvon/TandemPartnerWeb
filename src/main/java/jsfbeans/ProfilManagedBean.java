@@ -40,7 +40,7 @@ public class ProfilManagedBean {
     // ===========================  public  Methods  =========================79
     public String update() {
         if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
-            nutzer.setPasswort(HashedPasswordGenerator.generateHash(password));
+            nutzer.setPasswort(password);
         }
         if (mail.equals(nutzer.getMail())) {
             nutzer.addBezirk(dao.findBezirkByID(bezirkID));
