@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Die {@code HomeManagedBean} dient zur Verwaltung der Variablen und Methoden für
+ * Die {@code HomeManagedBean} dient zur Verwaltung der Variablen und Methoden f&uuml;r
  * die {@code home.xhtml}.
  */
 @ManagedBean
@@ -29,39 +29,37 @@ public class HomeManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     /**
-     * Das DAO-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
+     * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
     private DAO                             dao;
 
     /**
-     * Das Nutzer-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer                          nutzer;
 
     /**
-     * Die {@code ArrayList} mit der Typisierung {@code MatchanfragenModel} enthaelt alle offenen Matchanfragen.
+     * Die {@code ArrayList} mit der Typisierung {@code MatchanfragenModel} enth&auml;lt alle offenen Matchanfragen.
      */
     private ArrayList<MatchanfragenModel>   matchanfragenModelArrayList;
 
     // ============================  Constructors  ===========================79
-
     /**
-     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() initNutzer} aufgerufen wird.
+     * Initialisiert ein neu erzeugtes {@code HomeManagedBean}-Objekt und ruft dabei die Methode {@link #initNutzer() initNutzer} auf.
      */
     public HomeManagedBean() {
         initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
-
     /**
-     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zurueck.
+     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zur&uuml;ck.
      * Diese Methode wird dazu genutzt, um in der Tabelle der {@code home.xhtml} die Sprachennamen anzuzeigen.
      *
      * @param   spracheID SprachID des gesuchten Sprachennamens
-     * @return  Gibt den Namen der gesuchten Sprache zurueck.
+     * @return  Gibt den Namen der gesuchten Sprache zur&uuml;ck.
      */
     public String showSpracheName(int spracheID) {
         return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
@@ -71,7 +69,7 @@ public class HomeManagedBean {
      * Setzt den angenommen-Parameter der {@code Matchanfragen} auf 1, wodurch die Matchanfrage in der Datenbank
      * als angenommen gekennzeichnet wird.
      *
-     * @param matchanfragen     Die Matchanfrage, die als "angenommen" gekennzeichnet werden soll.
+     * @param matchanfragen Die Matchanfrage, die als "angenommen" gekennzeichnet werden soll.
      */
     public void acceptMatchanfrage(Matchanfragen matchanfragen) {
         matchanfragen.setAngenommen((byte) 1);
@@ -79,7 +77,7 @@ public class HomeManagedBean {
     }
 
     /**
-     * Loescht eine abgelehnte {@code Matchanfragen} aus der Datenbank.
+     * L&ouml;scht eine abgelehnte {@code Matchanfragen} aus der Datenbank.
      *
      * @param matchanfragen     Die Matchanfrage, die abgelehnt wurde.
      */
@@ -88,9 +86,9 @@ public class HomeManagedBean {
     }
 
     /**
-     * Liefert den {@code Nutzer} zurueck, der eingeloggt ist.
+     * Liefert das {@code Nutzer}-Objekt zur&uuml;ck, mit den Daten des angemeldeten Nutzers.
      *
-     * @return  Das Nutzer-Objekt.
+     * @return {@code Nutzer}-Objekt mit den Daten des angemeldeten Nutzers.
      */
     public Nutzer getNutzer() {
         return nutzer;
@@ -123,10 +121,9 @@ public class HomeManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-
     /**
-     * Initialisiert den eingeloggten Nutzer anhand der SessionScope der {@code LoginManagedBean},
-     * um den aktuell eingeloggten Nutzer der {@code HomeManagedBean} zu uebergeben.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
+     * die Session l&auml;uft. Anschließend wird der {@code Nutzer} der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -135,11 +132,11 @@ public class HomeManagedBean {
     }
 
     /**
-     * Holt sich alle offenen Matchanfragen, die der eingeloggte Nutzer hat und haelt sie sich in einer {@code ArrayList}.
+     * Holt sich alle offenen Matchanfragen, die der angemeldete Nutzer hat und h&auml;lt sie sich in einer {@code ArrayList}.
      * Dann werden die {@code Freizeitaktivitaeten} der {@code Nutzer}, welche die Matchanfragen gesendet haben (also die Initiatoren),
-     * mit den {@code Freizeitaktivitaeten} des eingeloggten Nutzers verglichen und gemeinsame {@code Freizeitaktivitaeten} werden
-     * in einen {@code String} geschrieben und anschliessend wird ein neus {@code MatchanfragenModel} erzeugt und dem
-     * {@link #matchanfragenModelArrayList matchanfragenModelArrayList} uebergeben.
+     * mit den {@code Freizeitaktivitaeten} des angemeldeten Nutzers verglichen und gemeinsame {@code Freizeitaktivitaeten} werden
+     * in einen {@code String} geschrieben.
+     * Anschlie&szlig;end wird ein neues {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
      */
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());

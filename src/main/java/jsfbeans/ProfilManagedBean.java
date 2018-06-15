@@ -15,15 +15,30 @@ import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Die {@code ProfilManagedBean} dient zur Verwaltung der Variablen und Methoden f&uuml;r die {@code profil.xhtml}.
+ */
 @ManagedBean
 @ViewScoped
 public class ProfilManagedBean {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
+    /**
+     * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
+     */
     @EJB
     private DAO         dao;
+
+    /**
+     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
+     */
     private Nutzer      nutzer;
+
+    /**
+     * {@code String}, welcher die E-Mail-Adresse des angemeldeten Nutzers enth&auml;lt.
+     */
     private String      mail;
     private int         bezirkID;
     private String      selectedSprachenString;
@@ -83,7 +98,7 @@ public class ProfilManagedBean {
 
     public void setMail(String mail) {
         this.mail = mail;
-    }
+    } // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
 
     public int getBezirkID() {
         return bezirkID;
@@ -91,7 +106,7 @@ public class ProfilManagedBean {
 
     public void setBezirkID(int bezirkID) {
         this.bezirkID = bezirkID;
-    }
+    }  // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
 
     public String getSelectedSprachenString() {
 
@@ -106,7 +121,7 @@ public class ProfilManagedBean {
 
     public void setSelectedSprachenString(String selectedSprachenString) {
         this.selectedSprachenString = selectedSprachenString;
-    }
+    }    // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
 
     public String getSelectedFreizeitaktivitaetenString() {
         selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
@@ -115,7 +130,7 @@ public class ProfilManagedBean {
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
-    }
+    }      // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
 
     public String getPassword() {
         return password;
@@ -123,7 +138,7 @@ public class ProfilManagedBean {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }  // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
