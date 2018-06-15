@@ -48,7 +48,7 @@ public class HomeManagedBean {
     // ============================  Constructors  ===========================79
 
     /**
-     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() (void)} aufgerufen wird.
+     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() (void) initNutzer} aufgerufen wird.
      */
     public HomeManagedBean() {
         initNutzer();
@@ -105,8 +105,8 @@ public class HomeManagedBean {
 //    }
 
     /**
-     * Initialisiert {@link #matchanfragenModelArrayList (ArrayList)} und ruft
-     * {@link #calculateMatchanfragen() (void)} auf, bevor {@link #matchanfragenModelArrayList (ArrayList)}
+     * Initialisiert {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList} und ruft
+     * {@link #calculateMatchanfragen() (void) calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList}
      * mit den offenen Matchanfragen wiedergegeben wird.
      *
      * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des aktuell angemeldeten Nutzers
@@ -135,7 +135,10 @@ public class HomeManagedBean {
     }
 
     /**
-     * Berechnet die Matchanfragen des eingeloggten Nutzers.
+     * Holt sich alle offenen Matchanfragen, die der eingeloggte Nutzer hat und haelt sie sich in einer {@code ArrayList}.
+     * Dann werden die {@code Freizeitaktivitaeten} der {@code Nutzer}, welche die Matchanfragen gesendet haben (also die Initiatoren),
+     * mit den {@code Freizeitaktivitaeten} des eingeloggten Nutzers verglichen und gemeinsame {@code Freizeitaktivitaeten} werden
+     * in einen {@code String} geschrieben und anschliessend wird ein neus {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList} uebergeben.
      */
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
