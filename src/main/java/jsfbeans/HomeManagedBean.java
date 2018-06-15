@@ -105,9 +105,11 @@ public class HomeManagedBean {
 //    }
 
     /**
+     * Initialisiert {@link #matchanfragenModelArrayList (ArrayList)} und ruft
+     * {@link #calculateMatchanfragen() (void)} auf, bevor {@link #matchanfragenModelArrayList (ArrayList)}
+     * mit den offenen Matchanfragen wiedergegeben wird.
      *
-     *
-     * @return
+     * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des aktuell angemeldeten Nutzers
      */
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
         matchanfragenModelArrayList = new ArrayList<>();
@@ -123,7 +125,8 @@ public class HomeManagedBean {
     // ===========================  private  Methods  ========================79
 
     /**
-     * Initialisiert den eingeloggten Nutzer anhand der Session der LoginManagedBean.
+     * Initialisiert den eingeloggten Nutzer anhand der SessionScope der {@code LoginManagedBean},
+     * um den aktuell eingeloggten Nutzer der {@code HomeManagedBean} zu uebergeben.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();

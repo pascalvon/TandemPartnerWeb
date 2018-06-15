@@ -22,10 +22,10 @@ public class SuchergebnisseManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     @EJB
-    private DAO                     dao;
-    private Suchanfrage             suchanfrage;
-    private Nutzer                  nutzer;
-    private ArrayList<SuchergebnisModal> suchergebnisseArrayList;
+    private DAO                             dao;
+    private Suchanfrage                     suchanfrage;
+    private Nutzer                          nutzer;
+    private ArrayList<SuchergebnisModal>    suchergebnisseArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
