@@ -192,7 +192,7 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" required="true"
+                    <b:inputSecret id="password" required="true" requiredMessage="Bitte gib ein Passwort ein!"
                                    value="#{registrierenManagedBean.nutzer.passwort}"
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
@@ -205,7 +205,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" requiredMessage="Bitte bestätige Dein Passwort!"
                                    label="Passwort:" placeholder="Passwort">
                         <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
