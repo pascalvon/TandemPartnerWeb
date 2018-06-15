@@ -5,6 +5,7 @@
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../../TandemPartnerWebDoc" />
+    <option name="OPTION_SCOPE" value="private" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

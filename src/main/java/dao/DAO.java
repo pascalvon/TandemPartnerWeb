@@ -12,21 +12,21 @@ public class DAO {
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
 
-    /** ================= Bezirk =================== */
+    // ================= Bezirk ===================
     public Bezirk findBezirkByID(int bezirkID) {
         return em.createNamedQuery("findBezirkByID", Bezirk.class)
                 .setParameter("id", bezirkID)
                 .getSingleResult();
     }
 
-    /** ================= Freizeitaktivitaeten =================== */
+    // ================= Freizeitaktivitaeten ===================
     public Freizeitaktivitaeten findFreizeitaktivitaetenByID(String freizeitaktivitaetenID) {
         return em.createNamedQuery("findByFreizeitaktivitaetenID", Freizeitaktivitaeten.class)
                 .setParameter("id", Integer.parseInt(freizeitaktivitaetenID))
                 .getSingleResult();
     }
 
-    /** ================= Matchanfragen =================== */
+    // ================= Matchanfragen ===================
     public ArrayList<Matchanfragen> findMatchanfragenByNutzerID(int nutzerID) {
         return (ArrayList<Matchanfragen>) em.createNamedQuery("findMatchanfragenByNutzerID", Matchanfragen.class)
                 .setParameter("partnerID", nutzerID)
@@ -77,7 +77,7 @@ public class DAO {
         em.merge(matchanfrage);
     }
 
-    /** ================= Nutzer =================== */
+    // ================= Nutzer ===================
     public Nutzer findNutzerByMail(String mail) {
         try {
             return em.createNamedQuery("findNutzerByMail", Nutzer.class)
@@ -113,14 +113,14 @@ public class DAO {
         em.merge(nutzer);
     }
 
-    /** ================= Sprache =================== */
+    // ================= Sprache ===================
     public Sprache findSpracheByID(String spracheID) {
         return em.createNamedQuery("findBySpracheID", Sprache.class)
                 .setParameter("id", Integer.parseInt(spracheID))
                 .getSingleResult();
     }
 
-    /** ================= Suchanfrage =================== */
+    // ================= Suchanfrage ===================
     public ArrayList<Suchanfrage> findSuchanfrageByNutzer(Nutzer nutzer) {
         return (ArrayList<Suchanfrage>) em.createNamedQuery("findSuchanfrageByNutzer", Suchanfrage.class)
                 .setParameter("nutzer", nutzer)

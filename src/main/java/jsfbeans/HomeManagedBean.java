@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Die {@code HomeManagedBean} dient zur Verwaltung der Variablen und Methoden fuer
+ * Die {@code HomeManagedBean} dient zur Verwaltung der Variablen und Methoden für
  * die {@code home.xhtml}.
  */
 @ManagedBean
@@ -29,14 +29,14 @@ public class HomeManagedBean {
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     /**
-     * Das DAO-Objekt, welches Methoden enthaelt, um abfragen mit der Datenbank zu realisieren.
+     * Das DAO-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
     private DAO                             dao;
 
     /**
      * Das Nutzer-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
-     * durch die Methode {@link #initNutzer() (void) initNutzer} initialisiert wird.
+     * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer                          nutzer;
 
@@ -48,7 +48,7 @@ public class HomeManagedBean {
     // ============================  Constructors  ===========================79
 
     /**
-     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() (void) initNutzer} aufgerufen wird.
+     * Einziger Konstruktor der Klasse, in der die Methode {@link #initNutzer() initNutzer} aufgerufen wird.
      */
     public HomeManagedBean() {
         initNutzer();
@@ -105,8 +105,8 @@ public class HomeManagedBean {
 //    }
 
     /**
-     * Initialisiert {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList} und ruft
-     * {@link #calculateMatchanfragen() (void) calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList}
+     * Initialisiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
+     * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den offenen Matchanfragen wiedergegeben wird.
      *
      * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des aktuell angemeldeten Nutzers
@@ -138,7 +138,8 @@ public class HomeManagedBean {
      * Holt sich alle offenen Matchanfragen, die der eingeloggte Nutzer hat und haelt sie sich in einer {@code ArrayList}.
      * Dann werden die {@code Freizeitaktivitaeten} der {@code Nutzer}, welche die Matchanfragen gesendet haben (also die Initiatoren),
      * mit den {@code Freizeitaktivitaeten} des eingeloggten Nutzers verglichen und gemeinsame {@code Freizeitaktivitaeten} werden
-     * in einen {@code String} geschrieben und anschliessend wird ein neus {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList (ArrayList) matchanfragenModelArrayList} uebergeben.
+     * in einen {@code String} geschrieben und anschliessend wird ein neus {@code MatchanfragenModel} erzeugt und dem
+     * {@link #matchanfragenModelArrayList matchanfragenModelArrayList} uebergeben.
      */
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
