@@ -30,7 +30,7 @@
 
                     </b:navbarLinks>
                     <b:navbarLinks pull="right">
-                        <b:navLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" href="impressum.xhtml"/>
+                        <b:navCommandLink class="#{view.viewId == '/impressum.xhtml' ? 'active' : ''}" value="Impressum" action="#{standardtemplateManagedBean.redirectToImpressum}"/>
 
                         <b:navLink style="font-weight: bold; background-color:gold ;" value="| #{loginManagedBean.nutzer.vorname} |"/>
                         <b:navCommandLink value="#{standardtemplateManagedBean.logStatus}" action="#{standardtemplateManagedBean.logout}"/>

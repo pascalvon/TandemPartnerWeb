@@ -13,7 +13,7 @@ import javax.faces.validator.ValidatorException;
 import java.io.Serializable;
 
 /**
- * Die {@code LoginManagedBean} dient zur Verwaltung der Variablen und Methoden f&uuml;r die {@code login.xhtml} und {@code standardtemplate.xhtml}.
+ * Die {@code LoginManagedBean} dient zur Verwaltung der Variablen und Methoden f&uuml;r die {@code login.xhtml}.
  */
 @ManagedBean
 @SessionScoped
@@ -42,6 +42,8 @@ public class LoginManagedBean implements Serializable {
      */
     private String password;
 
+    private boolean loggedIn = false;
+
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
@@ -53,8 +55,12 @@ public class LoginManagedBean implements Serializable {
      * @throws ValidatorException, wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
         nutzer = dao.findNutzerByMail(mail);
-        return "home?faces-redirect=true";
+        context.getExternalContext().getSessionMap().put("nutzer", nutzer.getMail());
+        loggedIn = true;
+        return "/nutzer/home?faces-redirect=true";
     }
 
     /**
@@ -103,6 +109,14 @@ public class LoginManagedBean implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     // =================  protected/package local  Methods ===================79

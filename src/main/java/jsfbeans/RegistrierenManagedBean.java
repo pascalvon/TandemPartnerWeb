@@ -40,7 +40,7 @@ public class RegistrierenManagedBean {
             addFreizeitaktivitaetenToNutzer();
             dao.merge(nutzer);
             initNutzer();
-            return "home?faces-redirect=true";
+            return "/nutzer/home?faces-redirect=true";
     }
 
     public Nutzer getNutzer() {

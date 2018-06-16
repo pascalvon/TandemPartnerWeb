@@ -51,7 +51,8 @@ public class Nutzer {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Freizeitaktivitaeten> freizeitaktivitaetenSet = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nutzer", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nutzer")//, cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Suchanfrage> suchanfrageSet;
 
     public Nutzer(){

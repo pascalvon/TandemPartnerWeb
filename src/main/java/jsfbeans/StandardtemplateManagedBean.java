@@ -58,6 +58,10 @@ public class StandardtemplateManagedBean {
         }
     }
 
+    // TODO Joe: 2018-06-17 verursacht Probleme
+    public String redirectToImpressum() {
+        return "/impressum?faces-redirect=true";
+    }
     /**
      * Die Session wird ung&uuml;ltig gemacht und alle an sie gebundenen Objekte werden aufgehoben.
      *
@@ -65,7 +69,7 @@ public class StandardtemplateManagedBean {
      */
     public String logout()  {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
+        return "/login?faces-redirect=true";
     }
 
     public String getLogStatus() {
