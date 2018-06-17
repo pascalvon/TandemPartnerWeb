@@ -50,7 +50,7 @@ public class SuchanfrageManagedBean {
     }
 
     public String showSpracheName(int spracheID) {
-        return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+        return dao.findSpracheByID(spracheID).getNameSprache();
     }
 
     public Nutzer getNutzer() {

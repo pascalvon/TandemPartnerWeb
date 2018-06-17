@@ -62,7 +62,7 @@ public class HomeManagedBean {
      * @return  Gibt den Namen der gesuchten Sprache zur&uuml;ck.
      */
     public String showSpracheName(int spracheID) {
-        return dao.findSpracheByID(String.valueOf(spracheID)).getNameSprache();
+        return dao.findSpracheByID(spracheID).getNameSprache();
     }
 
     /**

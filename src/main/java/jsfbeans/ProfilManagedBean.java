@@ -153,7 +153,7 @@ public class ProfilManagedBean {
         List<Sprache> selectedSprachenList = new ArrayList<>();
         String[] selectedSprachenArray = selectedSprachenString.split(",");
         for (String aSelectedSprachenArray : selectedSprachenArray) {
-            selectedSprachenList.add(dao.findSpracheByID(aSelectedSprachenArray));
+            selectedSprachenList.add(dao.findSpracheByID(Integer.parseInt(aSelectedSprachenArray)));
         }
         for (Sprache aSelectedSprachenList : selectedSprachenList) {
             nutzer.addSprache(aSelectedSprachenList);
@@ -165,7 +165,7 @@ public class ProfilManagedBean {
         ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
         String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
         for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
-            selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(aSelectedFreizeitaktivitaetenArray));
+            selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(Integer.parseInt(aSelectedFreizeitaktivitaetenArray)));
         }
         for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
             nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);

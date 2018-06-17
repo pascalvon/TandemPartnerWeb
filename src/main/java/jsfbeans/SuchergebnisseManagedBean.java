@@ -29,20 +29,13 @@ public class SuchergebnisseManagedBean {
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
-        this.suchanfrage    = initSuchanfrage();
-        this.nutzer         = initNutzer();
+        initSuchanfrage();
+        initNutzer();
     }
 
     // ===========================  public  Methods  =========================79
-    public void sendRequest(int partnerID) {
-        Matchanfragen matchanfragen = new Matchanfragen();
-        matchanfragen.getId().setInitiator(nutzer.getId());
-        matchanfragen.getId().setPartner(partnerID);
-        matchanfragen.setAngenommen((byte) 0);
-        matchanfragen.getId().setSpracheID(suchanfrage.getParamSpracheID());
-        if (!validateMatchanfragen(matchanfragen)) {
-            dao.merge(matchanfragen);
-        }
+    public String showSpracheName(int spracheID) {
+        return dao.findSpracheByID(spracheID).getNameSprache();
     }
 
     public boolean matchanfragenAlreadyExist(Nutzer tempNutzer) {
@@ -54,6 +47,21 @@ public class SuchergebnisseManagedBean {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+
+    public void sendRequest(int partnerID) {
+        Matchanfragen matchanfragen = new Matchanfragen();
+        matchanfragen.getId().setInitiator(nutzer.getId());
+        matchanfragen.getId().setPartner(partnerID);
+        matchanfragen.setAngenommen((byte) 0);
+        matchanfragen.getId().setSpracheID(suchanfrage.getParamSpracheID());
+        if (!validateMatchanfragen(matchanfragen)) {
+            dao.merge(matchanfragen);
+        }
+    }
+
+    public Suchanfrage getSuchanfrage() {
+        return suchanfrage;
     }
 
     public ArrayList<SuchergebnisModal> getSuchergebnisseArrayList() {
@@ -68,18 +76,25 @@ public class SuchergebnisseManagedBean {
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-    private Suchanfrage initSuchanfrage() {
+    private void initSuchanfrage() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         SuchanfrageManagedBean loggedNutzer = (SuchanfrageManagedBean) elContext.getELResolver().getValue(elContext, null, "suchanfrageManagedBean");
         suchanfrage = loggedNutzer.getSuchanfrage();
-        return suchanfrage;
     }
 
-    private Nutzer initNutzer() {
+    private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         SuchanfrageManagedBean loggedNutzer = (SuchanfrageManagedBean) elContext.getELResolver().getValue(elContext, null, "suchanfrageManagedBean");
         nutzer = loggedNutzer.getNutzer();
-        return nutzer;
+    }
+
+    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
+        try {
+            Matchanfragen matchanfragen1 = dao.findMatchanfragenByMatchanfragen(matchanfragen);
+            return matchanfragen.equals(matchanfragen1);
+        } catch(NullPointerException e) {
+            return false;
+        }
     }
 
     private void calculateSuchanfrage() {
@@ -97,15 +112,6 @@ public class SuchergebnisseManagedBean {
                     suchergebnisseArrayList.add(new SuchergebnisModal(tempNutzer, aktivitaeten.size(), aktivitaetenString));
                 }
             }
-        }
-    }
-
-    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
-        try {
-            Matchanfragen matchanfragen1 = dao.findMatchanfragenByMatchanfragen(matchanfragen);
-            return matchanfragen.equals(matchanfragen1);
-        } catch(NullPointerException e) {
-            return false;
         }
     }
 

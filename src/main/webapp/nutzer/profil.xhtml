@@ -21,7 +21,7 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="vorname" label="Vorname" required="true" placeholder="Vorname"
+                    <b:inputText id="vorname" label="Vorname:" required="true" placeholder="Vorname"
                                  requiredMessage="Bitte gib Deinen Vornamen ein!"
                                  value="#{profilManagedBean.nutzer.vorname}">
                     <f:ajax event="blur" execute="vorname" render="m_vorname vorname"/>
@@ -32,7 +32,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="nachname" label="Nachname" required="true" placeholder="Nachname"
+                    <b:inputText id="nachname" label="Nachname:" required="true" placeholder="Nachname"
                                  requiredMessage="Bitte gib Deinen Nachnamen ein!"
                                  value="#{profilManagedBean.nutzer.nachname}">
                         <f:ajax event="blur" execute="nachname" render="m_nachname nachname"/>
@@ -62,7 +62,7 @@
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
                                  requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
+                                 label="E-Mail:" placeholder="name@example.com" value="#{profilManagedBean.mail}">
                         <f:validator binding="#{mailValidatorProfil}"/>
                         <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
@@ -151,7 +151,7 @@
                 <b:column span="4">
                     <!--><h:outputLabel id="freizeitaktivitaeten" value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/><-->
-                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
                                        requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
                                        maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}"

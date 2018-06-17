@@ -74,7 +74,7 @@
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
                                  requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
+                                 label="E-Mail:" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
                         <f:validator binding="#{mailValidatorRegistrieren}"/>
                         <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
@@ -161,7 +161,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
                                        requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
                                        maxHeight="200"
