@@ -78,10 +78,6 @@ public class MatchesManagedBean {
         return nutzer;
     }
 
-//    public void setNutzer(Nutzer nutzer) {
-//        this.nutzer = nutzer;
-//    }
-
     /**
      * Initialisiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
      * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
@@ -94,10 +90,6 @@ public class MatchesManagedBean {
         calculateMatchanfragen();
         return matchanfragenModelArrayList;
     }
-
-//    public void setMatchanfragenModelArrayList(ArrayList<MatchanfragenModel> matchanfragenModelArrayList) {
-//        this.matchanfragenModelArrayList = matchanfragenModelArrayList;
-//    }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79

@@ -48,11 +48,11 @@ public class LoginManagedBean implements Serializable {
     // ===========================  public  Methods  =========================79
 
     /**
-     * Holt sich &üüml;ber die {@link #dao dao} und der {@link #mail mail} die Daten des Nutzers aus der Datenbank und
+     * Holt sich &uuml;ber die {@link #dao dao} und der {@link #mail mail} die Daten des Nutzers aus der Datenbank und
      * &uuml;bergibt sie dem {@link #nutzer nutzer}.
      *
      * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die {@code home.xhtml} weitergeleitet wird.
-     * @throws ValidatorException, wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
+     * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -72,6 +72,11 @@ public class LoginManagedBean implements Serializable {
         return nutzer;
     }
 
+    /**
+     * Ersetzt das {@code Nutzer}-Objekt durch das &uuml;bergebene {@code Nutzer}-Objekt.
+     *
+     * @param nutzer {@code Nutzer}-Objekt, welches das alte Objekt ersetzt.
+     */
     public void setNutzer(Nutzer nutzer) {
         this.nutzer = nutzer;
     }

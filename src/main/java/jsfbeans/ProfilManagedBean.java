@@ -40,12 +40,33 @@ public class ProfilManagedBean {
      * {@code String}, welcher die E-Mail-Adresse des angemeldeten Nutzers enth&auml;lt.
      */
     private String      mail;
+
+    /**
+     * {@code int}-Wert, welcher die Bezirk-ID des angemeldeten Nutzers enth&auml;lt.
+     */
     private int         bezirkID;
+
+    /**
+     * {@code String}, welcher die Namen der Sprachen enth&auml;lt, die der angemeldete Nutzer spricht.
+     */
     private String      selectedSprachenString;
+
+    /**
+     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer spricht.
+     */
     private String      selectedFreizeitaktivitaetenString;
+
+    /**
+     * {@code String}, f&uuml;r die Eingabe eines neuen Passworts des angemeldeten Nutzers.
+     */
     private String      password;
 
     // ============================  Constructors  ===========================79
+
+    /**
+     * Initialisiert ein neu erzeugtes {@code ProfilManagedBean}-Objekt, ruft dabei die Methode {@link #initNutzer() initNutzer} auf und
+     * wei&szlig;t den Variablen {@link #mail mail} und {@link #bezirkID bezirkID} die jeweiligen Werte vom vorher initialisierten {@link #nutzer nutzer} zu.
+     */
     public ProfilManagedBean() {
         initNutzer();
         this.mail       = nutzer.getMail();
@@ -53,6 +74,19 @@ public class ProfilManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
+    /**
+     * <pre>
+     * Aktualisiert die Daten des angemeldeten Nutzers.
+     * Unter anderem werden folgende if-else-Anweisungen durchgegangen:
+     *  1. Falls der angemeldete Nutzer ein neues Passwort festgelegt hat, wird dieses in {@link #nutzer nutzer} reingeschrieben.
+     *  2. Falls der angemeldete Nutzer seine E-Mail-Adresse nicht aktualisiert, werden seine Angaben aktualisiert,
+     *     das {@link #nutzer nutzer}-Objekt in die Datenbank gemerged und {@link #refreshNutzer() refreshNutzer} aufgerufen.
+     *  3. Falls der angemeldete Nutzer seine E-Mail-Adresse aktualisiert, wird neben den Schritten aus 2. noch die E-Mail-Adresse
+     *     des angemeldeten Nutzers aktualisiert.
+     * </pre>
+     *
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der angemeldete Nutzer bei erfolgreicher Aktualisierung auf die {@code home.xhtml} weitergeleitet wird.
+     */
     public String update() {
         if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
             nutzer.setPasswort(password);
@@ -76,6 +110,12 @@ public class ProfilManagedBean {
         }
     }
 
+    /**
+     * L&ouml;scht den angemeldeten Nutzer aus der Datenbank. Vorher werden alle Suchanfrage- und Matchanfragen-Entit&auml;ten,
+     * welche die ID des angemeldeten Nutzers enthalten gel&ouml;scht.
+     *
+     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher L&ouml;schung auf die {@code login.xhtml} weitergeleitet wird.
+     */
     public String deleteNutzer() {
         dao.deleteSuchanfrageByNutzer(nutzer);
         dao.deleteMatchanfrageByNutzer(nutzer);
@@ -84,26 +124,55 @@ public class ProfilManagedBean {
         return "login?faces-redirect=true";
     }
 
+    /**
+     * Liefert das {@code Nutzer}-Objekt zur&uuml;ck, mit den Daten des angemeldeten Nutzers.
+     *
+     * @return {@code Nutzer}-Objekt mit den Daten des angemeldeten Nutzers.
+     */
     public Nutzer getNutzer() {
         return nutzer;
     }
 
+    /**
+     * Ersetzt das {@code Nutzer}-Objekt durch das &uuml;bergebene {@code Nutzer}-Objekt.
+     *
+     * @param nutzer {@code Nutzer}-Objekt, welches das alte Objekt ersetzt.
+     */
     public void setNutzer(Nutzer nutzer) {
         this.nutzer = nutzer;
     }
 
+    /**
+     * Liefert die E-Mail-Adresse des angemeldeten Nutzers zur&uuml;ck.
+     *
+     * @return E-Mail-Adresse des angemeldeten Nutzers.
+     */
     public String getMail() {
         return mail;
     }
 
+    /**
+     * Ersetzt die E-Mail-Adresse des angemeldeten Nutzers durch eine Neue.
+     *
+     * @param mail Die E-Mail-Adresse, welche die alte E-Mail-Adresse ersetzt.
+     */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
+    /**
+     * Liefert die Bezirk-ID des angemeldeten Nutzers zur&uuml;ck.
+     *
+     * @return Bezirk-ID des angemeldeten Nutzers.
+     */
     public int getBezirkID() {
         return bezirkID;
     }
 
+    /**
+     *
+     * @param bezirkID
+     */
     public void setBezirkID(int bezirkID) {
         this.bezirkID = bezirkID;
     }
