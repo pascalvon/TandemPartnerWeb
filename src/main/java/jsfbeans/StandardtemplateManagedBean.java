@@ -62,6 +62,7 @@ public class StandardtemplateManagedBean {
     public String redirectToImpressum() {
         return "/impressum?faces-redirect=true";
     }
+
     /**
      * Die Session wird ung&uuml;ltig gemacht und alle an sie gebundenen Objekte werden aufgehoben.
      *
