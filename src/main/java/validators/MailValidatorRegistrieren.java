@@ -14,6 +14,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Pattern;
 
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
 @ManagedBean
 @RequestScoped
 public class MailValidatorRegistrieren implements Validator {

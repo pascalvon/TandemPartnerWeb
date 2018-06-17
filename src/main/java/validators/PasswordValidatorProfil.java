@@ -7,6 +7,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
 @FacesValidator("passwordValidatorProfil")
 public class PasswordValidatorProfil implements Validator {
 

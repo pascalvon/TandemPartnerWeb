@@ -13,6 +13,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.Set;
 
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
 @FacesValidator("spracheValidatorSuchanfrage")
 public class SpracheValidatorSuchanfrage implements Validator {
 
