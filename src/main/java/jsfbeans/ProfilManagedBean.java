@@ -98,7 +98,7 @@ public class ProfilManagedBean {
 
     public void setMail(String mail) {
         this.mail = mail;
-    } // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     public int getBezirkID() {
         return bezirkID;
@@ -106,7 +106,7 @@ public class ProfilManagedBean {
 
     public void setBezirkID(int bezirkID) {
         this.bezirkID = bezirkID;
-    }  // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     public String getSelectedSprachenString() {
 
@@ -121,7 +121,7 @@ public class ProfilManagedBean {
 
     public void setSelectedSprachenString(String selectedSprachenString) {
         this.selectedSprachenString = selectedSprachenString;
-    }    // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     public String getSelectedFreizeitaktivitaetenString() {
         selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
@@ -130,7 +130,7 @@ public class ProfilManagedBean {
 
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
-    }      // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     public String getPassword() {
         return password;
@@ -138,14 +138,14 @@ public class ProfilManagedBean {
 
     public void setPassword(String password) {
         this.password = password;
-    }  // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 
     private void updateSprachen() {
@@ -175,7 +175,7 @@ public class ProfilManagedBean {
     private void refreshNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
+        loginManagedBean.setNutzer(dao.findNutzerByMail(nutzer.getMail()));
     }
 
     // ============================  Inner Classes  ==========================79

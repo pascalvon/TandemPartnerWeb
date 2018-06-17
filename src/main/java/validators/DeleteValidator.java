@@ -35,6 +35,6 @@ public class DeleteValidator implements Validator {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 }

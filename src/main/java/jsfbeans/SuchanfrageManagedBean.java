@@ -8,14 +8,11 @@ import utilities.FreizeitaktivitaetenStringTransformer;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 
 @ManagedBean
-// TODO Joe: 13.06.2018 Scope wurde von Request auf Session geandert. Muss getestet werden und bei fehlern, muss die SessionScope vom SuchanfrageManagedBean nur gekillt werden,
-// TODO Joe: 13.06.2018 wenn bei Suchergebnissen auf Fertig oder Abbrechen gedrueckt wird.
 @SessionScoped
 public class SuchanfrageManagedBean {
 
@@ -35,9 +32,8 @@ public class SuchanfrageManagedBean {
     }
 
     // ===========================  public  Methods  =========================79
-    // TODO Joe: 14.06.2018 Validierung von bereits vorhandenen gleichen Suchanfragen fehlt
     public String search() {
-        if (dao.findSuchanfrageByNutzer(nutzer).size()<5) {
+        if (!validateSuchanfrage() && dao.findSuchanfrageByNutzer(nutzer).size()<5) {
             suchanfrage.addNutzer(nutzer);
             dao.merge(suchanfrage);
         }
@@ -98,8 +94,18 @@ public class SuchanfrageManagedBean {
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
         return nutzer;
+    }
+
+    private boolean validateSuchanfrage() {
+        try {
+            Suchanfrage existingSuchanfrage = dao.findSuchanfrage(suchanfrage, nutzer);
+            return existingSuchanfrage.getParamSpracheID() == suchanfrage.getParamSpracheID() &&
+                    existingSuchanfrage.getNutzer().getId() == nutzer.getId();
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
     // ============================  Inner Classes  ==========================79

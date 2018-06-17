@@ -100,7 +100,7 @@ public class RegistrierenManagedBean {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        loginManagedBean.nutzer = dao.findNutzerByMail(nutzer.getMail());
+        loginManagedBean.setNutzer(dao.findNutzerByMail(nutzer.getMail()));
     }
 
     // ============================  Inner Classes  ==========================79

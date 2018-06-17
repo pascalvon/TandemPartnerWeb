@@ -58,6 +58,16 @@ public class StandardtemplateManagedBean {
         }
     }
 
+    /**
+     * Die Session wird ung&uuml;ltig gemacht und alle an sie gebundenen Objekte werden aufgehoben.
+     *
+     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code login.xhtml} weitergeleitet wird.
+     */
+    public String logout()  {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
+    }
+
     public String getLogStatus() {
         if (validateNutzer(nutzer.getMail())) {
             logStatus = "Login";
@@ -76,7 +86,7 @@ public class StandardtemplateManagedBean {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 
     private boolean validateNutzer(String mail) {

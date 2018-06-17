@@ -58,16 +58,6 @@ public class LoginManagedBean implements Serializable {
     }
 
     /**
-     * Die Session wird ung&uuml;ltig gemacht und alle an sie gebundenen Objekte werden aufgehoben.
-     * 
-     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code login.xhtml} weitergeleitet wird.
-     */
-    public String logout()  {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
-    }                 // todo CCE : Falls nur in der standardtemplate.xhtml genutzt wird, dorthin verlagern, wenn moeglich.
-
-    /**
      * Liefert das {@code Nutzer}-Objekt zur&uuml;ck, mit den Daten des angemeldeten Nutzers.
      *
      * @return {@code Nutzer}-Objekt mit den Daten des angemeldeten Nutzers.
@@ -76,9 +66,9 @@ public class LoginManagedBean implements Serializable {
         return nutzer;
     }
 
-//    public void setNutzer(Nutzer nutzer) {
-//        this.nutzer = nutzer;
-//    }
+    public void setNutzer(Nutzer nutzer) {
+        this.nutzer = nutzer;
+    }
 
     /**
      * Liefert die eingegebene E-Mail-Adresse zur&uuml;ck.
@@ -96,7 +86,7 @@ public class LoginManagedBean implements Serializable {
      */
     public void setMail(String mail) {
         this.mail = mail;
-    }     // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     /**
      * Liefert das eingegebene Passwort zur&uuml;ck.
@@ -113,26 +103,10 @@ public class LoginManagedBean implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
-    }  // todo CCE : Zur Sicherheit ausprobieren, ob auch ohne funktioniert
+    }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
-
-//    /**
-//     *
-//     * @param mail
-//     * @param password
-//     * @return
-//     */
-//    private boolean validateNutzer(String mail, String password) {
-//        try {
-//            Nutzer n = dao.findNutzerByMail(mail);
-//            return n.getPasswort().equals(HashedPasswordGenerator.generateHash(password));
-//        } catch (NullPointerException e) {
-//            return false;
-//        }
-//    }
-
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

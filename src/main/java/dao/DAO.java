@@ -103,6 +103,22 @@ public class DAO {
                 .getResultList();
     }
 
+    public boolean findNutzerByMailBoolean(String mail) {
+        try {
+            Nutzer n = em.createNamedQuery("findNutzerByMailBoolean", Nutzer.class)
+                    .setParameter("mail", mail)
+                    .getSingleResult();
+            if (n.getMail().length()>0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        } catch (NoResultException e) {
+            return true;
+        }
+    }
+
     public void deleteNutzer(Nutzer nutzer) {
         em.createNamedQuery("deleteNutzer")
                 .setParameter("id", nutzer.getId())
@@ -126,6 +142,18 @@ public class DAO {
                 .setParameter("nutzer", nutzer)
                 .getResultList();
     }
+
+    public Suchanfrage findSuchanfrage(Suchanfrage suchanfrage, Nutzer nutzer) {
+        try {
+            return (Suchanfrage) em.createNamedQuery("findSuchanfrage")
+                    .setParameter("spracheId", suchanfrage.getParamSpracheID())
+                    .setParameter("nutzerId", nutzer.getId())
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     public void deleteSuchanfrageNQ(Suchanfrage suchanfrage) {
         em.createNamedQuery("deleteSuchanfrage")
                 .setParameter("id", suchanfrage.getSuchId())
@@ -138,39 +166,8 @@ public class DAO {
                 .executeUpdate();
     }
 
-    public boolean findNutzerByMailBoolean(String mail) {
-        try {
-            Nutzer n = em.createNamedQuery("findNutzerByMailBoolean", Nutzer.class)
-                    .setParameter("mail", mail)
-                    .getSingleResult();
-            if (n.getMail().length()>0) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        } catch (NoResultException e) {
-            return true;
-        }
-    }
-
+    // ================= Merge ===================
     public void merge(Suchanfrage suchanfrage) {
         em.merge(suchanfrage);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

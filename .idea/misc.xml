@@ -6,7 +6,6 @@
   <component name="IMDB Enhancer" showOnExecute="false" startAsBackgroundTask="true" autoUpdate="true" enhancerClassName="com.lucanet.imdb.imdbenhancer.ASM.ASMEnhancer" enhancerLibraryFolderFromBase="libsandtools/build/imdb" srcFolder="src" srcTestFolder="test" rtFolder="rt" rtTestFolder="rt-test" userHome="$USER_HOME$" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/TandemPartnerWebDoc" />
-    <option name="OPTION_SCOPE" value="private" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -18,7 +17,7 @@
   <component name="ProjectResources">
     <resource url="http://www.w3.org/2001/XMLSchema-instance" location="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8_92" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
