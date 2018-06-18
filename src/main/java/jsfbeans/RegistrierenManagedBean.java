@@ -38,9 +38,15 @@ public class RegistrierenManagedBean {
     private int                             bezirkID;
 
     /**
-     *
+     * Ein {@code List}-Objekt mit der Typisierung {@code Sprache}, welches im Konstruktor instanziiert wird und
+     * in dem die {@code Sprache}-Objekte gehalten werden, die den Sprachennamen
+     * aus {@link #selectedSprachenString selectedSprachenString} entsprechen.
      */
     private List<Sprache>                   selectedSprachenList;
+
+    /**
+     *
+     */
     private String                          selectedSprachenString;
     private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
     private String                          selectedFreizeitaktivitaetenString;
