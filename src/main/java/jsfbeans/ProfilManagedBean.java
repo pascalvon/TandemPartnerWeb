@@ -215,6 +215,7 @@ public class ProfilManagedBean {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.getNutzer();
+        // todo CCE : JavaDoc initNutzer aktualisieren
     }
 
     private void updateSprachen() {

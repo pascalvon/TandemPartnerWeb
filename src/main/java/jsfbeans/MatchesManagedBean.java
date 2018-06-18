@@ -95,7 +95,7 @@ public class MatchesManagedBean {
     // ===========================  private  Methods  ========================79
     /**
      * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird der {@code Nutzer} der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();

@@ -42,24 +42,22 @@ public class LoginManagedBean implements Serializable {
      */
     private String password;
 
-    private boolean loggedIn = false;
 
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
     /**
      * Holt sich &uuml;ber die {@link #dao dao} und der {@link #mail mail} die Daten des Nutzers aus der Datenbank und
-     * &uuml;bergibt sie dem {@link #nutzer nutzer}.
+     * &uuml;bergibt sie dem {@link #nutzer nutzer}. Zus&auml:tslich wird die E-Mail-Adresse des {@code Nutzer}-Objekts
+     * in der Session registriert, um durch den Filter passieren zu k&ouml;nnen.
      *
      * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die {@code home.xhtml} weitergeleitet wird.
      * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {
         FacesContext context = FacesContext.getCurrentInstance();
-
         nutzer = dao.findNutzerByMail(mail);
         context.getExternalContext().getSessionMap().put("nutzer", nutzer.getMail());
-        loggedIn = true;
         return "/nutzer/home?faces-redirect=true";
     }
 
@@ -114,14 +112,6 @@ public class LoginManagedBean implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     // =================  protected/package local  Methods ===================79
