@@ -25,7 +25,7 @@ public class SuchergebnisseManagedBean {
     private DAO                             dao;
     private Suchanfrage                     suchanfrage;
     private Nutzer                          nutzer;
-    private ArrayList<SuchergebnisModal>    suchergebnisseArrayList;
+    private ArrayList<SuchergebnisModel>    suchergebnisseArrayList;
 
     // ============================  Constructors  ===========================79
     public SuchergebnisseManagedBean() {
@@ -64,13 +64,13 @@ public class SuchergebnisseManagedBean {
         return suchanfrage;
     }
 
-    public ArrayList<SuchergebnisModal> getSuchergebnisseArrayList() {
+    public ArrayList<SuchergebnisModel> getSuchergebnisseArrayList() {
         suchergebnisseArrayList = new ArrayList<>();
         calculateSuchanfrage();
         return suchergebnisseArrayList;
     }
 
-    public void setSuchergebnisseArrayList(ArrayList<SuchergebnisModal> suchergebnisseArrayList) {
+    public void setSuchergebnisseArrayList(ArrayList<SuchergebnisModel> suchergebnisseArrayList) {
         this.suchergebnisseArrayList = suchergebnisseArrayList;
     }
 
@@ -109,7 +109,7 @@ public class SuchergebnisseManagedBean {
                 if (!aktivitaeten.isEmpty()) {
                     List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
                     String aktivitaetenString = String.join(",", aktivitaetenList);
-                    suchergebnisseArrayList.add(new SuchergebnisModal(tempNutzer, aktivitaeten.size(), aktivitaetenString));
+                    suchergebnisseArrayList.add(new SuchergebnisModel(tempNutzer, aktivitaeten.size(), aktivitaetenString));
                 }
             }
         }

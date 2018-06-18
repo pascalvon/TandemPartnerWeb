@@ -50,10 +50,10 @@ public class MatchesManagedBean {
 
     // ===========================  public  Methods  =========================79
     /**
-     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zur&uuml;ck.
+     * Gibt Anhand einer Sprach-ID den Sprachennamen als {@code String} zur&uuml;ck.
      * Diese Methode wird dazu genutzt, um in der Tabelle der {@code matches.xhtml} die Sprachennamen anzuzeigen.
      *
-     * @param spracheID SprachID des gesuchten Sprachennamens
+     * @param spracheID Sprach-ID des gesuchten Sprachennamens
      * @return Gibt den Namen der gesuchten Sprache zur&uuml;ck.
      */
     public String showSpracheName(int spracheID) {
@@ -79,7 +79,7 @@ public class MatchesManagedBean {
     }
 
     /**
-     * Initialisiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
+     * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
      * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den zustandegekommenen {@code Matchanfragen} wiedergegeben wird.
      *
@@ -122,7 +122,7 @@ public class MatchesManagedBean {
                 aNutzer = dao.findNutzerByID(anAcceptedMatchanfragen.getId().getInitiator());
                 origin = "Empfangen";
             }
-            Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
+            Set<Freizeitaktivitaeten> aktivitaeten =   HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
             aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
             if (!aktivitaeten.isEmpty()) {
                 List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());

@@ -55,10 +55,10 @@ public class HomeManagedBean {
 
     // ===========================  public  Methods  =========================79
     /**
-     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zur&uuml;ck.
+     * Gibt Anhand einer Sprach-ID den Sprachennamen als {@code String} zur&uuml;ck.
      * Diese Methode wird dazu genutzt, um in der Tabelle der {@code home.xhtml} die Sprachennamen anzuzeigen.
      *
-     * @param   spracheID SprachID des gesuchten Sprachennamens
+     * @param   spracheID Sprach-ID des gesuchten Sprachennamens
      * @return  Gibt den Namen der gesuchten Sprache zur&uuml;ck.
      */
     public String showSpracheName(int spracheID) {
@@ -95,7 +95,7 @@ public class HomeManagedBean {
     }
 
     /**
-     * Initialisiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
+     * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
      * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den offenen Matchanfragen wiedergegeben wird.
      *

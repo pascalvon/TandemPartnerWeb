@@ -4,7 +4,7 @@ import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
-import utilities.FreizeitaktivitaetenStringTransformer;
+import utilities.FreizeitaktivitaetenStringConverter;
 import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
@@ -52,7 +52,7 @@ public class ProfilManagedBean {
     private String      selectedSprachenString;
 
     /**
-     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer spricht.
+     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer hat.
      */
     private String      selectedFreizeitaktivitaetenString;
 
@@ -193,7 +193,7 @@ public class ProfilManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
         return selectedFreizeitaktivitaetenString;
     }
 
@@ -220,7 +220,7 @@ public class ProfilManagedBean {
 
     private void updateSprachen() {
         nutzer.clearSprachenSet();
-        List<Sprache> selectedSprachenList = new ArrayList<>();
+        List<Sprache> selectedSprachenList = new ArrayList<>();       // todo CCE : checken ob instanziiert oder initialisiert genutzt wird
         String[] selectedSprachenArray = selectedSprachenString.split(",");
         for (String aSelectedSprachenArray : selectedSprachenArray) {
             selectedSprachenList.add(dao.findSpracheByID(Integer.parseInt(aSelectedSprachenArray)));
@@ -232,7 +232,7 @@ public class ProfilManagedBean {
 
     private void updateFreizeitaktivitaeten() {
         nutzer.clearFreizeitaktivitaetenSet();
-        ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
+        ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();       // todo CCE : checken ob instanziiert oder initialisiert genutzt wird
         String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
         for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
             selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(Integer.parseInt(aSelectedFreizeitaktivitaetenArray)));

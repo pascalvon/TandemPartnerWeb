@@ -2,10 +2,16 @@ package models;
 
 import utilities.AgeCalculator;
 
-public class SuchergebnisModal {
+/**
+ * Diese Klasse repr&aumlsentiert das Ergebnis der Suchanfrage eines angemeldeten Nutzers.
+ */
+public class SuchergebnisModel {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
+    /**
+     * Stellt einen Nutzer dar, welcher den Parametern aus der Suchanfrage entspricht
+     */
     private Nutzer      nutzer;
     private String      vorname;
     private String      nachname;
@@ -16,7 +22,7 @@ public class SuchergebnisModal {
     private String      commonFreizeitaktivitaetenString;
 
     // ============================  Constructors  ===========================79
-    public SuchergebnisModal(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
+    public SuchergebnisModel(Nutzer nutzer, int commonFreizeitaktivitaetenNumber, String commonFreizeitaktivitaetenString) {
         this.nutzer                             = nutzer;
         this.vorname                            = nutzer.getVorname();
         this.nachname                           = nutzer.getNachname();
