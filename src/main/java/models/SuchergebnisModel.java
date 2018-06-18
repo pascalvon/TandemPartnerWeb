@@ -40,64 +40,32 @@ public class SuchergebnisModel {
         return nutzer;
     }
 
-    public void setNutzer(Nutzer nutzer) {
-        this.nutzer = nutzer;
-    }
-
     public String getVorname() {
         return vorname;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
     }
 
     public String getNachname() {
         return nachname;
     }
 
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
-    }
-
     public Geschlecht getGeschlecht() {
         return geschlecht;
-    }
-
-    public void setGeschlecht(Geschlecht geschlecht) {
-        this.geschlecht = geschlecht;
     }
 
     public int getAlter() {
         return alter;
     }
 
-    public void setAlter(int alter) {
-        this.alter = alter;
-    }
-
     public Bezirk getBezirk() {
         return bezirk;
-    }
-
-    public void setBezirk(Bezirk bezirk) {
-        this.bezirk = bezirk;
     }
 
     public int getCommonFreizeitaktivitaetenNumber() {
         return commonFreizeitaktivitaetenNumber;
     }
 
-    public void setCommonFreizeitaktivitaetenNumber(int commonFreizeitaktivitaetenNumber) {
-        this.commonFreizeitaktivitaetenNumber = commonFreizeitaktivitaetenNumber;
-    }
-
     public String getCommonFreizeitaktivitaetenString() {
         return commonFreizeitaktivitaetenString;
-    }
-
-    public void setCommonFreizeitaktivitaetenString(String commonFreizeitaktivitaetenString) {
-        this.commonFreizeitaktivitaetenString = commonFreizeitaktivitaetenString;
     }
 
     // =================  protected/package local  Methods ===================79

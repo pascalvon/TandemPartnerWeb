@@ -122,7 +122,7 @@ public class MatchesManagedBean {
                 aNutzer = dao.findNutzerByID(anAcceptedMatchanfragen.getId().getInitiator());
                 origin = "Empfangen";
             }
-            Set<Freizeitaktivitaeten> aktivitaeten =   HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
+            Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
             aktivitaeten.retainAll(this.nutzer.getFreizeitaktivitaetenSet());
             if (!aktivitaeten.isEmpty()) {
                 List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
