@@ -5,7 +5,7 @@ import models.Nutzer;
 
 import java.util.ArrayList;
 
-public class FreizeitaktivitaetenStringTransformer {
+public class FreizeitaktivitaetenStringConverter {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79

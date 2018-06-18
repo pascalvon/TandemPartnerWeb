@@ -42,8 +42,6 @@ public class LoginManagedBean implements Serializable {
      */
     private String password;
 
-    private boolean loggedIn = false;
-
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
@@ -59,7 +57,6 @@ public class LoginManagedBean implements Serializable {
 
         nutzer = dao.findNutzerByMail(mail);
         context.getExternalContext().getSessionMap().put("nutzer", nutzer.getMail());
-        loggedIn = true;
         return "/nutzer/home?faces-redirect=true";
     }
 
@@ -114,14 +111,6 @@ public class LoginManagedBean implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     // =================  protected/package local  Methods ===================79

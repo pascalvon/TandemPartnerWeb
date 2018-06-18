@@ -11,16 +11,35 @@ import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Die {@code RegistrierenManagedBean} dient zur Verwaltung der Variablen und Methoden f&uuml;r die {@code profil.xhtml}.
+ */
 @ManagedBean
 @RequestScoped
 public class RegistrierenManagedBean {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
+    /**
+     * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
+     */
     @EJB
     private DAO                             dao;
+
+    /**
+     * Das {@code Nutzer}-Objekt, welches im Konstruktor initialisiert wird und in dem die Eingaben des Nutzers
+     * gehalten werden.
+     */
     private Nutzer                          nutzer;
+
+    /**
+     * {@code int}-Wert, in dem die Bezirk-ID des Nutzers nach der Eingabe gehalten wird.
+     */
     private int                             bezirkID;
+
+    /**
+     *
+     */
     private List<Sprache>                   selectedSprachenList;
     private String                          selectedSprachenString;
     private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;

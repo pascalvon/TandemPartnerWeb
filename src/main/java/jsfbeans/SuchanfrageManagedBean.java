@@ -3,7 +3,7 @@ package jsfbeans;
 import dao.DAO;
 import models.Nutzer;
 import models.Suchanfrage;
-import utilities.FreizeitaktivitaetenStringTransformer;
+import utilities.FreizeitaktivitaetenStringConverter;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -62,7 +62,7 @@ public class SuchanfrageManagedBean {
     }
 
     public String getSelectedFreizeitaktivitaetenString() {
-        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringTransformer.selectedFreizeitaktivitaetenString(nutzer);
+        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
         return selectedFreizeitaktivitaetenString;
     }
 
