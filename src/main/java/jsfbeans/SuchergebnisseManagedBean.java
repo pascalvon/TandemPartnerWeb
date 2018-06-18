@@ -103,9 +103,7 @@ public class SuchergebnisseManagedBean {
         matchanfragen.getId().setPartner(partnerID);
         matchanfragen.setAngenommen((byte) 0);
         matchanfragen.getId().setSpracheID(suchanfrage.getParamSpracheID());
-        if (!validateMatchanfragen(matchanfragen)) {
             dao.merge(matchanfragen);
-        }
     }
 
     /**
@@ -130,11 +128,6 @@ public class SuchergebnisseManagedBean {
         return suchergebnisseArrayList;
     }
 
-    // todo CCE : Pruefen, ob benoetigt wird.
-//    public void setSuchergebnisseArrayList(ArrayList<SuchergebnisModel> suchergebnisseArrayList) {
-//        this.suchergebnisseArrayList = suchergebnisseArrayList;
-//    }
-
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
@@ -157,17 +150,6 @@ public class SuchergebnisseManagedBean {
         nutzer = loggedNutzer.getNutzer();
     }
 
-
-    // todo CCE : Pruefen, ob benoetigt wird
-    private boolean validateMatchanfragen(Matchanfragen matchanfragen) {
-        try {
-            Matchanfragen matchanfragen1 = dao.findMatchanfragenByMatchanfragen(matchanfragen);
-            return matchanfragen.equals(matchanfragen1);
-        } catch(NullPointerException e) {
-            return false;
-        }
-    }
-
     /**
      * Holt sich alle Nutzer aus der Datenbank, die der Sprache-ID aus der Suchanfrage entsprechen und h&auml;lt sie
      * sich in einer {@code ArrayList}. Dann wird f&uuml;r jeden einzelnen vorgeschlagenen Nutzer aus der Liste
@@ -176,7 +158,7 @@ public class SuchergebnisseManagedBean {
      * werden die gemeinsamen Freizeitaktivit&auml;ten des angemeldeten und des vorgeschlagenen Nutzers erechnet
      * und in ein {@code String}-Objekt geschrieben.
      * Anschlie&szlig;end wird ein neues {@code SuchergebnisModel} erzeugt und dem
-     * {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
+     * {@link #suchergebnisseArrayList suchergebnisseArrayList} hinzugef&uuml;gt.
      */
     private void calculateSuchanfrage() {
         ArrayList<Nutzer> nutzerMatchSprache = dao.findNutzerBySpracheID(suchanfrage.getParamSpracheID());

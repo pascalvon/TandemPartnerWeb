@@ -121,18 +121,20 @@ public class SuchanfrageManagedBean {
         return nutzer;
     }
 
-    // todo CCE : Pruefen, ob benoetigt wird
-//    public void setNutzer(Nutzer nutzer) {
-//        this.nutzer = nutzer;
-//    }
-
-    // todo CCE : siehe Profil
+    /**
+     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen der statischen
+     * Methode {@code selectedFreizeitaktivitaetenString} der Klasse {@code FreizeitaktivitaetenStringConverter} und
+     * gibt den {@code String} zur&uuml;ck.
+     *
+     * @return Gibt eine Zeichenkette mit allen Freizeitaktivitäten des angemeldeten Nutzers zur&uuml;ck.
+     */
     public String getSelectedFreizeitaktivitaetenString() {
         selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
         return selectedFreizeitaktivitaetenString;
     }
 
-    // todo CCE : Pruefen, ob benoetigt wird - Soll der Nutzer an dieser stelle Aktivitaeten aendern koennen?
+    // todo CCE : Das selectMultiMenu in der suchanfrage.xhtml muss soweit bearbeitet werden,
+    // TODO Joe: 2018-06-18  dass keine eingaben in ihr erfolgen koennen und dann kann diese Methode geloescht werden.
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
@@ -167,11 +169,6 @@ public class SuchanfrageManagedBean {
         suchanfrageArrayList = dao.findSuchanfrageByNutzer(nutzer);
         return this.suchanfrageArrayList;
     }
-
-    // todo CCE : Pruefen, ob benoetigt wird
-//    public void setSuchanfrageArrayList(ArrayList<Suchanfrage> suchanfrageArrayList) {
-//        this.suchanfrageArrayList = suchanfrageArrayList;
-//    }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
