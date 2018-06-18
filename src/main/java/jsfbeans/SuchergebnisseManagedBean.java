@@ -92,8 +92,7 @@ public class SuchergebnisseManagedBean {
     }
 
     /**
-     * Instanziiert und initialisiert ein {@code Matchanfragen}-Objekt und merged es in die Datenbank,
-     * falls diese noch nicht in der Matchanfragen-Tabelle der Datenbank enthalten ist // todo CCE : if-Anweisung noch notwendig, da Button disabled, wenn Matchanfrage existiert?
+     * Instanziiert und initialisiert ein {@code Matchanfragen}-Objekt und merged es in die Datenbank.
      *
      * @param partnerID Stellt den Wert f&uuml;r die partner-Spalte in der Datenbank dar.
      */

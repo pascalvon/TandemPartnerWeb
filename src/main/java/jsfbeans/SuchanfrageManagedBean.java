@@ -40,7 +40,7 @@ public class SuchanfrageManagedBean {
     private String                  selectedFreizeitaktivitaetenString;
 
     /**
-     * Das {@code Suchanfrage}-Objekt, welches im Konstruktor instanziiert wird und in den die Suchparameter      // todo CCE : Pruefen, ob sonst wo "initialisiert" anstelle von "instanziiert" geschrieben wurde
+     * Das {@code Suchanfrage}-Objekt, welches im Konstruktor instanziiert wird und in den die Suchparameter
      * des angemeldeten Nutzers geschrieben werden.
      */
     private Suchanfrage             suchanfrage;
