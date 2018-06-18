@@ -26,7 +26,7 @@ public class StandardtemplateManagedBean {
     private DAO dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer nutzer;

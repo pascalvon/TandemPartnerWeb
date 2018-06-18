@@ -35,7 +35,7 @@ public class HomeManagedBean {
     private DAO                             dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer                          nutzer;
@@ -99,7 +99,7 @@ public class HomeManagedBean {
      * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den offenen Matchanfragen wiedergegeben wird.
      *
-     * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des aktuell angemeldeten Nutzers
+     * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des angemeldeten Nutzers
      */
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
         matchanfragenModelArrayList = new ArrayList<>();
@@ -128,6 +128,7 @@ public class HomeManagedBean {
      */
     private void calculateMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
+
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
             Nutzer aNutzer = dao.findNutzerByID(anOpenMatchanfragen.getId().getInitiator());
             Set<Freizeitaktivitaeten> aktivitaeten = new HashSet<>(aNutzer.getFreizeitaktivitaetenSet());
