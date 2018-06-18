@@ -30,7 +30,7 @@ public class MatchesManagedBean {
     private DAO                             dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer                          nutzer;
@@ -50,10 +50,10 @@ public class MatchesManagedBean {
 
     // ===========================  public  Methods  =========================79
     /**
-     * Gibt Anhand einer SprachID den Sprachennamen als {@code String} zur&uuml;ck.
+     * Gibt Anhand einer Sprach-ID den Sprachennamen als {@code String} zur&uuml;ck.
      * Diese Methode wird dazu genutzt, um in der Tabelle der {@code matches.xhtml} die Sprachennamen anzuzeigen.
      *
-     * @param spracheID SprachID des gesuchten Sprachennamens
+     * @param spracheID Sprach-ID des gesuchten Sprachennamens
      * @return Gibt den Namen der gesuchten Sprache zur&uuml;ck.
      */
     public String showSpracheName(int spracheID) {
@@ -79,7 +79,7 @@ public class MatchesManagedBean {
     }
 
     /**
-     * Initialisiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
+     * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
      * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den zustandegekommenen {@code Matchanfragen} wiedergegeben wird.
      *
@@ -95,7 +95,7 @@ public class MatchesManagedBean {
     // ===========================  private  Methods  ========================79
     /**
      * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird der {@code Nutzer} der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();

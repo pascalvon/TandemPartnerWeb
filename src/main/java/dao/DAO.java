@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class DAO {
 
     /**
-     * // TODO Kalle: 2018-06-17 Bitte beschreiben fuer die JavaDoc
+     * Das {@code EntityManager}-Objekt wird verwendet, um persistente Entitäten zu erstellen, zu entfernen und
+     * Entitäten anhand ihres Primärschlüssels bzw. weiteren Parametern zu finden und über Entitäten abzufragen.
      */
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;

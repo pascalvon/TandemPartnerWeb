@@ -47,14 +47,14 @@ public class LoginManagedBean implements Serializable {
 
     /**
      * Holt sich &uuml;ber die {@link #dao dao} und der {@link #mail mail} die Daten des Nutzers aus der Datenbank und
-     * &uuml;bergibt sie dem {@link #nutzer nutzer}.
+     * &uuml;bergibt sie dem {@link #nutzer nutzer}. Zus&auml;tslich wird die E-Mail-Adresse des {@code Nutzer}-Objekts
+     * in der Session registriert, um durch den Filter passieren zu k&ouml;nnen.
      *
      * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die {@code home.xhtml} weitergeleitet wird.
      * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {
         FacesContext context = FacesContext.getCurrentInstance();
-
         nutzer = dao.findNutzerByMail(mail);
         context.getExternalContext().getSessionMap().put("nutzer", nutzer.getMail());
         return "/nutzer/home?faces-redirect=true";

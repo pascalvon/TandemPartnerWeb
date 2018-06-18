@@ -31,7 +31,7 @@ public class ProfilManagedBean {
     private DAO         dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, welches den aktuell angemeldeten Nutzer darstellt, der im Konstruktor
+     * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Nutzer      nutzer;
@@ -52,7 +52,7 @@ public class ProfilManagedBean {
     private String      selectedSprachenString;
 
     /**
-     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer spricht.
+     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer hat.
      */
     private String      selectedFreizeitaktivitaetenString;
 
@@ -246,6 +246,7 @@ public class ProfilManagedBean {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.getNutzer();
+        // todo CCE : JavaDoc initNutzer aktualisieren
     }
 
     /**
@@ -254,7 +255,7 @@ public class ProfilManagedBean {
      */
     private void updateSprachen() {
         nutzer.clearSprachenSet();
-        List<Sprache> selectedSprachenList = new ArrayList<>();
+        List<Sprache> selectedSprachenList = new ArrayList<>();       // todo CCE : checken ob instanziiert oder initialisiert genutzt wird
         String[] selectedSprachenArray = selectedSprachenString.split(",");
         for (String aSelectedSprachenArray : selectedSprachenArray) {
             selectedSprachenList.add(dao.findSpracheByID(Integer.parseInt(aSelectedSprachenArray)));
