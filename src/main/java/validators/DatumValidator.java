@@ -12,7 +12,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
- * Der Validator f6uuml;r das Geburtsdatum beim registrieren eines Nutzers.
+ * Der Validator f&uuml;r das Geburtsdatum beim registrieren eines Nutzers.
  */
 @FacesValidator("datumValidator")
 public class DatumValidator implements Validator {
