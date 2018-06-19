@@ -22,9 +22,13 @@ public class Freizeitaktivitaeten {
         return Id;
     }
 
+    public String getNameAktivitaet() {
+        return nameAktivitaet;
+    }
+
     @Override
     public String toString() {
-        return nameAktivitaet;
+        return getNameAktivitaet();
     }
 
     @Override

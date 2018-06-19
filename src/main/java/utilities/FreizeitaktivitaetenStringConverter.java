@@ -18,7 +18,7 @@ public class FreizeitaktivitaetenStringConverter {
         for (int i = 0; i < selectedFreizeitaktivitaetenList.size(); i++) {
             selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i).getId());
         }
-        return String.join(",", selectedFreizeitaktivitaetenArray);
+        return String.join(", ", selectedFreizeitaktivitaetenArray);
     }
 
     // =================  protected/package local  Methods ===================79

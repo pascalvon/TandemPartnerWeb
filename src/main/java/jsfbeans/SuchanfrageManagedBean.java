@@ -1,6 +1,7 @@
 package jsfbeans;
 
 import dao.DAO;
+import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Suchanfrage;
 import utilities.FreizeitaktivitaetenStringConverter;
@@ -35,11 +36,6 @@ public class SuchanfrageManagedBean {
     private Nutzer                  nutzer;
 
     /**
-     * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer hat.
-     */
-    private String                  selectedFreizeitaktivitaetenString;
-
-    /**
      * Das {@code Suchanfrage}-Objekt, welches im Konstruktor instanziiert wird und in den die Suchparameter
      * des angemeldeten Nutzers geschrieben werden.
      */
@@ -49,6 +45,9 @@ public class SuchanfrageManagedBean {
      * Die {@code ArrayList} mit der Typisierung {@code Suchanfrage} enth&auml;lt die gespeicherten Suchanfragen des angemeldeten Nutzers.
      */
     private ArrayList<Suchanfrage>  suchanfrageArrayList;
+
+    private ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList;
+
 
     // ============================  Constructors  ===========================79
     /**
@@ -122,24 +121,6 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen der statischen
-     * Methode {@code selectedFreizeitaktivitaetenString} der Klasse {@code FreizeitaktivitaetenStringConverter} und
-     * gibt den {@code String} zur&uuml;ck.
-     *
-     * @return Gibt eine Zeichenkette mit allen Freizeitaktivitäten des angemeldeten Nutzers zur&uuml;ck.
-     */
-    public String getSelectedFreizeitaktivitaetenString() {
-        selectedFreizeitaktivitaetenString = FreizeitaktivitaetenStringConverter.selectedFreizeitaktivitaetenString(nutzer);
-        return selectedFreizeitaktivitaetenString;
-    }
-
-    // todo CCE : Das selectMultiMenu in der suchanfrage.xhtml muss soweit bearbeitet werden,
-    // TODO Joe: 2018-06-18  dass keine eingaben in ihr erfolgen koennen und dann kann diese Methode geloescht werden.
-    public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
-        this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
-    }
-
-    /**
      * Liefert das {@code Suchanfrage}-Objekt zur&uuml;ck, mit den Suchparametern des angemeldeten Nutzers.
      *
      * @return {@code Suchanfrage}-Objekt mit den Suchparametern des angemeldeten Nutzers.
@@ -168,6 +149,11 @@ public class SuchanfrageManagedBean {
         suchanfrageArrayList = new ArrayList<>();
         suchanfrageArrayList = dao.findSuchanfrageByNutzer(nutzer);
         return this.suchanfrageArrayList;
+    }
+
+    public ArrayList<Freizeitaktivitaeten> getSelectedFreizeitaktivitaetenList() {
+        selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
+        return selectedFreizeitaktivitaetenList;
     }
 
     // =================  protected/package local  Methods ===================79

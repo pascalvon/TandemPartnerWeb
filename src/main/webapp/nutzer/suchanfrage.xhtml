@@ -73,27 +73,16 @@
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
-            <!--Auswahl Freizeitaktivitäten-->
             <b:row>
-                <b:column medium-screen="1"/>
-
-                <b:column medium-screen="4">
-                    <h:outputLabel value="Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu value="#{suchanfrageManagedBean.selectedFreizeitaktivitaetenString}" id="aktivitätenwahl">
-                        <f:selectItem itemLabel="Angeln" itemValue="1"/>
-                        <f:selectItem itemLabel="Basketball" itemValue="2"/>
-                        <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
-                        <f:selectItem itemLabel="Camping" itemValue="4"/>
-                        <f:selectItem itemLabel="Filmen" itemValue="5"/>
-                        <f:selectItem itemLabel="Fitness" itemValue="6"/>
-                        <f:selectItem itemLabel="Fußball" itemValue="7"/>
-                        <f:selectItem itemLabel="Gaming" itemValue="8"/>
-                        <f:selectItem itemLabel="Golfen" itemValue="9"/>
-                        <f:selectItem itemLabel="Handball" itemValue="10"/>
-                        <f:selectItem itemLabel="Inlineskating" itemValue="11"/>
-                    </b:selectMultiMenu>
-                </b:column>
-            </b:row><!-- 3.Reihe Ende-->
+            <b:column mediumScreen="3">
+                <b:dataTable value="#{suchanfrageManagedBean.selectedFreizeitaktivitaetenList}" var="aktivity"
+                             striped="#{dataTableSettingsBean.striped}"
+                             paginated="#{dataTableSettingsBean.paginated}"
+                             searching="false">
+                    <b:dataTableColumn label="Freizeitaktivitäten" value="#{aktivity.nameAktivitaet}"/>
+                </b:dataTable>
+            </b:column>
+            </b:row>
 
             <h3 style="text-align: center">Gespeicherte Suchanfragen</h3>
 

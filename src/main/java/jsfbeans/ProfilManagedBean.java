@@ -182,7 +182,7 @@ public class ProfilManagedBean {
         for (int i = 0; i < selectedSprachenList.size(); i++) {
             selectedSprachenArray[i] = String.valueOf(selectedSprachenList.get(i).getId());
         }
-        selectedSprachenString = String.join(",", selectedSprachenArray);
+        selectedSprachenString = String.join(", ", selectedSprachenArray);
         return selectedSprachenString;
     }
 
