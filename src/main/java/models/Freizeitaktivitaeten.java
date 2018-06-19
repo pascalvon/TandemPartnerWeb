@@ -4,20 +4,33 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Bildet eine Freizeitaktivitaeten-Entit&auml;t als Objekt in Java ab.
+ */
 @Entity
 @NamedQuery(name = "findByFreizeitaktivitaetenID", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :id")
 public class Freizeitaktivitaeten {
 
+    /**
+     * Repr&auml;sentiert die ID der Freizeitaktivitaeten-Entit&auml;t.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
 
+    /**
+     * Repr&auml;sentiert den Bezirksnamen der Freizeitaktivitaeten-Entit&auml;t.
+     */
     @Column(nullable = false)
     private String nameAktivitaet;
 
+    /**
+     * Mapped in der Datenbank die Freizeitaktivitaeten-Tabelle mit der Nutzer-Tabelle
+     */
     @ManyToMany(mappedBy = "freizeitaktivitaetenSet")
     private Set<Nutzer> nutzerSet;
 
+    
     public int getId() {
         return Id;
     }
