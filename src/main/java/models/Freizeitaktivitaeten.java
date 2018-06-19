@@ -8,9 +8,7 @@ import java.util.Set;
  * Bildet eine Freizeitaktivitaeten-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQuery(name = "findByFreizeitaktivitaetenID", query = "SELECT freizeitaktivitaeten " +
-                                                           "FROM Freizeitaktivitaeten freizeitaktivitaeten " +
-                                                           "WHERE freizeitaktivitaeten.id = :id")
+@NamedQuery(name = "findByFreizeitaktivitaetenID", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :id")
 public class Freizeitaktivitaeten {
 
     /**

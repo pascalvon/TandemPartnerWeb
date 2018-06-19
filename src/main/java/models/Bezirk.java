@@ -9,9 +9,7 @@ import java.util.Set;
  * Bildet eine Bezirk-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQuery(name = "findBezirkByID", query = "SELECT bezirk " +
-                                             "FROM Bezirk bezirk " +
-                                             "WHERE bezirk.id = :id")
+@NamedQuery(name = "findBezirkByID", query = "SELECT bezirk FROM Bezirk bezirk WHERE bezirk.id = :id")
 public class Bezirk {
 
     /**

@@ -9,16 +9,10 @@ import java.util.Objects;
  * Bildet eine Suchanfrage-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzer", query = "SELECT suchanfrage " +
-                                                                      "FROM Suchanfrage suchanfrage " +
-                                                                      "WHERE suchanfrage.nutzer = :nutzer"),
-                @NamedQuery(name = "findSuchanfrage", query = "SELECT suchanfrage " +
-                                                              "FROM Suchanfrage suchanfrage " +
-                                                              "WHERE suchanfrage.paramSpracheID = :spracheId AND suchanfrage.nutzer.id = :nutzerId"),
-                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage" +
-                                                                "WHERE suchanfrage.id = :id"),
-                @NamedQuery(name = "deleteSuchanfrageByNutzer", query = "DELETE FROM Suchanfrage suchanfrage " +
-                                                                        "WHERE suchanfrage.nutzer = :nutzer")})
+@NamedQueries({ @NamedQuery(name = "findSuchanfrageByNutzer", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :nutzer"),
+                @NamedQuery(name = "findSuchanfrage", query = "SELECT suchanfrage FROM Suchanfrage suchanfrage WHERE suchanfrage.paramSpracheID = :spracheId AND suchanfrage.nutzer.id = :nutzerId"),
+                @NamedQuery(name = "deleteSuchanfrage", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.id = :id"),
+                @NamedQuery(name = "deleteSuchanfrageByNutzer", query = "DELETE FROM Suchanfrage suchanfrage WHERE suchanfrage.nutzer = :nutzer")})
 public class Suchanfrage {
 
     /**
