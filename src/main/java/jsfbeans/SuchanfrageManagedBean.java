@@ -73,7 +73,7 @@ public class SuchanfrageManagedBean {
      */
     public String search() {
         if (!validateSuchanfrage() && dao.findSuchanfrageByNutzer(nutzer).size()<5) {
-            suchanfrage.addNutzer(nutzer);
+            suchanfrage.setNutzer(nutzer);
             dao.merge(suchanfrage);
         }
             return "suchergebnisse?faces-redirect=true";

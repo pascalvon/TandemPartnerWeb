@@ -127,7 +127,7 @@ public class MatchesManagedBean {
             if (!aktivitaeten.isEmpty()) {
                 List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
                 String aktivitaetenString = String.join(", ", aktivitaetenList);
-                matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaetenString, aktivitaeten.size(), anAcceptedMatchanfragen, origin));
+                matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaeten.size(), aktivitaetenString, anAcceptedMatchanfragen, origin));
             } else {
                 dao.deleteMatchanfrage(anAcceptedMatchanfragen);
             }

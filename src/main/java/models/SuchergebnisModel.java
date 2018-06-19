@@ -54,7 +54,8 @@ public class SuchergebnisModel {
 
     // ============================  Constructors  ===========================79
     /**
-     * Konstruiert ein {@code SuchergebnisModel} mit den eingegebenen Parametern und weißt diese den entsprechenden Variablen zu.
+     * Konstruiert ein {@code SuchergebnisModel} mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu.
      *
      * @param nutzer Stellt den vorgeschlagenen Nutzer dar.
      * @param commonFreizeitaktivitaetenNumber Stellt die Anzahl der gemeinsamen Freizeitaktivit&auml;ten des

@@ -136,7 +136,7 @@ public class HomeManagedBean {
             if (!aktivitaeten.isEmpty()) {
                 List<String> aktivitaetenList = aktivitaeten.stream().map(Freizeitaktivitaeten::toString).collect(Collectors.toList());
                 String aktivitaetenString = String.join(", ", aktivitaetenList);
-                matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaetenString, aktivitaeten.size(), anOpenMatchanfragen));
+                matchanfragenModelArrayList.add(new MatchanfragenModel(aNutzer, aktivitaeten.size(), aktivitaetenString, anOpenMatchanfragen));
             }
         }
     }
