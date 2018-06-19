@@ -13,17 +13,10 @@ import java.util.Set;
  * Bildet eine Nutzer-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "SELECT nutzer " +
-                                                               "FROM Nutzer nutzer " +
-                                                               "WHERE nutzer.mail = :mail"),
-                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer " +
-                                                                   "FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache " +
-                                                                   "WHERE sprache.id = :spracheID"),
-                @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer " +
-                                                                      "FROM Nutzer nutzer " +
-                                                                      "WHERE nutzer.mail = :mail"),
-                @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer " +
-                                                           "WHERE nutzer.id = :id")})
+@NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
+                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
+                @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
 
     /**
