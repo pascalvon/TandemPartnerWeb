@@ -5,6 +5,9 @@ import models.Nutzer;
 
 import java.util.ArrayList;
 
+/**
+ * Eine Hilfsklasse, um die selektierten Freizeitaktivit&auml;ten eines Nutzers in einen {@code String} zu packen.
+ */
 public class FreizeitaktivitaetenStringConverter {
 
     // =========================== Class Variables ===========================79
@@ -12,6 +15,23 @@ public class FreizeitaktivitaetenStringConverter {
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
+    /**
+     * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem sprachenSet der {@link #nutzer nutzer}-Variable.
+     * Anschlie&szlig;end werden die einzelnen Sprachennamen in {@link #selectedSprachenString selectedSprachenString} als
+     * eine Zeichenkette hinzugef&uuml;gt und der {@code String} zur&uuml;ckgegeben.
+     *
+     * @return Gibt eine Zeichenkette mit allen gesprochenen Sprachen des angemeldeten Nutzers zur&uuml;ck.
+     */
+    /**
+     * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem freizeitaktivitaetenSet des &uuml;bergebenen
+     * {@code Nutzer}-Objektes. Anschlie&szlig;end werden die einzelnen Bezeichnungen der Freizeitaktivit&auml;ten als
+     * einzelnen {@code String} zur&uuml;ckgegeben.
+     *
+     * @param nutzer {@code Nutzer}-Objekt, dessen freizeitaktivitaetenSet zur Erzeugung des {@code String}'s verwendet
+     *               wird.
+     * @return  Gibt eine Zeichenkette mit allen Freizeitaktivit&auml;ten des &uuml;bergebenen {@code Nutzer}-Objektes
+     *          zur&uuml;ck.
+     */
     public static String selectedFreizeitaktivitaetenString(Nutzer nutzer) {
         ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
         String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];

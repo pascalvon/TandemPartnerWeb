@@ -5,12 +5,21 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Eine Hilfsklasse, um das Alter eines Nutzers zu berechnen.
+ */
 public class AgeCalculator {
 
     // =========================== Class Variables ===========================79
     // =============================  Variables  =============================79
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
+
+    /**
+     * Berechnet das Alter eines Nutzers anhand seines Geburtsdatums.
+     * @param birthDate Geburtsdatum des Nutzers.
+     * @return Gibt ein {@code int}-Wert, welches dem Alter des Nutzers entspricht zur&uuml;ck.
+     */
     public static int calculateAge(Date birthDate) {
         LocalDate birthLocalDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         Date currentDate = new Date();
