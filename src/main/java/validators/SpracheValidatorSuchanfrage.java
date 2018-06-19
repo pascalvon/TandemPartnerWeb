@@ -1,6 +1,5 @@
 package validators;
 
-import dao.DAO;
 import jsfbeans.LoginManagedBean;
 import models.Nutzer;
 import models.Sprache;
@@ -14,18 +13,19 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.Set;
 
-@FacesValidator("suchanfrageValidator")
-public class SuchanfrageValidator implements Validator {
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
+@FacesValidator("spracheValidatorSuchanfrage")
+public class SpracheValidatorSuchanfrage implements Validator {
 
     private Nutzer nutzer;
+    private int sprachID = 0;
+    public SpracheValidatorSuchanfrage() { initNutzer(); }
 
-    public SuchanfrageValidator() { initNutzer(); }
-
-    int sprachID = 0;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        sprachID = Integer.parseInt((String) o);
+        sprachID = Integer.parseInt(o.toString());
+
         Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
 
         if(sprachID==0){
@@ -43,6 +43,6 @@ public class SuchanfrageValidator implements Validator {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 }

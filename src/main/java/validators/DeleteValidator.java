@@ -12,6 +12,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
 @FacesValidator("deleteValidator")
 public class DeleteValidator implements Validator {
 
@@ -35,6 +36,6 @@ public class DeleteValidator implements Validator {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 }

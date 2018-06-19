@@ -21,7 +21,7 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="vorname" label="Vorname" required="true" placeholder="Vorname"
+                    <b:inputText id="vorname" label="Vorname:" required="true" placeholder="Vorname"
                                  requiredMessage="Bitte gib Deinen Vornamen ein!"
                                  value="#{profilManagedBean.nutzer.vorname}">
                     <f:ajax event="blur" execute="vorname" render="m_vorname vorname"/>
@@ -32,7 +32,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText id="nachname" label="Nachname" required="true" placeholder="Nachname"
+                    <b:inputText id="nachname" label="Nachname:" required="true" placeholder="Nachname"
                                  requiredMessage="Bitte gib Deinen Nachnamen ein!"
                                  value="#{profilManagedBean.nutzer.nachname}">
                         <f:ajax event="blur" execute="nachname" render="m_nachname nachname"/>
@@ -62,7 +62,7 @@
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
                                  requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{profilManagedBean.mail}">
+                                 label="E-Mail:" placeholder="name@example.com" value="#{profilManagedBean.mail}">
                         <f:validator binding="#{mailValidatorProfil}"/>
                         <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
@@ -95,6 +95,7 @@
                         </b:selectOneMenu>
                         <b:messages id="m_bezirk" for="bezirk"/>
                     </b:formGroup>
+                    <!--<b:messages id="m_bezirk" for="bezirk"/>-->
                 </b:column>
 
                 <b:column medium-screen="2"/>
@@ -140,7 +141,7 @@
                         <f:selectItem itemLabel="Haitianisch" itemValue="17"/>
                         <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
                         <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
-                        <f:selectItem itemLabel="Hindi" itemValue="20"/>
+                        <f:selectItem itemLabel="Italienisch" itemValue="20"/>
                     </b:selectMultiMenu>
                     <b:messages id="m_ichSpreche" for="ichSpreche"/>
                 </b:column>
@@ -150,7 +151,7 @@
                 <b:column span="4">
                     <!--><h:outputLabel id="freizeitaktivitaeten" value="Meine Freizeitaktivitäten:" style="width: 100%;"
                                    for="aktivitätenwahl"/><-->
-                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
                                        requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
                                        maxHeight="200" value="#{profilManagedBean.selectedFreizeitaktivitaetenString}"
@@ -236,7 +237,7 @@
                     <b:column medium-screen="3"/>
 
                     <b:column medium-screen="6">
-                        <b:inputText id="loeschMail" placeholder="Deine E-Mail" value="#{profilManagedBean.deleteMail}"
+                        <b:inputText id="loeschPW" placeholder="Dein Passwort"
                                      validatorMessage="Falsches Passwort! Dein Profil konnte nicht gelöscht werden!">
                             <f:validator validatorId="deleteValidator"/>
                         </b:inputText>

@@ -16,6 +16,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Pattern;
 
+// TODO Luis: 2018-06-17 Bitte beschreiben fuer die JavaDoc
 @ManagedBean
 @RequestScoped
 public class MailValidatorProfil implements Validator {
@@ -51,7 +52,7 @@ public class MailValidatorProfil implements Validator {
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
-        nutzer = loginManagedBean.nutzer;
+        nutzer = loginManagedBean.getNutzer();
     }
 
     public Nutzer getNutzer() {

@@ -74,7 +74,7 @@
                 <b:column medium-screen="4">
                     <b:inputText id="mail" required="true"
                                  requiredMessage="Bitte gib Deine E-Mail-Adresse an!"
-                                 label="E-Mail" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
+                                 label="E-Mail:" placeholder="name@example.com" value="#{registrierenManagedBean.nutzer.mail}">
                         <f:validator binding="#{mailValidatorRegistrieren}"/>
                         <f:ajax event="blur" execute="mail" render="m_mail"/>
                     </b:inputText>
@@ -153,7 +153,7 @@
                         <f:selectItem itemLabel="Haitianisch" itemValue="17"/>
                         <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
                         <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
-                        <f:selectItem itemLabel="Hindi" itemValue="20"/>
+                        <f:selectItem itemLabel="Italienisch" itemValue="20"/>
 
                     </b:selectMultiMenu>
                 </b:column>
@@ -161,7 +161,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten" required="true"
+                    <b:selectMultiMenu id="freizeitaktivitaeten" label="Meine Freizeitaktivitäten:" required="true"
                                        nonSelectedText="Bitte wählen" style="width: 100%"
                                        requiredMessage="Bitte gib mindestens eine Freizeitaktivität an!"
                                        maxHeight="200"
@@ -192,7 +192,7 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="password" required="true"
+                    <b:inputSecret id="password" required="true" requiredMessage="Bitte gib ein Passwort ein!"
                                    value="#{registrierenManagedBean.nutzer.passwort}"
                                    label="Passwort:" placeholder="Passwort">
                         <f:validator validatorId="passwordValidatorRegistrieren" />
@@ -205,7 +205,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" requiredMessage="Bitte bestätige Dein Passwort!"
                                    label="Passwort:" placeholder="Passwort">
                         <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
