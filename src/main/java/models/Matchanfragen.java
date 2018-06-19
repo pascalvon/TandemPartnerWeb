@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Bildet eine Matchanfragen-Entit&auml;t als Objekt in Java ab.
+ */
 @Entity
 @NamedQueries({ @NamedQuery(name = "findMatchanfragenByNutzerID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.partner = :partnerID AND matchanfragen.angenommen = 0"),
                 @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.id.partner = :nutzerID OR matchanfragen.id.initiator = :nutzerID)"),
@@ -17,22 +20,24 @@ import java.util.Objects;
 
 public class Matchanfragen {
 
+    /**
+     * Repr&auml;sentiert die ID der Matchanfragen-Entit&auml;t.
+     */
     @EmbeddedId
     private MatchId id = new MatchId();
 
-
+    /**
+     * Repr&auml;sentiert den Status der Matchanfragen-Entit&auml;t.
+     */
     private Byte angenommen;
 
+    /**
+     * Gibt die ID der Matchanfragen-Entit&auml;t zur&uuml;ck.
+     *
+     * @return Gibt die ID der Matchanfragen-Entit&auml;t zur&uuml;ck.
+     */
     public MatchId getId() {
         return id;
-    }
-
-    public void setId(MatchId id) {
-        this.id = id;
-    }
-
-    public Byte getAngenommen() {
-        return angenommen;
     }
 
     public void setAngenommen(Byte angenommen) {

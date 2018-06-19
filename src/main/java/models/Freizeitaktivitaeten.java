@@ -16,7 +16,7 @@ public class Freizeitaktivitaeten {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     /**
      * Repr&auml;sentiert den Bezirksnamen der Freizeitaktivitaeten-Entit&auml;t.
@@ -30,27 +30,51 @@ public class Freizeitaktivitaeten {
     @ManyToMany(mappedBy = "freizeitaktivitaetenSet")
     private Set<Nutzer> nutzerSet;
 
-    
+    /**
+     * Gibt die ID der Freizeitaktivitaeten-Entit&auml;t zur&uuml;ck.
+     *
+     * @return Gibt die ID der Freizeitaktivitaeten-Entit&auml;t zur&uuml;ck.
+     */
     public int getId() {
-        return Id;
+        return id;
     }
 
+    /**
+     * &Uuml;berschreibt die {@link #toString() toString}-Methode, sodass {@link #nameAktivitaet nameAktivitaet}
+     * zur&uuml;ckgegeben wird.
+     *
+     * @return Gibt den Namen der Freizeitaktivit&auml;t zur&uuml;ck.
+     */
     @Override
     public String toString() {
         return nameAktivitaet;
     }
 
+    /**
+     * &Uuml;berschreibt die {@link #equals(Object) equals}-Methode, sodass {@code Freizeitaktivitaeten}-Ojekte &uuml;ber
+     * ihre {@link #id id} verglichen werden.
+     *
+     * @param   o Das Objekt, mit dem verglichen werden soll.
+     * @return  Gibt true zur&uuml;ck, wenn beide Objekte die selbe ID besitzen und false, wenn sie eine
+     *          unterschiedliche ID besitzen.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Freizeitaktivitaeten that = (Freizeitaktivitaeten) o;
-        return Id == that.Id;
+        return id == that.id;
     }
 
+    /**
+     * &Uuml;berschreibt die {@link #hashCode() hashCode}-Methode, sodass der Hashcode von {@code Freizeitaktivitaeten}-
+     * Objekten ihrer ID entspricht.
+     *
+     * @return Gibt den Hashcode des Objekts als seine ID wieder.
+     */
     @Override
     public int hashCode() {
 
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 }

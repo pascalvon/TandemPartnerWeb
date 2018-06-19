@@ -35,7 +35,7 @@ public class Bezirk {
     }
 
     /**
-     * &Uuml;berschreibt die {@link #toString() toString} Methode, sodass der {@link #bezirkName bezirkName}
+     * &Uuml;berschreibt die {@link #toString() toString}-Methode, sodass der {@link #bezirkName bezirkName}
      * zur&uuml;ckgegeben wird.
      *
      * @return Gibt den Bezirksnamen zur&uuml;ck.
