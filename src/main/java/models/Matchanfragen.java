@@ -27,14 +27,6 @@ public class Matchanfragen {
         return id;
     }
 
-    public void setId(MatchId id) {
-        this.id = id;
-    }
-
-    public Byte getAngenommen() {
-        return angenommen;
-    }
-
     public void setAngenommen(Byte angenommen) {
         this.angenommen = angenommen;
     }
