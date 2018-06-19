@@ -25,6 +25,15 @@ public class Bezirk {
     @Column(nullable = false)
     private String bezirkName;
 
+    public Bezirk() {
+
+    }
+
+    public Bezirk(int id, String bezirkName) {
+        this.Id = id;
+        this.bezirkName = bezirkName;
+    }
+
     /**
      * Gibt die ID der Bezirk-Entit&auml;t zur&uuml;ck.
      *

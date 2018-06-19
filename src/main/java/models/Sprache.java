@@ -31,6 +31,15 @@ public class Sprache {
     @ManyToMany(mappedBy = "sprachenSet")
     private Set<Nutzer> nutzerSet;
 
+    public Sprache() {
+
+    }
+
+    public Sprache(int id, String nameSprache) {
+        this.id = id;
+        this.nameSprache = nameSprache;
+    }
+
     /**
      * Gibt die ID der Sprache-Entit&auml;t zur&uuml;ck.
      *

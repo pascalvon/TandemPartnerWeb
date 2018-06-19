@@ -31,6 +31,15 @@ public class Freizeitaktivitaeten {
     @ManyToMany(mappedBy = "freizeitaktivitaetenSet")
     private Set<Nutzer> nutzerSet;
 
+    public Freizeitaktivitaeten() {
+
+    }
+
+    public Freizeitaktivitaeten(int id, String nameAktivitaet) {
+        this.id = id;
+        this.nameAktivitaet = nameAktivitaet;
+    }
+
     /**
      * Gibt die ID der Freizeitaktivitaeten-Entit&auml;t zur&uuml;ck.
      *
