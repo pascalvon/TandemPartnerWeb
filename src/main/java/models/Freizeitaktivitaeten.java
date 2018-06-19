@@ -22,21 +22,9 @@ public class Freizeitaktivitaeten {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getNameAktivitaet() {
-        return nameAktivitaet;
-    }
-
-    public void setNameAktivitaet(String nameAktivitaet) {
-        this.nameAktivitaet = nameAktivitaet;
-    }
-
     @Override
     public String toString() {
-        return getNameAktivitaet();
+        return nameAktivitaet;
     }
 
     @Override
