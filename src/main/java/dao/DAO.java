@@ -204,8 +204,7 @@ public class DAO {
     }
 
     /**
-     * // TODO Luis: 2018-06-17 Bitte if-else-Zweige beschreiben fuer die JavaDoc
-     *
+     * Sucht in der Tabelle Nutzer nach Einträgen, wo in der Spalte Mail der Wert @param mail steht
      * @param mail
      * @return
      */
@@ -214,6 +213,9 @@ public class DAO {
             Nutzer n = em.createNamedQuery("findNutzerByMailBoolean", Nutzer.class)
                     .setParameter("mail", mail)
                     .getSingleResult();
+            /**
+             * Wird eine Mail gefunden (length>0) wird der Wert auf false gesetzt, falls nicht auf true
+             */
             if (n.getMail().length()>0) {
                 return false;
             }
