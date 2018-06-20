@@ -86,7 +86,7 @@ public class RegistrierenManagedBean {
      *          {@code home.xhtml} weitergeleitet wird.
      */
     public String register() {
-            nutzer.addBezirk(dao.findBezirkByID(bezirkID));
+            nutzer.setBezirk(dao.findBezirkByID(bezirkID));
             addSprachenToNutzer();
             addFreizeitaktivitaetenToNutzer();
             dao.merge(nutzer);
