@@ -53,6 +53,11 @@ public class HomeManagedBean {
         initNutzer();
     }
 
+    public HomeManagedBean(DAO dao, Nutzer nutzer) {
+        this.dao = dao;
+        this.nutzer = nutzer;
+    }
+
     // ===========================  public  Methods  =========================79
     /**
      * Gibt Anhand einer Sprach-ID den Sprachennamen als {@code String} zur&uuml;ck.
