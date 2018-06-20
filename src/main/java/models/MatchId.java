@@ -24,6 +24,16 @@ public class MatchId implements Serializable {
      */
     private int spracheID;
 
+    public MatchId() {
+
+    }
+
+    public MatchId(int initiator, int partner, int spracheID) {
+        this.initiator = initiator;
+        this.partner = partner;
+        this.spracheID = spracheID;
+    }
+
     /**
      * Gibt die ID des Initiators der Matchanfrage zur&uuml;ck.
      *

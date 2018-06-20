@@ -11,7 +11,6 @@ import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -101,14 +100,14 @@ public class HomeManagedBean {
 
     /**
      * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
-     * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
+     * {@link #calculateUnansweredMatchanfragen() calculateUnansweredMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den offenen Matchanfragen wiedergegeben wird.
      *
      * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des angemeldeten Nutzers
      */
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
         matchanfragenModelArrayList = new ArrayList<>();
-        calculateMatchanfragen();
+        calculateUnansweredMatchanfragen();
         return matchanfragenModelArrayList;
     }
 
@@ -131,7 +130,7 @@ public class HomeManagedBean {
      * in einen {@code String} geschrieben.
      * Anschlie&szlig;end wird ein neues {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
      */
-    private void calculateMatchanfragen() {
+    private void calculateUnansweredMatchanfragen() {
         ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
 
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {

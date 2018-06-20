@@ -94,6 +94,14 @@ public class Nutzer {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Suchanfrage> suchanfrageSet = new HashSet<>();
 
+    public Nutzer() {
+
+    }
+
+    public Nutzer(int id) {
+        this.id = id;
+    }
+
     /**
      * Gibt die ID der Nutzer-Entit&auml;t zur&uuml;ck.
      *

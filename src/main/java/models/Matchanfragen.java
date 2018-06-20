@@ -31,6 +31,14 @@ public class Matchanfragen {
      */
     private Byte angenommen;
 
+    public Matchanfragen() {
+
+    }
+
+    public Matchanfragen(MatchId matchId) {
+        this.id = matchId;
+    }
+
     /**
      * Gibt die ID der Matchanfragen-Entit&auml;t zur&uuml;ck.
      *

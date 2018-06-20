@@ -19,6 +19,13 @@ public class DAO {
     @PersistenceContext(unitName = "ExperimentalJPADatabase")
     private EntityManager em;
 
+    public DAO() {
+
+    }
+
+    public DAO(EntityManager em) {
+        this.em = em;
+    }
     // ================= Bezirk ===================
 
     /**

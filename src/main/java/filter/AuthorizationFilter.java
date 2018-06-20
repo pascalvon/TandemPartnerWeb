@@ -19,8 +19,8 @@ public class AuthorizationFilter implements Filter {
 
     /**
      * &Uuml;berpr&uuml;ft die {@code HttpSession} nach dem Attribut "nutzer".
-     * Falls dieses Attribut existiert, werden die "gesicherten" URL's freigegeben und der angemeldete Nutzer hat
-     * Zugriff auf sie.
+     * Falls dieses Attribut existiert, werden die "gesicherten" URL's, welche sich unter /webapp/nutzerbefinden,
+     * freigegeben und der angemeldete Nutzer hat Zugriff auf sie.
      *
      * @param   req {@code ServletRequest}-Objekt, welches die Client-Anfrage-Informationen enth&auml;lt.
      * @param   res {@code ServletResponse}-Objekt, welches genutzt wird, um dem Client eine Antwort senden zu k&ouml;nnen.

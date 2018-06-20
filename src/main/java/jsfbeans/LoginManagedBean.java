@@ -42,6 +42,15 @@ public class LoginManagedBean implements Serializable {
      */
     private String password;
 
+    public LoginManagedBean() {
+
+    }
+
+    public LoginManagedBean(DAO dao, Nutzer nutzer) {
+        this.dao = dao;
+        this.nutzer = nutzer;
+    }
+
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 

@@ -48,6 +48,11 @@ public class MatchesManagedBean {
         initNutzer();
     }
 
+    public MatchesManagedBean(DAO dao, Nutzer nutzer) {
+        this.dao = dao;
+        this.nutzer = nutzer;
+    }
+
     // ===========================  public  Methods  =========================79
     /**
      * Gibt Anhand einer Sprach-ID den Sprachennamen als {@code String} zur&uuml;ck.
@@ -80,14 +85,14 @@ public class MatchesManagedBean {
 
     /**
      * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
-     * {@link #calculateMatchanfragen() calculateMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
+     * {@link #calculateAnsweredMatchanfragen() calculateAnsweredMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
      * mit den zustandegekommenen {@code Matchanfragen} wiedergegeben wird.
      *
      * @return Eine {@code ArrayList} mit den zustandegekommenen Matches des aktuell angemeldeten Nutzers
      */
     public ArrayList<MatchanfragenModel> getMatchanfragenModelArrayList() {
         matchanfragenModelArrayList = new ArrayList<>();
-        calculateMatchanfragen();
+        calculateAnsweredMatchanfragen();
         return matchanfragenModelArrayList;
     }
 
@@ -110,7 +115,7 @@ public class MatchesManagedBean {
      * Anschlie&szlig;end wird ein neues {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
      * Falls {@code Matchanfragen} existieren, deren Initiator und Partner keine gemeinsamen {@code Freizeitaktivitaeten} vorweisen, werden diese gel&ouml;scht.
      */
-    private void calculateMatchanfragen() {
+    private void calculateAnsweredMatchanfragen() {
         ArrayList<Matchanfragen> acceptedMatchanfragen = dao.findMatchanfragenByAllColumns(nutzer.getId());
         for (Matchanfragen anAcceptedMatchanfragen : acceptedMatchanfragen) {
             Nutzer aNutzer;
