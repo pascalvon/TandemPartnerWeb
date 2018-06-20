@@ -41,7 +41,7 @@ class ManagedBeansTest {
 
 
     @BeforeAll
-    static void buildEnv() {
+    static void setUp() {
 
         // Test-Nutzer
         arne = new Nutzer(1);

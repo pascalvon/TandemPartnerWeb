@@ -53,7 +53,7 @@ public class StandardtemplateManagedBean {
      *          zur {@code home.xhtml} oder {@code login.xhtml} wiedergegeben.
      */
     public String redirectToHome() {
-        if (validateNutzer(nutzer.getMail())) {
+        if (ifNutzerIsInvalid(nutzer.getMail())) {
             return "login?faces-redirect=true";
         } else {
             return "home?faces-redirect=true";
@@ -68,7 +68,7 @@ public class StandardtemplateManagedBean {
      * zur {@code profil.xhtml} oder {@code login.xhtml} wiedergegeben.
      */
     public String redirectToProfil() {
-        if (validateNutzer(nutzer.getMail())) {
+        if (ifNutzerIsInvalid(nutzer.getMail())) {
             return "login?faces-redirect=true";
         } else {
             return "profil?faces-redirect=true";
@@ -83,7 +83,7 @@ public class StandardtemplateManagedBean {
      * zur {@code suchanfrage.xhtml} oder {@code login.xhtml} wiedergegeben.
      */
     public String redirectToSuchanfragen() {
-        if (validateNutzer(nutzer.getMail())) {
+        if (ifNutzerIsInvalid(nutzer.getMail())) {
             return "login?faces-redirect=true";
         } else {
             return "suchanfrage?faces-redirect=true";
@@ -98,7 +98,7 @@ public class StandardtemplateManagedBean {
      * zur {@code matches.xhtml} oder {@code login.xhtml} wiedergegeben.
      */
     public String redirectToMatches() {
-        if (validateNutzer(nutzer.getMail())) {
+        if (ifNutzerIsInvalid(nutzer.getMail())) {
             return "login?faces-redirect=true";
         } else {
             return "matches?faces-redirect=true";
@@ -121,7 +121,7 @@ public class StandardtemplateManagedBean {
      * @return Gibt den Wert von {@link #logStatus logStatus} wieder.
      */
     public String getLogStatus() {
-        if (validateNutzer(nutzer.getMail())) {
+        if (ifNutzerIsInvalid(nutzer.getMail())) {
             logStatus = "Login";
         } else {
             logStatus = "Logout";
@@ -150,7 +150,7 @@ public class StandardtemplateManagedBean {
      * @return  Gibt false zur&uuml;ck, wenn die E-Mail-Adresse einer Nutzer-Entit&auml;t geh&ouml;rt und true, wenn
      *          eine NullPointerException fliegt.
      */
-    private boolean validateNutzer(String mail) {
+    private boolean ifNutzerIsInvalid(String mail) {
         try {
             Nutzer n = dao.findNutzerByMail(mail);
             return !n.getMail().equals(nutzer.getMail());
