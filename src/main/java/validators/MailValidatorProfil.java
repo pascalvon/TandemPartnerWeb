@@ -61,38 +61,32 @@ public class MailValidatorProfil implements Validator {
      * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     *
+     * Typkonvertierung der Eingaben aus den entsprechenden Komponenten, um Vergleichswerte im richtigen Datentyp
+     * String) zu erhalten
+     * Bei leerer Eingabe bewirkt @return, dass das Argument "required=true" aus der .xhtml-Datei zum Tragen kommt
+     * Wenn die Eingabe des Nutzers seiner aktuellen E-Mail entspricht (= keine Änderungen),
+     * braucht die Mail nicht weiter validiert zu werden (Annahme: Es stehen bereits nur valide E-Mail-Adressen in
+     * der Datenbank)
+     * Bei E-Mail-Adress-Änderung des Nutzers werden folgende Fälle überprüft:
+     * 1.: Passt die eingegebene E-Mail-Adresse zu den Anforderungen (Pattern)? (Beim Anschlagen des Validators
+     * folgt die Ausgabe der entsprechenden Fehlermeldung)
+     * 2.: Wird diese Mail bereits von einem anderen Nutzer verwendet? (Beim Anschlagen des Validators
+     * folgt die Ausgabe der entsprechenden Fehlermeldung)
+     *
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        /**
-         * Typkonvertierung der Eingabe aus der entsprechenden Komponente, um Vergleichswert im richtigen Datentyp
-         * (String) zu erhalten
-         */
+
         mail = (String)o;
-        /**
-         * Bool'scher Wert, welcher beim "matchen" der Eingabe mit dem Pattern true gesetzt wird, ansonsten false
-         */
         boolean matchesPattern = EMAIL_PATTERN.matcher(mail).find();
 
-        /**
-         * Überprüfung, ob Eingabe der E-Mail-Adresse leer ist oder der aktuellen Mail entspricht
-         */
         if(mail.isEmpty() || mail.equals(nutzer.getMail())){
-            /**
-             * Bei leerer Eingabe bewirkt @return, dass das Argument "required=true" aus der .xhtml-Datei zum Tragen kommt
-             * Wenn die Eingabe des Nutzers seiner aktuellen E-Mail entspricht (= keine Änderungen),
-             * braucht die Mail nicht weiter validiert zu werden (Annahme: Es stehen bereits nur valide E-Mail-Adressen in
-             * der Datenbank)
-             */
             return;
         }
-        /**
-         * Bei E-Mail-Adress-Änderung des Nutzers werden folgende Fälle überprüft:
-         * 1.: Passt die eingegebene E-Mail-Adresse zu den Anforderungen (Pattern)? (Beim Anschlagen des Validators
-         * folgt die Ausgabe der entsprechenden Fehlermeldung)
-         * 2.: Wird diese Mail bereits von einem anderen Nutzer verwendet? (Beim Anschlagen des Validators
-         * folgt die Ausgabe der entsprechenden Fehlermeldung)
-         */
+
+
+
         else if(!matchesPattern) {
             throw new ValidatorException((new FacesMessage("Ungültige E-Mail-Adresse", "Bitte erneut eingeben!")));
         }

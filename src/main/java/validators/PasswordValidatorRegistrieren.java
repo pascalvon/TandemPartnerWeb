@@ -26,37 +26,29 @@ public class PasswordValidatorRegistrieren implements Validator {
      * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     *
+     * Typkonvertierung der Eingaben aus der entsprechenden Komponente, um Vergleichswert im richtigen Datentyp
+     * (String) zu erhalten
+     * Sollten eins der Felder leer sein, schlägt der Validator an und fordert zur Eingabe auf
+     * Falls ein Passwort zur Änderung eingegeben wird, wird nach 2 Kriterien validiert:
+     * 1.: Entspricht das Passwort der vorgegebenen Länge? (Beim Anschlagen des Validators
+     * folgt die Ausgabe der entsprechenden Fehlermeldung)
+     * 2.: Stimmen beide Eingaben überein? (Beim Anschlagen des Validators
+     * folgt die Ausgabe der entsprechenden Fehlermeldung)
+     *
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        /**
-         * Typkonvertierung der Eingabe aus der entsprechenden Komponente, um Vergleichswert im richtigen Datentyp
-         * (String) zu erhalten
-         */
+
         String password = (String) o;
-        /**
-         * Typkonvertierung der Eingabe aus der Komponente "confirm", um Vergleichswert im richtigen Datentyp
-         * (String) zu erhalten
-         */
+
         String confirm = (String) uiComponent.getAttributes().get("confirm");
 
-        /**
-         * Überprüfung, ob mindestens eins der Felder leer ist
-         */
         if (password.isEmpty() || confirm.isEmpty())
         {
-            /**
-             * @return bewirkt, dass das Argument "required=true" aus der .xhtml-Datei zum Tragen kommt
-             */
             return;
         }
-        /**
-         * Bei der Passworteingabe wird nach 2 Kriterien validiert:
-         * 1.: Entspricht das Passwort der vorgegebenen Länge? (Beim Anschlagen des Validators
-         * folgt die Ausgabe der entsprechenden Fehlermeldung)
-         * 2.: Stimmen beide Eingaben überein? (Beim Anschlagen des Validators
-         * folgt die Ausgabe der entsprechenden Fehlermeldung)
-         */
+
         if (password.length()< 8 || password.length()>30)        {
             throw new ValidatorException(new FacesMessage("Das Passwort muss zwischen 8 und 30 Zeichen lang sein!"));
         }

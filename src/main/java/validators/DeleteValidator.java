@@ -40,21 +40,19 @@ public class DeleteValidator implements Validator {
      * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     *
+     * Zuerst finden eine Typkonvertierung der Eingabe und eine anschließende Verschlüsselung statt, um den Wert
+     * in die gleiche Form wie in der Datenbank zu bringen
+     * Danach wird überprüft, ob die Eingabe dem Passwort des Nutzers entspricht
+     * Falls die Eingabe dem hinterlegten Passwort nicht entspricht, schlägt der Validator an und die entsprechende
+     * Fehlermeldung wird ausgegeben
+     * Falls doch, ist die Validierung abgeschlossen
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        /**
-         * Typkonvertierung der Eingabe aus der entsprechenden Komponente, um Vergleichswert im richtigen Datentyp
-         * (String) zu erhalten
-         * Verschlüsselung der Eingabe vor der Überprüfung, da zu vergleichenden Werte in der Datenbank
-         * ebenfalls verschlüssselt sind
-         */
+
         String password = HashedPasswordGenerator.generateHash((String) o);
 
-        /**
-         * Falls die Eingabe dem hinterlegten Passwort nicht entspricht, schlägt der Validator an und die entsprechende
-         * Fehlermeldung wird ausgegeben
-         */
         if(!password.equals(nutzer.getPasswort())){
             throw new ValidatorException(new FacesMessage("Falsches Passwort!", "Profil konnte nicht gelöscht werden!"));
         }

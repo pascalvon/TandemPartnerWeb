@@ -45,41 +45,26 @@ public class SpracheValidatorSuchanfrage implements Validator {
      * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     *
+     * Nach Typkonvertierung der Eingabe (int) werden die gesprochenen Sprachen des Nutzer in ein Set des
+     * Typs Sprache geladen
+     * Sollte keine Eingabe gemacht worden sein, bleibt die sprachID auf dem Wert 0 und es wird eine entsprechende
+     * Fehlermeldung ausgegeben
+     * Falls eine Eingabe gemacht wurde, wird über das Set der gesprochenen Sprachen iteriert und jeder Eintrag
+     * mit der Eingabe verglichen
+     * Bei Gleichheit wird die entsprechende Fehlermeldung ausgegeben
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        /**
-         * Typkonvertierung der Eingabe aus der entsprechenden Komponente, um Vergleichswert im richtigen Datentyp
-         * (int) zu erhalten
-         */
         sprachID = Integer.parseInt(o.toString());
-        /**
-         * Initialiserung der gesprochenen Sprachen des angemeldeten Nutzers
-         */
         Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
 
-        /**
-         * Überprüfung auf leere Eingaben
-         */
         if(sprachID==0){
-            /**
-             * Bei einer leeren Eingabe wird nach dem Anschlagen des Validators die entsprechende Nachricht (@FacesMessage) ausgegeben
-             */
             throw new ValidatorException(new FacesMessage("Bitte eine Sprache eingeben!"));
         }
 
-        /**
-         * Durchlaufen der vom Nutzer gesprochenen Sprachen
-         */
         for(Sprache s: nutzerSpricht){
-            /**
-             * Überprüfung auf Übereinstimmung der eingegeben Sprache mit der aktuellen vom Nutzer gesprochenen Sprache
-             */
             if (sprachID == s.getId()) {
-                /**
-                 * Spricht der Nutzer die ausgewählte Sprache bereits, wird nach dem Anschlagen des Validators
-                 * die entsprechende Nachricht (@FacesMessage) ausgegeben
-                 */
                 throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du doch bereits!"));
             }
         }

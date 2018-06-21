@@ -30,9 +30,10 @@ public class DatumValidator implements Validator {
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
      */
+
+    //TODO: Joe JavaDoc, die Funktonsweise der Methode beschreiben
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        //TODO: Joe JavaDoc
         LocalDate geburtstag = ((Date) o).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate today = LocalDate.now();
         Period p = Period.between(geburtstag, today);
