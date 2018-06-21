@@ -2,7 +2,7 @@ package validators;
 
 import jsfbeans.LoginManagedBean;
 import models.Nutzer;
-import utilities.HashedPasswordGenerator;
+import models.Sprache;
 
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
@@ -11,55 +11,67 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import java.util.Set;
 
 
 /**
  * Annotiert mit dem JSF @FacesValidator, kann somit einer Komponente einer .xhtml-Seite
  * bspw. über den Tag <f:validator></f:validator> als Validator übergeben werden
  */
-@FacesValidator("deleteValidator")
+@FacesValidator("spracheValidatorSuchanfrage")
 /**
- * Validator, welcher beim Löschen des Nutzers die Bestätigungseingabe (Password) validiert
+ * Validator, welcher die bei der Suchanfrage eingegebene Sprache validiert
  * Implementiert das @Validator-Interface, welches die Implementierung der Methode @validate aufzwingt
  */
-public class DeleteValidator implements Validator {
+public class SpracheValidatorSuchanfrage implements Validator {
+
     /**
      * Nutzer-Instanz, welche zur Laufzeit bei der Validierung initialisert wird
      */
     private Nutzer nutzer;
     /**
+     * Initialisierung der zu überprüfenden sprachID
+     */
+    private int sprachID = 0;
+    /**
      * Konstruktor der Klasse, welcher den angemeldeten Nutzer initialisiert
      */
-    public DeleteValidator(){
-        initNutzer();
-    }
+    public SpracheValidatorSuchanfrage() { initNutzer(); }
+
 
     /**
-     * Standardmethode, welche der Validator-Interface zu implementieren aufzwingt
+     * Standardmethode, welche der @FacesValidators zu implementieren aufzwingt
      * @param facesContext entspricht dem Kontext (Fenster/Seite)
      * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
      * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
      * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
      *
-     * Zuerst finden eine Typkonvertierung der Eingabe und eine anschließende Verschlüsselung statt, um den Wert
-     * in die gleiche Form wie in der Datenbank zu bringen
-     * Danach wird überprüft, ob die Eingabe dem Passwort des Nutzers entspricht
-     * Falls die Eingabe dem hinterlegten Passwort nicht entspricht, schlägt der Validator an und die entsprechende
-     * Fehlermeldung wird ausgegeben
-     * Falls doch, ist die Validierung abgeschlossen
+     * Nach Typkonvertierung der Eingabe (int) werden die gesprochenen Sprachen des Nutzer in ein Set des
+     * Typs Sprache geladen
+     * Sollte keine Eingabe gemacht worden sein, bleibt die sprachID auf dem Wert 0 und es wird eine entsprechende
+     * Fehlermeldung ausgegeben
+     * Falls eine Eingabe gemacht wurde, wird über das Set der gesprochenen Sprachen iteriert und jeder Eintrag
+     * mit der Eingabe verglichen
+     * Bei Gleichheit wird die entsprechende Fehlermeldung ausgegeben
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+        sprachID = Integer.parseInt(o.toString());
+        Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
 
-        String password = HashedPasswordGenerator.generateHash((String) o);
+        if(sprachID==0){
+            throw new ValidatorException(new FacesMessage("Bitte eine Sprache eingeben!"));
+        }
 
-        if(!password.equals(nutzer.getPasswort())){
-            throw new ValidatorException(new FacesMessage("Falsches Passwort!", "Profil konnte nicht gelöscht werden!"));
+        for(Sprache s: nutzerSpricht){
+            if (sprachID == s.getId()) {
+                throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du doch bereits!"));
+            }
         }
         return;
     }
 
-    //TODO: Joe JavDoc
+    //TODO: Joe JavaDoc
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");

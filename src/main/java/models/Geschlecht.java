@@ -1,7 +1,7 @@
 package models;
 
 public enum Geschlecht {
-    WEIBLICH("weiblich"), MAENNLICH("männlich"), EGAL("egal");
+    WEIBLICH("weiblich"), MAENNLICH("männlich"), EGAL("weiblich und männlich");
 
     private String anzeigename;
 

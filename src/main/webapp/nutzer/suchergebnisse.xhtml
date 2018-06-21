@@ -13,11 +13,11 @@
     <!--body-Inhalt vom Template abweichend-->
     <ui:define name="content">
 
-
-
         <h1 style="text-align: center">Suchergebnisse:</h1>
         <br/>
         <br/>
+
+        <h3 style="text-align: center">Deine Suchanfrage für die Sprache "#{suchergebnisseManagedBean.showSpracheName(suchergebnisseManagedBean.suchanfrage.paramSpracheID)}" ergab folgende Treffer:</h3>
 
         <h:form>
             <b:dataTable value="#{suchergebnisseManagedBean.suchergebnisseArrayList}" var="suche"
@@ -30,7 +30,7 @@
                 <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{suche.commonFreizeitaktivitaetenString}"/>
                 <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{suche.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Bezirk" value="#{suche.bezirk}"/>
-                <b:dataTableColumn label="Match-Anfrage senden">
+                <b:dataTableColumn label="Matchanfrage senden">
                     <b:commandButton value="Senden"  disabled="#{suchergebnisseManagedBean.matchanfragenAlreadyExist(suche.nutzer)}" action="#{suchergebnisseManagedBean.sendRequest(suche.nutzer.id)}"/>
                 </b:dataTableColumn>
             </b:dataTable>

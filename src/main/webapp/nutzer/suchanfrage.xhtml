@@ -43,7 +43,7 @@
                             <f:selectItem itemLabel="Haitianisch" itemValue="17"/>
                             <f:selectItem itemLabel="Hawaisch" itemValue="18"/>
                             <f:selectItem itemLabel="Hebräisch" itemValue="19"/>
-                            <f:selectItem itemLabel="Hindi" itemValue="20"/>
+                            <f:selectItem itemLabel="Italienisch" itemValue="20"/>
                             <f:validator validatorId="spracheValidatorSuchanfrage"/>
                             <f:ajax event="blur" execute="sprache" render="m_sprache"/>
                         </b:selectOneMenu>
@@ -53,8 +53,7 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu value="#{suchanfrageManagedBean.suchanfrage.paramGeschlecht}"  required="true" label="Geschlecht:" labelmedium-screen="4">
-                            <f:selectItem itemLabel="egal" itemValue="EGAL" />
-                            <!--<f:selectItem itemLabel="Bitte wählen"  itemValue=""/>-->
+                            <f:selectItem itemLabel="weiblich und männlich" itemValue="EGAL" />
                             <f:selectItem itemLabel="männlich"  itemValue="MAENNLICH"/>
                             <f:selectItem itemLabel="weiblich" itemValue="WEIBLICH"/>
                         </b:selectOneMenu>
@@ -107,10 +106,11 @@
                 <b:dataTableColumn label="Maximalalter" value="#{suchanfrage.paramAlterMax}"/>
                 <b:dataTableColumn label="Geschlecht" value="#{suchanfrage.paramGeschlecht}"/>
                 <b:dataTableColumn label="Suchanfrage löschen">
-                    <b:commandButton value="Löschen" icon="trash" action="#{suchanfrageManagedBean.deleteSuchanfrage(suchanfrage)}"/>
+                    <b:commandButton value="Löschen" immediate="true" icon="trash"
+                                     action="#{suchanfrageManagedBean.deleteSuchanfrage(suchanfrage)}"/>
                 </b:dataTableColumn>
                 <b:dataTableColumn label="Suchanfrage verwenden">
-                    <b:commandButton value="Verwenden" action="#{suchanfrageManagedBean.useSuchanfrage(suchanfrage)}"/>
+                    <b:commandButton value="Verwenden" immediate="true" action="#{suchanfrageManagedBean.useSuchanfrage(suchanfrage)}"/>
                 </b:dataTableColumn>
             </b:dataTable>
 
