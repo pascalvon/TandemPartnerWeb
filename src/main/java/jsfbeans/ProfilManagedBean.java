@@ -73,6 +73,11 @@ public class ProfilManagedBean {
         this.bezirkID   = nutzer.getBezirk().getId();
     }
 
+    ProfilManagedBean(DAO dao, Nutzer nutzer) {
+        this.dao = dao;
+        this.nutzer = nutzer;
+    }
+
     // ===========================  public  Methods  =========================79
     /**
      * <pre>
@@ -96,7 +101,9 @@ public class ProfilManagedBean {
             nutzer.setMail(mail);
         }
             dao.merge(nutzer);
+        if (contextExists()){
             refreshNutzer();
+        }
             return "home?faces-redirect=true";
     }
 
@@ -290,6 +297,13 @@ public class ProfilManagedBean {
         loginManagedBean.setNutzer(dao.findNutzerByMail(nutzer.getMail()));
     }
 
+    private boolean contextExists() {
+        try {
+            return FacesContext.getCurrentInstance() != null;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

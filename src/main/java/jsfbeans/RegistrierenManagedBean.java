@@ -73,6 +73,13 @@ public class RegistrierenManagedBean {
         this.selectedFreizeitaktivitaetenList   = new ArrayList<>();
     }
 
+    public RegistrierenManagedBean(DAO dao, int nutzerID) {
+        this.dao                                = dao;
+        this.nutzer                             = new Nutzer(nutzerID);
+        this.selectedSprachenList               = new ArrayList<>();
+        this.selectedFreizeitaktivitaetenList   = new ArrayList<>();
+    }
+
     // ===========================  public  Methods  =========================79
     /**
      * Erstellt eine neue Nutzer-Entit&auml;t in der Datenbank.
@@ -90,7 +97,9 @@ public class RegistrierenManagedBean {
             addSprachenToNutzer();
             addFreizeitaktivitaetenToNutzer();
             dao.merge(nutzer);
-            initNutzer();
+            if (contextExists()) {
+                initNutzer();
+            }
             return "/nutzer/home?faces-redirect=true";
     }
 
@@ -213,6 +222,13 @@ public class RegistrierenManagedBean {
 
     }
 
+    private boolean contextExists() {
+        try {
+            return FacesContext.getCurrentInstance() != null;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

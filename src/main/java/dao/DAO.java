@@ -26,6 +26,11 @@ public class DAO {
     public DAO(EntityManager em) {
         this.em = em;
     }
+
+    public EntityManager getEm() {
+        return em;
+    }
+
     // ================= Bezirk ===================
 
     /**

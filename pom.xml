@@ -124,6 +124,13 @@
             <version>2.19.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Hibernate-Testing-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-testing</artifactId>
+            <version>5.2.2.Final</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -4,10 +4,7 @@ import org.hibernate.annotations.Cascade;
 import utilities.HashedPasswordGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Bildet eine Nutzer-Entit&auml;t als Objekt in Java ab.

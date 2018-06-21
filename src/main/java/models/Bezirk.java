@@ -3,6 +3,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -52,5 +53,19 @@ public class Bezirk {
     @Override
     public String toString() {
         return bezirkName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bezirk bezirk = (Bezirk) o;
+        return Id == bezirk.Id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(Id);
     }
 }
