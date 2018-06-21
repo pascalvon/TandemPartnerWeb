@@ -66,10 +66,21 @@
                 <b:column medium-screen="1"/>
 
                 <b:column medium-screen="4">
-                    <b:inputText  id="minAlter" label="Alter von:" placeholder="Mindestalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}"/>
+                    <b:inputText  id="minAlter" label="Alter von:" placeholder="Mindestalter" required="true"
+                                  mask="integer" validatorMessage="Bitte ein Alter zwischen 13 und 100 angeben!"
+                                  value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}"/>
+                    <f:validator validatorId="alterValidatorSuchanfrage"/>
+                    <f:attribute name="maxAlter" value="#{confirmSuchanfrage.submittedValue}"/>
+                    <f:validateLongRange minimum="13" maximum="100"/>
+                    <b:messages id="m_minAlter" for="minAlter"/>
                 </b:column>
+
                 <b:column medium-screen="4">
-                    <b:inputText  id="maxAlter" label="Alter bis:" placeholder="Maximalalter" required="true" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}"/>
+                    <b:inputText  id="maxAlter" label="Alter bis:" binding="#{confirmSuchanfrage}" placeholder="Maximalalter" required="true"
+                                  mask="integer" validatorMessage="Bitte ein Alter zwischen 13 und 100 angeben!"
+                                  value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}"/>
+                    <f:validateLongRange minimum="13" maximum="100"/>
+                    <b:messages id="m_maxAlter" for="maxAlter"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->
 
@@ -79,7 +90,8 @@
 
                 <b:column medium-screen="4">
                     <h:outputLabel value="Freizeitaktivitäten:" for="aktivitätenwahl" />
-                    <b:selectMultiMenu value="#{suchanfrageManagedBean.selectedFreizeitaktivitaetenString}" id="aktivitätenwahl">
+                    <b:selectMultiMenu value="#{suchanfrageManagedBean.selectedFreizeitaktivitaetenString}" id="aktivitätenwahl"
+                    disabled="true">
                         <f:selectItem itemLabel="Angeln" itemValue="1"/>
                         <f:selectItem itemLabel="Basketball" itemValue="2"/>
                         <f:selectItem itemLabel="Bergsteigen" itemValue="3"/>
