@@ -18,12 +18,13 @@
                <br/>
 
         <h:form>
-                   <!--Offene Matches anzeigen-->
+                   <!--Zustandegekommene Matches anzeigen-->
 
             <b:dataTable value="#{matchesManagedBean.matchanfragenModelArrayList}" var="akzeptierteMatchanfragen"
-                        striped="#{dataTableSettingsBean.striped}"
+                         striped="#{dataTableSettingsBean.striped}"
                          paginated="false"
-                         searching="false">
+                         searching="false"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/German.json">
                <b:dataTableColumn label="Sprache" value="#{matchesManagedBean.showSpracheName(akzeptierteMatchanfragen.matchanfragen.id.spracheID)}"/>
                <b:dataTableColumn label="Vorname" value="#{akzeptierteMatchanfragen.vorname}"/>
                <b:dataTableColumn label="Nachname" value="#{akzeptierteMatchanfragen.nachname}"/>

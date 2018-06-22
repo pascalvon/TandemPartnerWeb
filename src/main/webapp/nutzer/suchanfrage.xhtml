@@ -100,7 +100,8 @@
             <b:dataTable value="#{suchanfrageManagedBean.suchanfrageArrayList}" var="suchanfrage"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="#{dataTableSettingsBean.paginated}"
-                         searching="false">
+                         searching="false"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/German.json">
                 <b:dataTableColumn label="Sprache" value="#{suchanfrageManagedBean.showSpracheName(suchanfrage.paramSpracheID)}"/>
                 <b:dataTableColumn label="Mindestalter" value="#{suchanfrage.paramAlterMin}"/>
                 <b:dataTableColumn label="Maximalalter" value="#{suchanfrage.paramAlterMax}"/>

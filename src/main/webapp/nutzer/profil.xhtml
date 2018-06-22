@@ -192,7 +192,7 @@
                 <b:column medium-screen="2"/>
 
                 <b:column medium-screen="4">
-                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort:"
+                    <b:inputSecret id="confirm" binding="#{confirmPassword}" label="neues Passwort bestätigen:"
                                    placeholder="neues Paswort bestätigen">
                         <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                         <b:messages id="m_confirm" for="confirm" />
@@ -237,10 +237,10 @@
                     <b:column medium-screen="3"/>
 
                     <b:column medium-screen="6">
-                        <b:inputText id="loeschPW" placeholder="Dein Passwort"
+                        <b:inputSecret id="loeschPW" placeholder="Dein Passwort"
                                      validatorMessage="Falsches Passwort! Dein Profil konnte nicht gelöscht werden!">
                             <f:validator validatorId="deleteValidator"/>
-                        </b:inputText>
+                        </b:inputSecret>
 
                     </b:column>
 

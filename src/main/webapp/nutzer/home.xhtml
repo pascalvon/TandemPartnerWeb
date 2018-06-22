@@ -23,7 +23,8 @@
             <b:dataTable value="#{homeManagedBean.matchanfragenModelArrayList}" var="matchanfragen"
                          striped="#{dataTableSettingsBean.striped}"
                          paginated="false"
-                            searching="false">
+                         searching="false"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/German.json">
                 <b:dataTableColumn label="Sprache" value="#{homeManagedBean.showSpracheName(matchanfragen.matchanfragen.id.spracheID)}"/>
                 <b:dataTableColumn label="Vorname" value="#{matchanfragen.vorname}"/>
                 <b:dataTableColumn label="Nachname" value="#{matchanfragen.nachname}"/>

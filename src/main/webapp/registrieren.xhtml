@@ -206,7 +206,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputSecret id="confirm" binding="#{confirmPassword}" required="true" requiredMessage="Bitte bestätige Dein Passwort!"
-                                   label="Passwort:" placeholder="Passwort">
+                                   label="Passwort bestätigen:" placeholder="Passwort bestätigen">
                         <f:ajax event="keyup" execute="password confirm" render="m_password m_confirm" />
                     </b:inputSecret>
                     <b:messages id="m_confirm" for="confirm" />
