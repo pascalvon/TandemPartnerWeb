@@ -30,7 +30,7 @@ public class LoginManagedBean implements Serializable {
     /**
      * Das {@code Nutzer}-Objekt, in dem der angemeldete Nutzer gehalten wird, nachdem die Methode {@link #login() login} erfolgreich aufgerufen wurde.
      */
-    private Nutzer nutzer = new Nutzer();
+    private Nutzer nutzer;
 
     /**
      * {@code String}, f&uuml;r die Eingabe der E-Mail-Adresse des Nutzers.
@@ -43,12 +43,12 @@ public class LoginManagedBean implements Serializable {
     private String password;
 
     public LoginManagedBean() {
-
+        this.nutzer = new Nutzer();
     }
 
-    public LoginManagedBean(DAO dao, Nutzer nutzer) {
+    public LoginManagedBean(DAO dao) {
         this.dao = dao;
-        this.nutzer = nutzer;
+        this.nutzer = new Nutzer();
     }
 
     // ============================  Constructors  ===========================79
