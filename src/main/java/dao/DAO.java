@@ -116,7 +116,7 @@ public class DAO {
     /** ================= Sprache =================== */
     public Sprache findSpracheByID(String spracheID) {
         return em.createNamedQuery("findBySpracheID", Sprache.class)
-                .setParameter("id", Integer.parseInt(spracheID))
+                .setParameter("id", spracheID)
                 .getSingleResult();
     }
 
