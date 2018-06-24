@@ -1,8 +1,5 @@
 package filter;
 
-import jsfbeans.LoginManagedBean;
-
-import javax.faces.application.ResourceHandler;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

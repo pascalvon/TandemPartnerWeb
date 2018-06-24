@@ -186,7 +186,7 @@ public class Nutzer {
      * @param passwort Der {@code String} mit dem neuen Passwort, welcher das alte Passwort ersetzt.
      */
     public void setPasswort(String passwort) {
-        this.passwort = this.passwort = HashedPasswordGenerator.generateHash(passwort);
+        this.passwort = HashedPasswordGenerator.generateHash(passwort);
     }
 
     /**

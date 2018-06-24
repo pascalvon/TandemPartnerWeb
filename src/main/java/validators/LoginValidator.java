@@ -52,14 +52,11 @@ public class LoginValidator implements Validator {
      * @throws ValidatorException wenn die Eingabe invalide ist.
      */
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-
         try {
-
             mail = (String) o;
             password = (String) uiComponent.getAttributes().get("password");
 
             if (mail.isEmpty() && password.isEmpty()) {
-
                 throw new ValidatorException(new FacesMessage("Bitte gib Deine Login-Daten ein!"));
             }
             else if(!validateNutzer(mail,HashedPasswordGenerator.generateHash(password))){
