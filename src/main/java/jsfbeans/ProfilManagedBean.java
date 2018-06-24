@@ -6,6 +6,7 @@ import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
 import utilities.FreizeitaktivitaetenStringConverter;
+import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -118,7 +119,7 @@ public class ProfilManagedBean {
      *          Aktualisierung auf die {@code home.xhtml} weitergeleitet wird.
      */
     public String update() {
-        if (!nutzer.getPasswort().equals(password) && !password.isEmpty()) {
+        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
             nutzer.setPasswort(password);
         }
             nutzer.setBezirk(dao.findBezirkByName(bezirkName));
