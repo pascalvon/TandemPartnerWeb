@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.HashSet;
 
 /**
- * Die Testklasse f&uuml;r die ManagedBeans, welche Methoden testet,
- * die Logik enthalten.
+ * Die Unittests der Anwendung. Bei den Tests wurden stichprobenartig Methoden der Managed Beans ausgew%auml;hlt und
+ * unter erzeugen eines Setup's getestet.
+ * Dieser Test wird mit JUnit 5 und dem Mockito-Framework ausgef%uumlhrt.
  */
-class ManagedBeansTests {
-
+class ManagedBeansTest {
 
     private static DAO dao;
 
@@ -37,8 +37,6 @@ class ManagedBeansTests {
 
     private static ArrayList<Matchanfragen> matchanfragenListArne = new ArrayList<>();
     private static MatchanfragenModel matchanfragenModelArne;
-
-
 
     @BeforeAll
     static void setUp() {
@@ -236,9 +234,6 @@ class ManagedBeansTests {
             assertEquals(kalle.getBezirk(), registrierenKalle.getNutzer().getBezirk());
             assertEquals(String.valueOf(kalle.getSprachenSet()), String.valueOf(registrierenKalle.getNutzer().getSprachenSet()));
             assertEquals(kalle.getFreizeitaktivitaetenSet(), registrierenKalle.getNutzer().getFreizeitaktivitaetenSet());
-
-
-
         }
     }
 

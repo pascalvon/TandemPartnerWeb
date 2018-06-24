@@ -23,8 +23,8 @@
                 <b:column medium-screen="4">
                     <b:inputText id="vorname" label="Vorname:" required="true" placeholder="Vorname"
                                  requiredMessage="Bitte gib Deinen Vornamen ein!" mask="a{1,20}"
-                                 value="#{profilManagedBean.nutzer.vorname}">
-                    <f:ajax event="blur" execute="vorname" render="m_vorname vorname"/>
+                                 value="#{profilManagedBean.vorname}">
+                    <f:ajax event="blur" execute="vorname" render="m_vorname"/>
                     </b:inputText>
                     <b:messages id="m_vorname" for="vorname"/>
                 </b:column>
@@ -34,8 +34,8 @@
                 <b:column medium-screen="4">
                     <b:inputText id="nachname" label="Nachname:" required="true" placeholder="Nachname"
                                  requiredMessage="Bitte gib Deinen Nachnamen ein!" mask="a{1,20}"
-                                 value="#{profilManagedBean.nutzer.nachname}">
-                        <f:ajax event="blur" execute="nachname" render="m_nachname nachname"/>
+                                 value="#{profilManagedBean.nachname}">
+                        <f:ajax event="blur" execute="nachname" render="m_nachname"/>
                     </b:inputText>
                     <b:messages id="m_nachname" for="nachname"/>
                 </b:column>

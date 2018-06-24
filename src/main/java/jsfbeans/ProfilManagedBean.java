@@ -126,9 +126,11 @@ public class ProfilManagedBean {
         if (!nutzer.getPasswort().equals(password) && !password.isEmpty()) {
             nutzer.setPasswort(password);
         }
-            nutzer.setBezirk(dao.findBezirkByName(bezirkName));
-            updateSprachen();
-            updateFreizeitaktivitaeten();
+        nutzer.setVorname(vorname);
+        nutzer.setNachname(nachname);
+        nutzer.setBezirk(dao.findBezirkByName(bezirkName));
+        updateSprachen();
+        updateFreizeitaktivitaeten();
         if (!mail.equals(nutzer.getMail())) {
             nutzer.setMail(mail);
         }
@@ -191,6 +193,7 @@ public class ProfilManagedBean {
     }
 
     public String getVorname() {
+        vorname = nutzer.getVorname();
         return vorname;
     }
 
@@ -199,6 +202,7 @@ public class ProfilManagedBean {
     }
 
     public String getNachname() {
+        nachname = nutzer.getNachname();
         return nachname;
     }
 

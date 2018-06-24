@@ -370,15 +370,15 @@ public class DAO {
      * Entit&auml;t nicht gibt, wird ein {@code Suchanfrage}-Objekt mit dem Wert "null" zur&uuml;ckgegeben.
      * Daf&uuml;r nutzt die Methode die {@code @NamedQuery} "findSuchanfrage" der Klasse {@code Suchanfrage}.
      *
-     * @param   suchanfrage {@code Suchanfrage}-Objekt, dessen Sprache-ID f&uuml;r die Suche genutzt wird.
+     * @param   paramSpracheID {@code int}-Wert, welcher die ID f&uuml;r die Suche darstellt.
      * @param   nutzer {@code Nutzer}-Objekt, dessen ID f&uuml;r die Suche genutzt wird.
      * @return  Gibt ein {@code Suchanfrage}-Objekt wieder, welches mit den gesuchten Parametern &uuml;bereinstimmt
      *          oder den Wert "null" besitzt.
      */
-    public Suchanfrage findSuchanfrage(Suchanfrage suchanfrage, Nutzer nutzer) {
+    public Suchanfrage findSuchanfrage(int paramSpracheID, Nutzer nutzer) {
         try {
             return (Suchanfrage) em.createNamedQuery("findSuchanfrage")
-                    .setParameter("spracheId", suchanfrage.getParamSpracheID())
+                    .setParameter("spracheId", paramSpracheID)
                     .setParameter("nutzerId", nutzer.getId())
                     .getSingleResult();
         } catch (NoResultException e) {

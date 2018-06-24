@@ -51,6 +51,34 @@ public class Suchanfrage {
     private Nutzer nutzer;
 
     /**
+     * Der Standardkonstruktor des {@code Suchanfrage}-Objektes.
+     */
+    public Suchanfrage() {
+    }
+
+    /**
+     * Initialisiert ein {@code Suchanfrage}-Objekt mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param paramSpracheID {@code int}-Wert, welcher die Sprache-ID des {@code Suchanfrage}-Objektes
+     *                                  repr&auml;sentiert.
+     * @param paramAlterMin {@code Byte}-Wert, welcher das Mindestalter des {@code Suchanfrage}-Objektes
+     *                                  repr&auml;sentiert.
+     * @param paramAlterMax {@code Byte}-Wert, welcher das Maximalalter des {@code Suchanfrage}-Objektes
+     *                                  repr&auml;sentiert.
+     * @param paramGeschlecht {@code Geschlecht}-Objekt, welches das Geschlecht des {@code Suchanfrage}-Objektes
+     *                                          repr&auml;sentiert.
+     * @param nutzer {@code Nutzer}-Objekt, welches den Nutzer des {@code Suchanfrage}-Objektes repr&auml;sentiert.
+     */
+    public Suchanfrage(int paramSpracheID, byte paramAlterMin, byte paramAlterMax, Geschlecht paramGeschlecht, Nutzer nutzer) {
+        this.paramSpracheID = paramSpracheID;
+        this.paramAlterMin = paramAlterMin;
+        this.paramAlterMax = paramAlterMax;
+        this.paramGeschlecht = paramGeschlecht;
+        this.nutzer = nutzer;
+    }
+
+    /**
      * Gibt die ID der Suchanfrage-Entit&auml;t zur&uuml;ck.
      *
      * @return Gibt die ID der Suchanfrage-Entit&auml;t zur&uuml;ck.

@@ -252,7 +252,7 @@ public class SuchanfrageManagedBean {
      */
     private boolean validateSuchanfrage() {
         try {
-            Suchanfrage existingSuchanfrage = dao.findSuchanfrage(suchanfrage, nutzer);
+            Suchanfrage existingSuchanfrage = dao.findSuchanfrage(suchanfrage.getParamSpracheID(), nutzer);
             return existingSuchanfrage.getParamSpracheID() == suchanfrage.getParamSpracheID() &&
                     existingSuchanfrage.getNutzer().getId() == nutzer.getId();
         } catch (NullPointerException e) {
