@@ -155,8 +155,11 @@ public class SuchanfrageManagedBean {
         return selectedFreizeitaktivitaetenString;
     }
 
-    // todo CCE : Das selectMultiMenu in der suchanfrage.xhtml muss soweit bearbeitet werden,
-    // TODO Joe: 2018-06-18  dass keine eingaben in ihr erfolgen koennen und dann kann diese Methode geloescht werden.
+    /**
+     * Ersetzt den {@code String} durch den &uuml;bergebenen {@code String}.
+     *
+     * @param selectedFreizeitaktivitaetenString {@code String}, welcher den alte String ersetzt.
+     */
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
     }
