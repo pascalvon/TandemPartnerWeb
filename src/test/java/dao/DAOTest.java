@@ -1,4 +1,4 @@
-package jsfbeans;
+package dao;
 
 import dao.DAO;
 import models.*;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
+import javax.inject.Named;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -21,13 +22,12 @@ import static org.mockito.Mockito.when;
  * JUnit 4, weil es Arquillian besser unterst&uuml;zt.
  */
 @RunWith(Arquillian.class)
-public class LoginManagedBeanTest {
+public class DAOTest {
 
     @Deployment
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "joe-test.war")
+        return ShrinkWrap.create(WebArchive.class, "DAOTest.war")
                 .addPackage(DAO.class.getPackage())
-                .addPackage(LoginManagedBean.class.getPackage())
                 .addPackage(Nutzer.class.getPackage())
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -38,6 +38,7 @@ public class LoginManagedBeanTest {
 
     @Before
     public void setUp() throws Exception {
+        Nutzer nutzer = new Nutzer();
     }
 
     @After
@@ -45,15 +46,8 @@ public class LoginManagedBeanTest {
     }
 
     @Test
-    public void loginTest() {
+    public void daoTest() {
         Nutzer nutzer = dao.findNutzerByMail("c.cetinkaya@live.de");
-
-        LoginManagedBean loginManagedBean = new LoginManagedBean(dao);
-
-//        when(dao.findNutzerByMail("c.cetinkaya@live.de")).thenReturn(dao.findNutzerByMail("c.cetinkaya@live.de"));
-//        loginManagedBean.setMail("c.cetinkaya@live.de");
-//        loginManagedBean.setPassword("test1234");
-//        loginManagedBean.login();
 
         assertEquals("Coskun", nutzer.getVorname());
         assertEquals("Cetinkaya", nutzer.getNachname());

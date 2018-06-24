@@ -18,7 +18,7 @@ import java.util.HashSet;
  * Die Testklasse f&uuml;r die ManagedBeans, welche Methoden testet,
  * die Logik enthalten.
  */
-class ManagedBeansTest {
+class ManagedBeansTests {
 
 
     private static DAO dao;
