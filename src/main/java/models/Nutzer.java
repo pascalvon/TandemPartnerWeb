@@ -1,7 +1,6 @@
 package models;
 
 import org.hibernate.annotations.Cascade;
-import utilities.HashedPasswordGenerator;
 
 import javax.persistence.*;
 import java.util.*;
@@ -175,7 +174,7 @@ public class Nutzer {
      * @param passwort Der {@code String} mit dem neuen Passwort, welcher das alte Passwort ersetzt.
      */
     public void setPasswort(String passwort) {
-        this.passwort = HashedPasswordGenerator.generateHash(passwort);
+        this.passwort = passwort;
     }
 
     /**

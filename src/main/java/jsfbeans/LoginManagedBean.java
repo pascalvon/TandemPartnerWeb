@@ -2,7 +2,6 @@ package jsfbeans;
 
 import dao.DAO;
 import models.Nutzer;
-import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;

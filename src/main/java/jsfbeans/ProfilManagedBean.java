@@ -5,7 +5,6 @@ import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
 import utilities.FreizeitaktivitaetenStringConverter;
-import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -91,7 +90,7 @@ public class ProfilManagedBean {
      * @return  Gibt den {@code String} zur&uuml;ck, mit dem der angemeldete Nutzer bei erfolgreicher Aktualisierung auf die {@code home.xhtml} weitergeleitet wird.
      */
     public String update() {
-        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
+        if (!nutzer.getPasswort().equals(password) && !password.isEmpty()) {
             nutzer.setPasswort(password);
         }
             nutzer.setBezirk(dao.findBezirkByID(bezirkID));

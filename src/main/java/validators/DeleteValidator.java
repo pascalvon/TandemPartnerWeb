@@ -2,7 +2,6 @@ package validators;
 
 import jsfbeans.LoginManagedBean;
 import models.Nutzer;
-import utilities.HashedPasswordGenerator;
 
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
@@ -24,7 +23,7 @@ public class DeleteValidator implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        String password = HashedPasswordGenerator.generateHash((String) o);
+        String password = (String) o;
 
 
         if(!password.equals(nutzer.getPasswort())){

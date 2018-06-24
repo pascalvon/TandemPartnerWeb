@@ -5,7 +5,6 @@ import models.*;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import utilities.HashedPasswordGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,7 +51,7 @@ class ManagedBeansTest {
         arne.setVorname("Arne");
         arne.setNachname("Shaker");
         arne.setBezirk(new Bezirk(1,"Mitte"));
-        arne.setPasswort(HashedPasswordGenerator.generateHash("test1234"));
+        arne.setPasswort("test1234");
         arne.setGeburtsdatum(new Date(1993,6,16));
         arne.setGeschlecht(Geschlecht.MAENNLICH);
         arne.addSprache(new Sprache(9,"Deutsch"));
@@ -69,7 +68,7 @@ class ManagedBeansTest {
         joe.setVorname("Joe");
         joe.setNachname("Beer");
         joe.setBezirk(new Bezirk(11,"Lichtenberg"));
-        joe.setPasswort(HashedPasswordGenerator.generateHash("test1234"));
+        joe.setPasswort("test1234");
         joe.setGeburtsdatum(new Date(1989,12,11));
         joe.setGeschlecht(Geschlecht.MAENNLICH);
         joe.addSprache(new Sprache(4,"Bengalisch"));
@@ -86,7 +85,7 @@ class ManagedBeansTest {
         kalle.setVorname("Kalle");
         kalle.setNachname("Soldier");
         kalle.setBezirk(new Bezirk(2,"Friedrichshain-Kreuzberg"));
-        kalle.setPasswort(HashedPasswordGenerator.generateHash("test1234"));
+        kalle.setPasswort("test1234");
         kalle.setGeburtsdatum(new Date(1990,6,17));
         kalle.setGeschlecht(Geschlecht.MAENNLICH);
         kalle.addSprache(new Sprache(11,"Englisch"));
@@ -97,7 +96,7 @@ class ManagedBeansTest {
         luise.setVorname("Luise");
         luise.setNachname("Hertha");
         luise.setBezirk(new Bezirk(3,"Pankow"));
-        luise.setPasswort(HashedPasswordGenerator.generateHash("test1234"));
+        luise.setPasswort("test1234");
         luise.setGeburtsdatum(new Date(1993, 3,27));
         luise.setGeschlecht(Geschlecht.WEIBLICH);
         luise.addSprache(new Sprache(5,"Bosnisch"));
@@ -218,7 +217,7 @@ class ManagedBeansTest {
             registrierenKalle.getNutzer().setMail("kalle.soldier@web.de");
             registrierenKalle.getNutzer().setVorname("Kalle");
             registrierenKalle.getNutzer().setNachname("Soldier");
-            registrierenKalle.getNutzer().setPasswort(HashedPasswordGenerator.generateHash("test1234"));
+            registrierenKalle.getNutzer().setPasswort("test1234");
             registrierenKalle.getNutzer().setGeburtsdatum(new Date(1990,6,17));
             registrierenKalle.getNutzer().setGeschlecht(Geschlecht.MAENNLICH);
             registrierenKalle.setBezirkID(2);

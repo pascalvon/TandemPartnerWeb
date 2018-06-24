@@ -51,11 +51,11 @@ public class LoginManagedBeanTest {
         LoginManagedBean loginManagedBean = new LoginManagedBean(dao);
 
 //        when(dao.findNutzerByMail("c.cetinkaya@live.de")).thenReturn(dao.findNutzerByMail("c.cetinkaya@live.de"));
-        loginManagedBean.setMail("c.cetinkaya@live.de");
-        loginManagedBean.setPassword("test1234");
-        loginManagedBean.login();
+//        loginManagedBean.setMail("c.cetinkaya@live.de");
+//        loginManagedBean.setPassword("test1234");
+//        loginManagedBean.login();
 
-        assertEquals("Coskun", loginManagedBean.getNutzer().getVorname());
-        assertEquals("Cetinkaya", loginManagedBean.getNutzer().getNachname());
+        assertEquals("Coskun", nutzer.getVorname());
+        assertEquals("Cetinkaya", nutzer.getNachname());
     }
 }
