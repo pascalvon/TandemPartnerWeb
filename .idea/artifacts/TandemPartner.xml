@@ -2,7 +2,7 @@
   <artifact type="war" name="TandemPartner">
     <output-path>$PROJECT_DIR$/out/artifacts/TandemPartner</output-path>
     <root id="archive" name="TandemPartner.war">
-      <element id="artifact" artifact-name="Tandem" />
+      <element id="artifact" artifact-name="TandemPartnerWeb" />
     </root>
   </artifact>
 </component>

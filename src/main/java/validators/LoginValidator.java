@@ -3,6 +3,7 @@ package validators;
 
 import dao.DAO;
 import models.Nutzer;
+import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -61,7 +62,7 @@ public class LoginValidator implements Validator {
 
                 throw new ValidatorException(new FacesMessage("Bitte gib Deine Login-Daten ein!"));
             }
-            else if(!validateNutzer(mail,password)){
+            else if(!validateNutzer(mail,HashedPasswordGenerator.generateHash(password))){
                 throw new ValidatorException(new FacesMessage("E-Mail-Adresse oder Passwort falsch!"));
             }
             return;
