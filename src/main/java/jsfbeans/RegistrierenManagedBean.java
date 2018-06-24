@@ -166,7 +166,7 @@ public class RegistrierenManagedBean {
     }
 
     /**
-     * Instanziiert die Liste {@link #allBezirkList allBezirkList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * Instanziiert die Liste {@link #allBezirkList allBezirkList} und bef&uuml;llt sie, durch Aufruf der Methode
      * findBezirkList des {@code DAO}-Objektes {@link #dao dao}.
      *
      * @return  Gibt eine Liste mit allen Bezirk-Entit&auml;ten aus der Datenbank in Form von {@code Bezirk}-Objekten
@@ -199,7 +199,7 @@ public class RegistrierenManagedBean {
 
 
     /**
-     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml;llt sie, durch Aufruf der Methode
      * findSpracheList des {@code DAO}-Objektes {@link #dao dao}.
      *
      * @return  Gibt eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten
@@ -231,7 +231,7 @@ public class RegistrierenManagedBean {
     }
 
     /**
-     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml:llt sie,
+     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml;llt sie,
      * durch Aufruf der Methode findFreizeitaktivitaetenList des {@code DAO}-Objektes {@link #dao dao}.
      * @return  Gibt eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
      *          {@code Freizeitaktivitaeten}-Objekten zur&uuml;ck.

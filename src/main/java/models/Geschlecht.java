@@ -13,7 +13,7 @@ public enum Geschlecht {
 
     /**
      * Initialisiert ein neu erzeugtes {@code Geschlecht}-Objekt mit einem Anzeigenamen.
-     * @param anzeigename
+     * @param anzeigename Der Anzeigename des {@code Geschlecht}-Objektes.
      */
     private Geschlecht(String anzeigename) {
         this.anzeigename = anzeigename;

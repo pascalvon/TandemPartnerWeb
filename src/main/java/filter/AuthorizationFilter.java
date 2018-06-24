@@ -26,8 +26,8 @@ public class AuthorizationFilter implements Filter {
      * @param   res {@code ServletResponse}-Objekt, welches genutzt wird, um dem Client eine Antwort senden zu
      *                                     k&ouml;nnen.
      * @param   chain {@code FilterChain}-Objekt, welches den Filter darstellt.
-     * @throws  ServletException , wenn das Servlet nicht richtig ausgef&uuml;rt werden kann.
-     * @throws  IOException , wenn I/O-Operationen fehlgeschlagen sind oder unterbrochen wurden.
+     * @throws  ServletException wenn das Servlet nicht richtig ausgef&uuml;rt werden kann.
+     * @throws  IOException wenn I/O-Operationen fehlgeschlagen sind oder unterbrochen wurden.
      */
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {

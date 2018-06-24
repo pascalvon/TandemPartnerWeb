@@ -11,19 +11,14 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-
 /**
- * Annotiert mit dem JSF @FacesValidator, kann somit einer Komponente einer .xhtml-Seite
- * bspw. über den Tag <f:validator></f:validator> als Validator übergeben werden
+ * Der Validator, welcher beim L&ouml;schen des Nutzers die Best&auml;tigungseingabe (Password) validiert
  */
 @FacesValidator("deleteValidator")
-/**
- * Validator, welcher beim Löschen des Nutzers die Bestätigungseingabe (Password) validiert
- * Implementiert das @Validator-Interface, welches die Implementierung der Methode @validate aufzwingt
- */
 public class DeleteValidator implements Validator {
+
     /**
-     * Nutzer-Instanz, welche zur Laufzeit bei der Validierung initialisert wird
+     * {@code Nutzer}-Objekt, welches zur Laufzeit bei der Validierung initialisert wird
      */
     private Nutzer nutzer;
     /**
@@ -34,18 +29,13 @@ public class DeleteValidator implements Validator {
     }
 
     /**
-     * Standardmethode, welche der Validator-Interface zu implementieren aufzwingt
-     * @param facesContext entspricht dem Kontext (Fenster/Seite)
-     * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
-     * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
-     * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     * Pr&uuml;ft, ob die Eingaben valide sind.
      *
-     * Zuerst finden eine Typkonvertierung der Eingabe und eine anschließende Verschlüsselung statt, um den Wert
-     * in die gleiche Form wie in der Datenbank zu bringen
-     * Danach wird überprüft, ob die Eingabe dem Passwort des Nutzers entspricht
-     * Falls die Eingabe dem hinterlegten Passwort nicht entspricht, schlägt der Validator an und die entsprechende
-     * Fehlermeldung wird ausgegeben
-     * Falls doch, ist die Validierung abgeschlossen
+     * @param facesContext Das {@code FacesContext}-Objekt, welches alle Statusinformationen der Anfrage enth&auml;lt.
+     * @param uiComponent Das {@code UIComponent}-Objekt, welches die Basisklasse f&uuml;r alle
+     *                    Oberfl&auml;chenkomponenten in JSF darstellt.
+     * @param o Das Objekt, welches validiert werden soll.
+     * @throws ValidatorException wenn die Eingabe invalide ist.
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
@@ -57,7 +47,11 @@ public class DeleteValidator implements Validator {
         return;
     }
 
-    //TODO: Joe JavDoc
+    /**
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");

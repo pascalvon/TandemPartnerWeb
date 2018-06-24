@@ -277,22 +277,17 @@ public class DAO {
     }
 
     /**
-     * Sucht in der Tabelle Nutzer nach Einträgen, wo in der Spalte Mail der Wert @param mail steht
-     * @param mail
-     * @return Wird eine Mail gefunden (length>0) wird der Wert false returnt, ansonsten der Wert true
+     * Sucht in der Tabelle Nutzer nach Eintr&auml;gen, in denen in der Spalte 'mail' die E-Mail-Adresse dem
+     * &uuml;bergebenem Parameter entspricht.
+     * @param mail Die gesuchte E-Mail-Adresse.
+     * @return Gibt ein true zur&uuml;ck, wenn kein Eintrag gefunden wurden, andernfalls ein false.
      */
     public boolean findNutzerByMailBoolean(String mail) {
         try {
             Nutzer n = em.createNamedQuery("findNutzerByMailBoolean", Nutzer.class)
                     .setParameter("mail", mail)
                     .getSingleResult();
-
-            if (n.getMail().length()>0) {
-                return false;
-            }
-            else {
-                return true;
-            }
+            return n.getMail().length() <= 0;
         } catch (NoResultException e) {
             return true;
         }

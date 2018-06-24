@@ -52,7 +52,7 @@ public class LoginManagedBean implements Serializable {
      *
      * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die
      *          {@code home.xhtml} weitergeleitet wird.
-     * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
+     * @throws ValidatorException wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {
         FacesContext context = FacesContext.getCurrentInstance();

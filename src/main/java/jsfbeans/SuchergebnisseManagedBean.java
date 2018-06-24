@@ -155,7 +155,7 @@ public class SuchergebnisseManagedBean {
      * Holt sich alle Nutzer aus der Datenbank, die der Sprache-ID aus der Suchanfrage entsprechen und h&auml;lt sie
      * sich in einer {@code ArrayList}. Dann wird f&uuml;r jeden einzelnen vorgeschlagenen Nutzer aus der Liste
      * gepr&uuml;ft, ob es sich nicht um den angemeledeten Nutzer handelt, ob das Geschlecht dem Geschlecht aus
-     * der Suchanfrage und das Alter dem Alter aus der Suchanfrage entspricht. Wenn die Kriterien erf&uumlhlt sind,
+     * der Suchanfrage und das Alter dem Alter aus der Suchanfrage entspricht. Wenn die Kriterien erf&uuml;hlt sind,
      * werden die gemeinsamen Freizeitaktivit&auml;ten des angemeldeten und des vorgeschlagenen Nutzers erechnet
      * und in ein {@code String}-Objekt geschrieben.
      * Anschlie&szlig;end wird ein neues {@code SuchergebnisModel} erzeugt und dem

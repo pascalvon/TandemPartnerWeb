@@ -73,7 +73,7 @@ public class SuchanfrageManagedBean {
      * und instanziiert die Variable {@link #suchanfrage suchanfrage}.
      */
     public SuchanfrageManagedBean() {
-        this.nutzer         = initNutzer();
+        initNutzer();
         this.suchanfrage    = new Suchanfrage();
     }
 
@@ -162,7 +162,7 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml:llt sie,
+     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml;llt sie,
      * durch Aufruf der Methode findFreizeitaktivitaetenList des {@code DAO}-Objektes {@link #dao dao}.
      * @return  Gibt eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
      *          {@code Freizeitaktivitaeten}-Objekten zur&uuml;ck.
@@ -205,7 +205,7 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml;llt sie, durch Aufruf der Methode
      * findSpracheList des {@code DAO}-Objektes {@link #dao dao}.
      *
      * @return  Gibt eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten
@@ -233,11 +233,10 @@ public class SuchanfrageManagedBean {
      * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
      * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
-    private Nutzer initNutzer() {
+    private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.getNutzer();
-        return nutzer;
     }
 
     /**

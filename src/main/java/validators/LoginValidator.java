@@ -14,54 +14,41 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- * Da der von JSF bereitgestellte @FacesValidator nicht von dem "injection container"
- * (hier noch mal nach richtigem Begriff suchen ) gemanaged wird, muss zum Einsatz des DAO der LoginValidator als
- *
- * @ManagedBean mit entsprechendem Scope annotiert werden.
+ * Der Validator, welcher die vom Nutzer eingegebenen Login-Daten validiert.
  */
-
 @ManagedBean
 @RequestScoped
-/**
- * Validator, welcher die vom Anwender eingegebenen Login-Daten validiert.
- * Implementiert das @Validator-Interface, welches die Implementierung der Methode @validate aufzwingt
- *
- */
 public class LoginValidator implements Validator {
 
     /**
-     * Das DAO-Objekt, welches die Methoden zum Datenbankzugriff bereitstellt
-     * Zur Injektion mit @EJB annotiert
+     * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
-    private DAO dao;
-    /**
-     * Nutzer-Instanz, welche zur Laufzeit bei der Validierung initialisert wird
-     */
-    private Nutzer nutzer;
-    /**
-     * mail: Deklaration der zur Laufzeit mit Eingaben belegten E-Mail-Adresse
-     */
-    private String mail;
-    /**
-     * passwort: Deklaration des zur Laufzeit mit Eingaben belegten Passworts
-     */
-    private String password;
+    private DAO     dao;
 
     /**
-     * Standardmethode, welche das Validator-Interface zu implementieren aufzwingt. Auch ohne Annotation mit dem @FacesValidator
-     * wsinnvoll einzusetzen.
+     * {@code Nutzer}-Objekt, welches zur Laufzeit bei der Validierung initialisert wird
+     */
+    private Nutzer  nutzer;
+
+    /**
+     * {@code String}, welcher die Eingabe der E-Mail-Adresse des Nutzers enth&auml;lt.
+     */
+    private String  mail;
+
+    /**
+     * {@code String}, welcher die Eingabe des Passworts des Nutzers enth&auml;lt.
+     */
+    private String  password;
+
+    /**
+     * Pr&uuml;ft, ob die Eingaben valide sind.
      *
-     * @param facesContext entspricht dem Kontext (Fenster/Seite)
-     * @param uiComponent  enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
-     * @param o            beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
-     * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
-     *
-     * Zuerst werden die Parameter mail und password mit den Eingaben der jeweiligen Komponenten belegt
-     * Anschließend werden beide Felder auf Eingaben überprüft, sind welche vorhanden, werden diese zur Validierung
-     * in der Datenbank an die Methode validateNutzer übergeben
-     * Schlägt die Validierung fehl, wird eine entsprchende Fehlermeldung ausgegeben
-     * Ansonsten ist die Validierung beendet
+     * @param facesContext Das {@code FacesContext}-Objekt, welches alle Statusinformationen der Anfrage enth&auml;lt.
+     * @param uiComponent Das {@code UIComponent}-Objekt, welches die Basisklasse f&uuml;r alle
+     *                    Oberfl&auml;chenkomponenten in JSF darstellt.
+     * @param o Das Objekt, welches validiert werden soll.
+     * @throws ValidatorException wenn die Eingabe invalide ist.
      */
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
 
@@ -85,44 +72,18 @@ public class LoginValidator implements Validator {
     }
 
     /**
-     * @param mail
-     * @param password
-     * @return
+     * Validiert anhand der &uuml;bergebenen Parameter, ob ein passender Eintrag in der Datenbank existiert.
      *
-     * Durchsucht die Datenbank anhand des übergebenen Parameters mail auf einen Eintrag und überprüft anschließend die
-     * Passworteingabe mit dem zugehörigen Passwort des Eintrags
-     * Abgefangen werden NullPointerExceptions, sollte kein Eintrag vorhanden sein
+     * @param mail Die E-Mail-Adresse des Nutzers.
+     * @param password Das Passwort des Nutzers.
+     * @return Gibt true zur&uuml;ck, wenn es einen Eintrag in der Datenbank gibt, andernfalls wird ein false.
      */
     private boolean validateNutzer(String mail, String password) {
-
         try {
-
             nutzer = dao.findNutzerByMail(mail);
-
             return password.equals(nutzer.getPasswort());
         } catch (NullPointerException e) {
-
             return false;
         }
-    }
-
-    /**
-     * Getter und Setter
-     */
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

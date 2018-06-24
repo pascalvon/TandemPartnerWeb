@@ -15,24 +15,21 @@ import java.util.Set;
 
 
 /**
- * Annotiert mit dem JSF @FacesValidator, kann somit einer Komponente einer .xhtml-Seite
- * bspw. über den Tag <f:validator></f:validator> als Validator übergeben werden
+ * Der Validator, welcher die bei der Suchanfrage eingegebene Sprache validiert.
  */
 @FacesValidator("spracheValidatorSuchanfrage")
-/**
- * Validator, welcher die bei der Suchanfrage eingegebene Sprache validiert
- * Implementiert das @Validator-Interface, welches die Implementierung der Methode @validate aufzwingt
- */
 public class SpracheValidatorSuchanfrage implements Validator {
 
     /**
-     * Nutzer-Instanz, welche zur Laufzeit bei der Validierung initialisert wird
+     * {@code Nutzer}-Objekt, welches zur Laufzeit bei der Validierung initialisert wird
      */
     private Nutzer nutzer;
+
     /**
-     * Initialisierung der zu überprüfenden sprachID
+     * {@code String}, welcher den Sprachennamen der Auswahl des angemeldeten Nutzers enth&auml;lt.
      */
     private String sprachName = "";
+
     /**
      * Konstruktor der Klasse, welcher den angemeldeten Nutzer initialisiert
      */
@@ -40,39 +37,34 @@ public class SpracheValidatorSuchanfrage implements Validator {
 
 
     /**
-     * Standardmethode, welche der @FacesValidators zu implementieren aufzwingt
-     * @param facesContext entspricht dem Kontext (Fenster/Seite)
-     * @param uiComponent enspricht der Komponente, an welcher der Validator hängt (Button/InputText...)
-     * @param o beinhaltet die Anwendereingaben der Komponente (Datentyp: Object)
-     * @throws ValidatorException zeigt an, dass die Methode ValidatorExceptions werfen kann
+     * Pr&uuml;ft, ob die Eingaben valide sind.
      *
-     * Nach Typkonvertierung der Eingabe (int) werden die gesprochenen Sprachen des Nutzer in ein Set des
-     * Typs Sprache geladen
-     * Sollte keine Eingabe gemacht worden sein, bleibt die sprachID auf dem Wert 0 und es wird eine entsprechende
-     * Fehlermeldung ausgegeben
-     * Falls eine Eingabe gemacht wurde, wird über das Set der gesprochenen Sprachen iteriert und jeder Eintrag
-     * mit der Eingabe verglichen
-     * Bei Gleichheit wird die entsprechende Fehlermeldung ausgegeben
+     * @param facesContext Das {@code FacesContext}-Objekt, welches alle Statusinformationen der Anfrage enth&auml;lt.
+     * @param uiComponent Das {@code UIComponent}-Objekt, welches die Basisklasse f&uuml;r alle
+     *                    Oberfl&auml;chenkomponenten in JSF darstellt.
+     * @param o Das Objekt, welches validiert werden soll.
+     * @throws ValidatorException wenn die Eingabe invalide ist.
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         sprachName = o.toString();
         Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
-
-        // TODO Joe: 2018-06-24 funkt so glaube nicht mehr
         if(sprachName == ""){
             throw new ValidatorException(new FacesMessage("Bitte eine Sprache eingeben!"));
         }
-
         for(Sprache s: nutzerSpricht){
             if (sprachName.equals(s.getNameSprache())) {
-                throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du doch bereits!"));
+                throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du bereits!"));
             }
         }
         return;
     }
 
-    //TODO: Joe JavaDoc
+    /**
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
