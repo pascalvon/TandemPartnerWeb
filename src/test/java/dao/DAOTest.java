@@ -60,14 +60,15 @@ public class DAOTest {
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(2, "Basketball"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(6, "Fitness"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(9, "Golfen"));
-        //dao.merge(arne);
+        dao.merge(arne);
     }
 
     @After
     public void tearDown() throws Exception {
-//        dao.deleteSuchanfrageByNutzer(arne);
-//        dao.deleteMatchanfrageByNutzer(arne);
-//        dao.deleteNutzer(arne);
+        Nutzer nutzerToDelete = dao.findNutzerByMail("arne.shaker@web.de");
+        dao.deleteSuchanfrageByNutzer(nutzerToDelete);
+        dao.deleteMatchanfrageByNutzer(nutzerToDelete);
+        dao.deleteNutzer(nutzerToDelete);
     }
 
     @Test
@@ -76,6 +77,7 @@ public class DAOTest {
         Bezirk expectedBezirk   =  new Bezirk(1,"Mitte");
 
         assertEquals(expectedBezirk, actualBezirk );
+
     }
 
     @Test

@@ -41,6 +41,11 @@ public class ProfilManagedBean {
      */
     private String                          mail;
 
+
+    private String                          vorname;
+
+    private String                          nachname;
+
     /**
      * {@code String}-Wert, welcher den Bezirksnamen des angemeldeten Nutzers enth&auml;lt.
      */
@@ -185,6 +190,22 @@ public class ProfilManagedBean {
         this.mail = mail;
     }
 
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
     /**
      * Liefert den Bezirksnamen des angemeldeten Nutzers zur&uuml;ck.
      *
@@ -225,7 +246,6 @@ public class ProfilManagedBean {
      * @return Gibt eine Zeichenkette mit allen gesprochenen Sprachen des angemeldeten Nutzers zur&uuml;ck.
      */
     public String getSelectedSprachenString() {
-
         ArrayList<Sprache> selectedSprachenList = new ArrayList<>(nutzer.getSprachenSet());
         String[] selectedSprachenArray = new String[selectedSprachenList.size()];
         for (int i = 0; i < selectedSprachenList.size(); i++) {
