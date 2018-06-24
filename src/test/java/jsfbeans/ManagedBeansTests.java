@@ -52,10 +52,10 @@ class ManagedBeansTests {
         arne.setPasswort("test1234");
         arne.setGeburtsdatum(new Date(1993,6,16));
         arne.setGeschlecht(Geschlecht.MAENNLICH);
-        arne.addSprache(new Sprache(9,"Deutsch"));
-        arne.addSprache(new Sprache(10,"Englisch"));
-        arne.addSprache(new Sprache(15,"Grichisch"));
-        arne.addSprache(new Sprache(23,"Polnisch"));
+        arne.addSprache(new Sprache(5,"Deutsch"));
+        arne.addSprache(new Sprache(6,"Englisch"));
+        arne.addSprache(new Sprache(9,"Grichisch"));
+        arne.addSprache(new Sprache(17,"Polnisch"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(1, "Angeln"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(2, "Basketball"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(6, "Fitness"));
@@ -69,10 +69,10 @@ class ManagedBeansTests {
         joe.setPasswort("test1234");
         joe.setGeburtsdatum(new Date(1989,12,11));
         joe.setGeschlecht(Geschlecht.MAENNLICH);
-        joe.addSprache(new Sprache(4,"Bengalisch"));
-        joe.addSprache(new Sprache(10,"Englisch"));
-        joe.addSprache(new Sprache(14,"Georgisch"));
-        joe.addSprache(new Sprache(23,"Polnisch"));
+        joe.addSprache(new Sprache(1,"Bosnisch"));
+        joe.addSprache(new Sprache(6,"Englisch"));
+        joe.addSprache(new Sprache(10,"Irisch"));
+        joe.addSprache(new Sprache(17,"Polnisch"));
         joe.addFreizeitaktivitaeten(new Freizeitaktivitaeten(3, "Bergsteigen"));
         joe.addFreizeitaktivitaeten(new Freizeitaktivitaeten(5, "Filmen"));
         joe.addFreizeitaktivitaeten(new Freizeitaktivitaeten(6, "Fitness"));
@@ -107,7 +107,7 @@ class ManagedBeansTests {
         luise.addFreizeitaktivitaeten(new Freizeitaktivitaeten(9, "Golfen"));
 
         // Test-Matchanfragen
-        matchanfragenArneJoe = new Matchanfragen(new MatchId(1,2,4));
+        matchanfragenArneJoe = new Matchanfragen(new MatchId(1,2,1));
         matchanfragenArneJoe.setAngenommen((byte) 0);
 
         matchanfragenArneLuis = new Matchanfragen(new MatchId(1,4,7));
@@ -119,7 +119,7 @@ class ManagedBeansTests {
         matchanfragenKalleLuis = new Matchanfragen(new MatchId(3,4,30));
         matchanfragenKalleLuis.setAngenommen((byte) 0);
 
-        matchanfragenLuisArne = new Matchanfragen(new MatchId(4,1,9));
+        matchanfragenLuisArne = new Matchanfragen(new MatchId(4,1,5));
         matchanfragenLuisArne.setAngenommen((byte) 0);
 
         matchanfragenModelJoe = new MatchanfragenModel(arne,1,"Fitness", matchanfragenArneJoe);
@@ -175,23 +175,23 @@ class ManagedBeansTests {
             ProfilManagedBean profilKalle = new ProfilManagedBean(dao, kalle);
 
             HashSet<Sprache> sprachenSetKalleNew = new HashSet<>();
-            sprachenSetKalleNew.add(new Sprache(18,"Hawaiisch"));
+            sprachenSetKalleNew.add(new Sprache(18,"Portugiesisch"));
 
             HashSet<Freizeitaktivitaeten> freizeitaktivitaetenSetKalleNew = new HashSet<>();
             freizeitaktivitaetenSetKalleNew.add(new Freizeitaktivitaeten(1,"Angeln"));
 
-            assertEquals("11", profilKalle.getSelectedSprachenString());
-            assertEquals("6", profilKalle.getSelectedFreizeitaktivitaetenString());
+            assertEquals("Englisch", profilKalle.getSelectedSprachenString());
+            assertEquals("Fitness", profilKalle.getSelectedFreizeitaktivitaetenString());
 
             profilKalle.setMail("kalle.student@web.de");
             profilKalle.setPassword("kalle1234");
             profilKalle.setBezirkName("Friedrichshain-Kreuzberg");
-            profilKalle.setSelectedSprachenString("18");
-            profilKalle.setSelectedFreizeitaktivitaetenString("1");
+            profilKalle.setSelectedSprachenString("Portugiesisch");
+            profilKalle.setSelectedFreizeitaktivitaetenString("Angeln");
 
             Mockito.when(dao.findBezirkByName("Friedrichshain-Kreuzberg")).thenReturn(kalle.getBezirk());
-            Mockito.when(dao.findSpracheByID(18)).thenReturn(new Sprache(18,"Hawaiisch"));
-            Mockito.when(dao.findFreizeitaktivitaetenByID(1)).thenReturn(new Freizeitaktivitaeten(1,"Angeln"));
+            Mockito.when(dao.findSpracheByName("Portugiesisch")).thenReturn(new Sprache(18,"Portugiesisch"));
+            Mockito.when(dao.findFreizeitaktivitaetenByName("Angeln")).thenReturn(new Freizeitaktivitaeten(1,"Angeln"));
 
 
             assertEquals("home?faces-redirect=true", profilKalle.update());
@@ -219,12 +219,12 @@ class ManagedBeansTests {
             registrierenKalle.getNutzer().setGeburtsdatum(new Date(1990,6,17));
             registrierenKalle.getNutzer().setGeschlecht(Geschlecht.MAENNLICH);
             registrierenKalle.setBezirkName("Friedrichshain-Kreuzberg");
-            registrierenKalle.setSelectedSprachenString("11");
-            registrierenKalle.setSelectedFreizeitaktivitaetenString("6");
+            registrierenKalle.setSelectedSprachenString("Englisch");
+            registrierenKalle.setSelectedFreizeitaktivitaetenString("Fitness");
 
             Mockito.when(dao.findBezirkByName("Friedrichshain-Kreuzberg")).thenReturn(new Bezirk(2,"Friedrichshain-Kreuzberg"));
-            Mockito.when(dao.findSpracheByID(11)).thenReturn(new Sprache(11, "Englisch"));
-            Mockito.when(dao.findFreizeitaktivitaetenByID(6)).thenReturn(new Freizeitaktivitaeten(6, "Fitness"));
+            Mockito.when(dao.findSpracheByName("Englisch")).thenReturn(new Sprache(6, "Englisch"));
+            Mockito.when(dao.findFreizeitaktivitaetenByName("Fitness")).thenReturn(new Freizeitaktivitaeten(6, "Fitness"));
 
             assertEquals("/nutzer/home?faces-redirect=true", registrierenKalle.register());
             assertEquals(kalle.getMail(), registrierenKalle.getNutzer().getMail());
@@ -234,7 +234,7 @@ class ManagedBeansTests {
             assertEquals(kalle.getGeburtsdatum(), registrierenKalle.getNutzer().getGeburtsdatum());
             assertEquals(kalle.getGeschlecht(), registrierenKalle.getNutzer().getGeschlecht());
             assertEquals(kalle.getBezirk(), registrierenKalle.getNutzer().getBezirk());
-            assertEquals(kalle.getSprachenSet(), registrierenKalle.getNutzer().getSprachenSet());
+            assertEquals(String.valueOf(kalle.getSprachenSet()), String.valueOf(registrierenKalle.getNutzer().getSprachenSet()));
             assertEquals(kalle.getFreizeitaktivitaetenSet(), registrierenKalle.getNutzer().getFreizeitaktivitaetenSet());
 
 

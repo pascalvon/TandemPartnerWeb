@@ -140,12 +140,16 @@ public class StandardtemplateManagedBean {
     /**
      * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
      * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
-     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen. Falls
+     * das {@code Nutzer}-Objekt null ist, wird {@link #nutzer nutzer} instanziiert.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         LoginManagedBean loginManagedBean = (LoginManagedBean) elContext.getELResolver().getValue(elContext, null, "loginManagedBean");
         nutzer = loginManagedBean.getNutzer();
+        if (loginManagedBean.getNutzer() == null) {
+            nutzer = new Nutzer();
+        }
     }
 
     /**
