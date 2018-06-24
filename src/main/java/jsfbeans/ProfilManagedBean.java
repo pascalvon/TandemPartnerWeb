@@ -154,7 +154,7 @@ public class ProfilManagedBean {
         dao.deleteMatchanfrageByNutzer(nutzer);
         dao.deleteNutzer(nutzer);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
+        return "/login.xhtml?faces-redirect=true";
     }
 
     /**
