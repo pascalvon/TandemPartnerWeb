@@ -18,22 +18,23 @@ import java.util.Set;
 public class SpracheValidatorSuchanfrage implements Validator {
 
     private Nutzer nutzer;
-    private int sprachID = 0;
+    private String sprachName;
     public SpracheValidatorSuchanfrage() { initNutzer(); }
 
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        sprachID = Integer.parseInt(o.toString());
+        sprachName = o.toString();
 
-        Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
+        Set<Sprache> nutzerSpricht = nutzer.getSprachenSet();
 
-        if(sprachID==0){
+        // TODO Joe: 2018-06-24 funkt so glaube nicht mehr
+        if(sprachName == ""){
             throw new ValidatorException(new FacesMessage("Bitte eine Sprache eingeben!"));
         }
 
         for(Sprache s: nutzerSpricht){
-            if (sprachID == s.getId()) {
+            if (sprachName == s.getNameSprache()) {
                 throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du doch bereits!"));
             }
         }

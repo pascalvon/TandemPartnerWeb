@@ -3,6 +3,7 @@ package jsfbeans;
 import dao.DAO;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
+import models.Sprache;
 import models.Suchanfrage;
 import utilities.FreizeitaktivitaetenStringConverter;
 
@@ -50,13 +51,20 @@ public class SuchanfrageManagedBean {
      * Das {@code Suchanfrage}-Objekt, welches im Konstruktor instanziiert wird und in den die Suchparameter
      * des angemeldeten Nutzers geschrieben werden.
      */
-    private Suchanfrage             suchanfrage;
+    private Suchanfrage                     suchanfrage;
 
     /**
      * Die {@code ArrayList} mit der Typisierung {@code Suchanfrage} enth&auml;lt die gespeicherten Suchanfragen des
      * angemeldeten Nutzers.
      */
-    private ArrayList<Suchanfrage>  suchanfrageArrayList;
+    private ArrayList<Suchanfrage>          suchanfrageArrayList;
+
+    /**
+     * Eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten.
+     */
+    private ArrayList<Sprache>              allSprachenList;
+
+    private String                          paramSpracheName;
 
     // ============================  Constructors  ===========================79
     /**
@@ -194,6 +202,28 @@ public class SuchanfrageManagedBean {
         suchanfrageArrayList = new ArrayList<>();
         suchanfrageArrayList = dao.findSuchanfrageByNutzerList(nutzer);
         return this.suchanfrageArrayList;
+    }
+
+    /**
+     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * findSpracheList des {@code DAO}-Objektes {@link #dao dao}.
+     *
+     * @return  Gibt eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten
+     *          zur&uuml;ck.
+     */
+    public ArrayList<Sprache> getAllSprachenList() {
+        allSprachenList = new ArrayList<>();
+        allSprachenList = dao.findSpracheList();
+        return allSprachenList;
+    }
+
+    public String getParamSpracheName() {
+        return paramSpracheName;
+    }
+
+    public void setParamSpracheName(String paramSpracheName) {
+        suchanfrage.setParamSpracheID(dao.findSpracheByName(paramSpracheName).getId());
+        this.paramSpracheName = paramSpracheName;
     }
 
     // =================  protected/package local  Methods ===================79
