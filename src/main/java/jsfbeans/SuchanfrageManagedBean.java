@@ -1,6 +1,7 @@
 package jsfbeans;
 
 import dao.DAO;
+import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Suchanfrage;
 import utilities.FreizeitaktivitaetenStringConverter;
@@ -26,18 +27,24 @@ public class SuchanfrageManagedBean {
      * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
-    private DAO                     dao;
+    private DAO                             dao;
 
     /**
      * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
-    private Nutzer                  nutzer;
+    private Nutzer                          nutzer;
 
     /**
      * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer hat.
      */
-    private String                  selectedFreizeitaktivitaetenString;
+    private String                          selectedFreizeitaktivitaetenString;
+
+    /**
+     * Eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
+     * {@code Freizeitaktivitaeten}-Objekten.
+     */
+    private ArrayList<Freizeitaktivitaeten> allFreizeitaktivitaetenList;
 
     /**
      * Das {@code Suchanfrage}-Objekt, welches im Konstruktor instanziiert wird und in den die Suchparameter
@@ -46,13 +53,15 @@ public class SuchanfrageManagedBean {
     private Suchanfrage             suchanfrage;
 
     /**
-     * Die {@code ArrayList} mit der Typisierung {@code Suchanfrage} enth&auml;lt die gespeicherten Suchanfragen des angemeldeten Nutzers.
+     * Die {@code ArrayList} mit der Typisierung {@code Suchanfrage} enth&auml;lt die gespeicherten Suchanfragen des
+     * angemeldeten Nutzers.
      */
     private ArrayList<Suchanfrage>  suchanfrageArrayList;
 
     // ============================  Constructors  ===========================79
     /**
-     * Initialisiert ein neu erzeugtes {@code SuchanfrageManagedBean}-Objekt und ruft dabei die Methode {@link #initNutzer() initNutzer} auf
+     * Initialisiert ein neu erzeugtes {@code SuchanfrageManagedBean}-Objekt und ruft dabei die Methode
+     * {@link #initNutzer() initNutzer} auf
      * und instanziiert die Variable {@link #suchanfrage suchanfrage}.
      */
     public SuchanfrageManagedBean() {
@@ -63,16 +72,18 @@ public class SuchanfrageManagedBean {
     // ===========================  public  Methods  =========================79
     /**
      * Pr&uuml;ft nach dem Wert der Methode {@link #validateSuchanfrage() validateSuchanfrage} und ob die L&auml;nge
-     * der Liste aus {@code dao.findSuchanfrageByNutzer} kleiner als 5 ist. Falls ja, wird {@link #nutzer} {@link #suchanfrage suchanfrage}
-     * hinzugef&uuml;gt und {@link #suchanfrage} wird in die Datenbank gemerged. Anschlie&szlig;end wird der angemeldete Nutzer
+     * der Liste aus {@code dao.findSuchanfrageByNutzerList} kleiner als 5 ist. Falls ja, wird {@link #nutzer}
+     * {@link #suchanfrage suchanfrage} hinzugef&uuml;gt und {@link #suchanfrage} wird in die Datenbank gemerged.
+     * Anschlie&szlig;end wird der angemeldete Nutzer
      * zur {@code suchergebnisse.xhtml} weitergeleitet.
-     * Falls die if-Anweisung false ergibt, wird {@link #suchanfrage suchanfrage} nicht in die Datenbank gemerged. Es findet
-     * nur eine Weiterleitung des angemeldeten Nutzers statt.
+     * Falls die if-Anweisung false ergibt, wird {@link #suchanfrage suchanfrage} nicht in die Datenbank gemerged.
+     * Es findet nur eine Weiterleitung des angemeldeten Nutzers statt.
      *
-     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code suchergebnisse.xhtml} weitergeleitet wird.
+     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code suchergebnisse.xhtml}
+     * weitergeleitet wird.
      */
     public String search() {
-        if (!validateSuchanfrage() && dao.findSuchanfrageByNutzer(nutzer).size()<5) {
+        if (!validateSuchanfrage() && dao.findSuchanfrageByNutzerList(nutzer).size()<5) {
             suchanfrage.setNutzer(nutzer);
             dao.merge(suchanfrage);
         }
@@ -80,10 +91,11 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * F&uuml;hrt die Anfrage aus, um eine Suchanfrage-Entit&auml;t aus der Datenbank zu l&ouml;schen, welche dem &uuml;gerbegenem
-     * {@code Suchanfrage}-Objekt entspricht.
+     * F&uuml;hrt die Anfrage aus, um eine Suchanfrage-Entit&auml;t aus der Datenbank zu l&ouml;schen,
+     * welche dem &uuml;gerbegenem {@code Suchanfrage}-Objekt entspricht.
      *
-     * @param savedSuchanfrage Das {@code Suchanfrage}-Objekt, welches der zu l&ouml;schenden Entit&auml;t aus der Datenbank entspricht.
+     * @param savedSuchanfrage Das {@code Suchanfrage}-Objekt, welches der zu l&ouml;schenden Entit&auml;t aus der
+     *                         Datenbank entspricht.
      */
     public void deleteSuchanfrage(Suchanfrage savedSuchanfrage) {
         dao.deleteSuchanfrageNQ(savedSuchanfrage);
@@ -93,8 +105,10 @@ public class SuchanfrageManagedBean {
      * &Uuml;berschreibt {@link #suchanfrage suchanfrage} mit dem &uuml;bergebenem {@code Suchanfrage}-Objekt und
      * leitet den angemeldeten Nutzer weiter zur {@code suchergebnisse.xhtml}.
      *
-     * @param   savedSuchanfrage Das {@code Suchanfrage}-Objekt, welches {@link #suchanfrage suchanfrage} &uuml;berschreibt.
-     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code suchergebnisse.xhtml} weitergeleitet wird.
+     * @param   savedSuchanfrage Das {@code Suchanfrage}-Objekt, welches {@link #suchanfrage suchanfrage}
+     *                           &uuml;berschreibt.
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer auf die {@code suchergebnisse.xhtml}
+     *          weitergeleitet wird.
      */
     public String useSuchanfrage(Suchanfrage savedSuchanfrage) {
         this.suchanfrage = savedSuchanfrage;
@@ -122,9 +136,9 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen der statischen
-     * Methode {@code selectedFreizeitaktivitaetenString} der Klasse {@code FreizeitaktivitaetenStringConverter} und
-     * gibt den {@code String} zur&uuml;ck.
+     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen
+     * der statischen Methode {@code selectedFreizeitaktivitaetenString} der Klasse
+     * {@code FreizeitaktivitaetenStringConverter} und gibt den {@code String} zur&uuml;ck.
      *
      * @return Gibt eine Zeichenkette mit allen Freizeitaktivitäten des angemeldeten Nutzers zur&uuml;ck.
      */
@@ -137,6 +151,18 @@ public class SuchanfrageManagedBean {
     // TODO Joe: 2018-06-18  dass keine eingaben in ihr erfolgen koennen und dann kann diese Methode geloescht werden.
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
+    }
+
+    /**
+     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml:llt sie,
+     * durch Aufruf der Methode findFreizeitaktivitaetenList des {@code DAO}-Objektes {@link #dao dao}.
+     * @return  Gibt eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
+     *          {@code Freizeitaktivitaeten}-Objekten zur&uuml;ck.
+     */
+    public ArrayList<Freizeitaktivitaeten> getAllFreizeitaktivitaetenList() {
+        allFreizeitaktivitaetenList = new ArrayList<>();
+        allFreizeitaktivitaetenList = dao.findFreizeitaktivitaetenList();
+        return allFreizeitaktivitaetenList;
     }
 
     /**
@@ -166,15 +192,16 @@ public class SuchanfrageManagedBean {
      */
     public ArrayList<Suchanfrage> getSuchanfrageArrayList() {
         suchanfrageArrayList = new ArrayList<>();
-        suchanfrageArrayList = dao.findSuchanfrageByNutzer(nutzer);
+        suchanfrageArrayList = dao.findSuchanfrageByNutzerList(nutzer);
         return this.suchanfrageArrayList;
     }
 
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
-     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private Nutzer initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -184,11 +211,12 @@ public class SuchanfrageManagedBean {
     }
 
     /**
-     * Pr&uuml;ft, ob der angemeldete Nutzer eine gespeicherte Suchanfrage in der Datenbank hat, die gleich {@link #suchanfrage suchanfrage} ist.
-     * Wenn ja gibt die Methode ein true zur&uuml;ck. Falls eine {@code NullPointerException} fliegt, wird ein false zur&uuml;ckgegeben.
+     * Pr&uuml;ft, ob der angemeldete Nutzer eine gespeicherte Suchanfrage in der Datenbank hat, die gleich
+     * {@link #suchanfrage suchanfrage} ist. Wenn ja gibt die Methode ein true zur&uuml;ck. Falls eine
+     * {@code NullPointerException} fliegt, wird ein false zur&uuml;ckgegeben.
      *
-     * @return Gibt true zur&uuml;ck, wenn {@link #suchanfrage suchanfrage} bereits in der Datenbank existiert und false, wenn
-     *         eine NullPointerException fliegt.
+     * @return  Gibt true zur&uuml;ck, wenn {@link #suchanfrage suchanfrage} bereits in der Datenbank existiert und
+     *          false, wenn eine NullPointerException fliegt.
      */
     private boolean validateSuchanfrage() {
         try {

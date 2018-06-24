@@ -33,8 +33,8 @@
                 <b:dataTableColumn label="Gemeinsame Aktivitäten" value="#{akzeptierteMatchanfragen.commonFreizeitaktivitaetenString}"/>
                 <b:dataTableColumn label="Anzahl gemeinsamer Aktivitäten" value="#{akzeptierteMatchanfragen.commonFreizeitaktivitaetenNumber}"/>
                 <b:dataTableColumn label="Bezirk" value="#{akzeptierteMatchanfragen.bezirk}"/>
-                <b:dataTableColumn label="Empfangen/ Gesendet" value="#{akzeptierteMatchanfragen.origin}"/>
                 <b:dataTableColumn label="Emailadresse" value="#{akzeptierteMatchanfragen.mail}"/>
+                <b:dataTableColumn label="Empfangen/ Gesendet" value="#{akzeptierteMatchanfragen.origin}"/>
                 <b:dataTableColumn label="Match löschen">
                     <b:commandButton value="Löschen" icon="trash" action="#{matchesManagedBean.deleteMatchanfrage(akzeptierteMatchanfragen.matchanfragen)}"/>
                 </b:dataTableColumn>

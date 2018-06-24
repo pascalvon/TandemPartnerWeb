@@ -2,6 +2,8 @@ package models;
 
 import utilities.AgeCalculator;
 
+import java.util.Objects;
+
 /**
  * Diese Klasse repr&auml;sentiert einen zustandegekommenen Match eines angemeldeten Nutzers.
  */
@@ -228,6 +230,44 @@ public class MatchanfragenModel {
      */
     public String getOrigin() {
         return origin;
+    }
+
+    /**
+     * &Uuml;berschreibt die {@link #equals(Object) equals}-Methode, sodass {@code MatchanfragenModel}-Ojekte &uuml;ber
+     * bestimmte Parameter verglichen werden.
+     *
+     * @param   o Das Objekt, mit dem verglichen werden soll.
+     * @return  Gibt true zur&uuml;ck, wenn die Parameter der beiden Objekte die selben sind und false, wenn sie
+     *          unterschiedliche Parameter besitzen.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchanfragenModel that = (MatchanfragenModel) o;
+        return alter == that.alter &&
+                commonFreizeitaktivitaetenNumber == that.commonFreizeitaktivitaetenNumber &&
+                Objects.equals(nutzer, that.nutzer) &&
+                Objects.equals(vorname, that.vorname) &&
+                Objects.equals(nachname, that.nachname) &&
+                geschlecht == that.geschlecht &&
+                Objects.equals(bezirk, that.bezirk) &&
+                Objects.equals(commonFreizeitaktivitaetenString, that.commonFreizeitaktivitaetenString) &&
+                Objects.equals(mail, that.mail) &&
+                Objects.equals(matchanfragen, that.matchanfragen) &&
+                Objects.equals(origin, that.origin);
+    }
+
+    /**
+     * &Uuml;berschreibt die {@link #hashCode() hashCode}-Methode, sodass der Hashcode von {@code MatchanfragenModel}-
+     * Objekten ihrer Parameter entsprechen.
+     *
+     * @return Gibt den Hashcode des Objekts als seine Parameter wieder.
+     */
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(nutzer, vorname, nachname, geschlecht, alter, bezirk, commonFreizeitaktivitaetenNumber, commonFreizeitaktivitaetenString, mail, matchanfragen, origin);
     }
 
     // =================  protected/package local  Methods ===================79

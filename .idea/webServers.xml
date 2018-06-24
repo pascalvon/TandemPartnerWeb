@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="8c90cc1a-d5ff-4000-8780-de1d9d84a8af" name="WildflyTandem" url="http://ec2-54-149-222-235.us-west-2.compute.amazonaws.com">
-        <fileTransfer host="ec2-54-149-222-235.us-west-2.compute.amazonaws.com" port="22" privateKey="C:\Users\Joe Beer\Documents\keys\TandemWildfly-keypair.ppk" rootFolder="/home/bitnami" accessType="SFTP" keyPair="true">
+      <webServer id="8c90cc1a-d5ff-4000-8780-de1d9d84a8af" name="WildflyTandem" url="http://ec2-34-219-77-91.us-west-2.compute.amazonaws.com">
+        <fileTransfer host="ec2-34-219-77-91.us-west-2.compute.amazonaws.com" port="22" privateKey="C:\Users\Joe Beer\Documents\keys\TandemWildfly-keypair.ppk" rootFolder="/home/bitnami" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

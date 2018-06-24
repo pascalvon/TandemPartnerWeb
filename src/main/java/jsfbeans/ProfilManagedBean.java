@@ -1,11 +1,11 @@
 package jsfbeans;
 
 import dao.DAO;
+import models.Bezirk;
 import models.Freizeitaktivitaeten;
 import models.Nutzer;
 import models.Sprache;
 import utilities.FreizeitaktivitaetenStringConverter;
-import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.el.ELContext;
@@ -28,83 +28,118 @@ public class ProfilManagedBean {
      * Das {@code DAO}-Objekt, welches Methoden enth&auml;lt, um abfragen mit der Datenbank zu realisieren.
      */
     @EJB
-    private DAO         dao;
+    private DAO                             dao;
 
     /**
      * Das {@code Nutzer}-Objekt, welches den angemeldeten Nutzer darstellt, das im Konstruktor
      * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
-    private Nutzer      nutzer;
+    private Nutzer                          nutzer;
 
     /**
      * {@code String}, welcher die E-Mail-Adresse des angemeldeten Nutzers enth&auml;lt.
      */
-    private String      mail;
+    private String                          mail;
 
     /**
-     * {@code int}-Wert, welcher die Bezirk-ID des angemeldeten Nutzers enth&auml;lt.
+     * {@code String}-Wert, welcher den Bezirksnamen des angemeldeten Nutzers enth&auml;lt.
      */
-    private int         bezirkID;
+    private String                          bezirkName;
+
+    /**
+     * Eine Liste mit allen Bezirk-Entit&auml;ten aus der Datenbank in Form von {@code Bezirk}-Objekten.
+     */
+    private ArrayList<Bezirk>               allBezirkList;
 
     /**
      * {@code String}, welcher die Namen der Sprachen enth&auml;lt, die der angemeldete Nutzer spricht.
      */
-    private String      selectedSprachenString;
+    private String                          selectedSprachenString;
+
+    /**
+     * Eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten.
+     */
+    private ArrayList<Sprache>              allSprachenList;
 
     /**
      * {@code String}, welcher die Namen der Freizeitaktivit&auml;ten enth&auml;lt, die der angemeldete Nutzer hat.
      */
-    private String      selectedFreizeitaktivitaetenString;
+    private String                          selectedFreizeitaktivitaetenString;
+
+    /**
+     * Eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
+     * {@code Freizeitaktivitaeten}-Objekten.
+     */
+    private ArrayList<Freizeitaktivitaeten> allFreizeitaktivitaetenList;
 
     /**
      * {@code String}, f&uuml;r die Eingabe eines neuen Passworts des angemeldeten Nutzers.
      */
-    private String      password;
+    private String                          password;
 
     // ============================  Constructors  ===========================79
 
     /**
-     * Initialisiert ein neu erzeugtes {@code ProfilManagedBean}-Objekt, ruft dabei die Methode {@link #initNutzer() initNutzer} auf und
-     * wei&szlig;t den Variablen {@link #mail mail} und {@link #bezirkID bezirkID} die jeweiligen Werte vom vorher initialisierten {@link #nutzer nutzer} zu.
+     * Initialisiert ein neu erzeugtes {@code ProfilManagedBean}-Objekt, ruft dabei die Methode
+     * {@link #initNutzer() initNutzer} auf und wei&szlig;t den Variablen {@link #mail mail} und
+     * {@link #bezirkName bezirkName} die jeweiligen Werte vom vorher initialisierten {@link #nutzer nutzer} zu.
      */
     public ProfilManagedBean() {
         initNutzer();
         this.mail       = nutzer.getMail();
-        this.bezirkID   = nutzer.getBezirk().getId();
+        this.bezirkName = nutzer.getBezirk().getBezirkName();
+    }
+
+    /**
+     * Initialisiert ein {@code ProfilManagedBean}-Objekt mit den eingegebenen Parametern und weißt diese
+     * den entsprechenden Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param dao {@code DAO}-Objekt, welches dem {@code DAO}-Objekt {@link #dao dao} zugewiesen
+     *                         werden soll.
+     * @param nutzer {@code Nutzer}-Objekt, welches dem {@code Nutzer}-Objekt {@link #nutzer nutzer} zugewiesen
+     *                             werden soll.
+     */
+    ProfilManagedBean(DAO dao, Nutzer nutzer) {
+        this.dao    = dao;
+        this.nutzer = nutzer;
     }
 
     // ===========================  public  Methods  =========================79
     /**
      * <pre>
      * Aktualisiert die Daten des angemeldeten Nutzers.
-     * Falls der angemeldete Nutzer ein neues Passwort festgelegt hat, wird dieses in {@link #nutzer nutzer} reingeschrieben.
-     * Die Daten des angemeldeten Nutzers werden aktualisiert.
-     * Es wird gepr&uuml;ft, ob {@link #mail mail} ge&auml;ndert wurde.
-     * Das {@link #nutzer nutzer}-Objekt wird in die Datenbank gemerged und {@link #refreshNutzer() refreshNutzer} aufgerufen.
+     * Falls der angemeldete Nutzer ein neues Passwort festgelegt hat, wird dieses in {@link #nutzer nutzer}
+     * reingeschrieben. Die Daten des angemeldeten Nutzers werden aktualisiert.
+     * Es wird gepr&uuml;ft, ob {@link #mail mail} ge&auml;ndert wurde. Das {@link #nutzer nutzer}-Objekt wird in
+     * die Datenbank gemerged und {@link #refreshNutzer() refreshNutzer} aufgerufen.
      * </pre>
      *
-     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der angemeldete Nutzer bei erfolgreicher Aktualisierung auf die {@code home.xhtml} weitergeleitet wird.
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der angemeldete Nutzer bei erfolgreicher
+     *          Aktualisierung auf die {@code home.xhtml} weitergeleitet wird.
      */
     public String update() {
-        if (!nutzer.getPasswort().equals(HashedPasswordGenerator.generateHash(password)) && !password.isEmpty()) {
+        if (!nutzer.getPasswort().equals(password) && !password.isEmpty()) {
             nutzer.setPasswort(password);
         }
-            nutzer.setBezirk(dao.findBezirkByID(bezirkID));
+            nutzer.setBezirk(dao.findBezirkByName(bezirkName));
             updateSprachen();
             updateFreizeitaktivitaeten();
         if (!mail.equals(nutzer.getMail())) {
             nutzer.setMail(mail);
         }
             dao.merge(nutzer);
+        if (contextExists()){
             refreshNutzer();
+        }
             return "home?faces-redirect=true";
     }
 
     /**
-     * L&ouml;scht den angemeldeten Nutzer aus der Datenbank. Vorher werden alle Suchanfrage- und Matchanfragen-Entit&auml;ten,
-     * welche die ID des angemeldeten Nutzers enthalten gel&ouml;scht.
+     * L&ouml;scht den angemeldeten Nutzer aus der Datenbank. Vorher werden alle Suchanfrage- und
+     * Matchanfragen-Entit&auml;ten, welche die ID des angemeldeten Nutzers enthalten gel&ouml;scht.
      *
-     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher L&ouml;schung auf die {@code login.xhtml} weitergeleitet wird.
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher L&ouml;schung auf die
+     *          {@code login.xhtml} weitergeleitet wird.
      */
     public String deleteNutzer() {
         dao.deleteSuchanfrageByNutzer(nutzer);
@@ -151,27 +186,41 @@ public class ProfilManagedBean {
     }
 
     /**
-     * Liefert die Bezirk-ID des angemeldeten Nutzers zur&uuml;ck.
+     * Liefert den Bezirksnamen des angemeldeten Nutzers zur&uuml;ck.
      *
-     * @return Gibt die Bezirk-ID des angemeldeten Nutzers zur&uuml;ck.
+     * @return Gibt den Bezirksnamen des angemeldeten Nutzers zur&uuml;ck.
      */
-    public int getBezirkID() {
-        return bezirkID;
+    public String getBezirkName() {
+        return bezirkName;
     }
 
     /**
-     * Ersetzt die Bezirk-ID des angemeldeten Nutzers durch eine neue Bezirk-ID.
+     * Ersetzt den Bezirksnamen des angemeldeten Nutzers durch einen neuen Bezirksnamen.
      *
-     * @param bezirkID Die Bezirk-ID, welche die alte Bezirk-ID ersetzt.
+     * @param bezirkName Der Bezirksname, welcher den alten Bezirksnamen ersetzt.
      */
-    public void setBezirkID(int bezirkID) {
-        this.bezirkID = bezirkID;
+    public void setBezirkName(String bezirkName) {
+        this.bezirkName = bezirkName;
     }
 
     /**
-     * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem sprachenSet der {@link #nutzer nutzer}-Variable.
-     * Anschlie&szlig;end werden die einzelnen Sprachennamen in {@link #selectedSprachenString selectedSprachenString} als
-     * eine Zeichenkette hinzugef&uuml;gt und der {@code String} zur&uuml;ckgegeben.
+     * Instanziiert die Liste {@link #allBezirkList allBezirkList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * findBezirkList des {@code DAO}-Objektes {@link #dao dao}.
+     *
+     * @return  Gibt eine Liste mit allen Bezirk-Entit&auml;ten aus der Datenbank in Form von {@code Bezirk}-Objekten
+     *          zur&uuml;ck.
+     */
+    public ArrayList<Bezirk> getAllBezirkList() {
+        allBezirkList = new ArrayList<>();
+        allBezirkList = dao.findBezirkList();
+        return allBezirkList;
+    }
+
+    /**
+     * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem sprachenSet der
+     * {@link #nutzer nutzer}-Variable.
+     * Anschlie&szlig;end werden die einzelnen Sprachennamen in {@link #selectedSprachenString selectedSprachenString}
+     * als eine Zeichenkette hinzugef&uuml;gt und der {@code String} zur&uuml;ckgegeben.
      *
      * @return Gibt eine Zeichenkette mit allen gesprochenen Sprachen des angemeldeten Nutzers zur&uuml;ck.
      */
@@ -180,7 +229,7 @@ public class ProfilManagedBean {
         ArrayList<Sprache> selectedSprachenList = new ArrayList<>(nutzer.getSprachenSet());
         String[] selectedSprachenArray = new String[selectedSprachenList.size()];
         for (int i = 0; i < selectedSprachenList.size(); i++) {
-            selectedSprachenArray[i] = String.valueOf(selectedSprachenList.get(i).getId());
+            selectedSprachenArray[i] = String.valueOf(selectedSprachenList.get(i));
         }
         selectedSprachenString = String.join(",", selectedSprachenArray);
         return selectedSprachenString;
@@ -197,9 +246,22 @@ public class ProfilManagedBean {
     }
 
     /**
-     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen der statischen
-     * Methode {@code selectedFreizeitaktivitaetenString} der Klasse {@code FreizeitaktivitaetenStringConverter} und
-     * gibt den {@code String} zur&uuml;ck.
+     * Instanziiert die Liste {@link #allSprachenList allSprachenList} und bef&uuml:llt sie, durch Aufruf der Methode
+     * findSpracheList des {@code DAO}-Objektes {@link #dao dao}.
+     *
+     * @return  Gibt eine Liste mit allen Sprache-Entit&auml;ten aus der Datenbank in Form von {@code Sprache}-Objekten
+     *          zur&uuml;ck.
+     */
+    public ArrayList<Sprache> getAllSprachenList() {
+        allSprachenList = new ArrayList<>();
+        allSprachenList = dao.findSpracheList();
+        return allSprachenList;
+    }
+
+    /**
+     * Initialisiert {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch aufrufen der
+     * statischen Methode {@code selectedFreizeitaktivitaetenString} der Klasse
+     * {@code FreizeitaktivitaetenStringConverter} und gibt den {@code String} zur&uuml;ck.
      *
      * @return Gibt eine Zeichenkette mit allen Freizeitaktivitäten des angemeldeten Nutzers zur&uuml;ck.
      */
@@ -209,13 +271,25 @@ public class ProfilManagedBean {
     }
 
     /**
-     * Ersetzt die Zeichenkette {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch eine neue Zeichenkette mit
-     * selektierten Freizeitaktivitäten des angemeldeten Nutzers.
+     * Ersetzt die Zeichenkette {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} durch
+     * eine neue Zeichenkette mit selektierten Freizeitaktivitäten des angemeldeten Nutzers.
      *
      * @param selectedFreizeitaktivitaetenString Der {@code String}, welcher den alten {@code String}-Wert ersetzt.
      */
     public void setSelectedFreizeitaktivitaetenString(String selectedFreizeitaktivitaetenString) {
         this.selectedFreizeitaktivitaetenString = selectedFreizeitaktivitaetenString;
+    }
+
+    /**
+     * Instanziiert die Liste {@link #allFreizeitaktivitaetenList allFreizeitaktivitaetenList} und bef&uuml:llt sie,
+     * durch Aufruf der Methode findFreizeitaktivitaetenList des {@code DAO}-Objektes {@link #dao dao}.
+     * @return  Gibt eine Liste mit allen Freizeitaktivitaeten-Entit&auml;ten aus der Datenbank in Form von
+     *          {@code Freizeitaktivitaeten}-Objekten zur&uuml;ck.
+     */
+    public ArrayList<Freizeitaktivitaeten> getAllFreizeitaktivitaetenList() {
+        allFreizeitaktivitaetenList = new ArrayList<>();
+        allFreizeitaktivitaetenList = dao.findFreizeitaktivitaetenList();
+        return allFreizeitaktivitaetenList;
     }
 
     /**
@@ -239,8 +313,9 @@ public class ProfilManagedBean {
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
-     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -249,15 +324,15 @@ public class ProfilManagedBean {
     }
 
     /**
-     * Leert das {@code sprachenSet} des angemeldeten Nutzers und f&uuml;gt die selektierten Sprachen aus dem {@code String}
-     * {@link #selectedSprachenString selectedSprachenString} dem angemeldeten Nutzer wieder hinzu.
+     * Leert das {@code sprachenSet} des angemeldeten Nutzers und f&uuml;gt die selektierten Sprachen aus dem
+     * {@code String} {@link #selectedSprachenString selectedSprachenString} dem angemeldeten Nutzer wieder hinzu.
      */
     private void updateSprachen() {
         nutzer.clearSprachenSet();
         List<Sprache> selectedSprachenList = new ArrayList<>();
         String[] selectedSprachenArray = selectedSprachenString.split(",");
         for (String aSelectedSprachenArray : selectedSprachenArray) {
-            selectedSprachenList.add(dao.findSpracheByID(Integer.parseInt(aSelectedSprachenArray)));
+            selectedSprachenList.add(dao.findSpracheByName(aSelectedSprachenArray));
         }
         for (Sprache aSelectedSprachenList : selectedSprachenList) {
             nutzer.addSprache(aSelectedSprachenList);
@@ -265,15 +340,17 @@ public class ProfilManagedBean {
     }
 
     /**
-     * Leert das {@code freizeitaktivitaetenSet} des angemeldeten Nutzers und f&uuml;gt die selektierten Freizeitaktivitäten aus dem {@code String}
-     * {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} dem angemeldeten Nutzer wieder hinzu.
+     * Leert das {@code freizeitaktivitaetenSet} des angemeldeten Nutzers und f&uuml;gt die selektierten
+     * Freizeitaktivitäten aus dem {@code String}
+     * {@link #selectedFreizeitaktivitaetenString selectedFreizeitaktivitaetenString} dem angemeldeten Nutzer wieder
+     * hinzu.
      */
     private void updateFreizeitaktivitaeten() {
         nutzer.clearFreizeitaktivitaetenSet();
         List<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>();
         String[] selectedFreizeitaktivitaetenArray = selectedFreizeitaktivitaetenString.split(",");
         for (String aSelectedFreizeitaktivitaetenArray : selectedFreizeitaktivitaetenArray) {
-            selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByID(Integer.parseInt(aSelectedFreizeitaktivitaetenArray)));
+            selectedFreizeitaktivitaetenList.add(dao.findFreizeitaktivitaetenByName(aSelectedFreizeitaktivitaetenArray));
         }
         for (Freizeitaktivitaeten aSelectedFrezeitaktivitaetenList : selectedFreizeitaktivitaetenList) {
             nutzer.addFreizeitaktivitaeten(aSelectedFrezeitaktivitaetenList);
@@ -290,6 +367,18 @@ public class ProfilManagedBean {
         loginManagedBean.setNutzer(dao.findNutzerByMail(nutzer.getMail()));
     }
 
+    /**
+     * Pr&uuml;ft ob es einen {@code FacesContext} gibt. Wenn ja, wird true zur&uuml;ckgegeben. Falls es keinen
+     * {@code FacesContext} gibt, wird false zur&uuml;ckgegeben.
+     * @return  Gibt true zur&uuml;ck, wenn es ein {@code FacesContext} gibt, andernfalls false.
+     */
+    private boolean contextExists() {
+        try {
+            return FacesContext.getCurrentInstance() != null;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
     // ============================  Inner Classes  ==========================79
     // ============================  End of class  ===========================79
 }

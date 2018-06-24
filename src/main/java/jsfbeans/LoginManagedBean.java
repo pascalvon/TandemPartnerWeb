@@ -2,7 +2,6 @@ package jsfbeans;
 
 import dao.DAO;
 import models.Nutzer;
-import utilities.HashedPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -28,9 +27,10 @@ public class LoginManagedBean implements Serializable {
     private DAO dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, in dem der angemeldete Nutzer gehalten wird, nachdem die Methode {@link #login() login} erfolgreich aufgerufen wurde.
+     * Das {@code Nutzer}-Objekt, in dem der angemeldete Nutzer gehalten wird, nachdem die Methode
+     * {@link #login() login} erfolgreich aufgerufen wurde.
      */
-    private Nutzer nutzer = new Nutzer();
+    private Nutzer nutzer;
 
     /**
      * {@code String}, f&uuml;r die Eingabe der E-Mail-Adresse des Nutzers.
@@ -50,7 +50,8 @@ public class LoginManagedBean implements Serializable {
      * &uuml;bergibt sie dem {@link #nutzer nutzer}. Zus&auml;tslich wird die E-Mail-Adresse des {@code Nutzer}-Objekts
      * in der Session registriert, um durch den Filter passieren zu k&ouml;nnen.
      *
-     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die {@code home.xhtml} weitergeleitet wird.
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die
+     *          {@code home.xhtml} weitergeleitet wird.
      * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {

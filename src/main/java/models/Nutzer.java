@@ -1,20 +1,16 @@
 package models;
 
 import org.hibernate.annotations.Cascade;
-import utilities.HashedPasswordGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Bildet eine Nutzer-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
-                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "findNutzerBySprachIDList", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
                 @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
                 @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
@@ -95,6 +91,22 @@ public class Nutzer {
     private Set<Suchanfrage> suchanfrageSet = new HashSet<>();
 
     /**
+     * Der Standardkonstruktor des {@code Nutzer}-Objektes.
+     */
+    public Nutzer() {
+    }
+
+    /**
+     * Initialisiert ein {@code Nutzer}-Objekt mit dem eingegebenem Parameter und weißt diesen der entsprechenden
+     * Variable zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param id {@code int}-Wert, welcher die ID des {@code Nutzer}-Objektes repr&auml;sentiert.
+     */
+    public Nutzer(int id) {
+        this.id = id;
+    }
+
+    /**
      * Gibt die ID der Nutzer-Entit&auml;t zur&uuml;ck.
      *
      * @return Gibt die ID der Nutzer-Entit&auml;t zur&uuml;ck.
@@ -170,7 +182,7 @@ public class Nutzer {
      * @param passwort Der {@code String} mit dem neuen Passwort, welcher das alte Passwort ersetzt.
      */
     public void setPasswort(String passwort) {
-        this.passwort = HashedPasswordGenerator.generateHash(passwort);
+        this.passwort = passwort;
     }
 
     /**

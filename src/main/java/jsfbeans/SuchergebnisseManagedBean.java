@@ -32,8 +32,8 @@ public class SuchergebnisseManagedBean {
     private DAO                             dao;
 
     /**
-     * Das {@code Suchanfrage}-Objekt, welches die vom angemeldeten Nutzer ausgef&uuml;hrte Suchanfrage darstellt, das im Konstruktor
-     * durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
+     * Das {@code Suchanfrage}-Objekt, welches die vom angemeldeten Nutzer ausgef&uuml;hrte Suchanfrage darstellt,
+     * das im Konstruktor durch die Methode {@link #initNutzer() initNutzer} initialisiert wird.
      */
     private Suchanfrage                     suchanfrage;
 
@@ -116,8 +116,8 @@ public class SuchergebnisseManagedBean {
 
     /**
      * Instanziiert {@link #suchergebnisseArrayList suchergebnisseArrayList} und ruft
-     * {@link #calculateSuchanfrage() calculateSuchanfrage} auf, bevor {@link #suchergebnisseArrayList suchergebnisseArrayList}
-     * mit den vorgeschlagenen Nutzern wiedergegeben wird.
+     * {@link #calculateSuchanfrage() calculateSuchanfrage} auf, bevor
+     * {@link #suchergebnisseArrayList suchergebnisseArrayList} mit den vorgeschlagenen Nutzern wiedergegeben wird.
      *
      * @return Eine {@code ArrayList} mit den vorgeschlagenen Nutzern f&uuml;r die Suchanfrage des angemeldeten Nutzers
      */
@@ -130,8 +130,9 @@ public class SuchergebnisseManagedBean {
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
-     * Holt sich das {@code Suchanfrage}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code SuchanfrageManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Suchanfrage}-Objekt der {@code SuchanfrageManagedBean} dem {@link #suchanfrage suchanfrage} zugewiesen.
+     * Holt sich das {@code Suchanfrage}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code SuchanfrageManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Suchanfrage}-Objekt der {@code SuchanfrageManagedBean} dem {@link #suchanfrage suchanfrage} zugewiesen.
      */
     private void initSuchanfrage() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -140,8 +141,9 @@ public class SuchergebnisseManagedBean {
     }
 
     /**
-     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code SuchanfrageManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code SuchanfrageManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code SuchanfrageManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code SuchanfrageManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -160,7 +162,7 @@ public class SuchergebnisseManagedBean {
      * {@link #suchergebnisseArrayList suchergebnisseArrayList} hinzugef&uuml;gt.
      */
     private void calculateSuchanfrage() {
-        ArrayList<Nutzer> nutzerMatchSprache = dao.findNutzerBySpracheID(suchanfrage.getParamSpracheID());
+        ArrayList<Nutzer> nutzerMatchSprache = dao.findNutzerBySpracheIDList(suchanfrage.getParamSpracheID());
 
         for (Nutzer tempNutzer : nutzerMatchSprache) {
             if (! tempNutzer.equals(this.nutzer)
@@ -178,10 +180,11 @@ public class SuchergebnisseManagedBean {
     }
 
     /**
-     * Pr&uuml;ft, ob das Alter des {@code Nutzer}-Objekts im Bereich des Alters aus dem {@code Suchanfrage}-Objekt liegt.
-     * Wenn ja, gibt die Methode ein true zur&uuml;ck, andernfalls ein false.
+     * Pr&uuml;ft, ob das Alter des {@code Nutzer}-Objekts im Bereich des Alters aus dem {@code Suchanfrage}-Objekt
+     * liegt. Wenn ja, gibt die Methode ein true zur&uuml;ck, andernfalls ein false.
      *
-     * @param   suchanfrage Das {@code Suchanfrage}-Objekt, welches die Parameter f&uuml;r den Bereich des Alters enth&auml;lt.
+     * @param   suchanfrage Das {@code Suchanfrage}-Objekt, welches die Parameter f&uuml;r den Bereich des Alters
+     *                      enth&auml;lt.
      * @param   nutzer Das {@code Nutzer}-Objekt, welches das zu pr&uuml;fende Alter enth&auml;lt.
      * @return  Gibt true zur&uuml;ck, wenn das Alter im validen Bereich liegt und false, wenn das Alter au&szlig;erhalb
      *          dieses Bereichs liegt.
