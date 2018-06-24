@@ -40,7 +40,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputText required="true" label="Vorname:" placeholder="Vorname"
-                                 requiredMessage="Bitte gib Deinen Vornamen ein!" mask="a"
+                                 requiredMessage="Bitte gib Deinen Vornamen ein!" mask="a{1,20}"
                                  value="#{registrierenManagedBean.nutzer.vorname}"/>
                 </b:column>
 
@@ -48,7 +48,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputText required="true" label="Nachname:" placeholder="Nachname"
-                                 requiredMessage="Bitte gib Deinen Nachnamen ein!" mask="a"
+                                 requiredMessage="Bitte gib Deinen Nachnamen ein!" mask="a{1,20}"
                                  value="#{registrierenManagedBean.nutzer.nachname}"/>
                 </b:column>
             </b:row><!--1.Reihe Ende-->

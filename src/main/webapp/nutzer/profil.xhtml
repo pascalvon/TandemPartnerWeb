@@ -22,7 +22,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputText id="vorname" label="Vorname:" required="true" placeholder="Vorname"
-                                 requiredMessage="Bitte gib Deinen Vornamen ein!" mask="a"
+                                 requiredMessage="Bitte gib Deinen Vornamen ein!" mask="a{1,20}"
                                  value="#{profilManagedBean.nutzer.vorname}">
                     <f:ajax event="blur" execute="vorname" render="m_vorname vorname"/>
                     </b:inputText>
@@ -33,7 +33,7 @@
 
                 <b:column medium-screen="4">
                     <b:inputText id="nachname" label="Nachname:" required="true" placeholder="Nachname"
-                                 requiredMessage="Bitte gib Deinen Nachnamen ein!" mask="a"
+                                 requiredMessage="Bitte gib Deinen Nachnamen ein!" mask="a{1,20}"
                                  value="#{profilManagedBean.nutzer.nachname}">
                         <f:ajax event="blur" execute="nachname" render="m_nachname nachname"/>
                     </b:inputText>
@@ -112,8 +112,8 @@
                                        process="@this">
                         <f:selectItems var="sprache"
                                        value="#{profilManagedBean.allSprachenList}" itemValue="#{sprache.nameSprache}" itemLabel="#{sprache.nameSprache}"/>
+                        <b:messages id="m_ichSpreche" for="ichSpreche"/>
                     </b:selectMultiMenu>
-                    <b:messages id="m_ichSpreche" for="ichSpreche"/>
                 </b:column>
 
                 <b:column medium-screen="2"/>
@@ -131,9 +131,8 @@
                         <f:selectItems var="aktivitaet"
                                        value="#{profilManagedBean.allFreizeitaktivitaetenList}" itemValue="#{aktivitaet.nameAktivitaet}" itemLabel="#{aktivitaet.nameAktivitaet}"/>
 
-
+                        <b:messages id="m_freizeitaktivitaeten" for="freizeitaktivitaeten"/>
                     </b:selectMultiMenu>
-                    <b:messages id="m_freizeitaktivitaeten" for="freizeitaktivitaeten"/>
                 </b:column>
             </b:row><!-- 4.Reihe Ende-->
 

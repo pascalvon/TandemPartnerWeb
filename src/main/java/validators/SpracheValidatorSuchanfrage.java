@@ -32,7 +32,7 @@ public class SpracheValidatorSuchanfrage implements Validator {
     /**
      * Initialisierung der zu überprüfenden sprachID
      */
-    private int sprachID = 0;
+    private String sprachName = "";
     /**
      * Konstruktor der Klasse, welcher den angemeldeten Nutzer initialisiert
      */
@@ -56,7 +56,7 @@ public class SpracheValidatorSuchanfrage implements Validator {
      */
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        sprachID = Integer.parseInt(o.toString());
+        sprachName = o.toString();
         Set <Sprache> nutzerSpricht = nutzer.getSprachenSet();
 
         // TODO Joe: 2018-06-24 funkt so glaube nicht mehr
@@ -65,7 +65,7 @@ public class SpracheValidatorSuchanfrage implements Validator {
         }
 
         for(Sprache s: nutzerSpricht){
-            if (sprachName == s.getNameSprache()) {
+            if (sprachName.equals(s.getNameSprache())) {
                 throw new ValidatorException(new FacesMessage("Diese Sprache sprichst Du doch bereits!"));
             }
         }

@@ -23,7 +23,8 @@
                 <b:column medium-screen="4">
                     <b:formGroup>
                         <b:selectOneMenu id="sprache" value="#{suchanfrageManagedBean.paramSpracheName}"
-                                         required="true" label="Ich will lernen:" labelmedium-screen="2">
+                                         required="true" label="Ich will lernen:"
+                                         requiredMessage="Bitte gib eine Sprache an!" labelmedium-screen="2">
                             <f:selectItem itemLabel="Bitte wählen" itemValue="" />
                             <f:selectItems var="sprache"
                                            value="#{suchanfrageManagedBean.allSprachenList}" itemValue="#{sprache.nameSprache}" itemLabel="#{sprache.nameSprache}"/>
@@ -50,19 +51,18 @@
 
                 <b:column medium-screen="4">
                     <b:inputText  id="minAlter" label="Alter von:" placeholder="Mindestalter" required="true"
-                                  mask="integer" validatorMessage="Bitte ein Alter zwischen 13 und 100 angeben!"
-                                  value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}"/>
+                                  mask="integer"
+                                  value="#{suchanfrageManagedBean.suchanfrage.paramAlterMin}">
                     <f:validator validatorId="alterValidatorSuchanfrage"/>
                     <f:attribute name="maxAlter" value="#{confirmSuchanfrage.submittedValue}"/>
-                    <f:validateLongRange minimum="13" maximum="100"/>
+                    </b:inputText>
                     <b:messages id="m_minAlter" for="minAlter"/>
                 </b:column>
 
                 <b:column medium-screen="4">
                     <b:inputText  id="maxAlter" label="Alter bis:" binding="#{confirmSuchanfrage}" placeholder="Maximalalter" required="true"
-                                  mask="integer" validatorMessage="Bitte ein Alter zwischen 13 und 100 angeben!"
-                                  value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}"/>
-                    <f:validateLongRange minimum="13" maximum="100"/>
+                                  mask="integer" value="#{suchanfrageManagedBean.suchanfrage.paramAlterMax}">
+                    </b:inputText>
                     <b:messages id="m_maxAlter" for="maxAlter"/>
                 </b:column>
             </b:row><!--2.Reihe Ende-->

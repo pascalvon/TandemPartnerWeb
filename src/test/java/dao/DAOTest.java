@@ -40,7 +40,7 @@ public class DAOTest {
     @EJB
     private DAO dao;
 
-    private static Nutzer arne;
+    private Nutzer arne;
 
     @Before
     public void setUp() throws Exception {
@@ -60,14 +60,14 @@ public class DAOTest {
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(2, "Basketball"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(6, "Fitness"));
         arne.addFreizeitaktivitaeten(new Freizeitaktivitaeten(9, "Golfen"));
-        dao.merge(arne);
+        //dao.merge(arne);
     }
 
     @After
     public void tearDown() throws Exception {
-        dao.deleteSuchanfrageByNutzer(arne);
-        dao.deleteMatchanfrageByNutzer(arne);
-        dao.deleteNutzer(arne);
+//        dao.deleteSuchanfrageByNutzer(arne);
+//        dao.deleteMatchanfrageByNutzer(arne);
+//        dao.deleteNutzer(arne);
     }
 
     @Test
