@@ -10,7 +10,7 @@ import java.util.*;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = "findNutzerByMail", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
-                @NamedQuery(name = "findNutzerBySprachID", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
+                @NamedQuery(name = "findNutzerBySprachIDList", query = "SELECT nutzer FROM Nutzer nutzer JOIN nutzer.sprachenSet sprache WHERE sprache.id = :spracheID"),
                 @NamedQuery(name = "findNutzerByMailBoolean", query = "SELECT nutzer FROM Nutzer nutzer WHERE nutzer.mail = :mail"),
                 @NamedQuery(name = "deleteNutzer", query = "DELETE FROM Nutzer nutzer WHERE nutzer.id = :id")})
 public class Nutzer {
@@ -90,10 +90,18 @@ public class Nutzer {
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Suchanfrage> suchanfrageSet = new HashSet<>();
 
+    /**
+     * Der Standardkonstruktor des {@code Nutzer}-Objektes.
+     */
     public Nutzer() {
-
     }
 
+    /**
+     * Initialisiert ein {@code Nutzer}-Objekt mit dem eingegebenem Parameter und weißt diesen der entsprechenden
+     * Variable zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param id {@code int}-Wert, welcher die ID des {@code Nutzer}-Objektes repr&auml;sentiert.
+     */
     public Nutzer(int id) {
         this.id = id;
     }

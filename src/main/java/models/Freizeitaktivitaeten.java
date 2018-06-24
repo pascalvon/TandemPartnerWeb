@@ -8,7 +8,10 @@ import java.util.Set;
  * Bildet eine Freizeitaktivitaeten-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQuery(name = "findByFreizeitaktivitaetenID", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :id")
+@NamedQueries({
+        @NamedQuery(name = "findFreizeitaktivitaetenByID", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.id = :id"),
+        @NamedQuery(name = "findFreizeitaktivitaetenByName", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten WHERE freizeitaktivitaeten.nameAktivitaet = :name" ),
+        @NamedQuery(name = "findFreizeitaktivitaetenList", query = "SELECT freizeitaktivitaeten FROM Freizeitaktivitaeten freizeitaktivitaeten")})
 public class Freizeitaktivitaeten {
 
     /**
@@ -31,10 +34,19 @@ public class Freizeitaktivitaeten {
     @ManyToMany(mappedBy = "freizeitaktivitaetenSet")
     private Set<Nutzer> nutzerSet;
 
+    /**
+     * Der Standardkonstruktor des {@code Freizeitaktivitaeten}-Objektes.
+     */
     public Freizeitaktivitaeten() {
-
     }
 
+    /**
+     * Initialisiert ein {@code Freizeitaktivitaeten}-Objekt mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param id {@code int}-Wert, welcher die ID des {@code Freizeitaktivitaeten}-Objektes repr&auml;sentiert.
+     * @param nameAktivitaet {@code String}, welcher den Namen des {@code Freizeitaktivitaeten}-Objektes repr&auml;sentiert.
+     */
     public Freizeitaktivitaeten(int id, String nameAktivitaet) {
         this.id = id;
         this.nameAktivitaet = nameAktivitaet;
@@ -47,6 +59,15 @@ public class Freizeitaktivitaeten {
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * Gibt den Namen der Freizeitaktivitaeten-Entit&auml;t zur&uuml;ck.
+     *
+     * @return Gibt den Namen der Freizeitaktivitaeten-Entit&auml;t zur&uuml;ck.
+     */
+    public String getNameAktivitaet() {
+        return nameAktivitaet;
     }
 
     /**

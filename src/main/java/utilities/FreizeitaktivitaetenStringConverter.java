@@ -14,17 +14,9 @@ public class FreizeitaktivitaetenStringConverter {
     // =============================  Variables  =============================79
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
-
-    /**
-     * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem sprachenSet der {@link #nutzer nutzer}-Variable.
-     * Anschlie&szlig;end werden die einzelnen Sprachennamen in {@link #selectedSprachenString selectedSprachenString} als
-     * eine Zeichenkette hinzugef&uuml;gt und der {@code String} zur&uuml;ckgegeben.
-     *
-     * @return Gibt eine Zeichenkette mit allen gesprochenen Sprachen des angemeldeten Nutzers zur&uuml;ck.
-     */
     /**
      * Erzeugt zuerst eine {@code ArrayList} und initialisiert sie mit dem freizeitaktivitaetenSet des &uuml;bergebenen
-     * {@code Nutzer}-Objektes. Anschlie&szlig;end werden die einzelnen Bezeichnungen der Freizeitaktivit&auml;ten als
+     * {@code Nutzer}-Objektes. Anschlie&szlig;end werden die Bezeichnungen der Freizeitaktivit&auml;ten als
      * einzelnen {@code String} zur&uuml;ckgegeben.
      *
      * @param nutzer {@code Nutzer}-Objekt, dessen freizeitaktivitaetenSet zur Erzeugung des {@code String}'s verwendet
@@ -36,7 +28,7 @@ public class FreizeitaktivitaetenStringConverter {
         ArrayList<Freizeitaktivitaeten> selectedFreizeitaktivitaetenList = new ArrayList<>(nutzer.getFreizeitaktivitaetenSet());
         String[] selectedFreizeitaktivitaetenArray = new String[selectedFreizeitaktivitaetenList.size()];
         for (int i = 0; i < selectedFreizeitaktivitaetenList.size(); i++) {
-            selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i).getId());
+            selectedFreizeitaktivitaetenArray[i] = String.valueOf(selectedFreizeitaktivitaetenList.get(i));
         }
         return String.join(",", selectedFreizeitaktivitaetenArray);
     }

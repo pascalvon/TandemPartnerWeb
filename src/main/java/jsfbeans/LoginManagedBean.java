@@ -27,7 +27,8 @@ public class LoginManagedBean implements Serializable {
     private DAO dao;
 
     /**
-     * Das {@code Nutzer}-Objekt, in dem der angemeldete Nutzer gehalten wird, nachdem die Methode {@link #login() login} erfolgreich aufgerufen wurde.
+     * Das {@code Nutzer}-Objekt, in dem der angemeldete Nutzer gehalten wird, nachdem die Methode
+     * {@link #login() login} erfolgreich aufgerufen wurde.
      */
     private Nutzer nutzer;
 
@@ -41,15 +42,6 @@ public class LoginManagedBean implements Serializable {
      */
     private String password;
 
-    public LoginManagedBean() {
-        this.nutzer = new Nutzer();
-    }
-
-    public LoginManagedBean(DAO dao) {
-        this.dao = dao;
-        this.nutzer = new Nutzer();
-    }
-
     // ============================  Constructors  ===========================79
     // ===========================  public  Methods  =========================79
 
@@ -58,7 +50,8 @@ public class LoginManagedBean implements Serializable {
      * &uuml;bergibt sie dem {@link #nutzer nutzer}. Zus&auml;tslich wird die E-Mail-Adresse des {@code Nutzer}-Objekts
      * in der Session registriert, um durch den Filter passieren zu k&ouml;nnen.
      *
-     * @return Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die {@code home.xhtml} weitergeleitet wird.
+     * @return  Gibt den {@code String} zur&uuml;ck, mit dem der Nutzer bei erfolgreicher Anmeldung auf die
+     *          {@code home.xhtml} weitergeleitet wird.
      * @throws ValidatorException , wenn die E-Mail-Adresse oder das Passwort nicht richtig eingegeben werden.
      */
     public String login() throws ValidatorException {

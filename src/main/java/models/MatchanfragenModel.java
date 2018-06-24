@@ -232,6 +232,14 @@ public class MatchanfragenModel {
         return origin;
     }
 
+    /**
+     * &Uuml;berschreibt die {@link #equals(Object) equals}-Methode, sodass {@code MatchanfragenModel}-Ojekte &uuml;ber
+     * bestimmte Parameter verglichen werden.
+     *
+     * @param   o Das Objekt, mit dem verglichen werden soll.
+     * @return  Gibt true zur&uuml;ck, wenn die Parameter der beiden Objekte die selben sind und false, wenn sie
+     *          unterschiedliche Parameter besitzen.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -250,6 +258,12 @@ public class MatchanfragenModel {
                 Objects.equals(origin, that.origin);
     }
 
+    /**
+     * &Uuml;berschreibt die {@link #hashCode() hashCode}-Methode, sodass der Hashcode von {@code MatchanfragenModel}-
+     * Objekten ihrer Parameter entsprechen.
+     *
+     * @return Gibt den Hashcode des Objekts als seine Parameter wieder.
+     */
     @Override
     public int hashCode() {
 

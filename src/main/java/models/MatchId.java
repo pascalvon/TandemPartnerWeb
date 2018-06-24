@@ -24,10 +24,20 @@ public class MatchId implements Serializable {
      */
     private int spracheID;
 
+    /**
+     * Der Standardkonstruktor des {@code MatchId}-Objektes.
+     */
     public MatchId() {
-
     }
 
+    /**
+     * Initialisiert ein {@code MatchId}-Objekt mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param initiator {@code int}-Wert, welcher den Initiator des {@code MatchId}-Objektes repr&auml;sentiert.
+     * @param partner {@code int}-Wert, welcher den Partner des {@code MatchId}-Objektes repr&auml;sentiert.
+     * @param spracheID {@code int}-Wert, welcher den Sprachennamen des {@code MatchId}-Objektes repr&auml;sentiert.
+     */
     public MatchId(int initiator, int partner, int spracheID) {
         this.initiator = initiator;
         this.partner = partner;

@@ -46,12 +46,22 @@ public class HomeManagedBean {
 
     // ============================  Constructors  ===========================79
     /**
-     * Initialisiert ein neu erzeugtes {@code HomeManagedBean}-Objekt und ruft dabei die Methode {@link #initNutzer() initNutzer} auf.
+     * Initialisiert ein neu erzeugtes {@code HomeManagedBean}-Objekt und ruft dabei die Methode
+     * {@link #initNutzer() initNutzer} auf.
      */
     public HomeManagedBean() {
         initNutzer();
     }
 
+    /**
+     * Initialisiert ein {@code HomeManagedBean}-Objekt mit den eingegebenen Parametern und weißt diese
+     * den entsprechenden Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param dao {@code DAO}-Objekt, welcher dem {@code DAO}-Objekt {@link #dao dao} zugewiesen
+     *                         werden soll.
+     * @param nutzer {@code Nutzer}-Objekt, welcher dem {@code Nutzer}-Objekt {@link #nutzer nutzer} zugewiesen
+     *                             werden soll.
+     */
     public HomeManagedBean(DAO dao, Nutzer nutzer) {
         this.dao = dao;
         this.nutzer = nutzer;
@@ -83,7 +93,7 @@ public class HomeManagedBean {
     /**
      * L&ouml;scht eine abgelehnte {@code Matchanfragen} aus der Datenbank.
      *
-     * @param matchanfragen     Die Matchanfrage, die abgelehnt wurde.
+     * @param matchanfragen Die Matchanfrage, die abgelehnt wurde.
      */
     public void refuseMatchanfrage(Matchanfragen matchanfragen) {
         dao.deleteMatchanfrage(matchanfragen);
@@ -100,8 +110,9 @@ public class HomeManagedBean {
 
     /**
      * Instanziiert {@link #matchanfragenModelArrayList matchanfragenModelArrayList} und ruft
-     * {@link #calculateUnansweredMatchanfragen() calculateUnansweredMatchanfragen} auf, bevor {@link #matchanfragenModelArrayList matchanfragenModelArrayList}
-     * mit den offenen Matchanfragen wiedergegeben wird.
+     * {@link #calculateUnansweredMatchanfragen() calculateUnansweredMatchanfragen} auf, bevor
+     * {@link #matchanfragenModelArrayList matchanfragenModelArrayList} mit den offenen Matchanfragen wiedergegeben
+     * wird.
      *
      * @return  Eine {@code ArrayList} mit den offenen Matchanfragen des angemeldeten Nutzers
      */
@@ -114,8 +125,9 @@ public class HomeManagedBean {
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
-     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -124,14 +136,16 @@ public class HomeManagedBean {
     }
 
     /**
-     * Holt sich alle offenen Matchanfragen, die der angemeldete Nutzer hat und h&auml;lt sie sich in einer {@code ArrayList}.
-     * Dann werden die {@code Freizeitaktivitaeten} der {@code Nutzer}, welche die Matchanfragen gesendet haben (also die Initiatoren),
-     * mit den {@code Freizeitaktivitaeten} des angemeldeten Nutzers verglichen und gemeinsame {@code Freizeitaktivitaeten} werden
+     * Holt sich alle offenen Matchanfragen, die der angemeldete Nutzer hat und h&auml;lt sie sich in einer
+     * {@code ArrayList}. Dann werden die {@code Freizeitaktivitaeten} der {@code Nutzer}, welche die Matchanfragen
+     * gesendet haben (also die Initiatoren), mit den {@code Freizeitaktivitaeten} des angemeldeten Nutzers verglichen
+     * und gemeinsame {@code Freizeitaktivitaeten} werden
      * in einen {@code String} geschrieben.
-     * Anschlie&szlig;end wird ein neues {@code MatchanfragenModel} erzeugt und dem {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
+     * Anschlie&szlig;end wird ein neues {@code MatchanfragenModel} erzeugt und dem
+     * {@link #matchanfragenModelArrayList matchanfragenModelArrayList} hinzugef&uuml;gt.
      */
     private void calculateUnansweredMatchanfragen() {
-        ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerID(nutzer.getId());
+        ArrayList<Matchanfragen> openMatchanfragen = dao.findMatchanfragenByNutzerIDList(nutzer.getId());
 
         for (Matchanfragen anOpenMatchanfragen : openMatchanfragen) {
             Nutzer aNutzer = dao.findNutzerByID(anOpenMatchanfragen.getId().getInitiator());

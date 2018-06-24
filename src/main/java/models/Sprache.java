@@ -8,7 +8,10 @@ import java.util.Set;
  * Bildet eine Sprache-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQuery(name = "findBySpracheID", query = "SELECT sprache FROM Sprache sprache WHERE sprache.id = :id")
+@NamedQueries({
+        @NamedQuery(name = "findBySpracheID", query = "SELECT sprache FROM Sprache sprache WHERE sprache.id = :id"),
+        @NamedQuery(name = "findBySpracheName", query = "SELECT sprache FROM Sprache sprache WHERE sprache.nameSprache = :name"),
+        @NamedQuery(name = "findSprachenList", query = "SELECT sprache FROM Sprache sprache")})
 public class Sprache {
 
     /**
@@ -31,10 +34,19 @@ public class Sprache {
     @ManyToMany(mappedBy = "sprachenSet")
     private Set<Nutzer> nutzerSet;
 
+    /**
+     * Der Standardkonstruktor des {@code Sprache}-Objektes.
+     */
     public Sprache() {
-
     }
 
+    /**
+     * Initialisiert ein {@code Sprache}-Objekt mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param id {@code int}-Wert, welcher die ID des {@code Sprache}-Objektes repr&auml;sentiert.
+     * @param nameSprache {@code String}, welcher den Namen des {@code Sprache}-Objektes repr&auml;sentiert.
+     */
     public Sprache(int id, String nameSprache) {
         this.id = id;
         this.nameSprache = nameSprache;

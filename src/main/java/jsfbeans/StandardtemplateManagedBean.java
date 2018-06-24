@@ -38,7 +38,8 @@ public class StandardtemplateManagedBean {
 
     // ============================  Constructors  ===========================79
     /**
-     * Initialisiert ein neu erzeugtes {@code StandardtemplateManagedBean}-Objekt und ruft dabei die Methode {@link #initNutzer() initNutzer} auf.
+     * Initialisiert ein neu erzeugtes {@code StandardtemplateManagedBean}-Objekt und ruft dabei die Methode
+     * {@link #initNutzer() initNutzer} auf.
      */
     public StandardtemplateManagedBean() {
         initNutzer();
@@ -47,7 +48,8 @@ public class StandardtemplateManagedBean {
     // ===========================  public  Methods  =========================79
     /**
      * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert. Wenn ja wird dieser zur {@code home.xhtml} weitergeleitet
-     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml} weitergeleitet.
+     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml}
+     * weitergeleitet.
      *
      * @return  Je nachdem, welchen Wert {@link #nutzer nutzer} enth&auml;lt, wird die URL
      *          zur {@code home.xhtml} oder {@code login.xhtml} wiedergegeben.
@@ -62,7 +64,8 @@ public class StandardtemplateManagedBean {
 
     /**
      * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert. Wenn ja wird dieser zur {@code profil.xhtml} weitergeleitet
-     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml} weitergeleitet.
+     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml}
+     * weitergeleitet.
      *
      * @return Je nachdem, welchen Wert {@link #nutzer nutzer} enth&auml;lt, wird die URL
      * zur {@code profil.xhtml} oder {@code login.xhtml} wiedergegeben.
@@ -76,8 +79,9 @@ public class StandardtemplateManagedBean {
     }
 
     /**
-     * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert. Wenn ja wird dieser zur {@code suchanfrage.xhtml} weitergeleitet
-     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml} weitergeleitet.
+     * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert. Wenn ja wird dieser zur {@code suchanfrage.xhtml}
+     * weitergeleitet und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur
+     * {@code login.xhtml} weitergeleitet.
      *
      * @return Je nachdem, welchen Wert {@link #nutzer nutzer} enth&auml;lt, wird die URL
      * zur {@code suchanfrage.xhtml} oder {@code login.xhtml} wiedergegeben.
@@ -92,7 +96,8 @@ public class StandardtemplateManagedBean {
 
     /**
      * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert. Wenn ja wird dieser zur {@code matches.xhtml} weitergeleitet
-     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml} weitergeleitet.
+     * und f&uuml;r den Fall, dass kein angemeldeter Nutzer existiert, wird der Nutzer zur {@code login.xhtml}
+     * weitergeleitet.
      *
      * @return Je nachdem, welchen Wert {@link #nutzer nutzer} enth&auml;lt, wird die URL
      * zur {@code matches.xhtml} oder {@code login.xhtml} wiedergegeben.
@@ -116,7 +121,8 @@ public class StandardtemplateManagedBean {
     }
 
     /**
-     * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert und setzt dementsrpechend den Wert von {@link #logStatus logStatus}.
+     * Pr&uuml;ft, ob ein angemeldeter Nutzer existiert und setzt dementsrpechend den Wert von
+     * {@link #logStatus logStatus}.
      *
      * @return Gibt den Wert von {@link #logStatus logStatus} wieder.
      */
@@ -132,8 +138,9 @@ public class StandardtemplateManagedBean {
     // =================  protected/package local  Methods ===================79
     // ===========================  private  Methods  ========================79
     /**
-     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der {@code LoginManagedBean} solange existiert, wie
-     * die Session l&auml;uft. Anschließend wird das {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
+     * Holt sich das {@code Nutzer}-Objekt, welcher aufgrund der {@code @SessionScope}-Annotation der
+     * {@code LoginManagedBean} solange existiert, wie die Session l&auml;uft. Anschließend wird das
+     * {@code Nutzer}-Objekt der {@code LoginManagedBean} dem {@link #nutzer nutzer} zugewiesen.
      */
     private void initNutzer() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
@@ -142,8 +149,9 @@ public class StandardtemplateManagedBean {
     }
 
     /**
-     * &Uuml;berpr&uuml;ft, ob die &uuml;bergebene E-Mail-Adresse einer Nutzer-Entit&auml;t aus der Datenbank geh&ouml;rt.
-     * Falls ja, gibt die Methode false zur&uuml;ck und falls eine {@code NullPointerException} fliegt, gibt die Methode
+     * &Uuml;berpr&uuml;ft, ob die &uuml;bergebene E-Mail-Adresse einer Nutzer-Entit&auml;t aus der Datenbank
+     * geh&ouml;rt. Falls ja, gibt die Methode false zur&uuml;ck und falls eine {@code NullPointerException} fliegt,
+     * gibt die Methode
      * true zur&uuml;ck.
      *
      * @param   mail Die E-Mail-Adresse, welche gepr&uuml;ft werden soll.

@@ -3,7 +3,6 @@ package jsfbeans;
 import dao.DAO;
 import models.*;
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 /**
@@ -142,7 +140,7 @@ class ManagedBeansTests {
             dao = Mockito.mock(DAO.class);
             HomeManagedBean homeJoe = new HomeManagedBean(dao, joe);
 
-            Mockito.when(dao.findMatchanfragenByNutzerID(2)).thenReturn(matchanfragenListJoe);
+            Mockito.when(dao.findMatchanfragenByNutzerIDList(2)).thenReturn(matchanfragenListJoe);
             Mockito.when(dao.findNutzerByID(1)).thenReturn(arne);
 
             assertEquals(joe, homeJoe.getNutzer());
@@ -159,7 +157,7 @@ class ManagedBeansTests {
             dao = Mockito.mock(DAO.class);
             MatchesManagedBean matchesArne = new MatchesManagedBean(dao, arne);
 
-            Mockito.when(dao.findMatchanfragenByAllColumns(arne.getId())).thenReturn(matchanfragenListArne);
+            Mockito.when(dao.findMatchanfragenByAllColumnsList(arne.getId())).thenReturn(matchanfragenListArne);
             Mockito.when(dao.findNutzerByID(4)).thenReturn(luise);
 
             assertEquals(arne, matchesArne.getNutzer());
@@ -187,11 +185,11 @@ class ManagedBeansTests {
 
             profilKalle.setMail("kalle.student@web.de");
             profilKalle.setPassword("kalle1234");
-            profilKalle.setBezirkID(2);
+            profilKalle.setBezirkName("Friedrichshain-Kreuzberg");
             profilKalle.setSelectedSprachenString("18");
             profilKalle.setSelectedFreizeitaktivitaetenString("1");
 
-            Mockito.when(dao.findBezirkByID(2)).thenReturn(kalle.getBezirk());
+            Mockito.when(dao.findBezirkByName("Friedrichshain-Kreuzberg")).thenReturn(kalle.getBezirk());
             Mockito.when(dao.findSpracheByID(18)).thenReturn(new Sprache(18,"Hawaiisch"));
             Mockito.when(dao.findFreizeitaktivitaetenByID(1)).thenReturn(new Freizeitaktivitaeten(1,"Angeln"));
 
@@ -220,11 +218,11 @@ class ManagedBeansTests {
             registrierenKalle.getNutzer().setPasswort("test1234");
             registrierenKalle.getNutzer().setGeburtsdatum(new Date(1990,6,17));
             registrierenKalle.getNutzer().setGeschlecht(Geschlecht.MAENNLICH);
-            registrierenKalle.setBezirkID(2);
+            registrierenKalle.setBezirkName("Friedrichshain-Kreuzberg");
             registrierenKalle.setSelectedSprachenString("11");
             registrierenKalle.setSelectedFreizeitaktivitaetenString("6");
 
-            Mockito.when(dao.findBezirkByID(2)).thenReturn(new Bezirk(2,"Friedrichshain-Kreuzberg"));
+            Mockito.when(dao.findBezirkByName("Friedrichshain-Kreuzberg")).thenReturn(new Bezirk(2,"Friedrichshain-Kreuzberg"));
             Mockito.when(dao.findSpracheByID(11)).thenReturn(new Sprache(11, "Englisch"));
             Mockito.when(dao.findFreizeitaktivitaetenByID(6)).thenReturn(new Freizeitaktivitaeten(6, "Fitness"));
 

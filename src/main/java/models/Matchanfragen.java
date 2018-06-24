@@ -11,8 +11,8 @@ import java.util.Objects;
  * Bildet eine Matchanfragen-Entit&auml;t als Objekt in Java ab.
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "findMatchanfragenByNutzerID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.partner = :partnerID AND matchanfragen.angenommen = 0"),
-                @NamedQuery(name = "findMatchanfragenByAllColumns", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.id.partner = :nutzerID OR matchanfragen.id.initiator = :nutzerID)"),
+@NamedQueries({ @NamedQuery(name = "findMatchanfragenByNutzerIDList", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.partner = :partnerID AND matchanfragen.angenommen = 0"),
+                @NamedQuery(name = "findMatchanfragenByAllColumnsList", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.angenommen = 1 AND (matchanfragen.id.partner = :nutzerID OR matchanfragen.id.initiator = :nutzerID)"),
                 @NamedQuery(name = "findMatchanfragenByMatchanfragen", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen = :matchanfragen"),
                 @NamedQuery(name = "findMatchanfragenByInitiatorPartnerSpracheID", query = "SELECT matchanfragen FROM Matchanfragen matchanfragen WHERE matchanfragen.id.initiator = :initiatorID AND matchanfragen.id.partner = :partnerID AND matchanfragen.id.spracheID = :spracheID"),
                 @NamedQuery(name = "deleteMatchanfrage", query = "DELETE FROM Matchanfragen matchanfragen WHERE matchanfragen.id = :matchID"),
@@ -31,10 +31,18 @@ public class Matchanfragen {
      */
     private Byte angenommen;
 
+    /**
+     * Der Standardkonstruktor des {@code Matchanfragen}-Objektes.
+     */
     public Matchanfragen() {
-
     }
 
+    /**
+     * Initialisiert ein {@code Matchanfragen}-Objekt mit den eingegebenen Parametern und weißt diese den entsprechenden
+     * Variablen zu. Dieser Konstruktor wird ausschlie&szlig;ig f%uuml;r die Unittests ben&ouml;tigt.
+     *
+     * @param matchId {@code MatchId}-Objekt, welches die ID des {@code Matchanfragen}-Objektes repr&auml;sentiert.
+     */
     public Matchanfragen(MatchId matchId) {
         this.id = matchId;
     }
